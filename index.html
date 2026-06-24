@@ -203,14 +203,14 @@
     padding-block: clamp(8px, 2vh, 20px);
   }
 
-  /* shown small so the original raster stays pixel-crisp (no upscaling) */
+  /* shown at the logo's native (original) size — never enlarged */
   .crest {
-    height: clamp(58px, 8.5vh, 86px);
+    height: 58px;
     width: auto;
     display: block;
   }
   .wordmark {
-    width: clamp(116px, 14vw, 150px);
+    width: 94px;
     height: auto;
     display: block;
     margin-top: clamp(2px, 0.6vh, 6px);
@@ -318,7 +318,7 @@
   /* ——— short viewports: tighten so nothing scrolls ——— */
   @media (max-height: 660px) {
     .seal { gap: clamp(10px, 1.6vh, 16px); }
-    .crest { height: clamp(50px, 7vh, 68px); }
+    .crest { height: 52px; }
     .creed-ar { display: none; }
   }
 
