@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>HA Business Club — Bringing worlds together</title>
+<meta name="description" content="HA Business Club — connecting the business worlds of the Netherlands and the Arab world. A private circle. By invitation only." />
+<meta name="theme-color" content="#100f0d" />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="HA Business Club — Bringing worlds together" />
+<meta property="og:description" content="Connecting the business worlds of the Netherlands and the Arab world." />
+<meta property="og:image" content="assets/og.png" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="assets/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link rel="apple-touch-icon" href="assets/favicon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* — surfaces (warm near-black, tinted toward the crest's gold) — */
+    --void:       oklch(0.145 0.012 66);
+    --void-lift:  oklch(0.188 0.014 68);
+    --edge:       oklch(0.105 0.010 64);
+
+    /* — ink (warm ivory, never pure white) — */
+    --ink:        oklch(0.940 0.013 82);
+    --ink-soft:   oklch(0.805 0.012 82);
+    --ink-faint:  oklch(0.672 0.012 82);
+    --ink-ghost:  oklch(0.560 0.010 82);
+
+    /* — the single accent: antique gold, used in homeopathic doses — */
+    --gold:       oklch(0.820 0.098 86);
+    --gold-line:  oklch(0.760 0.086 84);
+
+    /* — the two worlds, as light — */
+    --warm-glow:  oklch(0.640 0.082 74 / 0.155);
+    --cool-glow:  oklch(0.690 0.032 244 / 0.17);
+
+    /* — type — */
+    --serif:  "Bodoni Moda", "Didot", "Bodoni 72", "Iowan Old Style", "Times New Roman", serif;
+    --caps:   "Cinzel", var(--serif);
+    --arabic: "Amiri", "Geeza Pro", "Times New Roman", serif;
+
+    /* — motion — */
+    --quint: cubic-bezier(0.22, 1, 0.36, 1);
+    --expo:  cubic-bezier(0.16, 1, 0.30, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    overflow: hidden;
+    background:
+      radial-gradient(118% 86% at 50% 40%, var(--void-lift), var(--void) 64%),
+      var(--void);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-kerning: normal;
+    font-variant-ligatures: common-ligatures contextual;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: oklch(0.820 0.098 86 / 0.24); color: var(--ink); }
+
+  /* — vignette to seat the void — */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(135% 115% at 50% 48%, transparent 52%, var(--edge) 100%);
+    z-index: 3;
+  }
+
+  /* — a whisper of film grain, for the feel of an engraved certificate — */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  /* ——— atmosphere: two worlds of light + the meridian ——— */
+  .atmos {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(calc(var(--px, 0) * 16px), calc(var(--py, 0) * 11px));
+    transition: opacity 1.9s ease, transform 0.9s var(--quint);
+  }
+  .is-ready .atmos { opacity: 1; }
+
+  .world {
+    position: absolute;
+    width: 86vmax;
+    height: 86vmax;
+    border-radius: 50%;
+    filter: blur(8px);
+  }
+  .world--warm {
+    right: -26vmax;
+    bottom: -16vmax;
+    background: radial-gradient(closest-side, var(--warm-glow), transparent 70%);
+    animation: drift-warm 30s ease-in-out infinite;
+  }
+  .world--cool {
+    left: -26vmax;
+    top: -18vmax;
+    background: radial-gradient(closest-side, var(--cool-glow), transparent 70%);
+    animation: drift-cool 38s ease-in-out infinite;
+  }
+
+  @keyframes drift-warm {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-3.5%, -2.5%) scale(1.07); }
+  }
+  @keyframes drift-cool {
+    0%, 100% { transform: translate(0, 0) scale(1.02); }
+    50%      { transform: translate(3.5%, 2.5%) scale(1.09); }
+  }
+
+  /* the axis where the worlds meet */
+  .meridian {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg,
+      transparent 4%,
+      oklch(0.760 0.086 84 / 0.16) 50%,
+      transparent 96%);
+    transform: scaleY(0);
+    transform-origin: top center;
+    opacity: 0;
+  }
+  .is-ready .meridian {
+    transform: scaleY(1);
+    opacity: 1;
+    transition: transform 1.7s var(--expo), opacity 1.1s ease;
+  }
+
+  /* ——— the stage ——— */
+  .stage {
+    position: relative;
+    z-index: 2;
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding:
+      clamp(20px, 3.4vh, 36px)
+      clamp(22px, 4.4vw, 60px);
+  }
+
+  .frame {
+    display: flex;
+    gap: 1rem;
+  }
+  .frame--top    { justify-content: flex-end;     align-items: flex-start; }
+  .frame--bottom { justify-content: space-between; align-items: flex-end; }
+
+  .tag {
+    font-family: var(--caps);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(0.58rem, 0.54rem + 0.2vw, 0.7rem);
+    letter-spacing: 0.34em;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+  .tag--mark { color: var(--ink-ghost); }
+
+  /* ——— the seal ——— */
+  .seal {
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(9px, 1.5vh, 16px);
+    max-width: min(90vw, 600px);
+    padding-block: clamp(8px, 2vh, 20px);
+  }
+
+  .crest {
+    height: clamp(92px, 14vh, 148px);
+    width: auto;
+    display: block;
+  }
+  .wordmark {
+    width: clamp(166px, 19vw, 222px);
+    height: auto;
+    display: block;
+    margin-top: clamp(2px, 0.6vh, 6px);
+  }
+
+  /* the rule is the hinge between the emblem above and the message below */
+  .rule {
+    position: relative;
+    width: clamp(118px, 17vw, 172px);
+    height: 1px;
+    margin-block: clamp(10px, 2.4vh, 24px);
+    background: linear-gradient(90deg, transparent, var(--gold-line) 16%, var(--gold-line) 84%, transparent);
+  }
+  .rule .node {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 4px;
+    height: 4px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: var(--gold);
+    box-shadow: 0 0 9px oklch(0.820 0.098 86 / 0.55);
+  }
+
+  .tagline {
+    margin: 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    font-size: clamp(1.35rem, 1.0rem + 1.55vw, 2.2rem);
+    line-height: 1.1;
+    letter-spacing: 0.004em;
+    color: var(--ink);
+  }
+
+  .creed {
+    margin: 0;
+    max-width: 42ch;
+    font-weight: 500;
+    font-optical-sizing: auto;
+    font-size: clamp(0.9rem, 0.84rem + 0.34vw, 1.06rem);
+    line-height: 1.55;
+    letter-spacing: 0.014em;
+    color: var(--ink-soft);
+    text-wrap: balance;
+  }
+
+  .creed-ar {
+    margin: 0;
+    direction: rtl;
+    font-family: var(--arabic);
+    font-size: clamp(1rem, 0.92rem + 0.44vw, 1.24rem);
+    line-height: 1.5;
+    letter-spacing: 0;
+    color: var(--ink-faint);
+  }
+
+  /* ——— entrance choreography ——— */
+  .r {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.95s var(--quint),
+      transform 1.05s var(--quint);
+    transition-delay: var(--d, 0ms);
+    will-change: opacity, transform;
+  }
+  .is-ready .r { opacity: 1; transform: none; }
+
+  .r-crest {
+    opacity: 0;
+    transform: translateY(22px) scale(0.945);
+    filter: blur(7px);
+    transition:
+      opacity 1.15s var(--expo),
+      transform 1.35s var(--expo),
+      filter 1.35s var(--expo);
+    transition-delay: var(--d, 0ms);
+    will-change: opacity, transform, filter;
+  }
+  .is-ready .r-crest { opacity: 1; transform: none; filter: blur(0); }
+
+  .r-rule {
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition:
+      transform 1.15s var(--expo),
+      opacity 0.6s ease;
+    transition-delay: var(--d, 0ms);
+  }
+  .is-ready .r-rule { opacity: 1; transform: scaleX(1); }
+
+  /* ——— reduced motion: no journey, just arrival ——— */
+  @media (prefers-reduced-motion: reduce) {
+    .world { animation: none; }
+    .atmos { transform: none; }
+    .r, .r-crest, .r-rule, .meridian {
+      transition-duration: 0.001ms;
+      transition-delay: 0ms;
+    }
+  }
+
+  /* ——— short viewports: tighten so nothing scrolls ——— */
+  @media (max-height: 660px) {
+    .seal { gap: clamp(10px, 1.6vh, 16px); }
+    .crest { height: clamp(64px, 9.5vh, 92px); }
+    .creed-ar { display: none; }
+  }
+
+  /* ——— phones ——— */
+  @media (max-width: 560px) {
+    .frame--bottom { flex-direction: row; }
+    .tag { font-size: 0.58rem; letter-spacing: 0.28em; }
+    .seal { gap: clamp(12px, 2.2vh, 20px); }
+  }
+  @media (max-width: 380px) {
+    .tag--invite { display: none; } /* keep the frame uncluttered on the smallest screens */
+  }
+</style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="atmos" aria-hidden="true">
+    <span class="world world--warm"></span>
+    <span class="world world--cool"></span>
+    <span class="meridian"></span>
+  </div>
+
+  <main class="stage">
+    <header class="frame frame--top">
+      <span class="tag tag--invite r" style="--d: 1040ms">By invitation only</span>
+    </header>
+
+    <section class="seal">
+      <img class="crest r-crest" src="assets/crest.png" alt="" width="208" height="236"
+           style="--d: 200ms" />
+      <img class="wordmark r" src="assets/wordmark.png" alt="HA Business Club" width="376" height="228"
+           style="--d: 360ms" />
+
+      <span class="rule r-rule" style="--d: 520ms" aria-hidden="true"><i class="node"></i></span>
+
+      <h1 class="tagline r" style="--d: 660ms">Bringing&nbsp;worlds together.</h1>
+
+      <p class="creed r" style="--d: 820ms">
+        Connecting the business worlds of the Netherlands and the Arab world.
+      </p>
+
+      <p class="creed-ar r" lang="ar" dir="rtl" style="--d: 940ms">نجمع العالمين</p>
+    </section>
+
+    <footer class="frame frame--bottom">
+      <span class="tag r" style="--d: 1140ms">The Netherlands</span>
+      <span class="tag tag--mark r" style="--d: 1220ms">© MMXXVI</span>
+    </footer>
+  </main>
+
+  <noscript>
+    <style>
+      .atmos, .meridian, .r, .r-crest, .r-rule {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+    </style>
+  </noscript>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var body = document.body;
+      var reveal = function () { body.classList.add("is-ready"); };
+
+      // Reveal once fonts are ready so the type settles in its final form,
+      // with belt-and-suspenders fallbacks so the page can never stay hidden.
+      var fired = false;
+      var go = function () { if (!fired) { fired = true; reveal(); } };
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () { requestAnimationFrame(go); });
+      }
+      window.addEventListener("load", function () { setTimeout(go, 60); });
+      setTimeout(go, 1400); // hard failsafe
+
+      // Subtle pointer parallax on the two worlds — fine pointers only,
+      // and never when reduced motion is requested.
+      var fine = window.matchMedia("(hover: hover) and (pointer: fine)");
+      var calm = window.matchMedia("(prefers-reduced-motion: reduce)");
+      if (fine.matches && !calm.matches) {
+        var tx = 0, ty = 0, raf = null;
+        var apply = function () {
+          root.style.setProperty("--px", tx.toFixed(3));
+          root.style.setProperty("--py", ty.toFixed(3));
+          raf = null;
+        };
+        window.addEventListener("pointermove", function (e) {
+          tx = (e.clientX / window.innerWidth) * 2 - 1;
+          ty = (e.clientY / window.innerHeight) * 2 - 1;
+          if (!raf) raf = requestAnimationFrame(apply);
+        }, { passive: true });
+      }
+    })();
+  </script>
+</body>
+</html>
