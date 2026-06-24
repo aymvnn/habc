@@ -203,13 +203,14 @@
     padding-block: clamp(8px, 2vh, 20px);
   }
 
+  /* shown small so the original raster stays pixel-crisp (no upscaling) */
   .crest {
-    height: clamp(92px, 14vh, 148px);
+    height: clamp(58px, 8.5vh, 86px);
     width: auto;
     display: block;
   }
   .wordmark {
-    width: clamp(166px, 19vw, 222px);
+    width: clamp(116px, 14vw, 150px);
     height: auto;
     display: block;
     margin-top: clamp(2px, 0.6vh, 6px);
@@ -317,7 +318,7 @@
   /* ——— short viewports: tighten so nothing scrolls ——— */
   @media (max-height: 660px) {
     .seal { gap: clamp(10px, 1.6vh, 16px); }
-    .crest { height: clamp(64px, 9.5vh, 92px); }
+    .crest { height: clamp(50px, 7vh, 68px); }
     .creed-ar { display: none; }
   }
 
@@ -347,9 +348,9 @@
     </header>
 
     <section class="seal">
-      <img class="crest r-crest" src="assets/crest.svg" alt="" width="832" height="944"
+      <img class="crest r-crest" src="assets/crest.png" alt="" width="306" height="348"
            style="--d: 200ms" />
-      <img class="wordmark r" src="assets/wordmark.svg" alt="HA Business Club" width="1520" height="912"
+      <img class="wordmark r" src="assets/wordmark.png" alt="HA Business Club" width="564" height="336"
            style="--d: 360ms" />
 
       <span class="rule r-rule" style="--d: 520ms" aria-hidden="true"><i class="node"></i></span>
