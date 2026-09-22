@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Demo — Signatuurelementen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@700;800&family=Archivo:wght@400;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#EDEAE1; --paper-lift:#F5F3EC; --ink:#171410; --ink-soft:#4A443A;
+    --muted:#7A7263; --gold:#A37F2A; --gold-bright:#C9A959;
+    --line:#CFC9B8; --emboss:#D2CCBB;
+    --display:"Bricolage Grotesque",sans-serif; --body:"Archivo",sans-serif; --arabic:"Almarai",sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--body) }
+  .demo-label{
+    font:700 11px/1 var(--body); letter-spacing:.24em; text-transform:uppercase; color:var(--gold);
+    display:flex; align-items:center; gap:10px; margin-bottom:60px;
+  }
+  .demo-label::before{ content:""; width:22px; height:2px; background:var(--gold) }
+  section{ padding:80px clamp(20px,5vw,64px) 100px; border-bottom:1.5px solid var(--ink); overflow:hidden }
+  .example{ position:relative; margin-bottom:130px }
+  .example:last-child{ margin-bottom:0 }
+  .caption{
+    font:600 10.5px/1.6 var(--body); letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted); margin-top:30px;
+  }
+
+  /* ═══════════ 1 · SPIEGEL-TYPOGRAFIE ═══════════ */
+  .stage{ position:relative; padding-block:70px }
+  .ghost{
+    position:absolute; z-index:0; pointer-events:none; user-select:none; white-space:nowrap;
+    font-family:var(--arabic); font-weight:800; line-height:1;
+    color:transparent; -webkit-text-stroke:1.6px rgba(23,20,16,.22);
+  }
+  .stage h1,.stage h2{ position:relative; z-index:1; margin:0 }
+
+  .hero-demo h1{
+    font-family:var(--display); font-weight:800; font-size:clamp(56px,8.6vw,120px);
+    line-height:.95; letter-spacing:-.03em; text-transform:uppercase;
+  }
+  .hero-demo h1 .gold{ color:var(--gold) }
+  .hero-demo .ghost{
+    font-size:clamp(120px,19vw,270px);
+    inset-inline-end:-4%; top:-4px;
+  }
+
+  .sub-demo h2{
+    font-family:var(--display); font-weight:800; font-size:clamp(40px,5.6vw,76px);
+    line-height:1; letter-spacing:-.02em;
+  }
+  .sub-demo h2 em{ font-style:normal; color:var(--gold) }
+  .sub-demo .ghost{
+    font-size:clamp(110px,16vw,220px);
+    -webkit-text-stroke-color:rgba(163,127,42,.30);
+    inset-inline-start:22%; bottom:0;
+  }
+
+  .ar-demo{ direction:rtl; text-align:right }
+  .ar-demo h2{
+    font-family:var(--arabic); font-weight:800; font-size:clamp(40px,5.2vw,68px); line-height:1.3;
+  }
+  .ar-demo h2 em{ font-style:normal; color:var(--gold) }
+  .ar-demo .ghost{
+    font-family:var(--display); font-weight:800; text-transform:uppercase; letter-spacing:-.02em;
+    font-size:clamp(90px,13vw,180px);
+    -webkit-text-stroke-color:rgba(23,20,16,.18);
+    inset-inline-end:30%; top:6px;
+  }
+
+  /* ═══════════ 4 · HET ZEGEL ═══════════ */
+  .seal-row{ display:flex; flex-wrap:wrap; gap:clamp(50px,8vw,140px); align-items:center; justify-content:flex-start }
+  .seal-item{ text-align:center }
+  .seal.emboss .shape{ stroke:var(--emboss) }
+  .seal.emboss{ filter:drop-shadow(0 1.5px 0 rgba(255,255,255,.9)) drop-shadow(0 -1px 1px rgba(23,20,16,.22)) }
+  .seal.emboss .ringtext{ fill:#B9B29D }
+  .seal.emboss .lion{ filter:brightness(.18) sepia(.6) saturate(1.4); opacity:.3 }
+  .seal.stamp{ transform:rotate(-7deg) }
+  .seal.stamp .shape{ stroke:var(--gold) }
+  .seal.stamp .ringtext{ fill:var(--gold) }
+  .seal.stamp .lion{ filter:brightness(.18) sepia(.9) saturate(4) hue-rotate(8deg); opacity:.85 }
+
+  .divider-demo{ display:flex; align-items:center; gap:24px; margin-top:110px }
+  .divider-demo::before,.divider-demo::after{ content:""; flex:1; height:1.5px; background:var(--ink) }
+</style>
+</head>
+<body>
+
+<!-- ════════════════ 1 · TWEETALIGE SPIEGEL-TYPOGRAFIE ════════════════ -->
+<section>
+  <p class="demo-label">Element 1 &mdash; Tweetalige spiegel-typografie</p>
+
+  <div class="example hero-demo">
+    <div class="stage">
+      <span class="ghost" aria-hidden="true">نجمع العالمين</span>
+      <h1>Bringing worlds<br /><span class="gold">together.</span></h1>
+    </div>
+    <p class="caption">A &mdash; herostijl: het Arabisch als groot contourwoord achter het Latijn</p>
+  </div>
+
+  <div class="example sub-demo">
+    <div class="stage">
+      <span class="ghost" aria-hidden="true">بيتٌ واحد</span>
+      <h2>Four desks,<br /><em>one house.</em></h2>
+    </div>
+    <p class="caption">B &mdash; sectiekopstijl: goudcontour, kleiner en subtieler</p>
+  </div>
+
+  <div class="example ar-demo" lang="ar">
+    <div class="stage">
+      <span class="ghost" aria-hidden="true" lang="en">One house</span>
+      <h2>أربعة مكاتب،<br /><em>بيتٌ واحد.</em></h2>
+    </div>
+    <p class="caption" dir="ltr">C &mdash; op de Arabische pagina spiegelt het systeem: Latijn wordt het contourwoord</p>
+  </div>
+</section>
+
+<!-- ════════════════ 4 · HET ZEGEL VAN HET HUIS ════════════════ -->
+<section>
+  <p class="demo-label">Element 4 &mdash; Het zegel van het huis</p>
+
+  <div class="seal-row">
+    <div class="seal-item">
+      <svg class="seal emboss" width="340" height="340" viewBox="0 0 300 300" role="img" aria-label="Blindzegel">
+        <g class="shape" fill="none" stroke-width="2">
+          <rect x="52" y="52" width="196" height="196" />
+          <rect x="52" y="52" width="196" height="196" transform="rotate(45 150 150)" />
+          <circle cx="150" cy="150" r="118" stroke-width="1.4" />
+          <circle cx="150" cy="150" r="76" stroke-width="1.4" />
+        </g>
+        <defs><path id="ringA" d="M150,44 a106,106 0 1,1 -0.01,0" /></defs>
+        <text class="ringtext" font-family="Archivo,sans-serif" font-size="13" font-weight="700" letter-spacing="4.2">
+          <textPath href="#ringA" startOffset="0">HA BUSINESS CLUB &#9670; ANNO 2018 &#9670; &#1633;&#1636;&#1635;&#1641; &#9670;</textPath>
+        </text>
+        <image class="lion" href="assets/crest-lite.png" x="111" y="102" width="78" height="89" />
+        <text x="150" y="215" text-anchor="middle" font-family="Archivo,sans-serif" font-size="10.5" font-weight="700" letter-spacing="3.4" class="ringtext">EST. MMXVIII</text>
+      </svg>
+      <p class="caption">A &mdash; blindreli&euml;f, in het papier gedrukt</p>
+    </div>
+
+    <div class="seal-item">
+      <svg class="seal stamp" width="340" height="340" viewBox="0 0 300 300" role="img" aria-label="Goudzegel">
+        <g class="shape" fill="none" stroke-width="2">
+          <rect x="52" y="52" width="196" height="196" />
+          <rect x="52" y="52" width="196" height="196" transform="rotate(45 150 150)" />
+          <circle cx="150" cy="150" r="118" stroke-width="1.4" />
+          <circle cx="150" cy="150" r="76" stroke-width="1.4" />
+        </g>
+        <defs><path id="ringB" d="M150,44 a106,106 0 1,1 -0.01,0" /></defs>
+        <text class="ringtext" font-family="Archivo,sans-serif" font-size="13" font-weight="700" letter-spacing="4.2">
+          <textPath href="#ringB" startOffset="0">HA BUSINESS CLUB &#9670; ANNO 2018 &#9670; &#1633;&#1636;&#1635;&#1641; &#9670;</textPath>
+        </text>
+        <image class="lion" href="assets/crest-lite.png" x="111" y="102" width="78" height="89" />
+        <text x="150" y="215" text-anchor="middle" font-family="Archivo,sans-serif" font-size="10.5" font-weight="700" letter-spacing="3.4" class="ringtext">EST. MMXVIII</text>
+      </svg>
+      <p class="caption">B &mdash; goudstempel, licht gekanteld</p>
+    </div>
+  </div>
+
+  <div class="divider-demo">
+    <svg class="seal emboss" width="72" height="72" viewBox="0 0 300 300" aria-hidden="true">
+      <g class="shape" fill="none" stroke-width="7">
+        <rect x="52" y="52" width="196" height="196" />
+        <rect x="52" y="52" width="196" height="196" transform="rotate(45 150 150)" />
+        <circle cx="150" cy="150" r="76" stroke-width="5" />
+      </g>
+      <image class="lion" href="assets/crest-lite.png" x="104" y="94" width="92" height="105" />
+    </svg>
+  </div>
+  <p class="caption" style="text-align:center">C &mdash; klein, als sectiescheiding</p>
+</section>
+
+</body>
+</html>

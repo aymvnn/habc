@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Demo — De Akte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@700;800&family=Archivo:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#EDEAE1; --paper-lift:#F5F3EC; --ink:#171410; --ink-soft:#4A443A;
+    --muted:#7A7263; --gold:#A37F2A; --gold-bright:#C9A959;
+    --line:#CFC9B8; --emboss:#D2CCBB;
+    --frame:18px; --frame2:26px;
+    --display:"Bricolage Grotesque",sans-serif; --body:"Archivo",sans-serif; --arabic:"Almarai",sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--body); overflow-x:hidden }
+
+  /* ═══════ HET KADER: elke schermvulling is een aktepagina ═══════ */
+  .frame{ position:fixed; inset:var(--frame); border:1.5px solid var(--ink); pointer-events:none; z-index:50 }
+  .frame::after{ content:""; position:absolute; inset:6px; border:1px solid rgba(23,20,16,.28) }
+  /* hoekmerken */
+  .frame i{ position:absolute; width:9px; height:9px; background:var(--gold); transform:rotate(45deg) }
+  .frame i:nth-child(1){ top:-5px; left:-5px } .frame i:nth-child(2){ top:-5px; right:-5px }
+  .frame i:nth-child(3){ bottom:-5px; left:-5px } .frame i:nth-child(4){ bottom:-5px; right:-5px }
+  /* folio, vast in het kader */
+  .folio{
+    position:fixed; right:calc(var(--frame2) + 14px); bottom:calc(var(--frame) + 10px); z-index:51;
+    font:700 9.5px/1 var(--body); letter-spacing:.26em; color:var(--muted); text-transform:uppercase;
+    background:var(--paper); padding:4px 8px;
+  }
+  .doc-id{
+    position:fixed; left:calc(var(--frame2) + 14px); bottom:calc(var(--frame) + 10px); z-index:51;
+    font:700 9.5px/1 var(--body); letter-spacing:.26em; color:var(--muted); text-transform:uppercase;
+    background:var(--paper); padding:4px 8px;
+  }
+  .doc-id b{ color:var(--gold) }
+  /* kop van de akte, vast bovenin het kader */
+  .doc-head{
+    position:fixed; top:calc(var(--frame) + 10px); left:50%; transform:translateX(-50%); z-index:51;
+    font:700 9.5px/1 var(--body); letter-spacing:.3em; color:var(--ink); text-transform:uppercase;
+    background:var(--paper); padding:4px 14px; white-space:nowrap;
+  }
+  .doc-head em{ font-style:normal; color:var(--gold) }
+
+  main{ padding:calc(var(--frame2) + 40px) }
+
+  /* ═══════ DE KANTLIJN: alle meta leeft in de marge ═══════ */
+  .leaf{
+    display:grid; grid-template-columns:150px 1fr; gap:clamp(30px,4vw,70px);
+    max-width:1200px; margin-inline:auto; padding-block:clamp(70px,9vh,120px);
+    border-bottom:1px solid var(--line); position:relative;
+  }
+  .leaf:last-child{ border-bottom:none }
+  .marge{
+    border-inline-end:1.5px solid var(--gold); padding-inline-end:22px; text-align:right;
+    display:flex; flex-direction:column; align-items:flex-end; gap:14px;
+  }
+  .marge .art{
+    font-family:var(--display); font-weight:800; font-size:30px; line-height:1; letter-spacing:-.02em;
+  }
+  .marge .art small{ display:block; font-family:var(--arabic); font-weight:700; font-size:15px; color:var(--gold); margin-top:4px }
+  .marge .tag{
+    font:700 9px/1.5 var(--body); letter-spacing:.22em; text-transform:uppercase; color:var(--muted);
+    writing-mode:vertical-rl; margin-top:6px;
+  }
+  .marge .whisper{ font-family:var(--arabic); font-weight:700; font-size:14px; color:rgba(163,127,42,.65) }
+
+  /* ═══════ CONTENT: registerdiscipline ═══════ */
+  .content h1{
+    font-family:var(--display); font-weight:800; font-size:clamp(46px,6.4vw,92px);
+    line-height:.96; letter-spacing:-.025em; margin:0 0 30px; text-transform:uppercase;
+  }
+  .content h1 .gold{ color:var(--gold) }
+  .content h2{
+    font-family:var(--display); font-weight:800; font-size:clamp(34px,4.4vw,58px);
+    line-height:1; letter-spacing:-.02em; margin:0 0 26px;
+  }
+  .content h2 em{ font-style:normal; color:var(--gold) }
+  .content p{ font-size:15.5px; line-height:1.65; color:var(--ink-soft); max-width:58ch; margin:0 0 16px }
+
+  /* opgemaakte registerregels (het 'gelinieerde' blok) */
+  .register{
+    margin-top:34px; border-top:1.5px solid var(--ink);
+  }
+  .register .r{
+    display:grid; grid-template-columns:110px 1fr auto; gap:18px; align-items:baseline;
+    padding-block:15px; border-bottom:1px solid var(--line);
+    font-size:14.5px;
+  }
+  .register .r b{ font:700 10px/1 var(--body); letter-spacing:.18em; text-transform:uppercase; color:var(--gold) }
+  .register .r span{ color:var(--ink-soft) }
+  .register .r .st{
+    font:700 9px/1 var(--body); letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+    border:1px solid var(--line); border-radius:999px; padding:5px 10px;
+  }
+
+  /* gewaarmerkt-blok met zegel */
+  .certified{
+    margin-top:40px; display:flex; align-items:center; gap:26px;
+    background:var(--paper-lift); border:1px solid var(--line); padding:22px 26px;
+  }
+  .certified svg{ flex:none }
+  .seal .shape{ stroke:var(--emboss); fill:none }
+  .seal .lion{ filter:brightness(.18) sepia(.6) saturate(1.4); opacity:.3 }
+  .certified p{ margin:0; font-size:13.5px; line-height:1.6; color:var(--muted) }
+  .certified p b{ color:var(--ink); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; display:block; margin-bottom:6px }
+
+  /* ondertekeningsregel */
+  .signoff{ margin-top:46px; display:flex; gap:60px }
+  .signoff .col{ flex:1; max-width:260px }
+  .signoff .line{ border-bottom:1px solid var(--ink); height:44px }
+  .signoff small{ display:block; font:700 9px/1.6 var(--body); letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:8px }
+
+  .demo-note{
+    max-width:1200px; margin:0 auto; padding:40px 0 10px;
+    font:600 10.5px/1.7 var(--body); letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  }
+  @media (max-width:760px){
+    .leaf{ grid-template-columns:64px 1fr; gap:20px }
+    .marge .art{ font-size:20px }
+    .signoff{ flex-direction:column; gap:26px }
+  }
+</style>
+</head>
+<body>
+
+<!-- het vaste kader -->
+<div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<div class="doc-head" aria-hidden="true">HA Business Club <em>&#9670;</em> Opgemaakt te Alblasserdam <em>&#9670;</em> Anno 2018 &middot; &#1633;&#1636;&#1635;&#1641;</div>
+<div class="doc-id" aria-hidden="true">Reg. <b>NL&ndash;AR</b> / 2018</div>
+<div class="folio" aria-hidden="true">Folio 01 &middot; &#1632;&#1633;</div>
+
+<main>
+
+  <!-- ══════ artikel 0: de kop van de akte ══════ -->
+  <div class="leaf">
+    <div class="marge">
+      <span class="art">&sect;0<small>تمهيد</small></span>
+      <span class="tag">Preambule</span>
+    </div>
+    <div class="content">
+      <h1>Bringing worlds<br /><span class="gold">together.</span></h1>
+      <p>Een besloten handelshuis tussen Noordwest-Europa en de Arabische wereld. Opgericht in 2018 als Nederlands&ndash;Arabische handelskamer. Leden worden voorgedragen en aangenomen op reputatie.</p>
+      <p style="font-family:var(--arabic);font-weight:700;color:rgba(163,127,42,.75);font-size:16px">نجمع العالمين</p>
+    </div>
+  </div>
+
+  <!-- ══════ artikel 1 ══════ -->
+  <div class="leaf">
+    <div class="marge">
+      <span class="art">&sect;1<small>البيت</small></span>
+      <span class="tag">Het Huis</span>
+    </div>
+    <div class="content">
+      <h2>Wij waren er <em>al.</em></h2>
+      <p>Ons huis werd in 2018 opgericht, in de jaren dat in Europa nog nauwelijks iemand serieus naar het oosten keek. Twee principalen leiden het: Nederlandse degelijkheid aan de ene kant van de tafel, Arabische toegang aan de andere.</p>
+    </div>
+  </div>
+
+  <!-- ══════ artikel 2: het register ══════ -->
+  <div class="leaf">
+    <div class="marge">
+      <span class="art">&sect;2<small>المكاتب</small></span>
+      <span class="tag">De Desks</span>
+    </div>
+    <div class="content">
+      <h2>Vier desks, <em>&eacute;&eacute;n huis.</em></h2>
+      <div class="register">
+        <div class="r"><b>Desk 01</b><span>Industri&euml;le sourcing &mdash; machines, productielijnen, componenten</span><span class="st">Persoonlijk geleid</span></div>
+        <div class="r"><b>Desk 02</b><span>De Levant &mdash; sourcing, counsel, eigendom &amp; titel</span><span class="st">Persoonlijk geleid</span></div>
+        <div class="r"><b>Desk 03</b><span>De Golf &mdash; distributie, agentuur, localisatie</span><span class="st">Persoonlijk geleid</span></div>
+        <div class="r"><b>Desk 04</b><span>Counsel &amp; structurering &mdash; fiscaal, contract, exportcontrole</span><span class="st">Persoonlijk geleid</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ artikel 3: gewaarmerkt ══════ -->
+  <div class="leaf">
+    <div class="marge">
+      <span class="art">&sect;3<small>المعايير</small></span>
+      <span class="tag">Standaarden</span>
+    </div>
+    <div class="content">
+      <h2>Handel overleeft op <em>papierwerk.</em></h2>
+      <p>Elke tegenpartij gescreend tegen de Europese, Amerikaanse en Britse maatregelen. Elk artikel geclassificeerd v&oacute;&oacute;r vertrek. Nooit geld van een lid onder eigen beheer.</p>
+      <div class="certified">
+        <svg class="seal" width="74" height="74" viewBox="0 0 300 300" aria-hidden="true">
+          <g class="shape" stroke-width="7">
+            <rect x="52" y="52" width="196" height="196" />
+            <rect x="52" y="52" width="196" height="196" transform="rotate(45 150 150)" />
+            <circle cx="150" cy="150" r="76" stroke-width="5" />
+          </g>
+          <image class="lion" href="assets/crest-lite.png" x="104" y="94" width="92" height="105" />
+        </svg>
+        <p><b>Gewaarmerkt</b>Dit huis voert verscherpt cli&euml;ntenonderzoek onder de Nederlandse Wwft en werkt uitsluitend binnen het Europese exportcontrolekader.</p>
+      </div>
+      <div class="signoff">
+        <div class="col"><div class="line"></div><small>De principaal &middot; Nederland</small></div>
+        <div class="col"><div class="line"></div><small>De principaal &middot; Syri&euml;</small></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<p class="demo-note">Concept &laquo;De Akte&raquo;: vast dubbellijnig kader met hoekmerken &middot; aktekop en folio vast in het kader &middot; kantlijn met artikelnummers (&sect;1 &middot; ٠١) en Arabische fluistertitels &middot; registerregels &middot; waarmerk met zegel &middot; ondertekeningsregels. Bij scrollen telt het folio-nummer mee en wisselt de aktekop van artikel.</p>
+
+</body>
+</html>
