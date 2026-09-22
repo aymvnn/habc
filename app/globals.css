@@ -366,7 +366,7 @@ footer .bottom .values i{ font-style:normal; color:var(--bar) }
   .founder{ grid-template-columns:1fr; row-gap:var(--s-lg) } .portrait{ max-width:220px }
   #correspondence .mail{ font-size:var(--t1) }
   footer .col,footer .col:first-of-type{ grid-column:span 6 }
-  .brand .wordmark{ display:none } .brand .mark{ display:block }
+  .brand .wordmark{ height:18px }
   .field.two{ grid-template-columns:1fr }
 }
 

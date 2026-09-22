@@ -65,7 +65,16 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
     const R = r.getBoundingClientRect();
     setBox({ w: R.width, h: R.height });
     r.style.setProperty("--bw", `${R.width}px`);
-    if (window.matchMedia("(max-width: 900px)").matches) { setThreads([]); setStem(""); setAnchors([]); return; }
+    if (window.matchMedia("(max-width: 900px)").matches) {
+      // one register, no threads: the photo opens at the end of the row, inside it
+      const rtl = getComputedStyle(r).direction === "rtl";
+      setAnchors(rows.current.map((el) => {
+        if (!el) return null;
+        const E = el.getBoundingClientRect();
+        return { x: (rtl ? E.left : E.right) - R.left, y: E.top + E.height / 2 - R.top, side: rtl ? 1 : -1 };
+      }));
+      setThreads([]); setStem(""); return;
+    }
     const C = c.getBoundingClientRect();
     const tx = C.left + C.width / 2 - R.left;
     const ty = C.bottom - R.top - C.height * 0.015;
@@ -152,16 +161,17 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
     const start = () => {
     if (cancelled || !el.classList.contains("intro")) return;
     const R = el.getBoundingClientRect(), W = w.getBoundingClientRect(), C = c.getBoundingClientRect();
-    // the strike has to be seen: if the line sits below the fold (phones, low screens), open normally
-    if (W.top + W.height * 0.607 > innerHeight - 30) { end(); off(); el.classList.add("in"); introDelay.current = 0; return; }
+    // the strike has to be seen: if the line sits below the fold (phones, low screens), the ducat strikes the tulip instead
+    const lineInView = W.top + W.height * 0.607 <= innerHeight - 30;
     const size = coin.offsetWidth || 84, half = size / 2;
     const x = W.left + W.width / 2 - R.left - half;
     const yLine = W.top + W.height * 0.607 - R.top - half;
     const yCrest = C.top + C.height * 0.46 - R.top - half;
+    const yStrike = lineInView ? yLine : yCrest;
     const grow = (C.height * 1.62) / size;
     const at = (y: number, extra = "") => `translate(${x}px, ${y}px) perspective(700px) ${extra}`;
     const fall = coin.animate(
-      [{ transform: at(-R.top - size * 1.8, "rotateY(0deg)") }, { transform: at(yLine, "rotateY(1080deg)") }],
+      [{ transform: at(-R.top - size * 1.8, "rotateY(0deg)") }, { transform: at(yStrike, "rotateY(1080deg)") }],
       { duration: 620, easing: "cubic-bezier(.55,0,.85,.4)", fill: "forwards" },
     );
     anims.push(fall);
@@ -169,14 +179,14 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
       el.classList.add("in"); // the strike: the bar draws out from here, the name opens, the tulip blooms
       anims.push(
         ring.animate(
-          [{ transform: `translate(${x}px, ${yLine}px) scale(.55)`, opacity: 0.95 }, { transform: `translate(${x}px, ${yLine}px) scale(5.5)`, opacity: 0 }],
+          [{ transform: `translate(${x}px, ${yStrike}px) scale(.55)`, opacity: 0.95 }, { transform: `translate(${x}px, ${yStrike}px) scale(5.5)`, opacity: 0 }],
           { duration: 950, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" },
         ),
         coin.animate(
           [
-            { transform: at(yLine, "rotateY(1080deg) scale(1)"), opacity: 1 },
-            { transform: at(yLine - 14, "rotateY(1080deg) scale(1.04)"), opacity: 1, offset: 0.16 },
-            { transform: at(yLine, "rotateY(1080deg) scale(1)"), opacity: 1, offset: 0.3 },
+            { transform: at(yStrike, "rotateY(1080deg) scale(1)"), opacity: 1 },
+            { transform: at(yStrike - 14, "rotateY(1080deg) scale(1.04)"), opacity: 1, offset: 0.16 },
+            { transform: at(yStrike, "rotateY(1080deg) scale(1)"), opacity: 1, offset: 0.3 },
             { transform: at(yCrest, `rotateY(1080deg) scale(${grow.toFixed(2)})`), opacity: 0 },
           ],
           { duration: 1350, easing: "cubic-bezier(.65,0,.35,1)", fill: "forwards" },
@@ -297,7 +307,6 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
     const w = wm.current, d = dock.current, b = bar.current;
     if (!w || !d || !b || !mounted) return;
     const html = document.documentElement;
-    const desk = window.matchMedia("(min-width: 901px)");
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let ready = false, raf = 0;
     const ease = (p: number) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
@@ -306,14 +315,17 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
       const nav = document.querySelector(".topbar");
       const tgt = document.querySelector(".topbar .brand .wordmark");
       const W = w.getBoundingClientRect();
-      if (!desk.matches || reduce || !nav || !tgt) {
+      if (reduce || !nav || !tgt || !tgt.getBoundingClientRect().width) {
         html.dataset.dock = window.scrollY > innerHeight * 0.55 ? "done" : "home";
         d.classList.remove("on"); w.style.visibility = ""; b.style.transform = "";
         return;
       }
       const N = nav.getBoundingClientRect(), T = tgt.getBoundingClientRect();
-      const range = Math.max(1, W.top + W.height * 0.574 + window.scrollY - N.bottom);
-      const p = Math.min(1, Math.max(0, window.scrollY / range));
+      // the flight starts once the line is on screen (at once on desktop; on phones it sits below the fold)
+      const lineAt = W.top + W.height * 0.574 + window.scrollY;
+      const from = Math.max(0, lineAt - innerHeight * 0.9);
+      const range = Math.max(1, lineAt - N.bottom - from);
+      const p = Math.min(1, Math.max(0, (window.scrollY - from) / range));
       if (ready) b.style.transform = `scaleY(${(1 - p * (1 - 3 / (W.height * 0.066))).toFixed(4)})`;
       if (!ready || window.scrollY < 2) { html.dataset.dock = "home"; d.classList.remove("on"); w.style.visibility = ""; return; }
       if (p >= 1) { html.dataset.dock = "done"; d.classList.remove("on"); w.style.visibility = "hidden"; return; }
@@ -338,13 +350,34 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
     update();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
-    desk.addEventListener("change", schedule);
     return () => {
       clearTimeout(t); cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", schedule); window.removeEventListener("resize", schedule); desk.removeEventListener("change", schedule);
+      window.removeEventListener("scroll", schedule); window.removeEventListener("resize", schedule);
       delete html.dataset.dock; w.style.visibility = ""; b.style.transform = ""; b.style.transition = "";
     };
   }, [mounted]);
+
+  /* ---------- phones: no hover, so the route passing the middle of the screen shows its photo ---------- */
+  useEffect(() => {
+    const small = window.matchMedia("(max-width: 900px)");
+    let raf = 0;
+    const spy = () => {
+      raf = 0;
+      if (!small.matches || hovering.current) return;
+      const mid = innerHeight * 0.46;
+      let best: number | null = null, dist = innerHeight * 0.17;
+      rows.current.forEach((el, i) => {
+        if (!el) return;
+        const E = el.getBoundingClientRect();
+        const d = Math.abs(E.top + E.height / 2 - mid);
+        if (d < dist) { dist = d; best = i; }
+      });
+      setActive(best);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(spy); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("scroll", onScroll); };
+  }, []);
 
   const enter = (i: number) => { hovering.current = true; measure(); setActive(i); fire(i); };
   const leave = () => { hovering.current = false; setActive(null); };
