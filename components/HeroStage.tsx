@@ -52,6 +52,7 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
   const [stem, setStem] = useState("");
   const [active, setActive] = useState<number | null>(null);
   const [anchors, setAnchors] = useState<(Anchor | null)[]>([]);
+  const [tab, setTab] = useState<"a" | "b">("a"); // phones: one group of routes at a time
 
   const href = (intent: string) => `/${locale}/contact?intent=${intent}#intake`;
   const trade = routes.items.slice(0, 4);
@@ -405,11 +406,13 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
     >
       <span className="rt-idx">{String(i + 1).padStart(2, "0")}</span>
       <span className="rt-label">{item.label}</span>
+      <img className="rt-thumb" src={`/routes/${item.intent}.jpg`} alt="" width={448} height={296} loading="lazy" decoding="async" />
+      <span className="rt-go" aria-hidden="true">→</span>
     </Link>
   );
 
   return (
-    <section className="h3" id="routes" ref={root} aria-labelledby="h3-q">
+    <section className="h3" id="routes" ref={root} aria-labelledby="h3-q" data-tab={tab}>
       <h1 className="sr-only">{title}</h1>
 
       <svg className="h3-threads" width={box.w} height={box.h} viewBox={`0 0 ${box.w || 1} ${box.h || 1}`} aria-hidden="true">
@@ -449,6 +452,16 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
       <div className="h3-top">
         <p className="h3-eyebrow">{descriptor} <i>◆</i> {hero.chip1}</p>
         <h2 id="h3-q" className="h3-q"><Rich text={routes.heading} /></h2>
+      </div>
+
+      {/* phones: the two groups become tabs, and a quiet cue leads from the brand screen to the choice */}
+      <span className="h3-cue" aria-hidden="true" />
+      <div className="h3-tabs" role="tablist" aria-label={routes.heading.replace(/[*_]/g, "")}>
+        {(["a", "b"] as const).map((t) => (
+          <button key={t} type="button" role="tab" aria-selected={tab === t} className={tab === t ? "on" : undefined} onClick={() => setTab(t)}>
+            {t === "a" ? hero.groupA : hero.groupB}
+          </button>
+        ))}
       </div>
 
       <div className="h3-stage">

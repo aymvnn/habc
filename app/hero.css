@@ -16,6 +16,16 @@
 .h3-threads{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:visible }
 .h3 > *:not(.h3-threads):not(.coin):not(.coin-ring):not(.knoop){ position:relative; z-index:1 }
 
+/* 0 · ground: a quiet pattern across the empty stage, fading away from the crest: a girih lattice, the geometry of the Arab world */
+.h3::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:0;
+  -webkit-mask-image:radial-gradient(ellipse 62% 58% at 50% 40%, transparent 34%, #000 100%);
+  mask-image:radial-gradient(ellipse 62% 58% at 50% 40%, transparent 34%, #000 100%);
+  transition:opacity 2.4s var(--ease-out) 1.2s;
+}
+.h3.in::before{ opacity:.22 }
+.h3::before{ background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23B39455' stroke-width='.6'%3E%3Cpath d='M28 28h40v40H28z'/%3E%3Cpath d='M48 19.7 76.3 48 48 76.3 19.7 48z'/%3E%3Cpath d='M48 0v19.7M48 76.3V96M0 48h19.7M76.3 48H96M0 0l28 28M96 0 68 28M0 96l28-28M96 96 68 68'/%3E%3C/g%3E%3C/svg%3E") center / 96px 96px }
+
 /* top: the question */
 .h3-top{ text-align:center; padding-inline:var(--gutter) }
 .h3-eyebrow{ font-family:var(--display); font-weight:600; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold-deep) }
@@ -270,34 +280,90 @@
 .h3.in .h3-legend{ transition-delay:1.7s }
 .h3.in .h3-key{ transition-delay:1.9s, 1.9s, 0s, 0s, 0s }
 
-/* phones and small tablets: the crest leads, routes become one register, no threads */
+/* phones and small tablets: two screens.
+   1 · the brand: crest, the name on its gold line, what the club is.
+   2 · the choice: the question, two tabs, a short list of routes with their photograph. No threads. */
+.h3-cue,.h3-tabs,.rt-thumb,.rt-go{ display:none }
 @media (max-width:900px){
-  .h3{ --wm:min(86vw, 520px); padding-top:88px }
-  .h3-stage{ grid-template-columns:1fr; row-gap:10px }
-  .h3-eyebrow{ font-size:10px; letter-spacing:.15em }
+  .h3{
+    --wm:min(84vw, 480px); --pt:clamp(76px, 10svh, 96px); --cm:clamp(18px, 4.5svh, 44px); --mth:clamp(150px, 28svh, 250px);
+    --cy:calc(var(--pt) + 20px + var(--cm) + var(--mth) * .46); /* the centre of the crest */
+    padding-top:var(--pt); padding-bottom:4px;
+  }
+  .h3-top,.h3-stage{ display:contents }
+  .h3-top > *,.h3-stage > *{ position:relative; z-index:1 }
+
+  /* screen 1 */
+  .h3-eyebrow{ order:1; text-align:center; font-size:10px; letter-spacing:.2em }
   .h3-eyebrow i{ margin-inline:6px }
-  .crest-col{ order:-1 }
-  .crest{ --th:clamp(120px, 20svh, 170px) }
+  .crest-col{ order:2; margin-top:var(--cm) }
+  .crest{ --th:var(--mth) }
   .caption{ display:none }
-  .wing,.wing-a,.wing-b{ align-items:stretch; text-align:start; --toward:1 }
-  [dir="rtl"] .wing{ --toward:-1 }
-  .wing-b{ margin-top:14px }
-  .wing-h,.rt{ width:100% }
-  .wing-a .rt{ grid-template-columns:auto 1fr }
-  .wing-a .rt-idx{ order:0 }
-  .wing .rt::after{ --edge:left }
-  [dir="rtl"] .wing .rt::after{ --edge:right }
-  .rt-label{ font-size:1.18rem }
-  /* the photo opens at the end of the row, so the label keeps clear of it */
-  .rt{ padding-inline-end:calc(var(--kw) + 12px) }
-  .h3{ --kw:clamp(76px, 24vw, 108px) }
-  .knoop{ width:var(--kw) }
-  .h3-key{ margin-top:22px }
+  .h3-band{ order:3; margin-top:0; padding-top:clamp(30px, 6svh, 56px) }
   .band-t,.band-b{ display:none }
-  .lg-chips{ display:flex; justify-content:center; gap:12px; font-family:var(--display); font-weight:600; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep) }
+  .h3-legend{ order:4; margin-top:clamp(12px, 2svh, 20px) }
+  .lg-chips{ display:flex; justify-content:center; gap:12px; font-family:var(--display); font-weight:600; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep) }
   .lg-chips i{ font-style:normal; color:var(--bar) }
   [dir="rtl"] .lg-chips{ font-family:var(--arabic); letter-spacing:0; font-size:.85rem }
-  .lg-sentence{ margin-top:10px }
+  .lg-sentence{ margin-top:12px; max-width:32ch; font-size:.98rem }
+  /* a hairline that runs down: there is more below */
+  .h3-cue{ order:5; display:block; position:relative; z-index:1; align-self:center; width:1px; height:clamp(34px, 7svh, 64px); margin-top:clamp(18px, 4svh, 36px); background:linear-gradient(var(--bar), transparent); overflow:hidden }
+  .h3-cue::after{ content:""; position:absolute; left:0; top:-40%; width:100%; height:40%; background:var(--wine); animation:cue 2.4s var(--ease-out) infinite }
+  @keyframes cue{ to{ top:110% } }
+
+  /* screen 2 */
+  .h3-q{ order:6; text-align:center; margin-top:clamp(56px, 12svh, 110px); padding-inline:var(--gutter); font-size:clamp(2.1rem, 9vw, 2.8rem) }
+  .h3-tabs{
+    order:7; position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:4px; margin:22px var(--gutter) 14px;
+    padding:4px; border:1px solid var(--line-strong); border-radius:999px; background:var(--paper-lift);
+  }
+  .h3-tabs button{
+    font:inherit; font-family:var(--display); font-weight:600; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--gold-deep); background:none; border:0; border-radius:999px; padding:11px 8px; cursor:pointer;
+    transition:background var(--d-mid) var(--ease-out), color var(--d-mid) var(--ease-out);
+  }
+  .h3-tabs button.on{ background:var(--wine); color:var(--paper) }
+  [dir="rtl"] .h3-tabs button{ font-family:var(--arabic); letter-spacing:0; font-size:.85rem }
+  .wing-a{ order:8 }
+  .wing-b{ order:9 }
+  .h3[data-tab="b"] .wing-a{ display:none }
+  .h3[data-tab="a"] .wing-b .rt:not(.rt-other){ display:none }
+  .wing,.wing-a,.wing-b{ align-items:stretch; text-align:start; padding-inline:var(--gutter); gap:8px; --toward:1 }
+  [dir="rtl"] .wing{ --toward:-1 }
+  .wing-h{ display:none }
+
+  /* a route is a small card: photograph, label, arrow */
+  .rt,.wing-a .rt{
+    width:100%; grid-template-columns:64px 1fr auto; align-items:center; column-gap:16px;
+    padding:8px 16px 8px 8px; border:1px solid var(--line); border-radius:calc(var(--radius) + 4px); background:color-mix(in srgb, var(--paper-lift) 70%, transparent);
+    transition:border-color var(--d-mid) var(--ease-out), background var(--d-mid) var(--ease-out);
+  }
+  [dir="rtl"] .rt{ padding:8px 8px 8px 16px }
+  .rt-idx{ display:none }
+  .rt-thumb{ display:block; grid-row:1; grid-column:1; width:64px; height:48px; object-fit:cover; border-radius:var(--radius); max-width:none }
+  .rt-label{ grid-column:2; font-size:1.08rem; line-height:1.2 }
+  .rt-go{ display:block; grid-column:3; color:var(--gold-deep); font-family:var(--display) }
+  [dir="rtl"] .rt-go{ transform:scaleX(-1) }
+  .rt::after{ display:none }
+  .rt:active,.rt:focus-visible{ border-color:var(--bar); background:var(--paper-lift) }
+  .rt:hover .rt-label,.rt:focus-visible .rt-label,.rt.on .rt-label{ transform:none }
+  .rt-other,.wing-a .rt-other{ border:0; background:none; padding:10px 0 0; grid-template-columns:1fr; text-align:center }
+  .rt-other .rt-idx{ display:none }
+  .rt-other .rt-label{ grid-column:1 }
+  .knoop{ display:none }
+
+  .h3-key{
+    order:10; margin-top:18px; border:0; background:none; padding:12px 16px; font-size:.9rem; color:var(--ink-soft);
+    border-top:1px solid var(--line); border-radius:0; align-self:stretch; justify-content:center; margin-inline:var(--gutter);
+  }
+
+  /* the ground becomes a fine wreath around the crest, clear of the name and the text */
+  .h3::before{
+    background-size:48px 48px; background-position:center var(--cy);
+    -webkit-mask-image:radial-gradient(circle at 50% var(--cy), transparent calc(var(--mth) * .78), #000 calc(var(--mth) * .9), rgba(0,0,0,.45) calc(var(--mth) * 1.05), transparent calc(var(--mth) * 1.25));
+    mask-image:radial-gradient(circle at 50% var(--cy), transparent calc(var(--mth) * .78), #000 calc(var(--mth) * .9), rgba(0,0,0,.45) calc(var(--mth) * 1.05), transparent calc(var(--mth) * 1.25));
+  }
+  .h3.in::before{ opacity:.3 }
 }
 
 @media (prefers-reduced-motion:reduce){
