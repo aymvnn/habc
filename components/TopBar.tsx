@@ -83,6 +83,14 @@ export function TopBar({ locale, nav }: { locale: Locale; nav: Dict["nav"] }) {
             </div>
           </div>
         </nav>
+        {/* phones: the other two languages stay in the header, beside the menu */}
+        <div className="lang-m" role="group" aria-label={nav.langLabel}>
+          {LOCALES.filter((l) => l.code !== locale).map((l) => (
+            <Link key={l.code} href={inLang(l.code)} hrefLang={l.code} lang={l.code} title={l.name} className={l.code === "ar" ? "ar-glyph" : undefined}>
+              {l.short}
+            </Link>
+          ))}
+        </div>
         <button
           className="burger"
           type="button"

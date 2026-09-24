@@ -92,6 +92,7 @@ h2 em,h3 em{ font-style:normal; color:var(--wine) }
 .lang a:hover{ color:var(--ink) }
 .lang a[aria-current="page"]{ color:var(--wine) }
 .lang a.ar-glyph{ font-family:var(--arabic); font-size:1rem; line-height:1; letter-spacing:0 }
+.lang-m{ display:none }
 .burger{ display:none; width:44px; height:44px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; cursor:pointer; position:relative }
 .burger span{ position:absolute; left:13px; right:13px; height:2px; background:var(--ink); transition:transform var(--d-mid) var(--ease-out), top var(--d-mid) var(--ease-out) }
 .burger span:nth-child(1){ top:17px } .burger span:nth-child(2){ top:25px }
@@ -390,8 +391,12 @@ footer .bottom .values i{ font-style:normal; color:var(--bar) }
   .intake .intro,.intake form{ grid-column:1 / span 12 }
 }
 @media (max-width:900px){
-  .topbar{ grid-template-columns:auto auto; grid-template-areas:none; justify-content:space-between }
+  .topbar{ grid-template-columns:1fr auto auto; grid-template-areas:none; gap:10px }
   .topbar nav,.topbar .lang{ display:none }
+  .lang-m{ display:flex; align-items:center; gap:2px }
+  .lang-m a{ font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.1em; color:var(--ink-soft); min-width:40px; height:40px; display:grid; place-items:center; border-radius:999px; transition:color var(--d-fast), background var(--d-fast) }
+  .lang-m a:active{ background:var(--paper-deep) }
+  .lang-m a.ar-glyph{ font-family:var(--arabic); font-size:1rem; line-height:1; letter-spacing:0; padding-bottom:5px }
   .brand{ grid-area:auto; justify-self:start }
   .burger{ display:block }
   .brand span{ display:none }
