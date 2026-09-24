@@ -156,6 +156,52 @@ section.block{ padding-block:var(--section); position:relative }
 @media (scripting: enabled){ .rv{ opacity:0; transform:translateY(28px); transition:opacity .9s var(--ease-out), transform .9s var(--ease-out) } }
 @media (scripting: enabled){ .rv.in{ opacity:1; transform:none } }
 .rv.lag1{ transition-delay:.1s } .rv.lag2{ transition-delay:.2s } .rv.lag3{ transition-delay:.3s } .rv.lag4{ transition-delay:.4s }
+/* scroll-linked where the browser can: the reveal follows the scroll position itself (half-way scrolled is
+   half-way shown, scrolling back plays it back) instead of firing once. Elsewhere the class toggle above. */
+@supports (animation-timeline: view()){
+  @media (scripting: enabled) and (prefers-reduced-motion: no-preference){
+    .rv{ transition:none; animation:rv-rise linear both; animation-timeline:view(); animation-range:entry 0% entry 100% }
+    .rv.lag1{ animation-range:entry 12% entry 100% } .rv.lag2{ animation-range:entry 22% entry 100% }
+    .rv.lag3{ animation-range:entry 32% entry 100% } .rv.lag4{ animation-range:entry 42% entry 100% }
+  }
+}
+@keyframes rv-rise{ from{ opacity:0; transform:translateY(34px) } to{ opacity:1; transform:none } }
+/* Lenis glides the page itself; the browser must not smooth its steps a second time */
+html.lenis{ scroll-behavior:auto }
+
+/* ---------- a held chapter: the five steps pin and play in place (see Steps.tsx) ---------- */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) and (min-height:560px){
+  #how.chapter{ padding-block:0; height:calc(100svh + var(--n) * 46svh) }
+  #how.chapter .pin{ position:sticky; top:0; height:100svh; display:flex; flex-direction:column; justify-content:center; padding-top:64px; padding-bottom:clamp(16px, 3svh, 40px); overflow:hidden }
+  #how.chapter .head{ margin-bottom:clamp(24px, 5svh, 64px) }
+  #how.chapter .head h2{ font-size:min(var(--t4), 8svh) }
+  #how.chapter .step-n{ font-size:min(var(--t5), 11svh) }
+  /* the gold line fills as you move through the chapter */
+  #how.chapter .ledger::after{
+    content:""; position:absolute; top:0; inset-inline:0; height:2px; margin-top:-.5px; background:var(--bar);
+    transform:scaleX(var(--p, 0)); transform-origin:var(--ox, left); will-change:transform;
+  }
+  [dir="rtl"] #how.chapter .ledger::after{ --ox:right }
+  #how.chapter .step{ opacity:.22; transition:opacity .7s var(--ease-out), transform .7s var(--ease-out) }
+  #how.chapter .step.past{ opacity:.5 }
+  #how.chapter .step.now{ opacity:1 }
+  #how.chapter .step::before{ transform:scaleY(.4); transform-origin:top; transition:transform .7s var(--ease-out) }
+  #how.chapter .step:is(.past,.now)::before{ transform:none }
+}
+/* tablets and phones: one register; only the current step opens its text, so the chapter fits one screen */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) and (min-height:560px) and (max-width:1100px){
+  #how.chapter .ledger{ grid-template-columns:1fr; row-gap:0 }
+  #how.chapter .step{ display:grid; grid-template-columns:auto 1fr; column-gap:var(--s-lg); align-items:baseline; padding-block:clamp(10px, 1.8svh, 18px) 0 }
+  #how.chapter .step::before{ display:none }
+  #how.chapter .step-n{ font-size:min(var(--t4), 6svh); min-width:1.2em }
+  #how.chapter .step h3{ margin-top:0; max-width:none; font-size:min(var(--t2), 3.4svh) }
+  #how.chapter .step p{ grid-column:2; margin-top:0; max-height:0; opacity:0; overflow:hidden; transition:max-height .7s var(--ease-out), opacity .5s var(--ease-out), margin-top .7s var(--ease-out) }
+  #how.chapter .step.now p{ max-height:14em; opacity:1; margin-top:var(--s-sm) }
+  #how.chapter .head h2{ font-size:min(var(--t4), 6.4svh) }
+  #how.chapter .head .lede{ display:none }
+  /* start under the nav instead of centring, so no half-empty screen opens up after the hero */
+  #how.chapter .pin{ justify-content:flex-start; padding-top:clamp(72px, 9svh, 96px) }
+}
 
 /* ---------- routers ---------- */
 #routes .register{ display:grid; grid-template-columns:1fr 1fr; column-gap:var(--s-2xl); border-top:1px solid var(--line-strong) }

@@ -56,29 +56,6 @@ export function Routers({ locale, routes }: { locale: Locale; routes: Dict["rout
   );
 }
 
-export function Steps({ how }: { how: Dict["how"] }) {
-  return (
-    <section className="block" id="how" aria-labelledby="how-h">
-      <div className="wrap">
-        <div className="head">
-          <span className="label rv">{how.label}</span>
-          <h2 id="how-h" className="rv"><Rich text={how.heading} /></h2>
-          <p className="lede rv lag1">{how.lede}</p>
-        </div>
-        <ol className="ledger">
-          {how.steps.map((s, i) => (
-            <li className={`step rv${i ? ` lag${i}` : ""}`} key={s.title}>
-              <span className="step-n">{i + 1}</span>
-              <h3>{s.title}</h3>
-              <p>{s.body}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
-
 export function Why({ why }: { why: Dict["why"] }) {
   return (
     <section className="block" id="why" aria-labelledby="why-h">

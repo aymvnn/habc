@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { HeroStage } from "@/components/HeroStage";
-import { Behind, Correspondence, Kruising, Membership, Name, Steps, Why } from "@/components/Sections";
+import { Behind, Correspondence, Kruising, Membership, Name, Why } from "@/components/Sections";
+import { Steps } from "@/components/Steps";
 import { getDict, isLocale } from "@/lib/i18n";
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {

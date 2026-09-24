@@ -4,7 +4,9 @@ import { notFound } from "next/navigation";
 import { TopBar } from "@/components/TopBar";
 import { Footer } from "@/components/Sections";
 import { RevealObserver } from "@/components/Reveal";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { alternatesFor, dirOf, getDict, isLocale, locales } from "@/lib/i18n";
+import "lenis/dist/lenis.css";
 import "../globals.css";
 import "../hero.css";
 
@@ -74,6 +76,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         <main id="main">{children}</main>
         <Footer locale={locale} nav={d.nav} footer={d.footer} />
         <RevealObserver />
+        <SmoothScroll />
       </body>
     </html>
   );
