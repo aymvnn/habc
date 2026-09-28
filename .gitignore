@@ -18,3 +18,10 @@ next-env.d.ts
 *.tsbuildinfo
 .env*.local
 .env
+
+# Generated photo variants (large; the chosen ones are copied into public/)
+brand/fotostijl/flow-export/
+
+# Working contact sheets of the photo tests (the prompts themselves are committed)
+brand/fotostijl/test-reportage/
+brand/fotostijl/homepage-selectie.jpg
