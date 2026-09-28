@@ -9,6 +9,8 @@ import { alternatesFor, dirOf, getDict, isLocale, locales } from "@/lib/i18n";
 import "lenis/dist/lenis.css";
 import "../globals.css";
 import "../hero.css";
+import "../nav.css";
+import "../pages.css";
 
 const display = Schibsted_Grotesk({
   subsets: ["latin", "latin-ext"],
@@ -72,9 +74,9 @@ export default async function LocaleLayout({ children, params }: { children: Rea
     <html lang={locale} dir={dirOf(locale)} className={`${display.variable} ${text.variable} ${arabic.variable}`} suppressHydrationWarning>
       <body>
         <a className="skiplink" href="#main">{d.nav.skip}</a>
-        <TopBar locale={locale} nav={d.nav} />
+        <TopBar locale={locale} nav={d.nav} site={d.site} chips={[d.hero.chip1, d.hero.chip2]} routes={d.routes.items} />
         <main id="main">{children}</main>
-        <Footer locale={locale} nav={d.nav} footer={d.footer} />
+        <Footer locale={locale} nav={d.nav} footer={d.footer} site={d.site} />
         <RevealObserver />
         <SmoothScroll />
       </body>

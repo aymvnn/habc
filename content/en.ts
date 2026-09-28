@@ -1,4 +1,5 @@
 import type { Dict } from "./types";
+import { siteEn } from "./site.en";
 
 export const en: Dict = {
   locale: "en",
@@ -41,6 +42,7 @@ export const en: Dict = {
     scrollcue: "What are you looking for?",
     groupA: "Trade",
     groupB: "Markets & capital",
+    heading: "The private business club between\nthe Netherlands and *the Arab world.*",
     caption: "Choose a route. Each one opens a short intake — we ask for your commercial need, not your CV.",
     other: "Something else?",
     otherLink: "Write to us",
@@ -139,6 +141,7 @@ export const en: Dict = {
     copyright: "© 2026 Stichting Nederlands–Arabische Handelskamer. All rights reserved.",
     values: "Value · Trust · Access",
   },
+  site: siteEn,
   contact: {
     title: "Contact — DUKAAT",
     heading: "Tell us what you need.",

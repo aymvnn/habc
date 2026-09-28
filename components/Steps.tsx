@@ -1,8 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import type { Dict } from "@/content/types";
 import { Rich } from "./Rich";
+
+/** one still life per step: paper turns into a shipment as the light brightens (brand/fotostijl/homepage-fotos.md) */
+const STEP_PHOTOS = [
+  "/photos/home/steps-1-need.jpg",
+  "/photos/home/steps-2-verify.jpg",
+  "/photos/home/steps-3-match.jpg",
+  "/photos/home/steps-4-introduce.jpg",
+  "/photos/home/steps-5-first-deal.jpg",
+];
 
 /**
  * "Five steps, in this order, every time" as one held chapter: the section pins to the screen and
@@ -10,7 +21,7 @@ import { Rich } from "./Rich";
  * is CSS (position: sticky), so it holds the same on phones, tablets and desktops; this only measures
  * how far through the chapter the reader is. Without room or motion it is the plain list.
  */
-export function Steps({ how }: { how: Dict["how"] }) {
+export function Steps({ how, more }: { how: Dict["how"]; more?: { href: string; label: string } }) {
   const ref = useRef<HTMLElement>(null);
   const [now, setNow] = useState(0);
   const n = how.steps.length;
@@ -42,6 +53,12 @@ export function Steps({ how }: { how: Dict["how"] }) {
             <span className="label rv">{how.label}</span>
             <h2 id="how-h" className="rv"><Rich text={how.heading} /></h2>
             <p className="lede rv lag1">{how.lede}</p>
+            {/* shown only while the chapter is pinned on wide screens; the current step's photo fades in */}
+            <figure className="step-photo" aria-hidden="true">
+              {STEP_PHOTOS.slice(0, n).map((src, i) => (
+                <Image key={src} src={src} alt="" width={1600} height={900} sizes="30vw" className={i === now ? "on" : undefined} />
+              ))}
+            </figure>
           </div>
           <ol className="ledger">
             {how.steps.map((s, i) => (
@@ -52,6 +69,7 @@ export function Steps({ how }: { how: Dict["how"] }) {
               </li>
             ))}
           </ol>
+          {more && <Link className="more" href={more.href}>{more.label} <span className="arrow" aria-hidden="true">→</span></Link>}
         </div>
       </div>
     </section>

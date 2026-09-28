@@ -1,0 +1,75 @@
+import type { SiteCopy } from "./types";
+
+export const siteEn: SiteCopy = {
+  groups: {
+    about: { label: "About DUKAAT", lede: "Who we are, where the name comes from, and the two people behind it." },
+    services: { label: "What we do", lede: "Sourcing, distribution, market entry, representation — for companies that genuinely trade." },
+    how: { label: "How we work", lede: "Five steps, how we charge, and the lines we do not cross." },
+    market: { label: "DUKAAT Market", lede: "Products, buyer requests, stocklots and machinery — one market, four doors." },
+    membership: { label: "Membership", lede: "Three levels, written commitments, admission by nomination." },
+    network: { label: "Network", lede: "The members, the sector clubs and, in time, their stories." },
+    events: { label: "Events & insight", lede: "Trade fairs, missions, the academy and market reports." },
+    legal: { label: "Legal", lede: "Privacy, terms and company details. Texts follow legal review." },
+  },
+  pages: {
+    "about/story": { title: "The name", blurb: "Why a Dutch trade coin of 1586 names a club for the Arab world." },
+    "about/why": { title: "Why DUKAAT", blurb: "Three things that are ours alone." },
+    "about/values": { title: "Vision, mission & values", blurb: "What we set out to do, and the values we hold ourselves to." },
+    "about/founders": { title: "Behind DUKAAT", blurb: "Two founders, two trades: the trader and the tax lawyer." },
+
+    "services/trade": { title: "Sourcing & distribution", blurb: "Finding a verified supplier, distributor or buyer on the other side." },
+    "services/market-entry": { title: "Market entry", blurb: "From the Netherlands to the Arab world or the other way: structure, partner, first order." },
+    "services/representation": { title: "Representation", blurb: "A presence on the other side before you have an office there." },
+    "services/documents": { title: "Documents, customs & logistics", blurb: "Certificates, freight, customs and payment terms — until the first shipment lands." },
+    "services/investment": { title: "Investment opportunities", blurb: "Real companies and projects, presented for information — never advice or brokerage." },
+
+    "how-we-work/verification": { title: "Verification & admission", blurb: "What we check before anyone meets a counterparty — and why not everyone is admitted." },
+    "how-we-work/fees": { title: "How we charge", blurb: "An annual subscription, project work quoted in writing, no hidden commissions." },
+    "how-we-work/boundaries": { title: "What we do not do", blurb: "No custody of funds, no banking, no guarantees on transactions between members." },
+    faq: { title: "Frequently asked questions", blurb: "Eight objections, answered before you raise them." },
+
+    "market/products": { title: "Products", blurb: "What members offer, verified and described by people who have seen it." },
+    "market/buyer-requests": { title: "Buyer requests", blurb: "The buyer states what he needs; suppliers answer. The market the right way round." },
+    "market/stocklots": { title: "Stocklots", blurb: "Surplus stock and one-off lots that need a buyer quickly." },
+    "market/machinery": { title: "Machinery", blurb: "Used and new production equipment, between Europe and the region." },
+
+    "membership/levels": { title: "The three levels", blurb: "Member, Professional and Executive — what each one includes." },
+    "membership/guarantees": { title: "Our commitments", blurb: "Response times, introductions and searches — in writing, with a remedy if we fall short." },
+    "membership/who-for": { title: "Who it is for — and who not", blurb: "An activity requirement, not a size requirement." },
+    "membership/founding-100": { title: "Founding 100", blurb: "A fixed number, the founders’ rate, a name on the founders’ wall, the right to nominate." },
+    "membership/nominated": { title: "I have been nominated", blurb: "A member gave us your name. Tell us who." },
+
+    "network/directory": { title: "Member directory", blurb: "Admitted members, with what they offer and what they look for." },
+    "network/sector-clubs": { title: "Sector club: Food & Agriculture", blurb: "The first sector club — the trade our founder knows from the inside." },
+    "network/stories": { title: "Stories", blurb: "Cases from members, published only with their approval." },
+
+    "events/calendar": { title: "Events", blurb: "Member meetings, trade fairs and the shared pavilion." },
+    "events/missions": { title: "Trade missions", blurb: "The Netherlands, Dubai and Saudi Arabia — with the meetings arranged in advance." },
+    "events/academy": { title: "Academy", blurb: "Courses and seminars on trading between the two sides." },
+    "events/intelligence": { title: "Market reports", blurb: "Sector reports on the markets our members trade in." },
+
+    "legal/privacy": { title: "Privacy statement", blurb: "How we process personal data under the GDPR." },
+    "legal/cookies": { title: "Cookie policy", blurb: "Which cookies we use, and how to refuse them as easily as you accept them." },
+    "legal/terms": { title: "Terms & conditions", blurb: "The terms that apply to membership and project work." },
+    "legal/disclaimer": { title: "Disclaimer", blurb: "The limits of what this site and its information promise." },
+    "legal/company": { title: "Company details", blurb: "Legal name, Chamber of Commerce and VAT numbers, registered address." },
+    "legal/member-data": { title: "Publication of member data", blurb: "What we publish about members, only with consent, and how to withdraw it." },
+    "legal/data-transfers": { title: "Transfers outside the EU", blurb: "How data travels safely to partners in the Gulf and the wider region." },
+  },
+  ui: {
+    home: "Home",
+    overview: "Overview",
+    building: "This page is being built",
+    buildingNote: "The content follows shortly. Until then, the pages below lead on.",
+    inSection: "In this section",
+    otherSections: "Elsewhere on the site",
+    indexLabel: "The whole club",
+    indexHeading: "Everything DUKAAT is, *in one place.*",
+    more: "Read more",
+    intake: "Straight to the intake",
+    faq: "FAQ",
+    submenu: "Show the pages under {group}",
+    mainNav: "Main menu",
+    utilNav: "Shortcuts",
+  },
+};

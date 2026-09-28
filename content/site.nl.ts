@@ -1,0 +1,75 @@
+import type { SiteCopy } from "./types";
+
+export const siteNl: SiteCopy = {
+  groups: {
+    about: { label: "Over DUKAAT", lede: "Wie wij zijn, waar de naam vandaan komt, en de twee mensen erachter." },
+    services: { label: "Wat wij doen", lede: "Inkoop, distributie, markttoetreding, vertegenwoordiging — voor bedrijven die werkelijk handelen." },
+    how: { label: "Zo werken wij", lede: "Vijf stappen, hoe wij factureren, en de grenzen die wij niet overschrijden." },
+    market: { label: "DUKAAT Market", lede: "Producten, inkoopaanvragen, partijen en machines — één markt, vier ingangen." },
+    membership: { label: "Lidmaatschap", lede: "Drie niveaus, vastgelegde toezeggingen, toelating op voordracht." },
+    network: { label: "Netwerk", lede: "De leden, de sectorclubs en, te zijner tijd, hun verhalen." },
+    events: { label: "Events & kennis", lede: "Beurzen, handelsmissies, de academy en marktrapporten." },
+    legal: { label: "Juridisch", lede: "Privacy, voorwaarden en bedrijfsgegevens. Teksten volgen na juridische toets." },
+  },
+  pages: {
+    "about/story": { title: "De naam", blurb: "Waarom een Nederlandse handelsmunt uit 1586 een club voor de Arabische wereld haar naam geeft." },
+    "about/why": { title: "Waarom DUKAAT", blurb: "Drie dingen die alleen van ons zijn." },
+    "about/values": { title: "Visie, missie & waarden", blurb: "Wat wij willen bereiken, en de waarden waaraan wij ons houden." },
+    "about/founders": { title: "Achter DUKAAT", blurb: "Twee oprichters, twee vakken: de handelaar en de fiscalist." },
+
+    "services/trade": { title: "Inkoop & distributie", blurb: "Een geverifieerde leverancier, distributeur of koper vinden aan de andere kant." },
+    "services/market-entry": { title: "Markttoetreding", blurb: "Van Nederland naar de Arabische wereld of andersom: structuur, partner, eerste order." },
+    "services/representation": { title: "Vertegenwoordiging", blurb: "Aanwezig aan de andere kant, voordat u daar een kantoor hebt." },
+    "services/documents": { title: "Documenten, douane & logistiek", blurb: "Certificaten, vracht, douane en betalingscondities — tot de eerste zending is geland." },
+    "services/investment": { title: "Investeringskansen", blurb: "Echte bedrijven en projecten, ter informatie gepresenteerd — nooit advies of bemiddeling." },
+
+    "how-we-work/verification": { title: "Verificatie & toelating", blurb: "Wat wij controleren voordat iemand een tegenpartij ontmoet — en waarom niet iedereen wordt toegelaten." },
+    "how-we-work/fees": { title: "Hoe wij factureren", blurb: "Een jaarabonnement, projectwerk schriftelijk geoffreerd, geen verborgen commissies." },
+    "how-we-work/boundaries": { title: "Wat wij niet doen", blurb: "Geen gelden in bewaring, geen bankzaken, geen garanties op transacties tussen leden." },
+    faq: { title: "Veelgestelde vragen", blurb: "Acht bezwaren, beantwoord voordat u ze stelt." },
+
+    "market/products": { title: "Producten", blurb: "Wat leden aanbieden, geverifieerd en beschreven door mensen die het hebben gezien." },
+    "market/buyer-requests": { title: "Inkoopaanvragen", blurb: "De koper zegt wat hij nodig heeft; leveranciers reageren. De markt omgedraaid." },
+    "market/stocklots": { title: "Partijen", blurb: "Overtollige voorraad en eenmalige partijen die snel een koper nodig hebben." },
+    "market/machinery": { title: "Machines", blurb: "Gebruikte en nieuwe productiemachines, tussen Europa en de regio." },
+
+    "membership/levels": { title: "De drie niveaus", blurb: "Member, Professional en Executive — wat elk niveau omvat." },
+    "membership/guarantees": { title: "Onze toezeggingen", blurb: "Reactietijden, introducties en zoekopdrachten — op papier, met een oplossing als wij tekortschieten." },
+    "membership/who-for": { title: "Voor wie — en voor wie niet", blurb: "Een activiteitseis, geen omvangseis." },
+    "membership/founding-100": { title: "Founding 100", blurb: "Een vast nummer, het oprichterstarief, een naam op de oprichtersmuur, het recht om voor te dragen." },
+    "membership/nominated": { title: "Ik ben voorgedragen", blurb: "Een lid heeft uw naam genoemd. Laat ons weten wie." },
+
+    "network/directory": { title: "Ledenregister", blurb: "Toegelaten leden, met wat zij aanbieden en wat zij zoeken." },
+    "network/sector-clubs": { title: "Sectorclub Food & Agriculture", blurb: "De eerste sectorclub — het vak dat onze oprichter van binnenuit kent." },
+    "network/stories": { title: "Verhalen", blurb: "Cases van leden, alleen gepubliceerd met hun toestemming." },
+
+    "events/calendar": { title: "Evenementen", blurb: "Ledenbijeenkomsten, beurzen en het gedeelde beurspaviljoen." },
+    "events/missions": { title: "Handelsmissies", blurb: "Nederland, Dubai en Saoedi-Arabië — met de gesprekken vooraf geregeld." },
+    "events/academy": { title: "Academy", blurb: "Cursussen en seminars over handel tussen beide kanten." },
+    "events/intelligence": { title: "Marktrapporten", blurb: "Sectorrapporten over de markten waarin onze leden handelen." },
+
+    "legal/privacy": { title: "Privacyverklaring", blurb: "Hoe wij persoonsgegevens verwerken onder de AVG." },
+    "legal/cookies": { title: "Cookiebeleid", blurb: "Welke cookies wij gebruiken, en hoe u ze even makkelijk weigert als accepteert." },
+    "legal/terms": { title: "Algemene voorwaarden", blurb: "De voorwaarden voor lidmaatschap en projectwerk." },
+    "legal/disclaimer": { title: "Disclaimer", blurb: "De grenzen van wat deze site en haar informatie beloven." },
+    "legal/company": { title: "Bedrijfsgegevens", blurb: "Statutaire naam, KvK- en btw-nummer, vestigingsadres." },
+    "legal/member-data": { title: "Publicatie van ledengegevens", blurb: "Wat wij over leden publiceren, alleen met toestemming, en hoe u die intrekt." },
+    "legal/data-transfers": { title: "Doorgifte buiten de EU", blurb: "Hoe gegevens veilig reizen naar partners in de Golf en de bredere regio." },
+  },
+  ui: {
+    home: "Home",
+    overview: "Overzicht",
+    building: "Deze pagina is in opbouw",
+    buildingNote: "De inhoud volgt binnenkort. Tot die tijd leiden de pagina’s hieronder u verder.",
+    inSection: "In deze rubriek",
+    otherSections: "Verder op de site",
+    indexLabel: "De hele club",
+    indexHeading: "Alles wat DUKAAT is, *op één plek.*",
+    more: "Lees meer",
+    intake: "Direct naar de intake",
+    faq: "FAQ",
+    submenu: "Toon de pagina’s onder {group}",
+    mainNav: "Hoofdmenu",
+    utilNav: "Snelkoppelingen",
+  },
+};

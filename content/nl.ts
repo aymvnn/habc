@@ -1,4 +1,5 @@
 import type { Dict } from "./types";
+import { siteNl } from "./site.nl";
 
 export const nl: Dict = {
   locale: "nl",
@@ -41,6 +42,7 @@ export const nl: Dict = {
     scrollcue: "Wat zoekt u?",
     groupA: "Handel",
     groupB: "Markten & kapitaal",
+    heading: "De besloten businessclub tussen\nNederland en *de Arabische wereld.*",
     caption: "Kies een route. Elke route opent een korte intake — wij vragen naar uw commerciële behoefte, niet naar uw cv.",
     other: "Iets anders?",
     otherLink: "Schrijf ons",
@@ -139,6 +141,7 @@ export const nl: Dict = {
     copyright: "© 2026 Stichting Nederlands–Arabische Handelskamer. Alle rechten voorbehouden.",
     values: "Value · Trust · Access",
   },
+  site: siteNl,
   contact: {
     title: "Contact — DUKAAT",
     heading: "Vertel ons wat u nodig hebt.",

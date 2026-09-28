@@ -10,6 +10,30 @@ export type Founder = { name: string; role: string; voice: string; portraitAlt: 
 
 export type Faq = { q: string; a: string };
 
+export type GroupKey = "about" | "services" | "how" | "market" | "membership" | "network" | "events" | "legal";
+
+/** copy for the site map (lib/site.ts): menu groups, every page's title and one-line blurb, and the UI words around them */
+export type SiteCopy = {
+  groups: Record<GroupKey, { label: string; lede: string }>;
+  pages: Record<string, { title: string; blurb: string }>;
+  ui: {
+    home: string;
+    overview: string;
+    building: string;
+    buildingNote: string;
+    inSection: string;
+    otherSections: string;
+    indexLabel: string;
+    indexHeading: string; // *word* = emphasised
+    more: string;
+    intake: string;
+    faq: string;
+    submenu: string; // "{group}" placeholder
+    mainNav: string;
+    utilNav: string;
+  };
+};
+
 export type Dict = {
   locale: Locale;
   meta: { title: string; description: string; ogTitle: string; ogDescription: string; ogImageAlt: string };
@@ -42,6 +66,7 @@ export type Dict = {
     scrollcue: string;
     groupA: string;
     groupB: string;
+    heading: string; // the hero line above the routes; *word* = emphasised
     caption: string;
     other: string;
     otherLink: string;
@@ -80,6 +105,7 @@ export type Dict = {
     copyright: string;
     values: string;
   };
+  site: SiteCopy;
   contact: {
     title: string;
     heading: string;

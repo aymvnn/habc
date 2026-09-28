@@ -129,6 +129,39 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
     return () => { ro.disconnect(); r?.removeEventListener("transitionend", settle); };
   }, [measure]);
 
+  /* ---------- fit: the name on the gold line always sits inside the first screen ----------
+     Taller scripts (Arabic) and low windows make the stage taller than the screen. Measure how far the
+     band runs past the bottom and take that height from the tulip (and a little from the gap above the band). */
+  useEffect(() => {
+    const r = root.current, b = band.current;
+    if (!r || !b) return;
+    let raf = 0;
+    const fit = () => {
+      raf = 0;
+      r.style.setProperty("--squeeze", "0px");
+      r.style.setProperty("--squeeze2", "0px");
+      if (window.matchMedia("(max-width: 900px)").matches) return; // phones: the hero is two screens by design
+      const over = () => b.getBoundingClientRect().bottom - r.getBoundingClientRect().top - innerHeight + 12;
+      let o = over();
+      if (o <= 0) return;
+      const s2 = Math.min(o, 36);
+      r.style.setProperty("--squeeze2", `${s2}px`);
+      let s = o - s2;
+      // two passes: the tulip only gives back height 1:1 while its column is the tallest in the stage
+      for (let i = 0; i < 2 && s > 0; i++) {
+        r.style.setProperty("--squeeze", `${Math.ceil(s)}px`);
+        o = over();
+        if (o <= 0) break;
+        s += o;
+      }
+    };
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(fit); };
+    fit();
+    document.fonts?.ready.then(schedule);
+    window.addEventListener("resize", schedule);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", schedule); };
+  }, []);
+
   /* ---------- entrance: the first time in a visit, a ducat falls onto the line and strikes it open ---------- */
   useEffect(() => {
     const el = root.current, w = wm.current, c = crest.current;
@@ -385,7 +418,7 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
 
   const photos = () =>
     photosReady && routes.items.map((r, n) => (
-      <img key={r.intent} src={`/routes/${r.intent}.jpg`} className={active === n ? "on" : undefined} alt="" width={448} height={296} decoding="async" />
+      <img key={r.intent} src={`/routes/${r.intent}.jpg`} className={active === n ? "on" : undefined} alt="" width={600} height={400} decoding="async" />
     ));
   const knoop = active !== null ? anchors[active] : null;
 
@@ -406,7 +439,7 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
     >
       <span className="rt-idx">{String(i + 1).padStart(2, "0")}</span>
       <span className="rt-label">{item.label}</span>
-      <img className="rt-thumb" src={`/routes/${item.intent}.jpg`} alt="" width={448} height={296} loading="lazy" decoding="async" />
+      <img className="rt-thumb" src={`/routes/${item.intent}.jpg`} alt="" width={600} height={400} loading="lazy" decoding="async" />
       <span className="rt-go" aria-hidden="true">→</span>
     </Link>
   );
@@ -451,7 +484,7 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
 
       <div className="h3-top">
         <p className="h3-eyebrow">{descriptor} <i>◆</i> {hero.chip1}</p>
-        <h2 id="h3-q" className="h3-q"><Rich text={routes.heading} /></h2>
+        <h2 id="h3-q" className="h3-q"><Rich text={hero.heading} /></h2>
       </div>
 
       {/* phones: the two groups become tabs, and a quiet cue leads from the brand screen to the choice */}

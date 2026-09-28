@@ -1,4 +1,5 @@
 import type { Dict } from "./types";
+import { siteAr } from "./site.ar";
 
 /**
  * Arabic copy. Formal Modern Standard Arabic, business register, Western digits.
@@ -45,6 +46,7 @@ export const ar: Dict = {
     scrollcue: "عمّ تبحث؟",
     groupA: "التجارة",
     groupB: "الأسواق ورأس المال",
+    heading: "نادي الأعمال الخاص\nبين هولندا و*العالم العربي.*",
     caption: "اختر مساراً. كل مسار يفتح استمارة قصيرة — نسألك عن حاجتك التجارية، لا عن سيرتك الذاتية.",
     other: "شيء آخر؟",
     otherLink: "راسلنا",
@@ -143,6 +145,7 @@ export const ar: Dict = {
     copyright: "© 2026 Stichting Nederlands–Arabische Handelskamer. جميع الحقوق محفوظة.",
     values: "القيمة · الثقة · الوصول",
   },
+  site: siteAr,
   contact: {
     title: "تواصل — DUKAAT",
     heading: "أخبرنا بما تحتاج إليه.",

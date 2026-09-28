@@ -10,7 +10,7 @@
   --wmh:calc(var(--wm) * 0.16044);
   --toward:1;
   position:relative; min-height:100svh; display:flex; flex-direction:column; align-items:stretch;
-  padding-top:clamp(86px, 11svh, 116px); padding-bottom:clamp(22px, 3.6svh, 44px);
+  padding-top:calc(clamp(86px, 11svh, 116px) + var(--util-h, 0px)); padding-bottom:clamp(22px, 3.6svh, 44px);
   overflow:hidden;
 }
 .h3-threads{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:visible }
@@ -31,9 +31,11 @@
 .h3-eyebrow{ font-family:var(--display); font-weight:600; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold-deep) }
 .h3-eyebrow i{ font-style:normal; color:var(--bar); margin-inline:10px }
 [dir="rtl"] .h3-eyebrow{ font-family:var(--arabic); letter-spacing:0; font-size:.9rem }
-.h3-q{ margin-top:clamp(8px,1.4svh,16px); font-size:clamp(2rem, 1rem + 2.7vw, 3.7rem); letter-spacing:-.035em; line-height:1 }
+/* on desktop the utility line above the nav already says this */
+@media (min-width:1201px){ .h3-eyebrow{ display:none } }
+.h3-q{ margin-top:clamp(8px,1.4svh,16px); font-size:clamp(1.8rem, .8rem + 2vw, 2.9rem); letter-spacing:-.03em; line-height:1.06 }
 .h3-q em{ font-style:normal; color:var(--wine) }
-[dir="rtl"] .h3-q{ line-height:1.35; letter-spacing:0 }
+[dir="rtl"] .h3-q{ line-height:1.25; letter-spacing:0 }
 
 /* stage: wing · crest · wing */
 .h3-stage{
@@ -62,7 +64,7 @@
   font-family:var(--display); font-weight:750; font-size:clamp(1.08rem, .5rem + 1.18vw, 1.62rem); letter-spacing:-.022em; line-height:1.12;
   display:inline-block; transition:color var(--d-mid) var(--ease-out), transform var(--d-mid) var(--ease-out);
 }
-[dir="rtl"] .rt-label{ font-family:var(--arabic); line-height:1.5; letter-spacing:0; font-weight:700 }
+[dir="rtl"] .rt-label{ font-family:var(--arabic); line-height:1.35; letter-spacing:0; font-weight:700 }
 .rt::after{
   content:""; position:absolute; bottom:-1px; left:0; right:0; height:2px; background:var(--bar);
   transform:scaleX(0); transform-origin:var(--edge, right); transition:transform .7s var(--ease-out);
@@ -82,7 +84,9 @@
 
 /* crest */
 .crest-col{ display:flex; flex-direction:column; align-items:center }
-.crest{ --th:clamp(160px, 31svh, 310px); position:relative; display:flex; justify-content:center }
+/* --squeeze is set by HeroStage when the hero would run past the bottom of the screen (taller scripts,
+   low windows): the tulip gives up that height first, so the name on the gold line always stays in view */
+.crest{ --th:max(130px, calc(clamp(160px, 31svh, 310px) - var(--squeeze, 0px))); position:relative; display:flex; justify-content:center }
 .crest .tulip{ position:relative; z-index:2; height:var(--th); width:auto; overflow:visible; transform-origin:50% 100% }
 
 /* 1 · guilloche: the engraving of money, counter-rotating so the lattice shimmers */
@@ -112,7 +116,7 @@
 .h3 .caption{ transition:opacity .9s var(--ease-out) 1.5s }
 .caption > p{ grid-area:1 / 1; opacity:0; transform:translateY(5px); transition:opacity .35s var(--ease-out), transform .45s var(--ease-out) }
 .caption > p.on{ opacity:1; transform:none; transition-delay:.05s }
-[dir="rtl"] .caption{ font-style:normal; line-height:1.8 }
+[dir="rtl"] .caption{ font-style:normal; line-height:1.65; max-width:34ch }
 @keyframes cap-in{ from{ opacity:0; transform:translateY(6px) } to{ opacity:1; transform:none } }
 
 /* tulip layers: bloom on entrance, breathe at rest */
@@ -207,7 +211,7 @@
 [dir="rtl"] .h3-key:hover .arrow{ transform:scaleX(-1) translateX(4px) }
 
 /* the band: wordmark opening out of the edge-to-edge bar */
-.h3-band{ position:relative; margin-top:auto; padding-top:clamp(28px, 5svh, 64px); display:flex; justify-content:center }
+.h3-band{ position:relative; margin-top:auto; padding-top:max(14px, calc(clamp(28px, 5svh, 64px) - var(--squeeze2, 0px))); display:flex; justify-content:center }
 .h3-band .wm{ position:relative; z-index:2; width:var(--wm); height:var(--wmh) }
 /* the line runs behind D-U-K and T, and surfaces only as the crossbar of the two A's — woven through the name */
 .bar-aa{

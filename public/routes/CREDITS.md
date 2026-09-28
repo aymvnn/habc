@@ -1,12 +1,7 @@
 # Route photos — credits
 
-Placeholders from Pexels (free licence, no attribution required).
+Generated for DUKAAT with Google's Gemini image model (Nano Banana 2), following the photo style in
+`brand/fotostijl/DUKAAT-fotostijl.md` and the prompts in `brand/fotostijl/homepage-fotos.md` (September 2026).
+Exported by `scripts/export-photos.py` from the chosen variants in `brand/fotostijl/flow-export/keuze.json`.
 
-- `distributor.jpg` — Warehouse aisle, William Buzeichuk: https://www.pexels.com/photo/29454379/
-- `supplier.jpg` — Factory floor with presses, Pexels contributor: https://www.pexels.com/photo/31352672/
-- `sell.jpg` — Container terminal, Rafael Rodrigues: https://www.pexels.com/photo/36652827/
-- `buy.jpg` — Nuts at a bazaar, Pexels contributor: https://www.pexels.com/photo/25067701/
-- `market-entry.jpg` — Dubai skyline, Pexels contributor: https://www.pexels.com/photo/10549886/
-- `opportunity.jpg` — Construction cranes at dusk, Pexels contributor: https://www.pexels.com/photo/29174068/
-- `invest.jpg` — Signing a contract, Mikhail Nilov: https://www.pexels.com/photo/8730987/
-- `nominated.jpg` — Envelope with red wax seal, Pexels contributor: https://www.pexels.com/photo/7190500/
+The earlier Pexels placeholders are no longer used.
