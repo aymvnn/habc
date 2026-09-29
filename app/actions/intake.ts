@@ -2,13 +2,13 @@
 
 export type IntakeState = { status: "idle" | "ok" | "error" | "unconfigured" | "invalid" };
 
-const INTENTS = new Set(["distributor", "supplier", "sell", "buy", "market-entry", "opportunity", "invest", "nominated", "other"]);
+const INTENTS = new Set(["distributor", "supplier", "sell", "buy", "market-entry", "opportunity", "invest", "nominated", "apply", "other"]);
 
 /**
  * Intake behind the eight routers. Sends an e-mail through Resend's REST API when
  * RESEND_API_KEY and INTAKE_TO are set; until the founders' own domain exists it reports
  * "unconfigured" so the page can point to the correspondence address instead.
- * This is an intake, not an application — nothing is stored server-side.
+ * An application (intent "apply") is reviewed like a nomination and guarantees nothing — nothing is stored server-side.
  */
 export async function sendIntake(_prev: IntakeState, formData: FormData): Promise<IntakeState> {
   // honeypot: real people never fill this

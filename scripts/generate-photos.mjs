@@ -10,6 +10,7 @@
 //   npm run photos -- --overview       only rebuild overzicht.html (e.g. after editing keuze.json)
 //   npm run photos -- --check          after each image, let a second Gemini model inspect it (faces, text, hands, borders…)
 //   npm run photos -- --check-only     inspect the images that already exist (with --only to limit)
+//   npm run photos -- --workers 3       generations in parallel (default 2)
 //
 // Needs GEMINI_API_KEY in .env.local. Output: brand/fotostijl/flow-export/<id>/<id>-<n>.jpg
 // plus brand/fotostijl/flow-export/overzicht.html to compare the variants side by side.
@@ -22,8 +23,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "brand/fotostijl/flow-export");
 const API = "https://generativelanguage.googleapis.com/v1beta";
 const MODELS = { flash: "gemini-3.1-flash-image", pro: "gemini-3-pro-image" };
-// the one large photo of the page gets the Pro model at 4K (as the sheet says); everything else Flash at 2K
+// the large photos get the Pro model at 4K: the members' room on the home page and every full-width 21:9 band;
+// everything else Flash at 2K
 const PRO = new Set(["membership-room"]);
+const isPro = (item) => PRO.has(item.id) || item.ratio === "21:9";
 const RATIOS = new Set(["1:1", "3:2", "2:3", "3:4", "4:3", "4:5", "5:4", "9:16", "16:9", "21:9"]);
 // the inspector: a cheap vision model that reads every image before a person does
 const CHECK_MODEL = process.env.GEMINI_CHECK_MODEL || "gemini-flash-latest";
@@ -38,6 +41,10 @@ const opt = (name, fallback) => {
 const N = Math.max(1, Math.min(6, Number(opt("n", 3))));
 const ONLY = opt("only", "").split(",").map((s) => s.trim()).filter(Boolean);
 const SHEET = join(ROOT, opt("sheet", "brand/fotostijl/homepage-fotos.md"));
+const WORKERS = Math.max(1, Math.min(4, Number(opt("workers", 2))));
+// one contact sheet per prompt sheet: homepage-fotos.md -> overzicht.html, paginas-fotos.md -> overzicht-paginas.html
+const SHEET_NAME = SHEET.split(/[\\/]/).pop();
+const OVERVIEW = SHEET_NAME === "homepage-fotos.md" ? "overzicht.html" : `overzicht-${SHEET_NAME.replace(/-fotos\.md$|\.md$/, "")}.html`;
 
 function loadEnv() {
   for (const f of [".env.local", ".env"]) {
@@ -107,8 +114,8 @@ async function post(url, body) {
 }
 
 async function generate(item, variant) {
-  const model = PRO.has(item.id) ? MODELS.pro : MODELS.flash;
-  const size = PRO.has(item.id) ? "4K" : "2K";
+  const model = isPro(item) ? MODELS.pro : MODELS.flash;
+  const size = isPro(item) ? "4K" : "2K";
   // 1 · the Interactions API (current docs)
   let r = await post(`${API}/interactions`, {
     model,
@@ -121,6 +128,13 @@ async function generate(item, variant) {
       contents: [{ parts: [{ text: item.prompt }] }],
       generationConfig: { responseModalities: ["IMAGE"], imageConfig: { aspectRatio: item.ratio, imageSize: size } },
     });
+  }
+  // money, not a rate limit: an empty prepaid balance (402) or the project's monthly spend cap (429) — stop the whole run
+  const why = r.json?.error?.message ?? "";
+  if (r.status === 402 || /spending cap|prepayment|billing/i.test(why)) {
+    const err = new Error(`HTTP ${r.status}: ${why.trim()}`);
+    err.fatal = true;
+    throw err;
   }
   // 403 "caller does not have permission" also turned out to be transient: it succeeds on a retry
   if (r.status === 429 || r.status === 403 || r.status >= 500) {
@@ -188,7 +202,7 @@ async function withRetry(fn, label) {
     try {
       return await fn();
     } catch (e) {
-      if (!e.retry || attempt >= 5) throw e;
+      if (!e.retry || e.fatal || attempt >= 5) throw e;
       const wait = 5000 * 2 ** (attempt - 1);
       console.log(`  … ${label}: ${e.message}, opnieuw over ${wait / 1000}s`);
       await new Promise((r) => setTimeout(r, wait));
@@ -219,7 +233,7 @@ function writeOverview(items) {
     const note = pick ? `<p class="note">${pick.note}</p>` : "";
     return `<section><h2>${it.id} <small>${it.ratio}</small></h2>${note}<div class="row">${imgs || "<p>nog niet gemaakt</p>"}</div><details><summary>prompt</summary><p>${it.prompt}</p></details></section>`;
   }).join("");
-  writeFileSync(join(OUT, "overzicht.html"), `<!doctype html><html lang="nl"><head><meta charset="utf-8"><title>DUKAAT — foto's vergelijken</title>
+  writeFileSync(join(OUT, OVERVIEW), `<!doctype html><html lang="nl"><head><meta charset="utf-8"><title>DUKAAT — foto's vergelijken</title>
 <style>body{margin:0;padding:32px;background:#EDEAE1;color:#241418;font:15px/1.5 Georgia,serif}h1{font:800 28px system-ui}h2{font:700 18px system-ui;margin:40px 0 12px}h2 small{color:#7A5A2A;font-weight:600}
 .row{display:flex;gap:16px;flex-wrap:wrap}figure{margin:0;width:min(420px,100%)}img{width:100%;display:block;box-shadow:0 0 0 1px #B39455;cursor:zoom-in}img.big{position:fixed;inset:0;margin:auto;width:auto;max-width:96vw;max-height:94vh;z-index:9;cursor:zoom-out;box-shadow:0 0 0 100vmax rgba(36,20,24,.85)}
 figcaption{font:600 12px system-ui;color:#6F5B60;margin-top:6px}.pick img{box-shadow:0 0 0 4px #6F0A25}.pick figcaption{color:#6F0A25}.note{margin:0 0 10px;color:#4B3A3E;max-width:900px}.c{display:block;font-weight:500;margin-top:2px}.c.ok{color:#3F6B4E}.c.check{color:#8A5F16}.c.reject{color:#93402C}details{margin-top:8px;color:#6F5B60;font-size:13px;max-width:900px}</style></head>
@@ -257,7 +271,7 @@ for (const it of items) for (let v = 1; v <= N; v++) if (flag("force") || !exist
 
 console.log(`${items.length} beelden × ${N} varianten · ${jobs.length} te maken · ${relative(ROOT, SHEET)}`);
 if (flag("dry")) {
-  for (const j of jobs) console.log(`  ${j.it.id}-${j.v}  ${j.it.ratio}  ${PRO.has(j.it.id) ? "Pro 4K" : "Flash 2K"}`);
+  for (const j of jobs) console.log(`  ${j.it.id}-${j.v}  ${j.it.ratio}  ${isPro(j.it) ? "Pro 4K" : "Flash 2K"}`);
   process.exit(0);
 }
 if (!KEY) {
@@ -284,10 +298,14 @@ const worker = async () => {
     } catch (e) {
       failed++;
       console.log(`✗ ${label}  ${e.message}`);
+      if (e.fatal) {
+        console.log("\nGestopt: de API weigert om een betaalreden (tegoed of maandlimiet). Pas dat aan in AI Studio en start opnieuw; wat er al is, wordt overgeslagen.");
+        queue.length = 0;
+      }
     }
   }
 };
-await Promise.all([worker(), worker()]); // two at a time: fast, and well under the rate limits
+await Promise.all(Array.from({ length: WORKERS }, worker)); // two at a time by default: fast, and well under the rate limits
 writeOverview(all);
-console.log(`\nKlaar: ${done} gemaakt, ${failed} mislukt. Vergelijk ze in ${relative(ROOT, join(OUT, "overzicht.html"))}`);
+console.log(`\nKlaar: ${done} gemaakt, ${failed} mislukt. Vergelijk ze in ${relative(ROOT, join(OUT, OVERVIEW))}`);
 if (failed) process.exitCode = 1;

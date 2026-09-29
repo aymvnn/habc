@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { IntakeForm } from "@/components/IntakeForm";
+import { Photo } from "@/components/Photo";
+import { Rich } from "@/components/Rich";
 import { alternatesFor, getDict, isLocale } from "@/lib/i18n";
 
 type Props = { params: Promise<{ locale: string }>; searchParams: Promise<{ intent?: string }> };
@@ -17,7 +19,7 @@ export default async function ContactPage({ params, searchParams }: Props) {
   const { intent } = await searchParams;
   if (!isLocale(locale)) notFound();
   const d = getDict(locale);
-  const known = d.routes.items.some((r) => r.intent === intent);
+  const known = intent === "apply" || d.routes.items.some((r) => r.intent === intent);
   return (
     <div className="page">
       <section className="block" style={{ paddingTop: 0 }}>
@@ -25,10 +27,11 @@ export default async function ContactPage({ params, searchParams }: Props) {
           <div className="intro">
             <span className="label">{d.nav.contact}</span>
             <h1>{d.contact.heading}</h1>
-            <p className="lede">{d.contact.intro}</p>
+            <p className="lede"><Rich text={d.contact.intro} /></p>
             <p className="where" style={{ marginTop: "var(--s-xl)", color: "var(--muted)" }}>
               <span className="pending-mark">{d.correspondence.mailPending}</span> · {d.correspondence.where}
             </p>
+            <Photo id="contact-hero" locale={locale} className="intake-ph" sizes="(max-width: 1100px) 90vw, 36vw" />
           </div>
           <IntakeForm locale={locale} contact={d.contact} routes={d.routes} initialIntent={known ? (intent as string) : "other"} mailPending={d.correspondence.mailPending} />
         </div>

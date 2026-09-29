@@ -158,7 +158,7 @@ export function Behind({ behind, more }: { behind: Dict["behind"]; more?: More }
                 ) : (
                   <img src="/logo/dukaat-beeldmerk.svg" alt="" width={859} height={998} />
                 )}
-                <span>{behind.portraitLabel}</span>
+                {!FOUNDER_STANDINS[i] && <span>{behind.portraitLabel}</span>}
               </div>
               <div>
                 <h3><span className="pending-mark">{f.name}</span></h3>

@@ -11,6 +11,7 @@ import "../globals.css";
 import "../hero.css";
 import "../nav.css";
 import "../pages.css";
+import "../blocks.css";
 
 const display = Schibsted_Grotesk({
   subsets: ["latin", "latin-ext"],

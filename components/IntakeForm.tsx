@@ -30,6 +30,7 @@ export function IntakeForm({ locale, contact, routes, initialIntent, mailPending
         <label htmlFor="intent">{contact.intentLabel}</label>
         <select id="intent" name="intent" value={intent} onChange={(e) => setIntent(e.target.value)} required>
           {routes.items.map((r) => <option key={r.intent} value={r.intent}>{r.label}</option>)}
+          <option value="apply">{contact.intentApply}</option>
           <option value="other">{contact.intentOther}</option>
         </select>
       </div>

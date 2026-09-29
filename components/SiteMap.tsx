@@ -71,15 +71,3 @@ export function OtherGroups({ locale, site, current }: { locale: Locale; site: D
     </nav>
   );
 }
-
-export function Building({ site }: { site: Dict["site"] }) {
-  return (
-    <div className="sp-build">
-      <img src="/logo/dukaat-beeldmerk.svg" alt="" width={859} height={998} />
-      <div>
-        <p className="sp-build-t">{site.ui.building}</p>
-        <p>{site.ui.buildingNote}</p>
-      </div>
-    </div>
-  );
-}

@@ -25,6 +25,7 @@ export const groups: SiteGroup[] = [
       { path: "services/representation" },
       { path: "services/documents" },
       { path: "services/investment" },
+      { path: "services/advisory" },
     ],
   },
   {
@@ -61,7 +62,13 @@ export const groups: SiteGroup[] = [
   {
     key: "network",
     path: "network",
-    children: [{ path: "network/directory" }, { path: "network/sector-clubs" }, { path: "network/stories" }],
+    children: [
+      { path: "network/directory" },
+      { path: "network/sector-clubs" },
+      { path: "network/stories" },
+      { path: "network/ambassadors" },
+      { path: "network/partners" },
+    ],
   },
   {
     key: "events",

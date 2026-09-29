@@ -19,8 +19,6 @@ export type SiteCopy = {
   ui: {
     home: string;
     overview: string;
-    building: string;
-    buildingNote: string;
     inSection: string;
     otherSections: string;
     indexLabel: string;
@@ -100,7 +98,6 @@ export type Dict = {
     legal: string;
     pages: string;
     legalGroup: string;
-    legalPending: string;
     languages: string;
     copyright: string;
     values: string;
@@ -112,6 +109,8 @@ export type Dict = {
     intro: string;
     intentLabel: string;
     intentOther: string;
+    /** the intake option for a company that applies for membership itself */
+    intentApply: string;
     fields: { company: string; name: string; email: string; country: string; message: string; messageHint: string };
     submit: string;
     sending: string;
