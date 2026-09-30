@@ -1,179 +1,170 @@
 import type { Dict } from "./types";
 import { siteEn } from "./site.en";
 
+/**
+ * English copy, verbatim from the translation (owntext/vertalingen/DUKAAT_Website_Copy_EN_uit_AR.md):
+ * the homepage (1.1–1.6), the footer, newsletter and form messages (21), the shared form fields (10).
+ * Words marked UI in content/types.ts are interface words the source does not give.
+ */
 export const en: Dict = {
   locale: "en",
   meta: {
     title: "DUKAAT — Dutch–Arab Business Club",
     description:
-      "A private business club connecting companies between the Netherlands and the Arab world. Verified introductions, run by traders, not consultants. Anno 2018.",
-    ogTitle: "DUKAAT — Where Value Crosses Borders",
-    ogDescription:
-      "The private Dutch–Arab business club that turns a verified introduction into a first shipment. Membership by nomination or invitation. Anno 2018.",
+      "We connect companies and entrepreneurs with knowledge, partners and opportunities between the Netherlands and the Arab world through training, business connections, gatherings and services.",
     ogImageAlt: "The DUKAAT tulip mark and wordmark on linen paper",
   },
   nav: {
+    home: "Home",
+    descriptor: "Dutch–Arab Business Club",
     toHome: "DUKAAT — to the homepage",
-    about: "About DUKAAT",
-    how: "How we work",
-    membership: "Membership",
-    behind: "Behind DUKAAT",
-    contact: "Contact",
-    routes: "What are you looking for?",
     menuOpen: "Open navigation",
     menuClose: "Close navigation",
     skip: "Skip to content",
     langLabel: "Language",
-    descriptor: "Dutch–Arab Business Club",
   },
   hero: {
-    eyebrow: "Dutch–Arab Business Club",
-    lines: [{ text: "Where value" }, { text: "crosses", crossed: true }, { text: "borders." }],
-    echo: "حيث تعبر القيمة الحدود",
-    echoLang: "ar",
-    sentence:
-      "A private business club for companies that genuinely trade between the Netherlands and the Arab world — run by traders, not consultants.",
-    chip1: "Anno 2018",
-    chip1Title: "Stichting Nederlands–Arabische Handelskamer, founded 2018",
-    chip2: "By nomination",
-    chip2Title: "Membership by nomination or invitation, after review",
+    title: "Where value crosses borders",
+    intro: "We connect companies and entrepreneurs with knowledge, partners and opportunities between the Netherlands and the Arab world.",
+    pillars: "Relationships – Knowledge – Trade – Investment",
+    knowHeading: "Get to know DUKAAT",
+    know: [
+      { title: "About us", text: "We connect traders, entrepreneurs and companies between the Netherlands and the Arab world." },
+      { title: "Our vision", text: "A business community that opens up horizons of cooperation across borders." },
+      { title: "Our mission", text: "Turning relationships into value and business opportunities." },
+      { title: "Our goals", text: "Connecting companies, exchanging knowledge and facilitating market entry." },
+    ],
+    networkHeading: "Discover the DUKAAT ecosystem",
+    network: [
+      { title: "Connecting companies and entrepreneurs", text: "We help you reach the right party for your business." },
+      { title: "The Academy and training courses" },
+      { title: "Workshops, events and exhibitions" },
+      { title: "Business services and consultancy" },
+      { title: "The market and trade opportunities" },
+      { title: "Investment and trade delegations" },
+      { title: "Membership and the DUKAAT community" },
+    ],
     pause: "Pause animation",
     play: "Play animation",
-    scrollcue: "What are you looking for?",
-    groupA: "Trade",
-    groupB: "Markets & capital",
-    heading: "The private business club between\nthe Netherlands and *the Arab world.*",
-    caption: "Choose a route. Each one opens a short intake — we ask for your commercial need, not your CV.",
-    other: "Something else?",
-    otherLink: "Write to us",
   },
-  routes: {
-    label: "Seven needs, one invitation",
-    heading: "What are *you* looking for?",
-    lede: "Each route opens a short intake: what you offer, what you look for, in which market. We do not ask for your CV.",
-    items: [
-      { intent: "distributor", label: "I need a distributor", hint: "A product that sells at home and needs a seller on the other side." },
-      { intent: "supplier", label: "I need a supplier", hint: "A specification, a volume, a certificate you require — and no verified source yet." },
-      { intent: "sell", label: "I want to sell", hint: "Goods, stock or capacity that should reach buyers you do not yet know." },
-      { intent: "buy", label: "I want to buy", hint: "You know what you need. We find who can deliver it, verified." },
-      { intent: "market-entry", label: "I want to enter a new market", hint: "From the Netherlands into the Arab world, or the other way round: structure, partner, first order." },
-      { intent: "opportunity", label: "I have an investment opportunity", hint: "A project or company that needs capital, and a counterparty who has actually met you." },
-      { intent: "invest", label: "I want to invest", hint: "Real companies and projects, not a listing. We start with a conversation." },
-      { intent: "nominated", label: "I have been nominated", hint: "A member has put your name forward. Tell us who, and we take it from there." },
+  more: {
+    heading: "Site sections",
+    rows: [
+      ["Company directory", "Business matchmaking", "Purchase requests", "Clearances and used equipment"],
+      ["Studies and reports", "Sector communities", "Success stories", "Partnerships and sponsorship"],
     ],
-    ariaPattern: "Open the intake: {label}",
-    foot: "Something else?",
-    footLink: "Write to us.",
-  },
-  how: {
-    label: "How we work",
-    heading: "Five steps, in this order, *every time.*",
-    lede: "Technology narrows the search; people verify.",
-    steps: [
-      { title: "Tell us what you need", body: "A short profile: what you offer, what you look for, in which market. We do not ask for your CV; we ask for your commercial need, precisely." },
-      { title: "We verify and admit", body: "Company registration, activity, references. Not everyone is admitted; that is what makes membership worth having. Card and membership number are issued on admission." },
-      { title: "We search and match", body: "Inside and beyond the network. Technology narrows the search, but a person reviews every match before it reaches you. We do not send lists." },
-      { title: "We introduce you properly", body: "A written brief to both sides. We join the first call where needed and translate the cultural gap before it becomes a misunderstanding." },
-      { title: "We stay until the first deal", body: "Documents, certificates, freight, customs, payment terms — until the first shipment lands or the first contract is signed. After that, the relationship is yours." },
-    ],
-  },
-  why: {
-    label: "Why DUKAAT",
-    heading: "Three things are *ours alone.*",
-    lede: "A search engine gives you names. It does not build the relationship.",
-    claims: [
-      { roman: "I", title: "We are *traders,* not consultants.", body: "DUKAAT was founded by someone who imports, packs and ships goods himself — not by an advisory firm that has never handled a container." },
-      { roman: "II", title: "We sit next to *Rotterdam,* Europe’s largest port.", body: "The gateway through which goods enter Europe is our neighbourhood, not a reference on a map. One hour from the market our members want to reach." },
-      { roman: "III", title: "We are trusted on *both sides,* in both languages.", body: "Our network did not start with a database. It started with people who already knew us — in Arabic and in Dutch." },
-    ],
-    mechanism: "Members’ current requests circulate inside the network, verified and matched by a person. They are not published on this page.",
-  },
-  name: {
-    label: "The name",
-    heading: "A coin both sides *already knew.*",
-    body: "Since 4 August 1586 the Dutch gold ducat has been a trade coin under the Dutch Mint Act: 3.494 grams of gold at 983/1000, and the Royal Dutch Mint in Utrecht still strikes it today. Its strength was not the gold alone. A merchant who saw it knew exactly what it represented. The Ottoman sultani of 1477–78 was struck on the ducat standard; Moroccan gold dinars were called bunduqi, after Venice, because the coin had travelled that far.",
-    keystone: "The ducat was a language both sides already spoke.",
-  },
-  membership: {
-    label: "Membership",
-    heading: "Membership with *defined commitments.*",
-    text: "Three levels — Member, Professional and Executive — each with commitments we put in writing: how quickly we reply, and what we do for you in introductions and searches. Founding 100 is a status held next to them, for one hundred of the most influential member companies: a permanent number, the founding rate and a voice in the club.",
-    charge: "Membership is an annual subscription. Project services (market entry, supplier search, representation) are quoted per engagement in writing. No hidden commissions.",
-    note: "Membership is by nomination or invitation. You can also apply through the intake — every application is reviewed, and it does not guarantee membership.",
-  },
-  behind: {
-    label: "Behind DUKAAT",
-    heading: "Two founders, *two trades.*",
-    lede: "One imports, packs and ships. The other advises on structure, contracts and checks.",
-    founders: [
-      {
-        name: "[Founder 1 — trader]",
-        role: "Founder · Trader",
-        voice: "DUKAAT did not start as a business plan. It started as a problem I kept running into. I run a contract-packing business in the Netherlands, legumes and nuts; I buy in the Arab world and sell into Europe. Again and again: a factory that could deliver exactly what a buyer needed, and a buyer who would never find it. I made those introductions as a favour for years. DUKAAT is doing it properly.",
-        portraitAlt: "The founding trader’s craft: a sampling probe in a sack of chickpeas",
-      },
-      {
-        name: "[Founder 2 — fiscal law]",
-        role: "Founder · Fiscal law",
-        voice: "A good introduction fails on the paperwork more often than on the people. My background is fiscal law, and my role at DUKAAT is an advisory one: making sure the right questions are asked early — which entity signs, what the contract says, where the tax and customs questions lie, and whether the other party is who they say they are. That experience makes a deal clearer. It is not a guarantee; the decision stays with the member. It is what makes the handshake worth something.",
-        portraitAlt: "The fiscal-law founder’s craft: a pen over a contract",
-      },
-    ],
-    portraitLabel: "Portrait to follow",
-  },
-  correspondence: {
-    heading: "Membership is by nomination or invitation.\nShould you wish to write, *write.*",
-    routePrefix: "Your route: ",
-    mailPending: "[enquiries@ — domain pending]",
-    mailPendingTitle: "Own-domain address follows the domain decision",
-    where: "Rotterdam area, meetings by appointment.",
-    tagline: "Where Value Crosses Borders",
-    taglineEcho: "حيث تعبر القيمة الحدود",
-    sealText: "DUKAAT · DUTCH–ARAB BUSINESS CLUB · ANNO 2018 · ",
   },
   footer: {
-    colophon: "DUKAAT — Dutch–Arab Business Club. An initiative of Stichting Nederlands–Arabische Handelskamer, Anno 2018, registered in the Netherlands.",
-    legal: "We do not take custody of members’ funds, we do not act as a bank or payment provider, and we do not guarantee any transaction between members.",
-    pages: "Pages",
-    legalGroup: "Legal",
+    about:
+      "DUKAAT — Dutch–Arab Business Club. We connect companies and entrepreneurs with knowledge, partners and opportunities between the Netherlands and the Arab world.",
+    values: "Value • Trust • Leadership",
+    slogan: "Where value crosses borders.",
+    copyright: "© 2026 DUKAAT. All rights reserved.",
     languages: "Languages",
-    copyright: "© 2026 Stichting Nederlands–Arabische Handelskamer. All rights reserved.",
-    values: "Value · Trust · Access",
+    newsletter: {
+      title: "Stay close to knowledge and opportunities",
+      text: "Subscribe to receive news of the programmes, gatherings, content and opportunities connected with the DUKAAT community.",
+      field: "Your email address",
+      button: "Subscribe",
+      note: "You can unsubscribe at any time. Find out how your data is processed in the privacy policy.",
+      success: "Your subscription request has been sent. If you receive a confirmation email, open it to complete your subscription.",
+    },
+  },
+  forms: {
+    common: {
+      name: "Full name",
+      company: "Company or project name (if any)",
+      role: "Professional title",
+      country: "Country of residence or company headquarters",
+      email: "Email address",
+      phone: "Phone (optional)",
+      language: "Preferred language of communication",
+      details: "Additional description",
+      attachment: "Optional attachment",
+    },
+    note: "Please do not attach identity documents, banking information or confidential documents to the initial request.",
+    privacy: "I have read the privacy policy regarding the processing of this request.",
+    optIn: "I would like to receive news, programmes and opportunities from DUKAAT, and I can unsubscribe at any time.",
+    success: "Your request has been received. We will review it and contact you using the details you provided, to clarify the next step.",
+    successNote:
+      "Submitting a request does not mean the start of a paid service; the scope of any service and its fees are agreed before implementation.",
+    required: "Please fill in this field.",
+    invalidEmail: "Please enter a valid email address.",
+    sending: "Sending your request…",
+    failed: "The request could not be sent at the moment. Please try again.",
+    attachmentHint: "Attach a document that helps us understand your request, if you wish.",
+    choose: "Choose…",
+  },
+  notFound: {
+    text: "We could not find this page. You can return to the homepage or contact us.",
+    back: "Return to the homepage.",
+  },
+  /** extras the owner kept on 30 Sep 2026 (report 9pZxu4Jeprq9yqE3KkNu5V) — not in the source; texts from commit 2336702 */
+  extra: {
+    "anno": "Anno 2018",
+    "annoTitle": "Stichting Nederlands–Arabische Handelskamer, founded 2018",
+    "byNomination": "By nomination",
+    "byNominationTitle": "Membership by nomination or invitation, after review",
+    "nominated": "I have been nominated",
+    "why": {
+      "label": "Why DUKAAT",
+      "heading": "Three things are *ours alone.*",
+      "lede": "A search engine gives you names. It does not build the relationship.",
+      "claims": [
+        {
+          "roman": "I",
+          "title": "We are *entrepreneurs,* not consultants.",
+          "body": "DUKAAT was founded by an entrepreneur who imports, packs and ships goods himself, and who knows trade between both sides from the inside."
+        },
+        {
+          "roman": "II",
+          "title": "We sit next to *Rotterdam,* Europe’s largest port.",
+          "body": "The gateway through which goods enter Europe is our neighbourhood, not a reference on a map. One hour from the market our members want to reach."
+        },
+        {
+          "roman": "III",
+          "title": "We are trusted on *both sides,* in both languages.",
+          "body": "Our network did not start with a database. It started with people who already knew us — in Arabic and in Dutch."
+        }
+      ],
+      "mechanism": "Members’ current requests circulate inside the network, verified and matched by a person. They are not published on this page."
+    },
+    "name": {
+      "label": "The name",
+      "heading": "A coin both sides *already knew.*",
+      "body": "Since 4 August 1586 the Dutch gold ducat has been a trade coin under the Dutch Mint Act: 3.494 grams of gold at 983/1000, and the Royal Dutch Mint in Utrecht still strikes it today. Its strength was not the gold alone. A merchant who saw it knew exactly what it represented. The Ottoman sultani of 1477–78 was struck on the ducat standard; Moroccan gold dinars were called bunduqi, after Venice, because the coin had travelled that far.",
+      "keystone": "The ducat was a language both sides already spoke."
+    },
+    "behind": {
+      "label": "Behind DUKAAT",
+      "heading": "Two founders, *two trades.*",
+      "lede": "One imports, packs and ships. The other advises on structure, contracts and checks.",
+      "founders": [
+        {
+          "name": "[Founder 1 — entrepreneur]",
+          "role": "Founder · Entrepreneur",
+          "voice": "DUKAAT did not start as a business plan. It started as a problem I kept running into. I run a contract-packing business in the Netherlands, legumes and nuts; I buy in the Arab world and sell into Europe. Again and again: a factory that could deliver exactly what a buyer needed, and a buyer who would never find it. I made those introductions as a favour for years. DUKAAT is doing it properly.",
+          "portraitAlt": "The founding entrepreneur’s craft: a sampling probe in a sack of chickpeas"
+        },
+        {
+          "name": "[Founder 2 — fiscal law]",
+          "role": "Founder · Fiscal law",
+          "voice": "A good introduction fails on the paperwork more often than on the people. My background is fiscal law, and my role at DUKAAT is an advisory one: making sure the right questions are asked early — which entity signs, what the contract says, where the tax and customs questions lie, and whether the other party is who they say they are. That experience makes a deal clearer. It is not a guarantee; the decision stays with the member. It is what makes the handshake worth something.",
+          "portraitAlt": "The fiscal-law founder’s craft: a pen over a contract"
+        }
+      ]
+    },
+    "correspondence": {
+      "heading": "Membership is by nomination or invitation.\nShould you wish to write, *write.*",
+      "mailPending": "[enquiries@ — domain pending]",
+      "mailPendingTitle": "Own-domain address follows the domain decision",
+      "where": "Rotterdam area, meetings by appointment.",
+      "taglineEcho": "حيث تعبر القيمة الحدود",
+      "sealText": "DUKAAT · DUTCH–ARAB BUSINESS CLUB · ANNO 2018 · "
+    },
+    "colophon": "An initiative of Stichting Nederlands–Arabische Handelskamer, Anno 2018, registered in the Netherlands.",
+    "legalLine": "We do not take custody of members’ funds, we do not act as a bank or payment provider, and we do not guarantee any transaction between members.",
+    "foundation": "Stichting Nederlands–Arabische Handelskamer"
   },
   site: siteEn,
-  contact: {
-    title: "Contact — DUKAAT",
-    heading: "Tell us what you need.",
-    intro: "Do you have an opportunity, a product, a project or a market you want to reach? Talk to us. We reply within 5 working days.",
-    intentLabel: "What are you trying to achieve?",
-    intentOther: "Something else",
-    intentApply: "I would like to apply for membership",
-    fields: {
-      company: "Company",
-      name: "Your name",
-      email: "E-mail",
-      country: "Country",
-      message: "Your commercial need",
-      messageHint: "What you offer, what you look for, in which market.",
-    },
-    submit: "Send",
-    sending: "Sending…",
-    note: "Every company is reviewed before admission, whether a member nominates it, we invite it or it applies itself. An application does not guarantee membership.",
-    investNotice:
-      "DUKAAT does not provide investment advice, does not arrange or broker investments, and does not offer securities. Opportunities are presented for information only. Independent legal, financial and technical due diligence remains essential before any investment decision.",
-    success: "Received. We reply within 5 working days.",
-    errorGeneric: "Sending failed. Please try again, or write to us directly.",
-    errorUnconfigured: "The intake mailbox is not configured yet. Please write to us directly at the address below.",
-    faqHeading: "Frequently asked questions",
-    faq: [
-      { q: "Is DUKAAT an official chamber of commerce?", a: "No. DUKAAT is a private business club and platform. We do not represent any government and we do not issue official documents — though we cooperate with chambers and official bodies where it benefits our members." },
-      { q: "Do you guarantee the companies listed?", a: "No. We verify basic information and publish it clearly, but the decision to transact — and the responsibility to do due diligence — remains with the member. Anyone who promises you a full guarantee in international trade either does not understand it or is not being honest with you." },
-      { q: "How are you different from a platform like Alibaba?", a: "Those are open platforms with millions of suppliers; their strength is scale. We are a closed community; our strength is that someone has actually met the other side. We do not compete on volume — we compete on trust." },
-      { q: "I am a small company. Is DUKAAT for me?", a: "Yes, if you genuinely trade. We do not set a size requirement — we set an activity requirement. Many of the best opportunities start with small companies that can decide quickly." },
-      { q: "What happens after the intake, or after I have been nominated?", a: "We review your profile and may request documents or a short call. You receive an acceptance or a decline within 10 working days. Not everyone is admitted." },
-      { q: "Do you take a commission on deals?", a: "No hidden commissions. Membership is an annual subscription and project services are quoted per engagement in writing; any other fee is communicated clearly and agreed in advance, in writing, with every party concerned." },
-      { q: "Which language can I use?", a: "Arabic, Dutch or English — whichever you prefer." },
-      { q: "Is my company’s data protected?", a: "Yes. We process data in accordance with the GDPR. Only what you explicitly approve is published in your profile, and you can request correction or deletion at any time." },
-    ],
-  },
 };

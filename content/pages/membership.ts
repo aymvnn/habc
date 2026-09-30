@@ -1,24 +1,286 @@
 import type { PageSet } from "./types";
 
 /**
- * Membership — the group overview and its four pages.
- * Rules that bind this file: admission by nomination or invitation, applications welcome but never a guarantee; no prices, only the charging
- * model verbatim; tier names in English in every language; Founding 100 is a status beside the levels, never a fourth level,
- * held by one hundred of the most influential member companies (never "the first 100"); no remedy "if we fall short";
- * every pending value stays in square brackets exactly as the founders left it (p.11–14 of the content master); no counter
- * of places, no counts of members. The benefit lists follow p.11–13 (Member 13 · Professional 17 · Executive 18).
+ * Membership — source section 9 ("العضوية ومجتمع دوكات").
+ * AR verbatim from owntext/DUKAAT_محتوى كتابة الموقع حديد _AR.md; NL and EN verbatim from owntext/vertalingen/.
+ * The "text beside the packages" is the tiers note; every button goes to the contact form with subject "membership".
  */
 export const membership: PageSet = {
   membership: {
     masthead: { variant: "band", photo: "membership-hero" },
+    headline: {
+      en: "Belonging that connects you with knowledge, relationships and opportunities",
+      nl: "Erbij horen verbindt u met kennis, relaties en kansen",
+      ar: "انتماء يربطك بالمعرفة والعلاقات والفرص",
+    },
     blocks: [
       {
         kind: "lead",
         text: {
-          en: "DUKAAT is a closed club. Companies are nominated by members, invited by us, or apply themselves; each one is reviewed before admission, and members are served at one of three levels, each with its own written commitments.",
-          nl: "DUKAAT is een besloten club. Bedrijven worden door leden voorgedragen, door ons uitgenodigd of melden zich zelf aan; elk bedrijf wordt vóór toelating beoordeeld, en leden worden bediend op een van de drie niveaus, elk met eigen schriftelijke toezeggingen.",
-          ar: "DUKAAT نادٍ مغلق: تصل إليه الشركات بترشيحٍ من أعضائه، أو بدعوةٍ منا، أو بطلب انضمامٍ تتقدّم به بنفسها؛ وتخضع كل شركة للمراجعة قبل قبولها، ثم نخدم الأعضاء وفق أحد ثلاثة مستويات، لكلٍّ منها التزاماته المكتوبة.",
+          en: "DUKAAT membership is a space for getting to know one another, for learning, and for developing your commercial and professional presence. We want every member to find a clearer path to what they need, and to have a role in the value the community builds.",
+          nl: "Het DUKAAT-lidmaatschap is een ruimte voor kennismaking, leren en het ontwikkelen van zakelijke en professionele aanwezigheid. We willen dat ieder lid een duidelijkere weg vindt naar wat hij of zij nodig heeft, en een rol heeft in de waarde die de community opbouwt.",
+          ar: "عضوية دوكات مساحة للتعارف والتعلّم وتطوير الحضور التجاري والمهني. نريد لكل عضو أن يجد طريقًا أوضح إلى ما يحتاجه، وأن يكون له دور في القيمة التي يبنيها المجتمع.",
         },
+      },
+      {
+        kind: "prose",
+        body: [
+          {
+            en: "Memberships are tiered according to the nature of participation and the support required. The services included, their limits, duration and fees are set out in the membership offer before you join.",
+            nl: "De lidmaatschappen zijn in niveaus opgebouwd, afhankelijk van de aard van de deelname en de benodigde ondersteuning. De inbegrepen diensten en hun grenzen, looptijd en kosten worden vóór de inschrijving toegelicht in het lidmaatschapsaanbod.",
+            ar: "تتدرج العضويات بحسب طبيعة المشاركة والدعم المطلوب. تُوضّح الخدمات المشمولة وحدودها ومدتها ورسومها في عرض العضوية قبل الاشتراك.",
+          },
+        ],
+        photo: "lvl-hero",
+        size: "half",
+      },
+      {
+        kind: "tiers",
+        tiers: [
+          {
+            name: "DUKAAT Member",
+            subtitle: { en: "Business Membership", nl: "Zakelijk lidmaatschap", ar: "عضوية الأعمال" },
+            tagline: {
+              en: "Begin your relationship with the DUKAAT community.",
+              nl: "Begin uw relatie met de DUKAAT-community.",
+              ar: "ابدأ علاقتك بمجتمع دوكات.",
+            },
+            forWhom: {
+              en: "Suited to entrepreneurs, professionals and companies who want to get to know one another, learn and make their activities known.",
+              nl: "Geschikt voor ondernemers, professionals en bedrijven die willen kennismaken, leren en hun activiteiten presenteren.",
+              ar: "مناسبة لروّاد الأعمال والمهنيين والشركات الذين يريدون التعارف والتعلّم والتعريف بنشاطهم.",
+            },
+            itemsLabel: {
+              en: "Core elements of the membership",
+              nl: "Hoofdlijnen van het lidmaatschap",
+              ar: "محاور العضوية",
+            },
+            items: [
+              {
+                en: "An introduction to the member or company: what they offer and what they are looking for.",
+                nl: "Een introductie van het lid of het bedrijf, en van wat het aanbiedt en wat het zoekt.",
+                ar: "تعريف بالعضو أو الشركة وما يقدّمه وما يبحث عنه.",
+              },
+              {
+                en: "A presence in the community directory, in line with the publication rules.",
+                nl: "Aanwezigheid in de gids van de community, volgens de publicatieregels.",
+                ar: "حضور في دليل المجتمع وفق قواعد النشر.",
+              },
+              {
+                en: "Access to selected content, information and opportunities.",
+                nl: "Toegang tot geselecteerde content, informatie en kansen.",
+                ar: "الاطلاع على محتوى ومعلومات وفرص مختارة.",
+              },
+              {
+                en: "Opportunities to take part in the meetings and programmes designated for this tier.",
+                nl: "Mogelijkheden om deel te nemen aan de bijeenkomsten en programma’s die voor deze categorie zijn bepaald.",
+                ar: "فرص مشاركة في اللقاءات والبرامج المحددة للفئة.",
+              },
+              {
+                en: "Getting to know the relevant sector communities.",
+                nl: "Kennismaking met de relevante sectorcommunity’s.",
+                ar: "التعرف إلى المجتمعات القطاعية ذات الصلة.",
+              },
+              {
+                en: "Member benefits in eligible programmes, in line with the published offer.",
+                nl: "Gebruikmaken van ledenvoordelen bij de in aanmerking komende programma’s, volgens het aangekondigde aanbod.",
+                ar: "الاستفادة من مزايا الأعضاء في البرامج المؤهلة وفق العرض المعلن.",
+              },
+            ],
+            action: {
+              href: "contact?subject=membership#contact-form",
+              label: {
+                en: "Express your interest in the Business Membership",
+                nl: "Toon uw interesse in het Zakelijk lidmaatschap",
+                ar: "أبدِ اهتمامك بعضوية الأعمال",
+              },
+            },
+          },
+          {
+            name: "DUKAAT Professional",
+            subtitle: { en: "Commercial Growth Membership", nl: "Lidmaatschap voor commerciële groei", ar: "عضوية النمو التجاري" },
+            tagline: {
+              en: "Make your offer and your commercial need clearer.",
+              nl: "Maak uw aanbod en uw commerciële behoefte duidelijker.",
+              ar: "اجعل عرضك واحتياجك التجاري أكثر وضوحًا.",
+            },
+            forWhom: {
+              en: "Suited to importers, exporters, manufacturers, service providers and companies with specific commercial needs.",
+              nl: "Geschikt voor importeurs, exporteurs, fabrikanten, dienstverleners en bedrijven met specifieke commerciële behoeften.",
+              ar: "مناسبة للمستوردين والمصدّرين والمصنّعين ومقدمي الخدمات والشركات ذات الاحتياجات التجارية المحددة.",
+            },
+            itemsLabel: {
+              en: "Core elements of the membership, alongside participation in the community",
+              nl: "Hoofdlijnen van het lidmaatschap, naast deelname aan de community",
+              ar: "محاور العضوية، إلى جانب المشاركة في المجتمع",
+            },
+            items: [
+              {
+                en: "An extended company profile and presentation of products and services within the approved scope.",
+                nl: "Een uitgebreid bedrijfsprofiel en een presentatie van de producten en diensten binnen het vastgestelde kader.",
+                ar: "ملف شركة موسع وعرض المنتجات والخدمات ضمن النطاق المعتمد.",
+              },
+              {
+                en: "Submitting purchase and commercial cooperation requests.",
+                nl: "Het indienen van aanvragen voor inkoop en commerciële samenwerking.",
+                ar: "تقديم طلبات شراء وتعاون تجاري.",
+              },
+              {
+                en: "Defined assistance in formulating the request and an initial search for suitable parties.",
+                nl: "Afgebakende hulp bij het formuleren van de aanvraag en bij een eerste zoektocht naar passende partijen.",
+                ar: "مساعدة محددة في صياغة الطلب والبحث الأولي عن الأطراف المناسبة.",
+              },
+              {
+                en: "Arranging introductions where there is mutual interest.",
+                nl: "Het voorbereiden van de kennismaking wanneer er wederzijdse interesse is.",
+                ar: "تهيئة التعارف عند وجود اهتمام متبادل.",
+              },
+              {
+                en: "Keeping track of information and opportunities related to the sector and the target market.",
+                nl: "Het volgen van informatie en kansen die verband houden met de sector en de doelmarkt.",
+                ar: "متابعة معلومات وفرص مرتبطة بالقطاع والسوق المستهدف.",
+              },
+              {
+                en: "Wider participation in learning and meetings, and a review of commercial steps according to the package.",
+                nl: "Ruimere deelname aan leeractiviteiten en bijeenkomsten, en het doornemen van de commerciële stappen afhankelijk van het pakket.",
+                ar: "مشاركة أوسع في التعلم واللقاءات، ومراجعة الخطوات التجارية بحسب الباقة.",
+              },
+            ],
+            action: {
+              href: "contact?subject=membership#contact-form",
+              label: {
+                en: "Express your interest in the Commercial Growth Membership",
+                nl: "Toon uw interesse in het lidmaatschap voor commerciële groei",
+                ar: "أبدِ اهتمامك بعضوية النمو التجاري",
+              },
+            },
+          },
+          {
+            name: "DUKAAT Executive",
+            subtitle: { en: "Executive Membership", nl: "Executive-lidmaatschap", ar: "العضوية التنفيذية" },
+            tagline: {
+              en: "Relationships and structured follow-up for your goals across borders.",
+              nl: "Relaties en gestructureerde opvolging voor uw doelen over de grenzen heen.",
+              ar: "علاقات ومتابعة منظمة لأهدافك عبر الحدود.",
+            },
+            forWhom: {
+              en: "Suited to company owners and managers who need more tailored support in organising communication and expansion.",
+              nl: "Geschikt voor bedrijfseigenaren en leidinggevenden die behoefte hebben aan meer op maat gesneden ondersteuning bij het organiseren van contacten en expansie.",
+              ar: "مناسبة لأصحاب الشركات والمديرين الذين يحتاجون إلى دعم أكثر تخصيصًا في تنظيم التواصل والتوسع.",
+            },
+            itemsLabel: {
+              en: "Core elements of the membership",
+              nl: "Hoofdlijnen van het lidmaatschap",
+              ar: "محاور العضوية",
+            },
+            items: [
+              {
+                en: "A point of contact for coordinating requests and follow-up within the scope of the membership.",
+                nl: "Een aanspreekpunt voor de coördinatie van aanvragen en opvolging binnen het kader van het lidmaatschap.",
+                ar: "نقطة اتصال لتنسيق الطلبات والمتابعة ضمن نطاق العضوية.",
+              },
+              {
+                en: "Organising commercial goals and setting priorities.",
+                nl: "Het ordenen van de commerciële doelen en het bepalen van prioriteiten.",
+                ar: "ترتيب الأهداف التجارية وتحديد الأولويات.",
+              },
+              {
+                en: "Broader research and follow-up based on agreed tasks.",
+                nl: "Ruimer onderzoek en opvolging volgens afgesproken opdrachten.",
+                ar: "بحث ومتابعة أوسع وفق مهام متفق عليها.",
+              },
+              {
+                en: "Preparation for important meetings and a review of next steps.",
+                nl: "Voorbereiding op belangrijke bijeenkomsten en het doornemen van de vervolgstappen.",
+                ar: "التحضير للقاءات المهمة ومراجعة الخطوات التالية.",
+              },
+              {
+                en: "Opportunities to take part in executive sessions and announced specialist meetings.",
+                nl: "Mogelijkheden om deel te nemen aan aangekondigde executive sessies en gespecialiseerde bijeenkomsten.",
+                ar: "فرص للمشاركة في جلسات تنفيذية ولقاءات متخصصة معلنة.",
+              },
+              {
+                en: "Coordinating interest in delegations, exhibitions and suitable market-entry programmes.",
+                nl: "Het coördineren van interesse in passende delegaties, beurzen en programma’s voor markttoetreding.",
+                ar: "تنسيق الاهتمام بالوفود والمعارض وبرامج دخول الأسواق المناسبة.",
+              },
+            ],
+            action: {
+              href: "contact?subject=membership#contact-form",
+              label: {
+                en: "Discuss the Executive Membership with us",
+                nl: "Bespreek het Executive-lidmaatschap met ons",
+                ar: "ناقش معنا العضوية التنفيذية",
+              },
+            },
+          },
+        ],
+        note: {
+          en: "Final details, prices and allocations are set out in the membership offer. Specialised courses, professional consultations, travel and extended research projects may require a separate agreement.",
+          nl: "De definitieve details, prijzen en quota worden in het lidmaatschapsaanbod toegelicht. Gespecialiseerde cursussen, professioneel advies, reizen en uitgebreide onderzoeksprojecten kunnen een afzonderlijke overeenkomst vereisen.",
+          ar: "التفاصيل والأسعار والحصص النهائية تُوضح في عرض العضوية. الدورات المتخصصة والاستشارات المهنية والسفر ومشاريع البحث الموسعة قد تتطلب اتفاقًا منفصلًا.",
+        },
+      },
+      {
+        kind: "prose",
+        heading: { en: "Which membership suits you?", nl: "Welk lidmaatschap past bij u?", ar: "أي عضوية تناسبك؟" },
+        body: [
+          {
+            en: "If your goal is getting to know one another and learning, start with the Business Membership. If you have a specific product or request and need commercial support, get to know the Commercial Growth Membership. And if you need more tailored coordination and follow-up, discuss the Executive Membership with us.",
+            nl: "Is uw doel kennismaken en leren, begin dan met het Zakelijk lidmaatschap. Heeft u een product of een specifieke aanvraag en heeft u commerciële ondersteuning nodig, maak dan kennis met het lidmaatschap voor commerciële groei. Heeft u behoefte aan meer op maat gesneden coördinatie en opvolging, bespreek dan het Executive-lidmaatschap met ons.",
+            ar: "إذا كان هدفك التعارف والتعلّم، ابدأ بعضوية الأعمال. وإذا كان لديك منتج أو طلب محدد وتحتاج إلى دعم تجاري، تعرّف إلى عضوية النمو التجاري. أما إذا كنت تحتاج إلى تنسيق ومتابعة أكثر تخصيصًا، فناقش معنا العضوية التنفيذية.",
+          },
+        ],
+        size: "tall",
+        side: "start",
+      },
+      {
+        kind: "prose",
+        heading: { en: "Our community's values", nl: "De waarden van onze community", ar: "قيم مجتمعنا" },
+        body: [
+          {
+            en: "We respect time and privacy, present information clearly, and maintain professionalism in how we communicate. We share knowledge, value the diversity of experience, and build relationships on mutual interests and realistic commitments.",
+            nl: "We respecteren tijd en privacy, presenteren informatie duidelijk en houden de communicatie professioneel. We delen kennis, waarderen uiteenlopende ervaringen en bouwen relaties op basis van wederzijdse belangen en realistische toezeggingen.",
+            ar: "نحترم الوقت والخصوصية، ونعرض المعلومات بوضوح، ونحافظ على المهنية في التواصل. نشارك المعرفة، ونقدّر اختلاف الخبرات، ونبني العلاقات على المصالح المتبادلة والالتزامات الواقعية.",
+          },
+        ],
+      },
+      {
+        kind: "actions",
+        links: [
+          {
+            href: "contact?subject=membership#contact-form",
+            label: {
+              en: "Help me choose a membership",
+              nl: "Help mij bij het kiezen van een lidmaatschap",
+              ar: "ساعدوني في اختيار العضوية",
+            },
+          },
+        ],
+      },
+      /* ── extras the owner kept (30 Sep 2026), verbatim from commit 2336702: "membership/levels" and "membership" ── */
+      {
+        kind: "duo",
+        photos: ["lvl-breakfast", "lvl-tea"],
+        label: { en: "Executive level", nl: "Niveau Executive", ar: "مستوى Executive" },
+        heading: { en: "Closer to *the table.*", nl: "Dichter bij *de tafel.*", ar: "أقرب إلى *الطاولة.*" },
+        body: [
+          {
+            en: "Business Concierge starts from one clear request. Instead of spending hours searching, you tell us what you need — for example a distributor in the Gulf, a paper supplier in Europe or a private-label manufacturer — and the DUKAAT team determines the right path for it, within your membership level and the service it calls for.",
+            nl: "Business Concierge begint bij één helder verzoek. In plaats van zelf urenlang te zoeken, laat u ons weten wat u nodig hebt — bijvoorbeeld een distributeur in de Golf, een papierleverancier in Europa of een producent voor huismerkproductie — en het DUKAAT-team bepaalt de juiste route, binnen uw niveau en de dienst die het verzoek vraagt.",
+            ar: "يبدأ Business Concierge من طلبٍ واضح واحد. فبدلاً من أن تقضي ساعاتٍ في البحث، تخبرنا بما تحتاج إليه — موزّعاً في الخليج مثلاً، أو مورّداً للورق في أوروبا، أو مصنعاً ينتج بعلامة خاصة (Private Label) — ويحدّد فريق DUKAAT المسار المناسب له ضمن مستوى عضويتك والخدمة التي يتطلبها.",
+          },
+          {
+            en: "DUKAAT Circle gathers business owners and leaders in closed meetings around one subject or one kind of opportunity. Executive Dinners are small and by invitation only: what counts is who sits at the table, not how many.",
+            nl: "DUKAAT Circle brengt eigenaren en bestuurders samen in besloten bijeenkomsten rond één onderwerp of één soort kans. Executive Dinners zijn klein en uitsluitend op uitnodiging: het gaat om wie er aan tafel zit, niet om hoeveel.",
+            ar: "يجمع DUKAAT Circle أصحاب الشركات وقادة الأعمال في لقاءات مغلقة حول موضوع واحد أو نوع واحد من الفرص. أما Executive Dinners فلقاءات عشاء محدودة الحضور، بالدعوة فقط: العبرة بمن يجلس إلى الطاولة، لا بعدد الجالسين.",
+          },
+          {
+            en: "Closed B2B sessions bring together a small number of companies, selected in advance on what each one offers and needs, for private meetings that we prepare with both sides before anyone sits down.",
+            nl: "Besloten B2B-sessies brengen een klein aantal bedrijven samen, vooraf geselecteerd op wat elk van hen aanbiedt en zoekt, voor vertrouwelijke gesprekken die wij met beide kanten voorbereiden voordat iemand aan tafel gaat.",
+            ar: "وتجمع جلسات B2B المغلقة عدداً محدوداً من الشركات، تُختار مسبقاً بحسب ما تقدّمه كلٌّ منها وما تحتاج إليه، في لقاءات خاصة نُعِدّها مع الطرفين قبل أن يجلس أحدٌ إلى الطاولة.",
+          },
+        ],
       },
       {
         kind: "steps",
@@ -65,643 +327,427 @@ export const membership: PageSet = {
         ],
       },
       {
-        kind: "tiers",
-        label: { en: "The levels", nl: "De niveaus", ar: "المستويات" },
-        heading: { en: "Three levels, *one standard.*", nl: "Drie niveaus, *één maatstaf.*", ar: "ثلاثة مستويات، *ومعيار واحد.*" },
-        intro: {
-          en: "Admission is the same for every level. What differs is how much of DUKAAT works on your behalf, and how closely.",
-          nl: "De toelating is voor elk niveau gelijk. Wat verschilt, is hoeveel van DUKAAT voor u werkt, en hoe dichtbij.",
-          ar: "القبول واحدٌ في المستويات كلها. أما الفرق ففي حجم ما يعمله DUKAAT نيابةً عنك، ومدى قربه منك.",
-        },
-        tiers: [
-          {
-            name: "Member",
-            tagline: {
-              en: "For companies entering the network.",
-              nl: "Voor bedrijven die het netwerk betreden.",
-              ar: "للشركات التي تدخل الشبكة.",
-            },
-            items: [
-              { en: "A profile and a listing in the member directory", nl: "Een profiel en een vermelding in het Ledenregister", ar: "ملف تعريفي وإدراج في دليل الأعضاء" },
-              { en: "Membership number and digital certificate", nl: "Lidnummer en digitaal certificaat", ar: "رقم عضوية وشهادة عضوية رقمية" },
-              { en: "Newsletters, selected reports and opportunities", nl: "Nieuwsbrieven, geselecteerde rapporten en kansen", ar: "النشرات الإخبارية، وتقارير وفرص مختارة" },
-              { en: "Basic access to the sector clubs", nl: "Basistoegang tot de sectorclubs", ar: "وصول أساسي إلى الأندية القطاعية" },
-            ],
-          },
-          {
-            name: "Professional",
-            tagline: {
-              en: "For companies that use DUKAAT actively.",
-              nl: "Voor bedrijven die DUKAAT actief gebruiken.",
-              ar: "للشركات التي تستخدم DUKAAT فعلياً.",
-            },
-            items: [
-              { en: "Everything in Member", nl: "Alles van Member", ar: "جميع مزايا Member" },
-              { en: "Buyer requests and product listings in DUKAAT Market", nl: "Inkoopaanvragen en productvermeldingen in DUKAAT Market", ar: "طلبات الشراء وعرض المنتجات في سوق DUKAAT" },
-              { en: "Supplier and distributor searches", nl: "Zoektochten naar leveranciers en distributeurs", ar: "البحث عن مورّدين وموزّعين" },
-              { en: "Business introductions and B2B matchmaking", nl: "Zakelijke introducties en B2B-koppelingen", ar: "التعريفات التجارية والمطابقة بين الشركات (B2B)" },
-            ],
-          },
-          {
-            name: "Executive",
-            tagline: {
-              en: "For owners and investors who want us beside them.",
-              nl: "Voor ondernemers en investeerders die ons aan hun zijde willen.",
-              ar: "لأصحاب الشركات والمستثمرين الذين يريدوننا إلى جانبهم.",
-            },
-            items: [
-              { en: "Everything in Professional", nl: "Alles van Professional", ar: "جميع مزايا Professional" },
-              { en: "A dedicated relationship contact", nl: "Een eigen relatiebeheerder", ar: "مسؤول علاقة مخصّص لك" },
-              { en: "Business Concierge and warm introductions", nl: "Business Concierge en persoonlijke introducties", ar: "Business Concierge والتعريفات المباشرة" },
-              { en: "Executive Dinners and DUKAAT Circle", nl: "Executive Dinners en DUKAAT Circle", ar: "دعوات إلى Executive Dinners وDUKAAT Circle" },
-            ],
-          },
-        ],
-      },
-      { kind: "home", section: "membership" },
-      {
-        kind: "index",
-        label: { en: "In detail", nl: "In detail", ar: "بالتفصيل" },
-        heading: { en: "Membership, *page by page.*", nl: "Het lidmaatschap, *pagina voor pagina.*", ar: "العضوية، *صفحةً صفحة.*" },
-      },
-      {
-        kind: "next",
+        kind: "actions",
         heading: {
           en: "If a member named you, *tell us who.*",
           nl: "Als een lid u heeft genoemd, *laat ons weten wie.*",
           ar: "إن ذكر أحد الأعضاء اسمك، *فأخبرنا مَن.*",
         },
         body: {
-          en: "Choose the route “I have been nominated” and give us the member’s name, or apply yourself through the intake. If you are still weighing whether DUKAAT fits your company, start with who it is for.",
-          nl: "Kies de route “Ik ben voorgedragen” en geef ons de naam van het lid, of meld u zelf aan via de intake. Weegt u nog af of DUKAAT bij uw bedrijf past, lees dan eerst voor wie het bedoeld is.",
-          ar: "اختر المسار «تمّت تزكيتي» وأخبرنا باسم العضو، أو تقدّم بطلب انضمام بنفسك عبر الاستمارة. وإن كنت لا تزال تنظر في مدى ملاءمة DUKAAT لشركتك، فابدأ بمعرفة لمن العضوية.",
+          en: "Choose the route “I have been nominated” and give us the member’s name, or apply yourself through the intake.",
+          nl: "Kies de route “Ik ben voorgedragen” en geef ons de naam van het lid, of meld u zelf aan via de intake.",
+          ar: "اختر المسار «تمّت تزكيتي» وأخبرنا باسم العضو، أو تقدّم بطلب انضمام بنفسك عبر الاستمارة.",
         },
         links: [
-          { href: "contact?intent=nominated#intake", label: { en: "I have been nominated", nl: "Ik ben voorgedragen", ar: "تمّت تزكيتي" } },
-          { href: "contact?intent=apply#intake", label: { en: "Apply for membership", nl: "Aanmelden als lid", ar: "التقدّم بطلب عضوية" } },
-          { href: "membership/who-for", label: { en: "Who it is for — and who not", nl: "Voor wie — en voor wie niet", ar: "لمن العضوية — ولمن لا" } },
+          { href: "contact?subject=nominated#contact-form", label: { en: "I have been nominated", nl: "Ik ben voorgedragen", ar: "تمّت تزكيتي" } },
+          { href: "contact?subject=membership#contact-form", label: { en: "Apply for membership", nl: "Aanmelden als lid", ar: "التقدّم بطلب عضوية" } },
         ],
       },
     ],
   },
 
-  "membership/levels": {
-    masthead: { variant: "plate", photo: "lvl-hero" },
+  /* ── extra page the owner kept (30 Sep 2026): old "how-we-work/verification", verbatim from commit 2336702 ── */
+  "membership/admission": {
+    masthead: { variant: "portrait", photo: "ver-hero" },
     blocks: [
       {
         kind: "lead",
         text: {
-          en: "Every level rests on the same admission and the same verification. What changes from Member to Executive is reach: how visible you are, how much we search for you, and how close we stay.",
-          nl: "Elk niveau rust op dezelfde toelating en dezelfde verificatie. Wat van Member naar Executive verandert, is het bereik: hoe zichtbaar u bent, hoeveel wij voor u zoeken, en hoe dicht wij bij u blijven.",
-          ar: "تقوم المستويات كلها على القبول نفسه والتحقق نفسه. أما ما يتغيّر من Member إلى Executive فهو النطاق: مدى ظهورك، وحجم ما نبحث عنه لحسابك، ومدى قربنا منك.",
+          en: "No member meets a counterparty that nobody at DUKAAT has checked: the registration looked up, the documents read. Verification is not a formality at the door; it is a large part of what membership is worth.",
+          nl: "Geen lid ontmoet een tegenpartij die niemand van DUKAAT heeft gecontroleerd: de inschrijving opgezocht, de stukken gelezen. Verificatie is geen formaliteit bij de deur; het is een groot deel van wat het lidmaatschap waard is.",
+          ar: "لا يلتقي أي عضو بطرفٍ مقابل لم يتحقق منه أحدٌ من فريق DUKAAT: السجلُّ مراجَع، والمستنداتُ مقروءة. فالتحقق ليس إجراءً شكلياً عند الباب، بل هو جزءٌ كبير من قيمة العضوية.",
         },
       },
       {
-        kind: "tiers",
-        label: { en: "The levels", nl: "De niveaus", ar: "المستويات" },
-        heading: { en: "What each level *includes.*", nl: "Wat elk niveau *omvat.*", ar: "ما يشمله *كل مستوى.*" },
+        kind: "register",
+        numbered: true,
+        cols: 2,
+        label: { en: "What we check", nl: "Wat wij controleren", ar: "ما نتحقق منه" },
+        heading: { en: "Checked before *anyone meets.*", nl: "Gecontroleerd vóór *de eerste ontmoeting.*", ar: "نتحقق *قبل أي لقاء.*" },
         intro: {
-          en: "Each level includes everything in the level before it, and adds to it.",
-          nl: "Elk niveau omvat alles van het niveau ervoor, en voegt daar iets aan toe.",
-          ar: "يشمل كل مستوى كلَّ ما في المستوى الذي قبله، ويزيد عليه.",
+          en: "We make these checks when a company is admitted and, as far as they apply, for any counterparty from outside the network before we introduce it to a member.",
+          nl: "Deze controles voeren wij uit bij de toelating van een bedrijf en, voor zover van toepassing, bij elke tegenpartij van buiten het netwerk voordat wij haar aan een lid voorstellen.",
+          ar: "نُجري هذه الفحوص عند قبول أي شركة، ونطبّق ما يلزم منها على كل طرف مقابل من خارج الشبكة قبل أن نعرّفه بأحد الأعضاء.",
         },
-        tiers: [
+        items: [
           {
-            name: "Member",
-            tagline: {
-              en: "For entrepreneurs and companies entering the DUKAAT network.",
-              nl: "Voor ondernemers en bedrijven die het DUKAAT-netwerk betreden.",
-              ar: "لروّاد الأعمال والشركات التي تدخل شبكة DUKAAT.",
+            title: { en: "Company registration", nl: "Inschrijving in het handelsregister", ar: "السجل التجاري" },
+            body: {
+              en: "The entry in the trade register of the company’s home country: legal name, registration number, legal form, and who is authorised to sign.",
+              nl: "De inschrijving in het handelsregister van het land van vestiging: statutaire naam, registratienummer, rechtsvorm, en wie bevoegd is te tekenen.",
+              ar: "القيد في السجل التجاري للبلد الذي تأسست فيه الشركة: الاسم القانوني، ورقم التسجيل، والشكل القانوني، ومَن يملك صلاحية التوقيع عنها.",
             },
-            items: [
-              { en: "A personal or company profile", nl: "Een persoonlijk profiel of bedrijfsprofiel", ar: "ملف شخصي أو ملف للشركة" },
-              { en: "A listing in the member directory", nl: "Een vermelding in het Ledenregister", ar: "إدراج في دليل الأعضاء" },
-              { en: "A membership number", nl: "Een lidnummer", ar: "رقم عضوية" },
-              { en: "A digital membership certificate", nl: "Een digitaal lidmaatschapscertificaat", ar: "شهادة عضوية رقمية" },
-              { en: "The DUKAAT Member badge, under our brand terms", nl: "Het DUKAAT Member-embleem, volgens onze merkvoorwaarden", ar: "شارة DUKAAT Member، وفق شروط استخدام علامتنا" },
-              { en: "Business and economic newsletters", nl: "Zakelijke en economische nieuwsbrieven", ar: "النشرات التجارية والاقتصادية" },
-              { en: "Selected reports and publications", nl: "Geselecteerde rapporten en publicaties", ar: "تقارير ومنشورات مختارة" },
-              { en: "Selected commercial opportunities", nl: "Geselecteerde handelskansen", ar: "فرص تجارية مختارة" },
-              { en: "Access to selected open events", nl: "Toegang tot geselecteerde open bijeenkomsten", ar: "حضور فعاليات عامة مختارة" },
-              { en: "Discounts on courses", nl: "Korting op cursussen", ar: "خصومات على الدورات" },
-              { en: "Discounts on selected events", nl: "Korting op geselecteerde evenementen", ar: "خصومات على فعاليات مختارة" },
-              { en: "Basic access to the sector clubs", nl: "Basistoegang tot de sectorclubs", ar: "وصول أساسي إلى الأندية القطاعية" },
-              { en: "General opportunity alerts", nl: "Algemene kansenmeldingen", ar: "تنبيهات عامة بالفرص" },
-            ],
           },
           {
-            name: "Professional",
-            tagline: {
-              en: "For companies that use DUKAAT actively to grow their business and find trade opportunities.",
-              nl: "Voor bedrijven die DUKAAT actief gebruiken om hun zaken uit te bouwen en handelskansen te vinden.",
-              ar: "للشركات التي تستخدم DUKAAT فعلياً لتطوير أعمالها والعثور على فرص تجارية.",
+            title: { en: "VAT information", nl: "Btw-gegevens", ar: "بيانات ضريبة القيمة المضافة" },
+            body: {
+              en: "The VAT or tax registration number and its status, checked against the public register wherever one is available.",
+              nl: "Het btw- of belastingnummer en de status ervan, gecontroleerd in het openbare register waar dat beschikbaar is.",
+              ar: "رقم التسجيل في ضريبة القيمة المضافة أو الرقم الضريبي، وحالته، مع التحقق منه في السجل العام حيثما يتوفر.",
             },
-            items: [
-              { en: "Everything in Member", nl: "Alles van Member", ar: "جميع مزايا Member" },
-              { en: "Enhanced visibility in the member directory", nl: "Grotere zichtbaarheid in het Ledenregister", ar: "ظهور أعلى في دليل الأعضاء" },
-              { en: "An advanced company profile", nl: "Een uitgebreid bedrijfsprofiel", ar: "ملف متقدّم للشركة" },
-              { en: "Product and service listings in DUKAAT Market", nl: "Product- en dienstvermeldingen in DUKAAT Market", ar: "عرض المنتجات والخدمات في سوق DUKAAT" },
-              { en: "Buyer requests, published in DUKAAT Market", nl: "Inkoopaanvragen, geplaatst in DUKAAT Market", ar: "نشر طلبات الشراء في سوق DUKAAT" },
-              { en: "Business requests, circulated in the network", nl: "Zakelijke aanvragen, uitgezet in het netwerk", ar: "طرح طلبات الأعمال داخل الشبكة" },
-              { en: "Supplier and distributor searches", nl: "Zoektochten naar leveranciers en distributeurs", ar: "البحث عن مورّدين وموزّعين" },
-              { en: "Wider access to commercial opportunities", nl: "Ruimere toegang tot handelskansen", ar: "وصول موسّع إلى الفرص التجارية" },
-              { en: "Priority places at events", nl: "Voorrang bij de toewijzing van plaatsen op evenementen", ar: "أولوية في حجز مقاعد الفعاليات" },
-              { en: "B2B matchmaking", nl: "B2B-koppelingen", ar: "المطابقة بين الشركات (B2B)" },
-              { en: "Business introductions", nl: "Zakelijke introducties", ar: "التعريفات التجارية" },
-              { en: "Wider access to DUKAAT Market", nl: "Ruimere toegang tot DUKAAT Market", ar: "وصول أوسع إلى سوق DUKAAT" },
-              { en: "Stocklot opportunities", nl: "Handelskansen in partijen", ar: "فرص دفعات المخزون" },
-              { en: "Larger discounts on trade missions", nl: "Hogere korting op handelsmissies", ar: "خصومات أعلى على البعثات التجارية" },
-              { en: "Eligibility for Member Spotlight", nl: "Kans op een plaats in Member Spotlight", ar: "إمكانية الظهور في Member Spotlight" },
-              { en: "Introductory advisory sessions, within an annual allowance", nl: "Inleidende adviesgesprekken, binnen een jaarlijks tegoed", ar: "جلسات استشارية أولية ضمن رصيد سنوي" },
-              { en: "Opportunity alerts tailored to your sector", nl: "Kansenmeldingen afgestemd op uw sector", ar: "تنبيهات بالفرص مخصّصة لقطاعك" },
-              { en: "Priority in supplier and buyer matching", nl: "Voorrang bij het koppelen van leveranciers en kopers", ar: "أولوية أعلى في مطابقة المورّدين والمشترين" },
-            ],
           },
           {
-            name: "Executive",
-            tagline: {
-              en: "The highest level, for business owners, investors and companies that want more access, discretion and support.",
-              nl: "Het hoogste niveau, voor ondernemers, investeerders en bedrijven die meer toegang, discretie en ondersteuning willen.",
-              ar: "المستوى الأعلى، لأصحاب الأعمال والمستثمرين والشركات التي تريد قدراً أكبر من الوصول والخصوصية والدعم.",
+            title: { en: "Website and trading activity", nl: "Website en handelsactiviteit", ar: "الموقع الإلكتروني والنشاط التجاري" },
+            body: {
+              en: "Whether the company actually trades: a working website, products or services that match its registration, and signs of current commercial activity.",
+              nl: "Of het bedrijf werkelijk handelt: een werkende website, producten of diensten die passen bij de inschrijving, en tekenen van actuele commerciële activiteit.",
+              ar: "هل تتاجر الشركة فعلاً: موقع إلكتروني يعمل، ومنتجات أو خدمات تتفق مع قيدها في السجل، وشواهد على نشاط تجاري قائم.",
             },
-            items: [
-              { en: "Everything in Professional", nl: "Alles van Professional", ar: "جميع مزايا Professional" },
-              { en: "A dedicated relationship contact", nl: "Een eigen relatiebeheerder", ar: "مسؤول علاقة مخصّص لك" },
-              { en: "The highest priority in matchmaking", nl: "De hoogste voorrang bij koppelingen", ar: "الأولوية القصوى في المطابقة بين الشركات" },
-              { en: "Access to Business Concierge", nl: "Toegang tot Business Concierge", ar: "الوصول إلى Business Concierge" },
-              { en: "Warm introductions, with a written brief to both sides", nl: "Persoonlijke introducties, met een schriftelijke briefing aan beide kanten", ar: "تعريفات مباشرة، بملخّص مكتوب للطرفين" },
-              { en: "Early access to selected opportunities", nl: "Vroege toegang tot geselecteerde kansen", ar: "وصول مبكر إلى فرص مختارة" },
-              { en: "Access to private opportunities", nl: "Toegang tot besloten kansen", ar: "الوصول إلى الفرص الخاصة" },
-              { en: "Invitations to Executive Dinners", nl: "Uitnodigingen voor Executive Dinners", ar: "دعوات إلى Executive Dinners" },
-              { en: "Access to DUKAAT Circle", nl: "Toegang tot DUKAAT Circle", ar: "الوصول إلى DUKAAT Circle" },
-              { en: "VIP access to events", nl: "VIP-toegang tot evenementen", ar: "دخول VIP إلى الفعاليات" },
-              { en: "Priority on trade missions", nl: "Voorrang bij handelsmissies", ar: "أولوية في البعثات التجارية" },
-              { en: "Premium visibility across the platform", nl: "Prominente zichtbaarheid op het platform", ar: "ظهور مميّز في أرجاء المنصة" },
-              { en: "A larger annual advisory allowance", nl: "Een ruimer jaarlijks adviestegoed", ar: "رصيد استشاري سنوي أكبر" },
-              { en: "Market entry support", nl: "Ondersteuning bij markttoetreding", ar: "دعم دخول الأسواق" },
-              { en: "Extended support in supplier sourcing", nl: "Uitgebreide hulp bij het vinden van leveranciers", ar: "مساعدة موسّعة في البحث عن مورّدين" },
-              { en: "Extended support in distributor searches", nl: "Uitgebreide hulp bij het zoeken naar distributeurs", ar: "مساعدة موسّعة في البحث عن موزّعين" },
-              { en: "Closed B2B sessions", nl: "Besloten B2B-sessies", ar: "جلسات B2B مغلقة" },
-              { en: "Priority in investor programmes", nl: "Voorrang in investeerdersprogramma’s", ar: "أولوية في برامج المستثمرين" },
-              { en: "Sponsorship opportunities", nl: "Sponsormogelijkheden", ar: "فرص الرعاية" },
-            ],
+          },
+          {
+            title: { en: "Contact verification", nl: "Verificatie van de contactpersoon", ar: "التحقق من جهة الاتصال" },
+            body: {
+              en: "That the person we deal with is who they say they are and holds the role they claim — confirmed through the company’s own channels.",
+              nl: "Dat onze contactpersoon is wie hij of zij zegt te zijn en de opgegeven functie bekleedt — bevestigd via de eigen kanalen van het bedrijf.",
+              ar: "أن هوية الشخص الذي نتعامل معه ومنصبه يطابقان ما يذكره — ونتأكد من ذلك عبر قنوات الشركة نفسها.",
+            },
+          },
+          {
+            title: { en: "Company address", nl: "Bedrijfsadres", ar: "عنوان الشركة" },
+            body: {
+              en: "A real business address that matches the registration: a place where the company works, not only a mailbox.",
+              nl: "Een werkelijk bedrijfsadres dat overeenkomt met de inschrijving: een plek waar het bedrijf werkt, niet alleen een postadres.",
+              ar: "عنوان عمل حقيقي يطابق القيد في السجل: مكانٌ تعمل فيه الشركة فعلاً، لا مجرد صندوق بريد.",
+            },
+          },
+          {
+            title: { en: "Export experience", nl: "Exportervaring", ar: "الخبرة في التصدير" },
+            body: {
+              en: "What the company has shipped before, and where: markets, product groups, and the documents it is used to handling.",
+              nl: "Wat het bedrijf eerder heeft verscheept, en waarheen: markten, productgroepen, en de documenten waarmee het vertrouwd is.",
+              ar: "ما صدّرته الشركة من قبل وإلى أين: الأسواق، وفئات المنتجات، والمستندات التي اعتادت التعامل معها.",
+            },
+          },
+          {
+            title: { en: "Certifications", nl: "Certificeringen", ar: "الشهادات" },
+            body: {
+              en: "The certificates a product or process relies on — quality, food safety, origin, halal where relevant — checked for scope and validity.",
+              nl: "De certificaten waarop een product of proces steunt — kwaliteit, voedselveiligheid, herkomst, halal waar van toepassing — gecontroleerd op reikwijdte en geldigheid.",
+              ar: "الشهادات التي يستند إليها المنتج أو عملية الإنتاج — في الجودة، وسلامة الغذاء، والمنشأ، والحلال حيث يلزم — مع التحقق من نطاقها وسريانها.",
+            },
+          },
+          {
+            title: { en: "References we can call", nl: "Referenties die wij kunnen bellen", ar: "مراجع نستطيع الاتصال بها" },
+            body: {
+              en: "Trading partners prepared to speak to us about the company — a customer, a supplier, a forwarder. We call them ourselves.",
+              nl: "Handelspartners die ons over het bedrijf te woord willen staan — een klant, een leverancier, een expediteur. Wij bellen hen zelf.",
+              ar: "شركاء تجاريون مستعدون للحديث معنا عن الشركة — عميل، أو مورّد، أو وكيل شحن. ونتصل بهم بأنفسنا.",
+            },
+          },
+          {
+            title: { en: "International sanctions lists", nl: "Internationale sanctielijsten", ar: "قوائم العقوبات الدولية" },
+            body: {
+              en: "The company, its directors and its ultimate owners, checked against international sanctions lists, including those of the European Union, the United Nations and the Netherlands.",
+              nl: "Het bedrijf, zijn bestuurders en zijn uiteindelijke eigenaren, getoetst aan internationale sanctielijsten, waaronder die van de Europese Unie, de Verenigde Naties en Nederland.",
+              ar: "مطابقة الشركة ومديريها ومالكيها الفعليين بقوائم العقوبات الدولية، ومنها قوائم الاتحاد الأوروبي والأمم المتحدة وهولندا.",
+            },
           },
         ],
-        note: {
+      },
+      {
+        kind: "steps",
+        label: { en: "Admission", nl: "Toelating", ar: "القبول" },
+        heading: { en: "From a name to a *membership number.*", nl: "Van een naam naar een *lidnummer.*", ar: "من اسمٍ إلى *رقم عضوية.*" },
+        intro: {
+          en: "Whether a company is nominated, invited or applies, admission follows one path, in four steps.",
+          nl: "Of een bedrijf nu wordt voorgedragen, uitgenodigd of zich aanmeldt: toelating volgt één weg, in vier stappen.",
+          ar: "سواء رُشّحت الشركة أو دُعيت أو تقدّمت بطلب انضمام، فللقبول طريقٌ واحد، في أربع خطوات.",
+        },
+        items: [
+          {
+            title: { en: "A nomination, an invitation or an application", nl: "Een voordracht, uitnodiging of aanmelding", ar: "ترشيحٌ أو دعوةٌ أو طلب انضمام" },
+            body: {
+              en: "A member puts your name forward, we invite you ourselves — sometimes after an intake has shown us what your company trades and needs — or you apply. An application is welcome, and it guarantees nothing.",
+              nl: "Een lid draagt u voor, wij nodigen u zelf uit — soms nadat een intake ons heeft laten zien wat uw bedrijf verhandelt en zoekt — of u meldt zich aan. Een aanmelding is welkom, en garandeert niets.",
+              ar: "يرشّحك أحد الأعضاء، أو ندعوك نحن — أحياناً بعد أن تكشف لنا استمارة التعارف عمّا تتاجر فيه شركتك وما تحتاج إليه — أو تتقدّم بطلب انضمام. والطلب مرحَّب به، لكنه لا يضمن شيئاً.",
+            },
+          },
+          {
+            title: { en: "Documents and a short call", nl: "Documenten en een kort gesprek", ar: "مستندات ومكالمة قصيرة" },
+            body: {
+              en: "We ask for the documents behind the checks above, and speak with you briefly about what you trade, where, and what you are looking for.",
+              nl: "Wij vragen om de stukken die voor de controles hierboven nodig zijn, en spreken u kort over wat u verhandelt, waar, en wat u zoekt.",
+              ar: "نطلب المستندات اللازمة للفحوص المذكورة أعلاه، ونتحدث معك باختصار عمّا تتاجر فيه، وأين، وعمّا تبحث عنه.",
+            },
+          },
+          {
+            title: { en: "A decision within 10 working days", nl: "Een besluit binnen 10 werkdagen", ar: "قرارٌ خلال 10 أيام عمل" },
+            body: {
+              en: "An acceptance or a decline, within that term. The decision rests on one question: whether your company fits the club.",
+              nl: "Een toelating of een afwijzing, binnen die termijn. Het besluit draait om één vraag: of uw bedrijf bij de club past.",
+              ar: "قبولٌ أو اعتذار، خلال تلك المهلة. ويقوم القرار على سؤالٍ واحد: هل تناسب شركتك النادي؟",
+            },
+          },
+          {
+            title: { en: "Card and membership number", nl: "Kaart en lidnummer", ar: "البطاقة ورقم العضوية" },
+            body: {
+              en: "On admission you receive your card and membership number.",
+              nl: "Bij toelating ontvangt u uw kaart en lidnummer.",
+              ar: "عند القبول تتسلّم بطاقتك ورقم عضويتك.",
+            },
+          },
+        ],
+      },
+      /* was a "specimen" (the verification record): its fields as a register, its note as a notice */
+      {
+        kind: "register",
+        label: { en: "The record", nl: "Het dossier", ar: "السجلّ" },
+        heading: { en: "Trust begins with *clear information.*", nl: "Vertrouwen begint bij *heldere informatie.*", ar: "الثقة تبدأ *بالمعلومات الواضحة.*" },
+        intro: {
+          en: "What we verify is recorded, field by field, in the company’s file at DUKAAT. The file stays with us; what a member receives is an introduction, prepared on the strength of it.",
+          nl: "Wat wij verifiëren, wordt veld voor veld vastgelegd in het dossier van het bedrijf bij DUKAAT. Het dossier blijft bij ons; wat een lid ontvangt, is een introductie die erop steunt.",
+          ar: "يُدوَّن ما نتحقق منه، بنداً بنداً، في ملف الشركة لدى DUKAAT. ويبقى الملف لدينا؛ أما ما يتلقاه العضو فتعريفٌ يُعَدّ استناداً إليه.",
+        },
+        items: [
+          {
+            title: { en: "Company registration checked", nl: "Inschrijving gecontroleerd", ar: "التحقق من السجل التجاري" },
+            body: { en: "Register, number, date of the check", nl: "Register, nummer, datum van controle", ar: "السجل، والرقم، وتاريخ التحقق" },
+          },
+          {
+            title: { en: "VAT information", nl: "Btw-gegevens", ar: "بيانات ضريبة القيمة المضافة" },
+            body: { en: "Number and status", nl: "Nummer en status", ar: "الرقم والحالة" },
+          },
+          {
+            title: { en: "Website", nl: "Website", ar: "الموقع الإلكتروني" },
+            body: { en: "Address, and whether it matches the registration", nl: "Adres, en of het overeenkomt met de inschrijving", ar: "الرابط، ومدى مطابقته للقيد في السجل" },
+          },
+          {
+            title: { en: "Contact verification", nl: "Verificatie contactpersoon", ar: "التحقق من جهة الاتصال" },
+            body: { en: "Name, role, how it was confirmed", nl: "Naam, functie, hoe bevestigd", ar: "الاسم، والمنصب، وطريقة التأكيد" },
+          },
+          {
+            title: { en: "Company address", nl: "Bedrijfsadres", ar: "عنوان الشركة" },
+            body: { en: "Registered and trading address", nl: "Vestigingsadres en bezoekadres", ar: "العنوان المسجّل وعنوان العمل" },
+          },
+          {
+            title: { en: "Export experience", nl: "Exportervaring", ar: "الخبرة في التصدير" },
+            body: { en: "Markets and product groups", nl: "Markten en productgroepen", ar: "الأسواق وفئات المنتجات" },
+          },
+          {
+            title: { en: "Certifications", nl: "Certificeringen", ar: "الشهادات" },
+            body: { en: "Certificate, issuer, valid until", nl: "Certificaat, uitgevende instantie, geldig tot", ar: "الشهادة، والجهة المانحة، وتاريخ انتهاء الصلاحية" },
+          },
+        ],
+      },
+      {
+        kind: "notice",
+        body: [
+          {
+            en: "This information does not constitute a guarantee, endorsement or warranty by DUKAAT regarding any company, product or transaction. It is provided to support more informed business decisions. Members remain fully responsible for their own due diligence.",
+            nl: "Deze informatie vormt geen garantie, aanbeveling of waarborg van DUKAAT ten aanzien van enig bedrijf, product of enige transactie. Zij wordt verstrekt om beter geïnformeerde zakelijke beslissingen te ondersteunen. Leden blijven volledig verantwoordelijk voor hun eigen due diligence.",
+            ar: "لا تُشكّل هذه المعلومات ضماناً أو تأييداً أو كفالةً من DUKAAT بشأن أي شركة أو منتج أو معاملة، وإنما تُقدَّم لدعم اتخاذ قراراتٍ تجارية أكثر وعياً. ويبقى الأعضاء مسؤولين مسؤوليةً كاملة عن إجراء الفحص النافي للجهالة بأنفسهم.",
+          },
+        ],
+      },
+      {
+        kind: "statement",
+        text: {
+          en: "Not everyone is admitted. That is precisely what makes membership worth having.",
+          nl: "Niet iedereen wordt toegelaten. Dat is precies wat het lidmaatschap waard maakt.",
+          ar: "لا يُقبل الجميع، وهذا تحديداً ما يمنح العضوية قيمتها.",
+        },
+      },
+      {
+        kind: "actions",
+        body: {
+          en: "If a member has put your name forward, tell us who.",
+          nl: "Heeft een lid u voorgedragen, laat ons dan weten wie.",
+          ar: "وإن رشّحك أحد الأعضاء، فأخبرنا مَن.",
+        },
+        links: [
+          { href: "membership/fees", label: { en: "How we charge", nl: "Hoe wij factureren", ar: "كيف نحتسب أتعابنا" } },
+          { href: "contact?subject=nominated#contact-form", label: { en: "I have been nominated", nl: "Ik ben voorgedragen", ar: "تمّت تزكيتي" } },
+        ],
+      },
+    ],
+  },
+
+  /* ── extra page the owner kept (30 Sep 2026): old "how-we-work/fees", verbatim from commit 2336702 ── */
+  "membership/fees": {
+    masthead: { variant: "plate", photo: "fees-hero" },
+    blocks: [
+      {
+        kind: "lead",
+        text: {
           en: "Membership is an annual subscription. Project services (market entry, supplier search, representation) are quoted per engagement in writing. No hidden commissions.",
           nl: "Het lidmaatschap is een jaarabonnement. Projectdiensten (markttoetreding, leverancierszoektocht, vertegenwoordiging) worden per opdracht schriftelijk geoffreerd. Geen verborgen commissies.",
           ar: "العضوية اشتراك سنوي. خدمات المشاريع (دخول الأسواق، البحث عن مورّدين، التمثيل) تُعرض أسعارها كتابةً لكل مهمة على حدة. لا عمولات خفية.",
         },
       },
+      /* was a "contrast": its two columns as two registers, its note as a notice */
       {
-        kind: "duo",
-        photos: ["lvl-breakfast", "lvl-tea"],
-        label: { en: "Executive level", nl: "Niveau Executive", ar: "مستوى Executive" },
-        heading: { en: "Closer to *the table.*", nl: "Dichter bij *de tafel.*", ar: "أقرب إلى *الطاولة.*" },
+        kind: "register",
+        label: { en: "Two kinds of work", nl: "Twee soorten werk", ar: "نوعان من العمل" },
+        heading: { en: "Included in the membership", nl: "Inbegrepen in het lidmaatschap", ar: "مشمولٌ بالعضوية" },
+        items: [
+          { title: { en: "Company profile and directory listing", nl: "Bedrijfsprofiel en vermelding in het Ledenregister", ar: "ملف الشركة وإدراجها في دليل الأعضاء" } },
+          { title: { en: "Opportunity newsletters and alerts", nl: "Nieuwsbrieven en kansenmeldingen", ar: "نشرات الفرص وتنبيهاتها" } },
+          { title: { en: "DUKAAT Market, as your level allows", nl: "DUKAAT Market, zoals uw niveau toestaat", ar: "سوق DUKAAT، بحسب ما يتيحه مستواك" } },
+          { title: { en: "Member events, and discounts on courses and missions", nl: "Ledenbijeenkomsten, en korting op cursussen en missies", ar: "فعاليات الأعضاء، وخصومات على الدورات والبعثات" } },
+        ],
+      },
+      {
+        kind: "register",
+        heading: { en: "Quoted per engagement, in writing", nl: "Per opdracht schriftelijk geoffreerd", ar: "بعرض سعر مكتوب لكل مهمة" },
+        items: [
+          { title: { en: "Market entry: structure, partner, first order", nl: "Markttoetreding: structuur, partner, eerste order", ar: "دخول الأسواق: الهيكل، والشريك، والطلبية الأولى" } },
+          { title: { en: "Representation on the other side", nl: "Vertegenwoordiging aan de andere kant", ar: "التمثيل على الضفة الأخرى" } },
+        ],
+      },
+      {
+        kind: "notice",
         body: [
           {
-            en: "Business Concierge starts from one clear request. Instead of spending hours searching, you tell us what you need — for example a distributor in the Gulf, a paper supplier in Europe or a private-label manufacturer — and the DUKAAT team determines the right path for it, within your membership level and the service it calls for.",
-            nl: "Business Concierge begint bij één helder verzoek. In plaats van zelf urenlang te zoeken, laat u ons weten wat u nodig hebt — bijvoorbeeld een distributeur in de Golf, een papierleverancier in Europa of een producent voor huismerkproductie — en het DUKAAT-team bepaalt de juiste route, binnen uw niveau en de dienst die het verzoek vraagt.",
-            ar: "يبدأ Business Concierge من طلبٍ واضح واحد. فبدلاً من أن تقضي ساعاتٍ في البحث، تخبرنا بما تحتاج إليه — موزّعاً في الخليج مثلاً، أو مورّداً للورق في أوروبا، أو مصنعاً ينتج بعلامة خاصة (Private Label) — ويحدّد فريق DUKAAT المسار المناسب له ضمن مستوى عضويتك والخدمة التي يتطلبها.",
-          },
-          {
-            en: "DUKAAT Circle gathers business owners and leaders in closed meetings around one subject or one kind of opportunity. Executive Dinners are small and by invitation only: what counts is who sits at the table, not how many.",
-            nl: "DUKAAT Circle brengt eigenaren en bestuurders samen in besloten bijeenkomsten rond één onderwerp of één soort kans. Executive Dinners zijn klein en uitsluitend op uitnodiging: het gaat om wie er aan tafel zit, niet om hoeveel.",
-            ar: "يجمع DUKAAT Circle أصحاب الشركات وقادة الأعمال في لقاءات مغلقة حول موضوع واحد أو نوع واحد من الفرص. أما Executive Dinners فلقاءات عشاء محدودة الحضور، بالدعوة فقط: العبرة بمن يجلس إلى الطاولة، لا بعدد الجالسين.",
-          },
-          {
-            en: "Closed B2B sessions bring together a small number of companies, selected in advance on what each one offers and needs, for private meetings that we prepare with both sides before anyone sits down.",
-            nl: "Besloten B2B-sessies brengen een klein aantal bedrijven samen, vooraf geselecteerd op wat elk van hen aanbiedt en zoekt, voor vertrouwelijke gesprekken die wij met beide kanten voorbereiden voordat iemand aan tafel gaat.",
-            ar: "وتجمع جلسات B2B المغلقة عدداً محدوداً من الشركات، تُختار مسبقاً بحسب ما تقدّمه كلٌّ منها وما تحتاج إليه، في لقاءات خاصة نُعِدّها مع الطرفين قبل أن يجلس أحدٌ إلى الطاولة.",
+            en: "What each level includes is set out on the page about the three levels. What an engagement costs is set out in its quote, before any work begins.",
+            nl: "Wat elk niveau omvat, staat op de pagina over de drie niveaus. Wat een opdracht kost, staat in de offerte, voordat er werk begint.",
+            ar: "ما يشمله كل مستوى مبيَّن في صفحة المستويات الثلاثة. وما تكلّفه أي مهمة مبيَّن في عرض سعرها، قبل أن يبدأ العمل.",
           },
         ],
-      },
-      {
-        kind: "prose",
-        label: { en: "Beside the levels", nl: "Naast de niveaus", ar: "إلى جانب المستويات" },
-        heading: { en: "Founding 100 is *a status,* not a level.", nl: "Founding 100 is *een status,* geen niveau.", ar: "Founding 100 *صفةٌ،* لا مستوى." },
-        body: [
-          {
-            en: "Founding 100 is the status DUKAAT gives, beside their level, to one hundred of its most influential member companies. It brings a permanent number from 001 to 100, the founding rate for as long as the membership lasts, a standing invitation to the annual Founding 100 Forum, and a voice when DUKAAT shapes new programmes, sector clubs and markets.",
-            nl: "Founding 100 is de status die DUKAAT naast hun niveau geeft aan honderd van zijn meest invloedrijke leden. Die omvat een vast nummer van 001 tot 100, het oprichterstarief zolang het lidmaatschap loopt, een vaste uitnodiging voor het jaarlijkse Founding 100 Forum, en een stem wanneer DUKAAT nieuwe programma’s, sectorclubs en markten vormgeeft.",
-            ar: "Founding 100 صفةٌ يمنحها DUKAAT، إلى جانب مستوى العضوية، لمئةٍ من أكثر الشركات الأعضاء تأثيراً. وتمنح صاحبها رقماً دائماً من 001 إلى 100، وسعر التأسيس ما دامت عضويته قائمة، ودعوةً دائمة إلى منتدى Founding 100 السنوي، وصوتاً مسموعاً حين يرسم DUKAAT برامجه وأنديته القطاعية وأسواقه الجديدة.",
-          },
-        ],
-      },
-      {
-        kind: "next",
-        heading: { en: "Numbers and terms, *in writing.*", nl: "Aantallen en termijnen, *op papier.*", ar: "أعدادٌ ومهل، *مكتوبة.*" },
-        links: [
-          { href: "membership/guarantees", label: { en: "Our commitments", nl: "Onze toezeggingen", ar: "التزاماتنا" } },
-          { href: "membership/founding-100", label: { en: "Founding 100", nl: "Founding 100", ar: "Founding 100" } },
-        ],
-      },
-    ],
-  },
-
-  "membership/guarantees": {
-    masthead: { variant: "portrait", photo: "gua-hero" },
-    blocks: [
-      {
-        kind: "lead",
-        text: {
-          en: "We put our commitments in writing. Not as a promise about the outcome of a deal — no one can honestly promise that — but as what DUKAAT itself does for you: how quickly we reply, and how many introductions and searches we make on your behalf.",
-          nl: "Wij zetten onze toezeggingen op papier. Niet als belofte over de uitkomst van een deal — dat kan niemand eerlijk beloven — maar als wat DUKAAT zelf voor u doet: hoe snel wij antwoorden, en hoeveel introducties en zoekopdrachten wij voor u verzorgen.",
-          ar: "نضع التزاماتنا كتابةً، لا بوصفها وعداً بنتيجة صفقة — فذلك ما لا يستطيع أحدٌ أن يعد به بصدق — بل بوصفها ما يقوم به DUKAAT نفسه من أجلك: سرعة ردّنا، وعدد التعريفات وعمليات البحث التي نجريها لحسابك.",
-        },
-      },
-      {
-        kind: "tiers",
-        label: { en: "Per level", nl: "Per niveau", ar: "بحسب المستوى" },
-        heading: { en: "What you can *hold us to.*", nl: "Waaraan u ons *kunt houden.*", ar: "ما يمكنك أن *تحاسبنا عليه.*" },
-        intro: {
-          en: "Each level has its own commitments, each one stated as a number, a term or a place — never as an intention. Each level also keeps the commitments of the level before it.",
-          nl: "Elk niveau heeft eigen toezeggingen, elk uitgedrukt in een aantal, een termijn of een plaats — nooit als voornemen. Elk niveau behoudt daarnaast de toezeggingen van het niveau ervoor.",
-          ar: "لكل مستوى التزاماته، وكلٌّ منها محدّدٌ بعددٍ أو مهلةٍ أو مقعد — لا بمجرّد نيّة. ويحتفظ كل مستوى كذلك بالتزامات المستوى الذي قبله.",
-        },
-        tiers: [
-          {
-            name: "Member",
-            tagline: {
-              en: "The baseline every member can hold us to.",
-              nl: "De basis waaraan elk lid ons kan houden.",
-              ar: "الحدّ الأدنى الذي يحق لكل عضو أن يحاسبنا عليه.",
-            },
-            items: [
-              { en: "A profile in the member directory", nl: "Een profiel in het Ledenregister", ar: "ملف في دليل الأعضاء" },
-              { en: "Newsletters, selected reports and opportunities", nl: "Nieuwsbrieven, geselecteerde rapporten en kansen", ar: "النشرات الإخبارية، وتقارير وفرص مختارة" },
-            ],
-            promise: [
-              {
-                en: "Your directory profile published within 10 working days of admission",
-                nl: "Uw profiel in het Ledenregister gepubliceerd binnen 10 werkdagen na toelating",
-                ar: "نشر ملفك في دليل الأعضاء خلال 10 أيام عمل من قبولك",
-              },
-              {
-                en: "A reply to any enquiry within 5 working days",
-                nl: "Antwoord op elke vraag binnen 5 werkdagen",
-                ar: "الردّ على أي استفسار خلال 5 أيام عمل",
-              },
-              {
-                en: "[48] opportunity newsletters per year",
-                nl: "[48] nieuwsbrieven met kansen per jaar",
-                ar: "نشرات بالفرص، بواقع [48] في السنة",
-              },
-            ],
-          },
-          {
-            name: "Professional",
-            tagline: {
-              en: "Introductions and searches, counted.",
-              nl: "Introducties en zoekopdrachten, geteld.",
-              ar: "تعريفات وعمليات بحث، بأعدادٍ محدّدة.",
-            },
-            items: [
-              { en: "Everything in Member", nl: "Alles van Member", ar: "جميع مزايا Member" },
-              { en: "Searches, buyer requests and business introductions", nl: "Zoektochten, inkoopaanvragen en zakelijke introducties", ar: "عمليات البحث، وطلبات الشراء، والتعريفات التجارية" },
-            ],
-            promise: [
-              {
-                en: "[2] qualified business introductions per year",
-                nl: "[2] gekwalificeerde zakelijke introducties per jaar",
-                ar: "تعريفات تجارية مؤهَّلة، بواقع [2] في السنة",
-              },
-              {
-                en: "[2] supplier or distributor searches, answered within [15] working days",
-                nl: "[2] zoektochten naar een leverancier of distributeur, beantwoord binnen [15] werkdagen",
-                ar: "عمليات بحث عن مورّد أو موزّع، عددها [2]، يُجاب عنها خلال [15] يوم عمل",
-              },
-              {
-                en: "A reply to any enquiry within 3 working days",
-                nl: "Antwoord op elke vraag binnen 3 werkdagen",
-                ar: "الردّ على أي استفسار خلال 3 أيام عمل",
-              },
-            ],
-          },
-          {
-            name: "Executive",
-            tagline: {
-              en: "Introductions with us on the call.",
-              nl: "Introducties met ons aan de lijn.",
-              ar: "تعريفات نحضر فيها المكالمة معك.",
-            },
-            items: [
-              { en: "Everything in Professional", nl: "Alles van Professional", ar: "جميع مزايا Professional" },
-              { en: "A dedicated relationship contact and Business Concierge", nl: "Een eigen relatiebeheerder en Business Concierge", ar: "مسؤول علاقة مخصّص وBusiness Concierge" },
-            ],
-            promise: [
-              {
-                en: "[6] qualified introductions per year, with us present on the first call",
-                nl: "[6] gekwalificeerde introducties per jaar, waarbij wij aanwezig zijn bij het eerste gesprek",
-                ar: "تعريفات مؤهَّلة، بواقع [6] في السنة، مع حضورنا المكالمة الأولى",
-              },
-              {
-                en: "A named contact, replying within 1 working day",
-                nl: "Een contactpersoon op naam, die antwoordt binnen 1 werkdag",
-                ar: "مسؤول اتصال محدّد بالاسم، يردّ خلال يوم عمل واحد",
-              },
-              {
-                en: "A guaranteed place on [one trade mission] per year",
-                nl: "Een gegarandeerde plaats op [één handelsmissie] per jaar",
-                ar: "مقعد مضمون في [بعثة تجارية واحدة] كل سنة",
-              },
-              {
-                en: "[6] advisory hours, from DUKAAT or its specialist network",
-                nl: "[6] adviesuren, van DUKAAT of uit ons netwerk van specialisten",
-                ar: "ساعات استشارية عددها [6]، من DUKAAT أو من شبكة المختصين لدينا",
-              },
-            ],
-          },
-        ],
-        note: {
-          en: "These commitments concern DUKAAT’s own service, never the outcome of a deal. We do not take custody of members’ funds, we do not act as a bank or payment provider, and we do not guarantee any transaction between members.",
-          nl: "Deze toezeggingen gaan over de dienstverlening van DUKAAT zelf, nooit over de uitkomst van een deal. Wij nemen geen gelden van leden in bewaring, wij treden niet op als bank of betaaldienstverlener, en wij garanderen geen enkele transactie tussen leden.",
-          ar: "تتعلق هذه الالتزامات بخدمة DUKAAT نفسها، لا بنتيجة أي صفقة. نحن لا نحتفظ بأموال الأعضاء، ولا نعمل كمصرف أو مزوّد خدمات دفع، ولا نضمن أي معاملة بين الأعضاء.",
-        },
-      },
-      {
-        kind: "statement",
-        text: {
-          en: "The effort to connect is always there. What two parties make of it is theirs.",
-          nl: "De inspanning om te verbinden is er altijd. Wat twee partijen ervan maken, is aan hen.",
-          ar: "الجهد في الربط حاضرٌ دائماً. أما ما يصنعه الطرفان منه فشأنهما.",
-        },
-        note: {
-          en: "Our commitments cover our own work — replying, searching, introducing — never the outcome.",
-          nl: "Onze toezeggingen gaan over ons eigen werk — antwoorden, zoeken, introduceren — nooit over de uitkomst.",
-          ar: "تتعلق التزاماتنا بعملنا نحن — الرد، والبحث، والتعريف — لا بالنتيجة أبداً.",
-        },
-      },
-      {
-        kind: "prose",
-        label: { en: "Why in writing", nl: "Waarom op papier", ar: "لماذا كتابةً" },
-        heading: { en: "Commitments, *not promises.*", nl: "Toezeggingen, *geen beloften.*", ar: "التزامات، *لا وعود.*" },
-        body: [
-          {
-            en: "A promise costs nothing to make. A commitment has a number and a term, and it is written where you can read it and hold us to it. That is the point.",
-            nl: "Een belofte kost niets. Een toezegging heeft een aantal en een termijn, en staat op papier waar u haar kunt nalezen en ons eraan kunt houden. Daar gaat het om.",
-            ar: "الوعد لا يكلّف صاحبه شيئاً. أما الالتزام فله عددٌ ومهلة، وهو مكتوب حيث يمكنك أن تقرأه وتحاسبنا عليه. وهذا بيت القصيد.",
-          },
-          {
-            en: "It also keeps us precise about what we can stand behind. We can commit to how fast we reply, how many introductions we make and how many searches we complete, and by when. A qualified introduction, for us, is one to a party we have checked and whose interest we have tested, with a written brief to both sides — never a phone number passed on. What two parties do after they meet is theirs to decide.",
-            nl: "Het dwingt ons ook tot precisie over wat wij kunnen waarmaken. Wij kunnen toezeggen hoe snel wij antwoorden, hoeveel introducties wij doen en hoeveel zoekopdrachten wij afronden, en binnen welke termijn. Een gekwalificeerde introductie is bij ons een introductie bij een partij die wij hebben gecontroleerd en van wie wij de interesse hebben getoetst, met een schriftelijke briefing aan beide kanten — nooit een doorgegeven telefoonnummer. Wat twee partijen daarna doen, beslissen zij zelf.",
-            ar: "ويُلزمنا ذلك أيضاً بالدقة فيما نستطيع الوفاء به. يمكننا أن نلتزم بسرعة ردّنا، وبعدد التعريفات التي نقدّمها وعمليات البحث التي ننجزها، وبموعد ذلك كله. والتعريف المؤهَّل عندنا تعريفٌ بطرفٍ تحقّقنا منه واختبرنا اهتمامه، مع ملخّصٍ مكتوب للطرفين — لا رقمُ هاتفٍ نمرّره. أما ما يفعله الطرفان بعد لقائهما، فقرارٌ يعود إليهما وحدهما.",
-          },
-        ],
-      },
-      {
-        kind: "next",
-        heading: { en: "Who these commitments *are for.*", nl: "Voor wie deze toezeggingen *gelden.*", ar: "لمن *هذه الالتزامات.*" },
-        links: [
-          { href: "membership/who-for", label: { en: "Who it is for — and who not", nl: "Voor wie — en voor wie niet", ar: "لمن العضوية — ولمن لا" } },
-          { href: "membership/levels", label: { en: "The three levels", nl: "De drie niveaus", ar: "المستويات الثلاثة" } },
-        ],
-      },
-    ],
-  },
-
-  "membership/who-for": {
-    masthead: { variant: "band", photo: "who-hero" },
-    blocks: [
-      {
-        kind: "lead",
-        text: {
-          en: "Membership does not depend on the size of your company. It depends on what you do: whether you genuinely trade between the Netherlands, Europe and the Arab world, and whether we can verify it.",
-          nl: "Lidmaatschap hangt niet af van de omvang van uw bedrijf. Het hangt af van wat u doet: of u werkelijk handelt tussen Nederland, Europa en de Arabische wereld, en of wij dat kunnen verifiëren.",
-          ar: "لا تتوقف العضوية على حجم شركتك، بل على ما تفعله: أن تتاجر فعلاً بين هولندا وأوروبا والعالم العربي، وأن نتمكّن من التحقق من ذلك.",
-        },
-      },
-      {
-        kind: "contrast",
-        label: { en: "Admission", nl: "Toelating", ar: "القبول" },
-        heading: { en: "Whom we *admit.*", nl: "Wie wij *toelaten.*", ar: "مَن *نقبل.*" },
-        a: {
-          title: { en: "DUKAAT is for you if", nl: "DUKAAT is voor u als", ar: "DUKAAT مناسبٌ لك إذا" },
-          items: [
-            {
-              en: "You own or lead a registered company, or you are a decision-maker within one.",
-              nl: "U eigenaar of bestuurder bent van een ingeschreven bedrijf, of daarbinnen beslissingen neemt.",
-              ar: "كنت تملك شركة مسجّلة أو تديرها، أو كنت صاحب قرار فيها.",
-            },
-            {
-              en: "You are actively buying, selling, manufacturing, distributing or investing across the Netherlands, Europe and the Arab world — or are seriously preparing to.",
-              nl: "U actief inkoopt, verkoopt, produceert, distribueert of investeert tussen Nederland, Europa en de Arabische wereld — of u daar serieus op voorbereidt.",
-              ar: "كنت تشتري أو تبيع أو تصنّع أو توزّع أو تستثمر فعلاً بين هولندا وأوروبا والعالم العربي — أو تستعد لذلك بجدية.",
-            },
-            {
-              en: "You can be verified: a commercial registration, a real trading history, and references we can call.",
-              nl: "U verifieerbaar bent: een inschrijving in het handelsregister, een werkelijke handelsgeschiedenis, en referenties die wij kunnen bellen.",
-              ar: "كان من الممكن التحقق منك: سجلٌّ تجاري، وتاريخٌ فعلي في التجارة، ومراجع يمكننا الاتصال بها.",
-            },
-          ],
-        },
-        b: {
-          title: { en: "DUKAAT is not for", nl: "DUKAAT is niet voor", ar: "DUKAAT ليس موجّهاً إلى" },
-          items: [
-            {
-              en: "Job seekers, or those looking for general networking.",
-              nl: "Werkzoekenden, of wie in het algemeen wil netwerken.",
-              ar: "الباحثين عن وظيفة، أو عن شبكة معارف عامة.",
-            },
-            {
-              en: "Intermediaries with no verifiable transactions.",
-              nl: "Tussenpersonen zonder aantoonbare transacties.",
-              ar: "الوسطاء الذين ليست لهم معاملات يمكن التحقق منها.",
-            },
-            {
-              en: "Anyone seeking a directory listing without intending to do business.",
-              nl: "Wie een vermelding in een register zoekt, zonder de bedoeling zaken te doen.",
-              ar: "مَن يريد مجرّد إدراجٍ في دليل، دون نيّةٍ للتعامل التجاري.",
-            },
-          ],
-        },
-        note: {
-          en: "Every nomination and every application is reviewed against these criteria.",
-          nl: "Elke voordracht en elke aanmelding wordt aan deze criteria getoetst.",
-          ar: "يُراجَع كل ترشيح وكل طلب انضمام وفق هذه المعايير.",
-        },
-      },
-      {
-        kind: "statement",
-        text: {
-          en: "We review every company before admission, whichever way it reaches us.",
-          nl: "Wij beoordelen elk bedrijf vóór toelating, langs welke weg het ook bij ons komt.",
-          ar: "نراجع كل شركة قبل قبولها، أيّاً كان الطريق الذي وصلت منه إلينا.",
-        },
-        note: {
-          en: "A nomination, an invitation or an application opens the conversation; the review decides.",
-          nl: "Een voordracht, uitnodiging of aanmelding opent het gesprek; de beoordeling beslist.",
-          ar: "الترشيح أو الدعوة أو طلب الانضمام يفتح باب الحديث؛ أما القرار فللمراجعة.",
-        },
       },
       {
         kind: "register",
         cols: 2,
-        label: { en: "Activity, not size", nl: "Activiteit, geen omvang", ar: "النشاط، لا الحجم" },
-        heading: { en: "The companies *we work with.*", nl: "De bedrijven *waarmee wij werken.*", ar: "الشركات *التي نعمل معها.*" },
-        intro: {
-          en: "Large or small, they share one thing: they make, move, sell or finance something between the two sides.",
-          nl: "Groot of klein, zij hebben één ding gemeen: zij maken, vervoeren, verkopen of financieren iets tussen beide kanten.",
-          ar: "كبيرةً كانت أو صغيرة، يجمعها أمر واحد: أنها تصنع شيئاً أو تنقله أو تبيعه أو تموّله بين الضفتين.",
-        },
+        label: { en: "Principles", nl: "Uitgangspunten", ar: "المبادئ" },
         items: [
           {
-            title: { en: "Manufacturers and producers", nl: "Fabrikanten en producenten", ar: "المصنّعون والمنتجون" },
+            title: { en: "An annual subscription", nl: "Een jaarabonnement", ar: "اشتراك سنوي" },
             body: {
-              en: "Factories and growers with the capacity to export, looking for buyers, distributors or private-label partners on the other side.",
-              nl: "Fabrieken en telers met exportcapaciteit, op zoek naar kopers, distributeurs of partners voor huismerkproductie aan de andere kant.",
-              ar: "مصانع ومزارع لديها قدرة على التصدير، تبحث عن مشترين أو موزّعين أو شركاء في التصنيع بعلامة خاصة (Private Label) على الضفة الأخرى.",
+              en: "Membership runs per year and is charged as one subscription. Your level determines what it includes; the membership agreement sets out the rate.",
+              nl: "Het lidmaatschap loopt per jaar en wordt als één abonnement gefactureerd. Uw niveau bepaalt wat het omvat; de lidmaatschapsovereenkomst legt het tarief vast.",
+              ar: "تسري العضوية سنةً بسنة، وتُحتسب اشتراكاً واحداً. ويحدّد مستواك ما تشمله، وتنصّ اتفاقية العضوية على السعر.",
             },
           },
           {
-            title: { en: "Traders and wholesalers", nl: "Handelaren en groothandels", ar: "التجار وتجار الجملة" },
+            title: { en: "Project work, quoted in advance", nl: "Projectwerk, vooraf geoffreerd", ar: "أعمال المشاريع، بعرضٍ مسبق" },
             body: {
-              en: "Companies that buy and sell in volume and need verified sources, new buyers, or a quick outlet for surplus stock.",
-              nl: "Bedrijven die in volume inkopen en verkopen, en geverifieerde bronnen, nieuwe kopers of een snelle afzet voor overtollige voorraad nodig hebben.",
-              ar: "شركات تشتري وتبيع بكميات كبيرة، وتحتاج إلى مصادر موثّقة، أو مشترين جدد، أو منفذ سريع لتصريف فائض المخزون.",
+              en: "Market entry, searches beyond your level and representation are quoted per engagement, in writing, before any work begins. Nothing is invoiced that was not quoted.",
+              nl: "Markttoetreding, zoekopdrachten buiten uw niveau en vertegenwoordiging worden per opdracht schriftelijk geoffreerd, voordat er werk begint. Er wordt niets gefactureerd dat niet is geoffreerd.",
+              ar: "تُعرض أسعار دخول الأسواق، وعمليات البحث التي تتجاوز مستواك، والتمثيل، كتابةً لكل مهمة على حدة، قبل بدء أي عمل. ولا نُصدر فاتورةً بشيء لم يَرِد في العرض.",
             },
           },
           {
-            title: { en: "Importers and exporters", nl: "Importeurs en exporteurs", ar: "المستوردون والمصدّرون" },
+            title: { en: "No hidden commissions", nl: "Geen verborgen commissies", ar: "لا عمولات خفية" },
             body: {
-              en: "Companies moving goods between Europe and the Arab world, for whom documents, customs and payment terms decide whether a shipment works.",
-              nl: "Bedrijven die goederen verplaatsen tussen Europa en de Arabische wereld, en voor wie documenten, douane en betalingscondities bepalen of een zending slaagt.",
-              ar: "شركات تنقل البضائع بين أوروبا والعالم العربي، ويتوقف نجاح كل شحنة لديها على المستندات والجمارك وشروط الدفع.",
-            },
-          },
-          {
-            title: { en: "Distributors and agents", nl: "Distributeurs en agenten", ar: "الموزّعون والوكلاء" },
-            body: {
-              en: "Companies that carry brands into their market and look for products worth representing, with the principal verified before they commit.",
-              nl: "Bedrijven die merken in hun markt brengen en producten zoeken die het vertegenwoordigen waard zijn, met de principaal geverifieerd voordat zij zich binden.",
-              ar: "شركات تُدخل العلامات التجارية إلى أسواقها، وتبحث عن منتجات تستحق أن تمثّلها، مع التحقق من صاحب العلامة قبل أي التزام.",
-            },
-          },
-          {
-            title: { en: "Investors and project owners", nl: "Investeerders en projecteigenaren", ar: "المستثمرون وأصحاب المشاريع" },
-            body: {
-              en: "Those with capital looking for real companies and projects, and project owners looking for capital. DUKAAT does not provide investment advice, does not arrange or broker investments, and does not offer securities. Opportunities are presented for information only. Independent legal, financial and technical due diligence remains essential before any investment decision.",
-              nl: "Wie kapitaal heeft en echte bedrijven en projecten zoekt, en projecteigenaren die kapitaal zoeken. DUKAAT geeft geen beleggingsadvies, bemiddelt niet bij investeringen en biedt geen effecten aan. Kansen worden uitsluitend ter informatie gepresenteerd. Onafhankelijk juridisch, financieel en technisch onderzoek blijft essentieel vóór elke investeringsbeslissing.",
-              ar: "مَن يملكون رأس المال ويبحثون عن شركات ومشاريع حقيقية، وأصحاب مشاريع يبحثون عن رأس المال. لا يقدّم DUKAAT استشارات استثمارية، ولا يرتّب الاستثمارات أو يتوسط فيها، ولا يعرض أوراقاً مالية. تُعرض الفرص للاطلاع فقط. ويبقى الفحص النافي للجهالة القانوني والمالي والفني المستقل ضرورياً قبل أي قرار استثماري.",
-            },
-          },
-          {
-            title: { en: "Professional service providers", nl: "Professionele dienstverleners", ar: "مقدّمو الخدمات المهنية" },
-            body: {
-              en: "Lawyers, tax advisers, accountants, logistics firms and other specialists who serve cross-border trade and work alongside members.",
-              nl: "Advocaten, fiscalisten, accountants, logistieke bedrijven en andere specialisten die grensoverschrijdende handel bedienen en naast leden werken.",
-              ar: "محامون ومستشارون ضريبيون ومحاسبون وشركات لوجستية وغيرهم من المختصين الذين يخدمون التجارة عبر الحدود ويعملون إلى جانب الأعضاء.",
+              en: "We take no undisclosed share of any deal between members, from either side. Whatever we charge is agreed in advance and in writing.",
+              nl: "Wij nemen geen verzwegen aandeel in een deal tussen leden, van geen van beide kanten. Wat wij in rekening brengen, wordt vooraf en schriftelijk afgesproken.",
+              ar: "لا نتقاضى أي حصة غير معلنة من أي صفقة بين الأعضاء، لا من هذا الطرف ولا من ذاك. وكل ما نتقاضاه يُتفق عليه مسبقاً وكتابةً.",
             },
           },
         ],
       },
       {
-        kind: "next",
-        heading: { en: "What we check *before admission.*", nl: "Wat wij controleren *vóór toelating.*", ar: "ما نتحقق منه *قبل القبول.*" },
+        kind: "prose",
+        label: { en: "Prices", nl: "Prijzen", ar: "الأسعار" },
+        heading: { en: "Why there are no prices *on this site.*", nl: "Waarom er geen prijzen *op deze site staan.*", ar: "سبب غياب الأسعار *عن هذا الموقع.*" },
+        body: [
+          {
+            en: "The right level follows from what a company needs, not from a price list. A manufacturer looking for one distributor in the Gulf needs something different from a trading house sourcing in several markets at once, and each deserves a straight answer about which level fits.",
+            nl: "Het juiste niveau volgt uit wat een bedrijf nodig heeft, niet uit een prijslijst. Een fabrikant die één distributeur in de Golf zoekt, heeft iets anders nodig dan een handelshuis dat in meerdere markten tegelijk inkoopt, en beide verdienen een eerlijk antwoord op de vraag welk niveau past.",
+            ar: "المستوى المناسب يتحدد بحاجة الشركة، لا بقائمة أسعار. فالمصنع الذي يبحث عن موزّعٍ واحد في الخليج يحتاج إلى غير ما تحتاجه شركة تجارية تشتري من عدة أسواق في آنٍ واحد، وكلاهما يستحق جواباً صريحاً عن المستوى الذي يناسبه.",
+          },
+          {
+            en: "Rates are therefore discussed with you directly, once we know what you trade and where, and set out in the membership agreement before anything is due. Project work is quoted separately, in writing. Nothing is charged that has not first been agreed on paper.",
+            nl: "Tarieven bespreken wij daarom rechtstreeks met u, zodra wij weten wat u verhandelt en waar, en zij worden vastgelegd in de lidmaatschapsovereenkomst voordat er iets verschuldigd is. Projectwerk wordt apart en schriftelijk geoffreerd. Er wordt niets in rekening gebracht dat niet eerst op papier is afgesproken.",
+            ar: "لذلك نناقش الأسعار معك مباشرةً، بعد أن نعرف ما تتاجر فيه وأين، ثم تُثبَّت في اتفاقية العضوية قبل أن يستحقّ أي مبلغ. وتُعرض أسعار أعمال المشاريع كتابةً وعلى حدة. ولا نتقاضى شيئاً لم يُتفق عليه كتابةً أولاً.",
+          },
+        ],
+      },
+      {
+        kind: "actions",
+        heading: { en: "The levels behind *the subscription.*", nl: "De niveaus achter *het abonnement.*", ar: "المستويات التي *يغطيها الاشتراك.*" },
         links: [
-          { href: "how-we-work/verification", label: { en: "Verification & admission", nl: "Verificatie & toelating", ar: "التحقق والقبول" } },
-          { href: "contact?intent=nominated#intake", label: { en: "I have been nominated", nl: "Ik ben voorgedragen", ar: "تمّت تزكيتي" } },
-          { href: "contact?intent=apply#intake", label: { en: "Apply for membership", nl: "Aanmelden als lid", ar: "التقدّم بطلب عضوية" } },
+          { href: "membership", label: { en: "The three levels", nl: "De drie niveaus", ar: "المستويات الثلاثة" } },
+          { href: "services/boundaries", label: { en: "What we do not do", nl: "Wat wij niet doen", ar: "ما لا نفعله" } },
         ],
       },
     ],
   },
 
-  "membership/founding-100": {
-    masthead: { variant: "portrait", photo: "f100-hero" },
+  /* ── extra page the owner kept (30 Sep 2026): old "network/ambassadors", verbatim from commit 2336702 ── */
+  "membership/ambassadors": {
+    masthead: { variant: "band", photo: "amb-hero" },
     blocks: [
       {
         kind: "lead",
         text: {
-          en: "Founding 100 is the status DUKAAT gives to one hundred of its most influential member companies. It sits beside the three levels, it is never held by more than one hundred, and each founding number belongs to one company alone.",
-          nl: "Founding 100 is de status die DUKAAT geeft aan honderd van zijn meest invloedrijke leden. Zij staat naast de drie niveaus, wordt nooit door meer dan honderd bedrijven gedragen, en elk oprichtersnummer hoort bij één bedrijf alleen.",
-          ar: "Founding 100 صفةٌ يمنحها DUKAAT لمئةٍ من أكثر الشركات الأعضاء تأثيراً. وتقوم إلى جانب المستويات الثلاثة، ولا يحملها أكثر من مئة أبداً، ولكل رقم تأسيسي شركةٌ واحدة لا تشاركها فيه أخرى.",
+          en: "DUKAAT works with ambassadors in various markets and cities. An ambassador is an established business figure in their own market — someone who knows its people, its customs and its doors.",
+          nl: "DUKAAT werkt met ambassadeurs in verschillende markten en steden. Een ambassadeur is een gevestigde ondernemer in de eigen markt — iemand die de mensen, de gebruiken en de deuren daar kent.",
+          ar: "يعمل DUKAAT مع سفراء في أسواق ومدن مختلفة. والسفير شخصيةُ أعمالٍ راسخة في سوقها، تعرف أهلها وأعرافها وأبوابها.",
         },
       },
       {
-        kind: "facts",
-        label: { en: "The status", nl: "De status", ar: "الصفة" },
-        heading: { en: "What a Founding 100 member *holds.*", nl: "Wat een Founding 100-lid *toekomt.*", ar: "ما يحمله *عضو Founding 100.*" },
+        kind: "register",
+        cols: 1,
+        numbered: true,
+        label: { en: "The role", nl: "De rol", ar: "الدور" },
+        heading: { en: "What an ambassador *does.*", nl: "Wat een ambassadeur *doet.*", ar: "ما يقوم به *السفير.*" },
         items: [
           {
-            term: { en: "Number", nl: "Nummer", ar: "الرقم" },
-            value: { en: "Permanent, from 001 to 100, never reissued", nl: "Vast, van 001 tot 100, nooit opnieuw uitgegeven", ar: "دائم، من 001 إلى 100، لا يُعاد إصداره أبداً" },
-          },
-          {
-            term: { en: "Rate", nl: "Tarief", ar: "السعر" },
-            value: { en: "The founding rate, for as long as you remain a member", nl: "Het oprichterstarief, zolang u lid blijft", ar: "سعر التأسيس، ما دمت عضواً" },
-          },
-          {
-            term: { en: "Card", nl: "Kaart", ar: "البطاقة" },
-            value: { en: "A Founding 100 card", nl: "Een Founding 100-kaart", ar: "بطاقة Founding 100" },
-          },
-          {
-            term: { en: "Recognition", nl: "Erkenning", ar: "التميّز" },
-            value: { en: "The Founding 100 mark on the member profile", nl: "Het Founding 100-kenmerk op het ledenprofiel", ar: "علامة Founding 100 على ملف العضو" },
-          },
-          {
-            term: { en: "A voice", nl: "Een stem", ar: "صوتٌ مسموع" },
-            value: {
-              en: "Consulted when DUKAAT shapes new programmes, sector clubs and markets",
-              nl: "Geraadpleegd wanneer DUKAAT nieuwe programma’s, sectorclubs en markten vormgeeft",
-              ar: "يُستشار حين يرسم DUKAAT برامجه وأنديته القطاعية وأسواقه الجديدة",
+            title: { en: "Opens doors", nl: "Opent deuren", ar: "يفتح الأبواب" },
+            body: {
+              en: "Introductions to the companies, decision-makers and institutions of their market, made personally and with the standing of someone who is known there.",
+              nl: "Introducties bij de bedrijven, beslissers en instellingen in zijn markt, persoonlijk verzorgd en met het gezag van iemand die daar bekend is.",
+              ar: "تعريفاتٌ بالشركات وأصحاب القرار والمؤسسات في سوقه، يُجريها بنفسه وبمكانة من يعرفه الناس هناك.",
             },
           },
           {
-            term: { en: "Founding 100 Forum", nl: "Founding 100 Forum", ar: "منتدى Founding 100" },
-            value: {
-              en: "A standing invitation to the yearly meeting of the hundred with the founders",
-              nl: "Een vaste uitnodiging voor de jaarlijkse bijeenkomst van de honderd met de oprichters",
-              ar: "دعوة دائمة إلى اللقاء السنوي للمئة مع المؤسسَين",
+            title: { en: "Hosts visiting members", nl: "Ontvangt bezoekende leden", ar: "يستقبل الأعضاء الزائرين" },
+            body: {
+              en: "When DUKAAT members travel to the ambassador’s country, the ambassador receives them and helps them understand how business is done there, before the first meeting.",
+              nl: "Wanneer leden van DUKAAT naar het land van de ambassadeur reizen, ontvangt de ambassadeur hen en helpt hen te begrijpen hoe daar zaken worden gedaan, nog vóór het eerste gesprek.",
+              ar: "حين يسافر أعضاء DUKAAT إلى بلده، يستقبلهم ويعينهم على فهم كيف تُدار الأعمال هناك، قبل اللقاء الأول.",
+            },
+          },
+          {
+            title: { en: "Brings local opportunities in", nl: "Brengt lokale kansen binnen", ar: "يأتي بالفرص المحلية إلى الشبكة" },
+            body: {
+              en: "Needs, suppliers, projects and openings in their market reach DUKAAT through the ambassador — and are verified like any other before they reach a member.",
+              nl: "Vraag, aanbod en projecten uit zijn markt bereiken DUKAAT via de ambassadeur — en worden geverifieerd zoals al het andere, voordat ze een lid bereiken.",
+              ar: "تصل إلى DUKAAT عن طريق السفير احتياجاتُ سوقه ومورّدوها ومشاريعها وفرصها — ويُتحقَّق منها كما يُتحقَّق من غيرها قبل أن تُعرض على أي عضو.",
+            },
+          },
+          {
+            title: { en: "Represents DUKAAT in that market", nl: "Vertegenwoordigt DUKAAT in die markt", ar: "يمثّل DUKAAT في تلك السوق" },
+            body: {
+              en: "A named position: the ambassador represents DUKAAT in their market or city, within a role agreed in writing.",
+              nl: "Een benoemde functie: de ambassadeur vertegenwoordigt DUKAAT in zijn markt of stad, binnen een rol die schriftelijk is vastgelegd.",
+              ar: "تعيينٌ رسمي بالاسم: يمثّل السفير DUKAAT في سوقه أو مدينته، ضمن دورٍ محدّدٍ كتابةً.",
             },
           },
         ],
-      },
-      {
-        kind: "statement",
-        text: {
-          en: "Member No. 017 of the Founding 100.",
-          nl: "Lid nr. 017 van de Founding 100.",
-          ar: "العضو رقم 017 في Founding 100.",
-        },
-        note: {
-          en: "An example of how a Founding 100 member is introduced. The number stays with the company for as long as its membership lasts.",
-          nl: "Een voorbeeld van hoe een Founding 100-lid wordt voorgesteld. Het nummer blijft bij het bedrijf zolang het lidmaatschap duurt.",
-          ar: "مثالٌ على الطريقة التي يُقدَّم بها عضو Founding 100. ويبقى الرقم للشركة ما دامت عضويتها قائمة.",
-        },
       },
       {
         kind: "prose",
-        label: { en: "Why it matters", nl: "Waarom het telt", ar: "لماذا يهمّ ذلك" },
-        heading: { en: "A number that is *never reissued.*", nl: "Een nummer dat *niemand anders krijgt.*", ar: "رقمٌ *لا يُعاد إصداره أبداً.*" },
+        photo: "amb-facade",
+        size: "tall",
+        side: "end",
+        label: { en: "The choice", nl: "De keuze", ar: "الاختيار" },
+        heading: { en: "By invitation, *on reputation.*", nl: "Op uitnodiging, *op reputatie.*", ar: "بالدعوة، *وعلى أساس السمعة.*" },
         body: [
           {
-            en: "A founding number marks the companies that give DUKAAT its weight: leaders in their trade and their market, whose presence makes an introduction count on both sides. It is not bought, and it does not follow the level of membership. That is why it is never given to anyone else: if a Founding 100 membership ends, its number is retired with it.",
-            nl: "Een oprichtersnummer markeert de bedrijven die DUKAAT zijn gewicht geven: toonaangevend in hun vak en hun markt, met een aanwezigheid die een introductie aan beide kanten laat tellen. Het is niet te koop, en het volgt niet het niveau van het lidmaatschap. Daarom krijgt niemand anders het: eindigt een Founding 100-lidmaatschap, dan wordt het nummer ingetrokken.",
-            ar: "يميّز الرقم التأسيسي الشركات التي تمنح DUKAAT ثقله: شركاتٌ رائدة في قطاعها وسوقها، يمنح حضورها التعريفَ وزناً لدى الطرفين. لا يُشترى، ولا يتبع مستوى العضوية. ولهذا لا يُمنح لأحدٍ سواها: إن انتهت عضويةٌ في Founding 100، طُوي رقمها معها.",
+            en: "The position is not advertised, and there is no form for it. DUKAAT invites its ambassadors in the same way that members are admitted: on reputation, after verifying the company, its activity and its references.",
+            nl: "De functie wordt niet uitgeschreven, en er is geen formulier voor. DUKAAT nodigt zijn ambassadeurs uit op dezelfde manier waarop leden worden toegelaten: op reputatie, na verificatie van het bedrijf, de activiteit en de referenties.",
+            ar: "لا يُعلَن عن هذا المنصب، وليست له استمارة. يدعو DUKAAT سفراءه بالطريقة نفسها التي يُقبل بها الأعضاء: على أساس السمعة، وبعد التحقق من الشركة ونشاطها ومراجعها.",
           },
           {
-            en: "Founding 100 members are consulted when DUKAAT shapes new programmes, sector clubs and markets, and once a year they meet with the founders at the Founding 100 Forum. It is how a club like this grows well: guided by the companies that know its standard from the inside.",
-            nl: "Founding 100-leden worden geraadpleegd wanneer DUKAAT nieuwe programma’s, sectorclubs en markten vormgeeft, en eens per jaar ontmoeten zij de oprichters op het Founding 100 Forum. Zo groeit een club als deze op de juiste manier: geleid door de bedrijven die haar maatstaf van binnenuit kennen.",
-            ar: "يُستشار أعضاء Founding 100 حين يرسم DUKAAT برامجه وأنديته القطاعية وأسواقه الجديدة، ويلتقون المؤسسَين مرةً كل عام في منتدى Founding 100. وهكذا ينمو نادٍ كهذا نموّاً سليماً: بتوجيهٍ من الشركات التي تعرف معياره من الداخل.",
+            en: "What we look for is standing, not size: a business person with a real trading life in their own market, trusted there, and at ease on both sides — in the Netherlands and Europe as well as in the Arab world.",
+            nl: "Wij zoeken aanzien, geen omvang: een ondernemer die in zijn eigen markt werkelijk handel drijft, daar vertrouwen geniet en aan beide kanten thuis is — in Nederland en Europa én in de Arabische wereld.",
+            ar: "ما نبحث عنه هو المكانة لا الحجم: صاحبُ أعمالٍ يمارس التجارة فعلاً في سوقه، ويحظى فيها بالثقة، ويألف العمل على الضفتين — في هولندا وأوروبا كما في العالم العربي.",
+          },
+          {
+            en: "The choice is made with care, and the market or city, the scope of the role and its terms are agreed in writing.",
+            nl: "De keuze wordt zorgvuldig gemaakt, en de markt of stad, de reikwijdte van de rol en de voorwaarden worden schriftelijk vastgelegd.",
+            ar: "ويجري الاختيار بعناية، وتُحدَّد كتابةً السوقُ أو المدينة، ونطاقُ الدور، وشروطُه.",
           },
         ],
       },
       {
-        kind: "next",
-        heading: {
-          en: "Every founding number begins *with a name.*",
-          nl: "Elk oprichtersnummer begint *bij een naam.*",
-          ar: "كل رقمٍ تأسيسي يبدأ *باسم.*",
-        },
-        body: {
-          en: "Founding 100 is by invitation: DUKAAT invites the companies it counts among the most influential in their trade and market. Like every member, they are admitted after review.",
-          nl: "Founding 100 is op uitnodiging: DUKAAT nodigt de bedrijven uit die het rekent tot de meest invloedrijke in hun vak en markt. Zoals elk lid worden zij na beoordeling toegelaten.",
-          ar: "صفة Founding 100 بالدعوة: يدعو DUKAAT الشركات التي يعدّها من الأكثر تأثيراً في قطاعها وسوقها. وتُقبل، كسائر الأعضاء، بعد المراجعة.",
-        },
+        kind: "actions",
+        heading: { en: "Into the market, *in person.*", nl: "De markt in, *persoonlijk.*", ar: "إلى السوق، *حضورياً.*" },
         links: [
-          { href: "membership/levels", label: { en: "The three levels", nl: "De drie niveaus", ar: "المستويات الثلاثة" } },
-          { href: "network/partners", label: { en: "The Golden Ten", nl: "De Golden Ten", ar: "Golden Ten" } },
+          { href: "events/missions", label: { en: "Trade missions", nl: "Handelsmissies", ar: "البعثات التجارية" } },
+          { href: "services/advisory", label: { en: "Market entry", nl: "Markttoetreding", ar: "دخول الأسواق" } },
+          { href: "services/representation", label: { en: "Representation", nl: "Vertegenwoordiging", ar: "التمثيل" } },
         ],
       },
     ],

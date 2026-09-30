@@ -4,8 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import type { Dict, Locale } from "@/content/types";
+import { homeKnow, homeNetwork, hrefOf } from "@/lib/site";
 import { Tulip } from "./Tulip";
-import { Rich } from "./Rich";
 
 /* eslint-disable @next/next/no-img-element -- brand SVGs are served as-is */
 
@@ -14,23 +14,23 @@ type Props = {
   title: string;
   descriptor: string;
   hero: Dict["hero"];
-  routes: Dict["routes"];
-  tagline: string;
-  taglineEcho: string;
+  /** extras the owner kept: "Anno 2018", "By nomination" and the nomination key under the tulip */
+  extra: Dict["extra"];
 };
 
-const isArabic = (s: string) => /[؀-ۿ]/.test(s);
+/** the photograph that opens beside each line on hover: the masthead photo of the page it leads to */
+const PHOTOS = ["about-room", "values-court", "why-hero", "values-value", "trade-samples", "aca-hero", "cal-hero", "adv-hero", "market-hero", "inv-hero", "membership-hero"];
 
 type Anchor = { x: number; y: number; side: 1 | -1 };
 
 /**
- * The hero is the logo, taken apart and used as architecture:
- * the A-bar becomes a line across the whole screen, the wordmark opens out of that line,
- * the tulip stands above it as the centre, and every route is a gold thread into the tulip
- * that runs down its stem to the bar. A pulse travels route → tulip → stem → bar, and the
- * bar glints outward in both directions: value crossing the border.
+ * The hero is the logo, taken apart and used as architecture, with the source's homepage around it (1.2–1.4):
+ * the A-bar becomes a line across the whole screen, the wordmark opens out of that line, the tulip stands above it
+ * as the centre. On one side "Get to know DUKAAT" (1.3), on the other "Discover the DUKAAT network" (1.4); every line
+ * is a gold thread into the tulip that runs down its stem to the bar. A pulse travels line → tulip → stem → bar, and
+ * the bar glints outward in both directions: value crossing the border.
  */
-export function HeroStage({ locale, title, descriptor, hero, routes, tagline, taglineEcho }: Props) {
+export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
   const root = useRef<HTMLElement>(null);
   const crest = useRef<HTMLDivElement>(null);
   const key = useRef<HTMLAnchorElement>(null);
@@ -52,17 +52,17 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
   const [stem, setStem] = useState("");
   const [active, setActive] = useState<number | null>(null);
   const [anchors, setAnchors] = useState<(Anchor | null)[]>([]);
-  const [tab, setTab] = useState<"a" | "b">("a"); // phones: one group of routes at a time
+  const [tab, setTab] = useState<"a" | "b">("a"); // phones: one side at a time
 
-  const href = (intent: string) => `/${locale}/contact?intent=${intent}#intake`;
-  const trade = routes.items.slice(0, 4);
-  const capital = routes.items.slice(4, 7);
-  const nominated = routes.items[7];
+  const rowsTotal = homeKnow.length + homeNetwork.length;
+  // the line below the title (1.2) rides the two ends of the gold bar: "Relationships – Knowledge" | "Trade – Investment"
+  const pillars = hero.pillars.split(/\s+[–-]\s+/);
+  const half = Math.ceil(pillars.length / 2);
 
   /* ---------- geometry: threads from each route into the tulip base, stem down to the bar ---------- */
   const measure = useCallback(() => {
-    const r = root.current, c = crest.current, k = key.current, b = band.current;
-    if (!r || !c || !k || !b) return;
+    const r = root.current, c = crest.current, b = band.current;
+    if (!r || !c || !b) return;
     const R = r.getBoundingClientRect();
     setBox({ w: R.width, h: R.height });
     r.style.setProperty("--bw", `${R.width}px`);
@@ -87,8 +87,6 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
       const fromLeft = E.left + E.width / 2 < C.left + C.width / 2;
       return { x: (fromLeft ? E.right + 12 : E.left - 12) - R.left, y: label.top + label.height / 2 - R.top, side: fromLeft ? 1 : -1 };
     });
-    const K0 = k.getBoundingClientRect();
-    A[7] = { x: K0.right + 14 - R.left, y: K0.top + K0.height / 2 - R.top, side: 1 };
     setAnchors(A);
     setThreads(
       rows.current.map((el) => {
@@ -106,14 +104,16 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
         return `M${ax.toFixed(1)},${ay.toFixed(1)} C${c1x.toFixed(1)},${ay.toFixed(1)} ${c2x.toFixed(1)},${c2y.toFixed(1)} ${tx.toFixed(1)},${(ty + 4).toFixed(1)}`;
       }),
     );
-    const K = k.getBoundingClientRect();
     const B = b.getBoundingClientRect();
     const P = cap.current?.getBoundingClientRect();
     const lineTop = B.top + B.height - B.height * 0.0 - (b.querySelector(".wm")?.getBoundingClientRect().height ?? 0) * 0.426 - R.top;
     const seg = (y1: number, y2: number) => (y2 - y1 > 4 ? `M${tx},${y1} L${tx},${y2} ` : "");
-    const capTop = P ? P.top - R.top - 6 : K.top - R.top - 6;
-    const capBot = P ? P.bottom - R.top + 6 : K.top - R.top - 6;
-    setStem((seg(ty + 4, capTop) + seg(capBot, K.top - R.top - 6) + seg(K.bottom - R.top + 6, lineTop)).trim());
+    const capTop = P ? P.top - R.top - 6 : lineTop;
+    const capBot = P ? P.bottom - R.top + 6 : lineTop;
+    // the stem passes behind the nomination key on its way down to the bar
+    const K = key.current?.getBoundingClientRect();
+    const below = K ? seg(capBot, K.top - R.top - 6) + seg(K.bottom - R.top + 6, lineTop) : seg(capBot, lineTop);
+    setStem((seg(ty + 4, capTop) + below).trim());
   }, []);
 
   useEffect(() => {
@@ -268,13 +268,13 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
       if (hovering.current || document.hidden || !threads.length) return;
       const R = root.current?.getBoundingClientRect();
       if (!R || R.bottom < 0 || R.top > window.innerHeight) return;
-      let i = Math.floor(Math.random() * 7);
-      if (i === last) i = (i + 3) % 7;
+      let i = Math.floor(Math.random() * rowsTotal);
+      if (i === last) i = (i + 3) % rowsTotal;
       last = i;
       fire(i);
     }, 4600);
     return () => { clearTimeout(first); clearInterval(loop); timers.current.forEach(clearTimeout); };
-  }, [fire, threads.length]);
+  }, [fire, threads.length, rowsTotal]);
 
   useEffect(() => setMounted(true), []);
   useEffect(() => { const t = window.setTimeout(() => setPhotosReady(true), 2600); return () => clearTimeout(t); }, []);
@@ -417,29 +417,27 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
   const leave = () => { hovering.current = false; setActive(null); };
 
   const photos = () =>
-    photosReady && routes.items.map((r, n) => (
-      <img key={r.intent} src={`/routes/${r.intent}.jpg`} className={active === n ? "on" : undefined} alt="" width={600} height={400} decoding="async" />
+    photosReady && PHOTOS.map((id, n) => (
+      <img key={id} src={`/photos/pages/${id}.jpg`} className={active === n ? "on" : undefined} alt="" width={600} height={400} decoding="async" />
     ));
   const knoop = active !== null ? anchors[active] : null;
 
-  const caption = active === null ? hero.caption : routes.items[active].hint;
-
-  const row = (i: number, item: Dict["routes"]["items"][number]) => (
+  const row = (i: number, path: string, label: string, text?: string, idx?: number) => (
     <Link
-      key={item.intent}
+      key={path}
       ref={(el) => { rows.current[i] = el; }}
-      className={`rt${active === i ? " on" : ""}`}
-      href={href(item.intent)}
-      aria-label={routes.ariaPattern.replace("{label}", item.label)}
+      className={`rt${active === i ? " on" : ""}${text ? " has-text" : ""}`}
+      href={hrefOf(locale, path)}
       onMouseEnter={() => enter(i)}
       onMouseLeave={leave}
       onFocus={() => enter(i)}
       onBlur={leave}
       style={{ ["--i" as string]: i }}
     >
-      <span className="rt-idx">{String(i + 1).padStart(2, "0")}</span>
-      <span className="rt-label">{item.label}</span>
-      <img className="rt-thumb" src={`/routes/${item.intent}.jpg`} alt="" width={600} height={400} loading="lazy" decoding="async" />
+      <span className="rt-idx">{idx ? String(idx) : "◆"}</span>
+      <span className="rt-label">{label}</span>
+      {text && <span className="rt-text">{text}</span>}
+      <img className="rt-thumb" src={`/photos/pages/${PHOTOS[i]}.jpg`} alt="" width={600} height={400} loading="lazy" decoding="async" />
       <span className="rt-go" aria-hidden="true">→</span>
     </Link>
   );
@@ -483,24 +481,24 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
       <span className="coin-ring" aria-hidden="true" />
 
       <div className="h3-top">
-        <p className="h3-eyebrow">{descriptor} <i>◆</i> {hero.chip1}</p>
-        <h2 id="h3-q" className="h3-q"><Rich text={hero.heading} /></h2>
+        <p className="h3-eyebrow">DUKAAT <i>|</i> {descriptor}</p>
+        <h2 id="h3-q" className="h3-q">{hero.title}</h2>
       </div>
 
-      {/* phones: the two groups become tabs, and a quiet cue leads from the brand screen to the choice */}
+      {/* phones: the two sides become tabs, and a quiet cue leads from the brand screen to the choice */}
       <span className="h3-cue" aria-hidden="true" />
-      <div className="h3-tabs" role="tablist" aria-label={routes.heading.replace(/[*_]/g, "")}>
+      <div className="h3-tabs" role="tablist" aria-label={title}>
         {(["a", "b"] as const).map((t) => (
           <button key={t} type="button" role="tab" aria-selected={tab === t} className={tab === t ? "on" : undefined} onClick={() => setTab(t)}>
-            {t === "a" ? hero.groupA : hero.groupB}
+            {t === "a" ? hero.knowHeading : hero.networkHeading}
           </button>
         ))}
       </div>
 
       <div className="h3-stage">
-        <nav className="wing wing-a" aria-label={hero.groupA}>
-          <span className="wing-h">{hero.groupA}</span>
-          {trade.map((item, n) => row(n, item))}
+        <nav className="wing wing-a" aria-label={hero.knowHeading}>
+          <span className="wing-h">{hero.knowHeading}</span>
+          {homeKnow.map((path, n) => row(n, path, hero.know[n].title, hero.know[n].text))}
         </nav>
 
         <div className="crest-col">
@@ -513,47 +511,32 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
             <Tulip id="ht" />
           </div>
           <div className="caption" ref={cap}>
-            {/* every hint is stacked in one grid cell, so the box always has the height of the longest one: no layout shift on hover */}
-            {[hero.caption, ...routes.items.map((r) => r.hint)].map((t, n) => (
-              <p key={n} className={(active === null ? n === 0 : n === active + 1) ? "on" : undefined} aria-hidden="true">{t}</p>
-            ))}
+            <p className="on">{hero.intro}</p>
           </div>
-          <p className="sr-only" aria-live="polite">{caption}</p>
         </div>
 
-        <nav className="wing wing-b" aria-label={hero.groupB}>
-          <span className="wing-h">{hero.groupB}</span>
-          {capital.map((item, n) => row(n + 4, item))}
-          <Link className="rt rt-other" href={`/${locale}/contact`}>
-            <span className="rt-idx">—</span>
-            <span className="rt-label">{hero.other} <u>{hero.otherLink}</u></span>
-          </Link>
+        <nav className="wing wing-b" aria-label={hero.networkHeading}>
+          <span className="wing-h">{hero.networkHeading}</span>
+          {homeNetwork.map((path, n) => row(n + homeKnow.length, path, hero.network[n].title, hero.network[n].text, n + 1))}
         </nav>
       </div>
 
-      <Link
-        ref={key}
-        className="h3-key"
-        href={href(nominated.intent)}
-        aria-label={routes.ariaPattern.replace("{label}", nominated.label)}
-        onMouseEnter={() => { hovering.current = true; measure(); setActive(7); }}
-        onMouseLeave={leave}
-      >
+      <Link ref={key} className="h3-key" href={`/${locale}/contact?subject=nominated#contact-form`}>
         <img src="/logo/dukaat-beeldmerk.svg" alt="" width={859} height={998} />
-        <span>{nominated.label}</span>
+        <span>{extra.nominated}</span>
         <span className="arrow" aria-hidden="true">→</span>
       </Link>
 
       <div className="h3-band" ref={band}>
-        <p className="band-t band-start" lang={isArabic(tagline) ? "ar" : locale}><bdi>{tagline}</bdi></p>
+        <p className="band-t band-start"><bdi>{pillars.slice(0, half).join(" – ")}</bdi></p>
         <div className="wm" ref={wm} role="img" aria-label="DUKAAT">
           <span className="wm-half wm-top"><img src="/logo/dukaat-woordmerk-nobar.svg" alt="" width={3160} height={507} /></span>
           <span className="wm-half wm-bot"><img src="/logo/dukaat-woordmerk-nobar.svg" alt="" width={3160} height={507} /></span>
           <span className="bar-aa" aria-hidden="true" />
         </div>
-        <p className="band-t band-end" lang={isArabic(taglineEcho) ? "ar" : "en"}><bdi>{taglineEcho}</bdi></p>
-        <span className="band-b band-start">{hero.chip1}</span>
-        <span className="band-b band-end">{hero.chip2}</span>
+        <p className="band-t band-end"><bdi>{pillars.slice(half).join(" – ")}</bdi></p>
+        <span className="band-b band-start" title={extra.annoTitle}>{extra.anno}</span>
+        <span className="band-b band-end" title={extra.byNominationTitle}>{extra.byNomination}</span>
         <span className="bar" ref={bar} aria-hidden="true" />
       </div>
 
@@ -564,11 +547,6 @@ export function HeroStage({ locale, title, descriptor, hero, routes, tagline, ta
         </div>,
         document.body,
       )}
-
-      <div className="h3-legend">
-        <p className="lg-chips"><span>{hero.chip1}</span><i>◆</i><span>{hero.chip2}</span></p>
-        <p className="lg-sentence">{hero.sentence}</p>
-      </div>
     </section>
   );
 }

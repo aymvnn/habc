@@ -5,8 +5,11 @@ import { pageDefs } from "@/content/pages";
 import { hrefOf, type SiteGroup } from "@/lib/site";
 import { Rich } from "./Rich";
 import { Photo } from "./Photo";
-import { NameFilm } from "./NameFilm";
-import { Behind, Membership, Name, Routers, Why } from "./Sections";
+import { Form, FormSet } from "./Form";
+import { ListingSearch } from "./Listing";
+import { fieldsOf, type LocalField } from "@/lib/forms";
+import type { Field, FormDef } from "@/content/pages/types";
+import { hiddenFormOptions, hiddenListings } from "@/content/visibility";
 
 /* eslint-disable @next/next/no-img-element -- brand SVGs are served as-is */
 
@@ -19,10 +22,8 @@ type Ctx = { l: Locale; d: Dict; group: SiteGroup; path: string };
 
 /** the few words the blocks need themselves */
 const UI = {
-  promise: { en: "In writing", nl: "Schriftelijk", ar: "كتابةً" },
   contents: { en: "Contents", nl: "Inhoud", ar: "المحتويات" },
   article: { en: "Article", nl: "Artikel", ar: "المادة" },
-  next: { en: "Next", nl: "Verder", ar: "التالي" },
 } satisfies Record<string, T>;
 
 const pad = (i: number) => String(i + 1).padStart(2, "0");
@@ -129,9 +130,8 @@ function Mosaic({ b, c }: { b: Extract<Block, { kind: "mosaic" }>; c: Ctx }) {
 }
 
 function Register({ b, c }: { b: Extract<Block, { kind: "register" }>; c: Ctx }) {
-  const quotes = b.variant === "quotes";
   const list = (
-    <ol className={`reg cols-${b.cols ?? 1}${quotes ? " quotes" : ""}${b.numbered ? " numbered" : ""}`}>
+    <ol className={`reg cols-${b.cols ?? 1}${b.numbered ? " numbered" : ""}`}>
       {b.items.map((it, i) => (
         <li className={`reg-i rv${lag(i % (b.cols ?? 1) === 0 ? 0 : 1)}`} key={i}>
           {b.numbered && <span className="reg-n" aria-hidden="true">{pad(i)}</span>}
@@ -157,7 +157,7 @@ function Register({ b, c }: { b: Extract<Block, { kind: "register" }>; c: Ctx })
     );
   }
   return (
-    <section className={`b b-register${quotes ? " is-quotes" : ""}`}>
+    <section className="b b-register">
       <div className="wrap">
         <Head label={b.label} heading={b.heading} intro={b.intro} l={c.l} className="head" />
         {list}
@@ -201,22 +201,6 @@ function Steps({ b, c }: { b: Extract<Block, { kind: "steps" }>; c: Ctx }) {
   );
 }
 
-function Sequence({ b, c }: { b: Extract<Block, { kind: "sequence" }>; c: Ctx }) {
-  return (
-    <section className="b b-sequence">
-      <div className="wrap">
-        <Head label={b.label} heading={b.heading} l={c.l} className="head" />
-        <ol className="seq">
-          {b.items.map((x, i) => (
-            <li className={`rv${lag(i)}`} key={i}><Rich text={x[c.l]} /></li>
-          ))}
-        </ol>
-        {b.body && <p className="seq-body rv"><Rich text={b.body[c.l]} /></p>}
-      </div>
-    </section>
-  );
-}
-
 function Statement({ b, c }: { b: Extract<Block, { kind: "statement" }>; c: Ctx }) {
   return (
     <section className="b b-statement">
@@ -226,151 +210,6 @@ function Statement({ b, c }: { b: Extract<Block, { kind: "statement" }>; c: Ctx 
         </div>
         <p className={`stmt rv${b.text.en.length > 90 ? " is-long" : ""}`}><Rich text={b.text[c.l]} /></p>
         {b.note && <p className="stmt-note rv lag1"><Rich text={b.note[c.l]} /></p>}
-      </div>
-    </section>
-  );
-}
-
-function Quote({ b, c, flip }: { b: Extract<Block, { kind: "quote" }>; c: Ctx; flip: boolean }) {
-  return (
-    <section className={`b b-quote${b.photo ? " has-photo" : ""}${flip ? " flip" : ""}`}>
-      <div className="wrap b-grid">
-        {b.photo && <Photo id={b.photo} locale={c.l} className="q-ph rv" sizes="(max-width: 900px) 80vw, 30vw" />}
-        <figure className="q">
-          <blockquote>
-            {b.text.map((p, i) => (
-              <p className={`rv${i ? " lag1" : ""}`} key={i}><Rich text={p[c.l]} /></p>
-            ))}
-          </blockquote>
-          <figcaption className="rv">
-            <span className="q-by"><Rich text={b.by[c.l]} /></span>
-            {b.role && <span className="q-role">{b.role[c.l]}</span>}
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-  );
-}
-
-function Contrast({ b, c }: { b: Extract<Block, { kind: "contrast" }>; c: Ctx }) {
-  return (
-    <section className="b b-contrast">
-      <div className="wrap">
-        <Head label={b.label} heading={b.heading} intro={b.intro} l={c.l} className="head" />
-        <div className="ctr">
-          {[b.a, b.b].map((col, k) => (
-            <div className={`ctr-col ${k ? "is-b" : "is-a"} rv${k ? " lag1" : ""}`} key={k}>
-              <h3><Rich text={col.title[c.l]} /></h3>
-              <ul>
-                {col.items.map((x, i) => (
-                  <li key={i}><Rich text={x[c.l]} /></li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        {b.note && <p className="b-note rv"><Rich text={b.note[c.l]} /></p>}
-      </div>
-    </section>
-  );
-}
-
-function Facts({ b, c }: { b: Extract<Block, { kind: "facts" }>; c: Ctx }) {
-  const media = b.media === "film" ? (
-    <div className="facts-media is-film rv"><div className="film"><NameFilm /></div></div>
-  ) : b.photo ? (
-    <div className="facts-media rv"><Photo id={b.photo} locale={c.l} sizes="(max-width: 900px) 90vw, 36vw" /></div>
-  ) : null;
-  return (
-    <section className={`b b-facts${media ? " has-media" : ""}`}>
-      <div className="wrap b-grid">
-        {media}
-        <div className="facts-body">
-          <Head label={b.label} heading={b.heading} intro={b.intro} l={c.l} />
-          <dl className="facts">
-            {b.items.map((it, i) => (
-              <div className={`fact rv${lag(i % 2)}`} key={i}>
-                <dt>{it.term[c.l]}</dt>
-                <dd><Rich text={it.value[c.l]} /></dd>
-              </div>
-            ))}
-          </dl>
-          {b.note && <p className="b-note rv"><Rich text={b.note[c.l]} /></p>}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Tiers({ b, c }: { b: Extract<Block, { kind: "tiers" }>; c: Ctx }) {
-  return (
-    <section className="b b-tiers">
-      <div className="wrap">
-        <Head label={b.label} heading={b.heading} intro={b.intro} l={c.l} className="head" />
-        <div className="tiers" style={{ ["--n" as string]: b.tiers.length }}>
-          {b.tiers.map((tr, i) => (
-            <article className={`tier rv${lag(i)}`} key={tr.name}>
-              <span className="tier-n" aria-hidden="true">{["I", "II", "III", "IV"][i]}</span>
-              <h3 className="tier-name">{tr.name}</h3>
-              <p className="tier-tag"><Rich text={tr.tagline[c.l]} /></p>
-              {tr.items.length > 0 && (
-                <ul className="tier-items">
-                  {tr.items.map((x, k) => (
-                    <li key={k}><Rich text={x[c.l]} /></li>
-                  ))}
-                </ul>
-              )}
-              {tr.promise && tr.promise.length > 0 && (
-                <div className="tier-promise">
-                  <span className="tier-promise-l">{UI.promise[c.l]}</span>
-                  <ul>
-                    {tr.promise.map((x, k) => (
-                      <li key={k}><Rich text={x[c.l]} /></li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </article>
-          ))}
-        </div>
-        {b.note && <p className="b-note rv"><Rich text={b.note[c.l]} /></p>}
-      </div>
-    </section>
-  );
-}
-
-function Specimen({ b, c }: { b: Extract<Block, { kind: "specimen" }>; c: Ctx }) {
-  return (
-    <section className="b b-specimen">
-      <div className="wrap b-grid">
-        <div className="spec-head">
-          <Head label={b.label} heading={b.heading} intro={b.intro} l={c.l} />
-          {b.note && <p className="b-note rv lag2"><Rich text={b.note[c.l]} /></p>}
-        </div>
-        <div className="spec-card rv lag1">
-          <div className="spec-top">
-            <img src="/logo/dukaat-beeldmerk.svg" alt="" width={859} height={998} aria-hidden="true" />
-            <p className="spec-title"><Rich text={b.title[c.l]} /></p>
-          </div>
-          <dl className="spec-fields">
-            {b.fields.map((f, i) => (
-              <div className="spec-f" key={i}>
-                <dt>{f.label[c.l]}</dt>
-                <dd>{f.hint ? <Rich text={f.hint[c.l]} /> : <span className="spec-line" aria-hidden="true" />}</dd>
-              </div>
-            ))}
-          </dl>
-          {b.examples && b.examples.length > 0 && (
-            <div className="spec-ex">
-              {b.examplesLabel && <span className="spec-ex-l">{b.examplesLabel[c.l]}</span>}
-              <ul>
-                {b.examples.map((e, i) => (
-                  <li key={i}><Rich text={e[c.l]} /></li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
       </div>
     </section>
   );
@@ -395,29 +234,6 @@ function Chapter({ b, c }: { b: Extract<Block, { kind: "chapter" }>; c: Ctx }) {
             </article>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function Faq({ b, c }: { b: Extract<Block, { kind: "faq" }>; c: Ctx }) {
-  return (
-    <section className="b b-faq">
-      <div className="wrap">
-        <Head label={b.label} heading={b.heading} l={c.l} className="head" />
-        {b.groups.map((g, gi) => (
-          <div className="faq-g b-grid" key={gi}>
-            <div className="faq-gt">{g.title && <h2 className="label rv">{g.title[c.l]}</h2>}</div>
-            <div className="faq faq-list">
-              {g.items.map((f, i) => (
-                <details key={i} className="rv">
-                  <summary>{f.q[c.l]}</summary>
-                  <p><Rich text={f.a[c.l]} /></p>
-                </details>
-              ))}
-            </div>
-          </div>
-        ))}
       </div>
     </section>
   );
@@ -502,8 +318,7 @@ function Index({ b, c }: { b: Extract<Block, { kind: "index" }>; c: Ctx }) {
     href: hrefOf(c.l, k),
     title: c.d.site.pages[k.path].title,
     blurb: c.d.site.pages[k.path].blurb,
-    key: !!k.href,
-    ph: k.href ? { src: "/routes/nominated.jpg" } : photoOfPage(k.path),
+    ph: photoOfPage(k.path),
   }));
   const [first, ...rest] = kids;
   return (
@@ -520,7 +335,7 @@ function Index({ b, c }: { b: Extract<Block, { kind: "index" }>; c: Ctx }) {
           <ul className="idx-rest">
             {rest.map((k, i) => (
               <li className={`rv${lag(i)}`} key={k.href}>
-                <Link href={k.href} className={k.key ? "is-key" : undefined}>
+                <Link href={k.href}>
                   <Photo {...k.ph} locale={c.l} className="idx-thumb" sizes="112px" decorative />
                   <span className="idx-n">{pad(i + 1)}</span>
                   <span className="idx-t">{k.title}<span className="arrow" aria-hidden="true">→</span></span>
@@ -535,19 +350,76 @@ function Index({ b, c }: { b: Extract<Block, { kind: "index" }>; c: Ctx }) {
   );
 }
 
-function Next({ b, c }: { b: Extract<Block, { kind: "next" }>; c: Ctx }) {
+/** a link of the source: a page of the site, the contact form with a subject, or an anchor on this page */
+const hrefIn = (l: Locale, h: string) => (h.startsWith("#") ? h : `/${l}/${h}`);
+/** links to an overview that is not public (content/visibility.ts) are left out */
+const shown = (h: string) => !(h.includes("#") && hiddenListings.has(h.slice(h.indexOf("#") + 1)));
+
+function Tiers({ b, c }: { b: Extract<Block, { kind: "tiers" }>; c: Ctx }) {
   return (
-    <section className="b b-next">
-      <div className="wrap b-grid">
-        <div className="next-head">
-          <span className="label rv">{UI.next[c.l]}</span>
-          <h2 className="rv"><Rich text={b.heading[c.l]} /></h2>
-          {b.body && <p className="rv lag1"><Rich text={b.body[c.l]} /></p>}
+    <section className="b b-tiers">
+      <div className="wrap">
+        <Head label={b.label} heading={b.heading} intro={b.intro} l={c.l} className="head" />
+        <div className="tiers" style={{ ["--n" as string]: b.tiers.length }}>
+          {b.tiers.map((tr, i) => (
+            <article className={`tier rv${lag(i)}`} key={tr.name}>
+              <span className="tier-n" aria-hidden="true">{["I", "II", "III", "IV"][i]}</span>
+              <h3 className="tier-name">{tr.name}</h3>
+              <p className="tier-sub">{tr.subtitle[c.l]}</p>
+              <p className="tier-tag"><Rich text={tr.tagline[c.l]} /></p>
+              <p className="tier-for"><Rich text={tr.forWhom[c.l]} /></p>
+              <p className="tier-il">{tr.itemsLabel[c.l]}</p>
+              <ul className="tier-items">
+                {tr.items.map((x, k) => (
+                  <li key={k}><Rich text={x[c.l]} /></li>
+                ))}
+              </ul>
+              <Link className="more tier-go" href={hrefIn(c.l, tr.action.href)}>
+                {tr.action.label[c.l]} <span className="arrow" aria-hidden="true">→</span>
+              </Link>
+            </article>
+          ))}
         </div>
-        <ul className="next-links">
-          {b.links.map((k, i) => (
-            <li className={`rv${lag(i)}`} key={k.href}>
-              <Link href={`/${c.l}/${k.href}`}>
+        {b.note && <p className="b-note rv"><Rich text={b.note[c.l]} /></p>}
+      </div>
+    </section>
+  );
+}
+
+function Faq({ b, c }: { b: Extract<Block, { kind: "faq" }>; c: Ctx }) {
+  return (
+    <section className="b b-faq">
+      <div className="wrap">
+        <Head label={b.label} heading={b.heading} l={c.l} className="head" />
+        <div className="faq faq-list">
+          {b.items.map((f, i) => (
+            <details key={i} className="rv">
+              <summary>{f.q[c.l]}</summary>
+              <p><Rich text={f.a[c.l]} /></p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Actions({ b, c }: { b: Extract<Block, { kind: "actions" }>; c: Ctx }) {
+  const links = b.links.filter((k) => shown(k.href));
+  if (!links.length && !b.heading && !b.body) return null;
+  return (
+    <section className="b b-actions">
+      <div className="wrap">
+        {(b.heading || b.body) && (
+          <div className="act-head">
+            {b.heading && <h2 className="rv"><Rich text={b.heading[c.l]} /></h2>}
+            {b.body && <p className="lede rv lag1"><Rich text={b.body[c.l]} /></p>}
+          </div>
+        )}
+        <ul className="act-links">
+          {links.map((k, i) => (
+            <li className={`rv${lag(i)}`} key={k.href + i}>
+              <Link href={hrefIn(c.l, k.href)} className={i === 0 ? "act-a is-first" : "act-a"}>
                 <span><Rich text={k.label[c.l]} /></span>
                 <span className="arrow" aria-hidden="true">→</span>
               </Link>
@@ -559,22 +431,91 @@ function Next({ b, c }: { b: Extract<Block, { kind: "next" }>; c: Ctx }) {
   );
 }
 
-function HomeSection({ b, c }: { b: Extract<Block, { kind: "home" }>; c: Ctx }) {
-  switch (b.section) {
-    case "why":
-      return <Why why={c.d.why} />;
-    case "name":
-      return <Name name={c.d.name} />;
-    case "behind":
-      return <Behind behind={c.d.behind} />;
-    case "membership":
-      return <Membership membership={c.d.membership} />;
-  }
+const local = (fs: Field[], l: Locale): LocalField[] =>
+  fs.map((f) => ({ ...f, label: f.label[l], options: f.options?.map((o) => o[l]), placeholder: f.placeholder?.[l] }));
+
+function Listing({ b, c }: { b: Extract<Block, { kind: "listing" }>; c: Ctx }) {
+  // not public (content/visibility.ts): only the overview's other buttons remain
+  if (hiddenListings.has(b.id)) return b.links?.length ? <Actions b={{ kind: "actions", links: b.links }} c={c} /> : null;
+  return (
+    <section className="b b-listing" id={b.id}>
+      <div className="wrap">
+        <div className="head">
+          <h2 className="rv"><Rich text={b.heading[c.l]} /></h2>
+          {b.intro && <p className="lede rv lag1"><Rich text={b.intro[c.l]} /></p>}
+        </div>
+        <div className="ls rv">
+          {b.search ? (
+            <ListingSearch id={b.id} fields={local(b.search, c.l)} label={b.searchLabel?.[c.l] ?? ""} empty={b.empty[c.l]} choose={c.d.forms.choose} />
+          ) : (
+            <p className="ls-empty on">{b.empty[c.l]}</p>
+          )}
+          {b.links && b.links.length > 0 && (
+            <ul className="ls-links">
+              {b.links.map((k, i) => (
+                <li key={k.href + i}>
+                  <Link className="more" href={hrefIn(c.l, k.href)}>{k.label[c.l]} <span className="arrow" aria-hidden="true">→</span></Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** the props of one form in one language, with the source's default confirmation (10) when the form has none */
+function formProps(f: FormDef, c: Ctx) {
+  const d = c.d;
+  return {
+    id: f.id,
+    locale: c.l,
+    fields: fieldsOf(f, c.l, d),
+    submit: f.submit[c.l],
+    success: f.success ? f.success[c.l] : d.forms.success,
+    successNote: f.success ? f.successNote?.[c.l] : d.forms.successNote,
+    option: hiddenFormOptions.has(f.id) ? undefined : f.option?.[c.l],
+    msgs: d.forms,
+  };
+}
+
+function FormBlock({ b, c }: { b: Extract<Block, { kind: "form" }>; c: Ctx }) {
+  return (
+    <section className="b b-form" id={b.form.id}>
+      <div className="wrap b-grid">
+        <div className="fm-head">
+          {b.label && <span className="label rv">{b.label[c.l]}</span>}
+          {b.form.title && <h2 className="rv"><Rich text={b.form.title[c.l]} /></h2>}
+          {b.form.intro && <p className="lede rv lag1"><Rich text={b.form.intro[c.l]} /></p>}
+        </div>
+        <div className="fm-body rv lag1"><Form {...formProps(b.form, c)} /></div>
+      </div>
+    </section>
+  );
+}
+
+function FormSetBlock({ b, c }: { b: Extract<Block, { kind: "formset" }>; c: Ctx }) {
+  return (
+    <section className="b b-formset">
+      <div className="wrap">
+        {(b.heading || b.intro) && (
+          <div className="head">
+            {b.heading && <h2 className="rv"><Rich text={b.heading[c.l]} /></h2>}
+            {b.intro && <p className="lede rv lag1"><Rich text={b.intro[c.l]} /></p>}
+          </div>
+        )}
+        <FormSet
+          id={b.id}
+          forms={b.forms.map((f) => ({ ...formProps(f, c), choice: (f.choice ?? f.title ?? { en: f.id, nl: f.id, ar: f.id })[c.l], title: f.title?.[c.l], intro: f.intro?.[c.l] }))}
+        />
+      </div>
+    </section>
+  );
 }
 
 export function Blocks({ def, locale, d, group, path }: { def: PageDef; locale: Locale; d: Dict; group: SiteGroup; path: string }) {
   const c: Ctx = { l: locale, d, group, path };
-  let quotes = 0;
   return (
     <>
       {def.blocks.map((b, i) => {
@@ -587,22 +528,18 @@ export function Blocks({ def, locale, d, group, path }: { def: PageDef; locale: 
           case "register": return <Register key={i} b={b} c={c} />;
           case "terms": return <Terms key={i} b={b} c={c} />;
           case "steps": return <Steps key={i} b={b} c={c} />;
-          case "sequence": return <Sequence key={i} b={b} c={c} />;
           case "statement": return <Statement key={i} b={b} c={c} />;
-          case "quote": return <Quote key={i} b={b} c={c} flip={quotes++ % 2 === 1} />;
-          case "contrast": return <Contrast key={i} b={b} c={c} />;
-          case "facts": return <Facts key={i} b={b} c={c} />;
           case "tiers": return <Tiers key={i} b={b} c={c} />;
-          case "specimen": return <Specimen key={i} b={b} c={c} />;
           case "chapter": return <Chapter key={i} b={b} c={c} />;
           case "faq": return <Faq key={i} b={b} c={c} />;
           case "notice": return <Notice key={i} b={b} c={c} />;
           case "dark": return <Dark key={i} b={b} c={c} />;
           case "legal": return <Legal key={i} b={b} c={c} />;
           case "index": return <Index key={i} b={b} c={c} />;
-          case "routes": return <Routers key={i} locale={locale} routes={d.routes} />;
-          case "home": return <HomeSection key={i} b={b} c={c} />;
-          case "next": return <Next key={i} b={b} c={c} />;
+          case "actions": return <Actions key={i} b={b} c={c} />;
+          case "listing": return <Listing key={i} b={b} c={c} />;
+          case "form": return <FormBlock key={i} b={b} c={c} />;
+          case "formset": return <FormSetBlock key={i} b={b} c={c} />;
         }
       })}
     </>
@@ -632,9 +569,9 @@ export function Masthead({
       <div className="wrap">
         {crumbs}
         <div className="mh-grid">
-          <span className="label mh-label">{label}</span>
-          <h1 className="mh-title">{title}</h1>
-          <p className="lede mh-lede">{blurb}</p>
+          <span className="label mh-label">{def?.eyebrow ? def.eyebrow[locale] : label}</span>
+          <h1 className="mh-title">{def?.headline ? def.headline[locale] : title}</h1>
+          {(def?.lede || (!def?.headline && blurb)) && <p className="lede mh-lede">{def?.lede ? def.lede[locale] : blurb}</p>}
           {photo && m.variant !== "band" && (
             <Photo
               id={photo}

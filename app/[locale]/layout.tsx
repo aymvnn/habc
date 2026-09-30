@@ -57,8 +57,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       type: "website",
       siteName: "DUKAAT",
-      title: d.meta.ogTitle,
-      description: d.meta.ogDescription,
+      title: d.meta.title,
+      description: d.meta.description,
       locale: locale === "en" ? "en_GB" : locale === "nl" ? "nl_NL" : "ar_AE",
       images: [{ url: "/og.png", width: 1200, height: 630, alt: d.meta.ogImageAlt }],
     },
@@ -75,9 +75,9 @@ export default async function LocaleLayout({ children, params }: { children: Rea
     <html lang={locale} dir={dirOf(locale)} className={`${display.variable} ${text.variable} ${arabic.variable}`} suppressHydrationWarning>
       <body>
         <a className="skiplink" href="#main">{d.nav.skip}</a>
-        <TopBar locale={locale} nav={d.nav} site={d.site} chips={[d.hero.chip1, d.hero.chip2]} routes={d.routes.items} />
+        <TopBar locale={locale} nav={d.nav} site={d.site} extra={d.extra} />
         <main id="main">{children}</main>
-        <Footer locale={locale} nav={d.nav} footer={d.footer} site={d.site} />
+        <Footer locale={locale} d={d} />
         <RevealObserver />
         <SmoothScroll />
       </body>

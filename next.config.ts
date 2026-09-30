@@ -4,6 +4,8 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   images: { formats: ["image/avif", "image/webp"], qualities: [75, 80] },
+  // the forms may carry one optional attachment (app/actions/forms.ts caps it at 5 MB)
+  experimental: { serverActions: { bodySizeLimit: "6mb" } },
   async redirects() {
     return [{ source: "/", destination: "/en", permanent: false }];
   },

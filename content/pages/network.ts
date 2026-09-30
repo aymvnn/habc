@@ -1,71 +1,305 @@
 import type { PageSet } from "./types";
 
 /**
- * Network — the group overview and its five pages: directory, sector clubs, stories, ambassadors, partners.
- * Everything is described as it works, in the present tense: no counts, no "first club", no markets named,
- * no revenue share for ambassadors, no invented stories or profiles. Ambassadors work in various markets and cities
- * (never "one per market", never "exclusive"); members do not search the directory themselves; the Golden Ten are the
- * ten principal sponsors (owner, 29 Sep 2026). Sources: content master p.19 (directory),
- * p.22 (sector clubs, stories), p.26–27 (ambassadors, partnerships & sponsorship); tier lists p.10–12;
- * the compagnon's Arabic wording where it exists (دليل فرص، أفضل دليل على قوة الشبكة، عضو/شركة/مصنع/مستثمر).
+ * Source sections 11 (DUKAAT Directory), 15 (DUKAAT Intelligence), 16 (DUKAAT Circles), 17 (DUKAAT Stories) and
+ * 18 (Partnerships and sponsorship), each in the source's order.
+ * ar = the Arabic master verbatim; nl / en = the translation files verbatim (owntext/vertalingen/).
+ * Not published (editorial): the labels, the report card data (15) and the story editing template (17).
+ *
+ * 11  "Browse the companies" is the heading of the directory listing (#companies): its search fields are the source's
+ *     search options, its empty text the source's no-results text, its links the other two buttons. The profile form
+ *     (#company-profile) holds the profile fields, then the profile headings.
+ * 15  "Browse the content" is the heading of the publications listing (#publications), the other two buttons are its
+ *     links; the text accompanying the reports follows as a notice. The source gives no empty text: pending marker.
+ * 16  The three buttons lead to the registration form (#circle); its sector field offers the target sectors.
+ *     "Country" is one of the shared fields the site appends, so it is not repeated.
+ * 17  "Read the stories" is the heading of the stories listing (#stories), whose empty text is the source's launch text.
+ * 18  Both buttons lead to the form (#partnership), headed by the source's "Have an idea for collaboration?".
  */
 export const network: PageSet = {
-  /* ───────────────────────── overview ───────────────────────── */
-  network: {
-    masthead: { variant: "band", photo: "network-hero" },
+  /* ------------------------------------------------------------------ 11. Company directory */
+  "services/directory": {
+    masthead: { variant: "plate", photo: "dir-hero" },
+    eyebrow: {
+      en: "DUKAAT Directory",
+      nl: "DUKAAT Directory",
+      ar: "DUKAAT Directory",
+    },
+    headline: {
+      en: "Get to know companies through what they offer and what they are looking for",
+      nl: "Maak kennis met bedrijven aan de hand van wat zij bieden en wat zij zoeken",
+      ar: "تعرّف إلى الشركات من خلال ما تقدّمه وما تبحث عنه",
+    },
     blocks: [
       {
         kind: "lead",
         text: {
-          en: "The DUKAAT network is the people inside the club: admitted members, the sector clubs they meet in, ambassadors in various markets and cities, and the institutions we work with. It is where every search begins.",
-          nl: "Het DUKAAT-netwerk bestaat uit de mensen binnen de club: toegelaten leden, de sectorclubs waarin zij elkaar treffen, ambassadeurs in verschillende markten en steden, en de instellingen waarmee wij samenwerken. Daar begint elke zoektocht.",
-          ar: "شبكة DUKAAT هي مَن يضمّهم النادي: الأعضاء المقبولون، والأندية القطاعية التي يلتقون فيها، وسفراء في أسواق ومدن مختلفة، والمؤسسات التي نتعاون معها. ومنها يبدأ كل بحث.",
+          en: "The DUKAAT Directory helps you discover companies and people with expertise by sector, country and nature of activity. Each profile presents information that makes it easier to understand the company and to explore opportunities to connect with it.",
+          nl: "De DUKAAT-gids helpt bij het ontdekken van bedrijven en mensen met expertise op basis van sector, land en de aard van de activiteit. Elk profiel toont informatie die het gemakkelijker maakt om het bedrijf te begrijpen en de kansen te verkennen om ermee in contact te komen.",
+          ar: "يساعد دليل دوكات على اكتشاف شركات وأصحاب خبرة بحسب القطاع والدولة وطبيعة النشاط. يعرض كل ملف معلومات تسهّل فهم الشركة واستكشاف فرص التواصل معها.",
         },
       },
       {
-        kind: "index",
-        label: { en: "The network", nl: "Het netwerk", ar: "الشبكة" },
-        heading: { en: "What the network is *made of.*", nl: "Waaruit het netwerk *bestaat.*", ar: "ما تتكوّن منه *الشبكة.*" },
-      },
-      {
-        kind: "contrast",
-        label: { en: "Offer and need", nl: "Aanbod en vraag", ar: "العرض والطلب" },
-        heading: { en: "Every member states *two things.*", nl: "Elk lid benoemt *twee dingen.*", ar: "يحدّد كل عضو *أمرين.*" },
-        intro: {
-          en: "Every profile, every intake and every introduction starts from the same two lines: what a company brings to the table, and what it is looking for.",
-          nl: "Elk profiel, elke intake en elke introductie begint bij dezelfde twee regels: wat een bedrijf inbrengt en wat het zoekt.",
-          ar: "يبدأ كل ملف، وكل استمارة، وكل تعريف من السطرين نفسيهما: ما تقدّمه الشركة، وما تبحث عنه.",
+        kind: "listing",
+        id: "companies",
+        heading: {
+          en: "Browse the companies",
+          nl: "Bekijk de bedrijven",
+          ar: "استعرض الشركات",
         },
-        a: {
-          title: { en: "I offer", nl: "Ik bied", ar: "ما أقدّمه" },
-          items: [
-            { en: "Products, and the capacity to make or pack them", nl: "Producten, en de capaciteit om ze te maken of te verpakken", ar: "منتجات، والقدرة على تصنيعها أو تعبئتها" },
-            { en: "Surplus stock and one-off lots", nl: "Overtollige voorraad en eenmalige partijen", ar: "فائض المخزون والدفعات الفردية" },
-            { en: "Used and new machinery", nl: "Gebruikte en nieuwe machines", ar: "آلات مستعملة وجديدة" },
-            { en: "Distribution and customers in their own market", nl: "Distributie en klanten in de eigen markt", ar: "قنوات توزيع وعملاء في سوقي" },
-            { en: "Specialist knowledge: law, tax, customs, freight", nl: "Vakkennis: recht, belasting, douane, vracht", ar: "خبرة متخصصة في القانون والضرائب والجمارك والشحن" },
-          ],
+        search: [
+          {
+            name: "query",
+            label: {
+              en: "Search by company name or product",
+              nl: "Zoek op bedrijfsnaam of product",
+              ar: "ابحث باسم الشركة أو المنتج",
+            },
+          },
+          {
+            name: "country",
+            label: {
+              en: "Country",
+              nl: "Land",
+              ar: "الدولة",
+            },
+          },
+          {
+            name: "sector",
+            label: {
+              en: "Sector",
+              nl: "Sector",
+              ar: "القطاع",
+            },
+          },
+          {
+            name: "market",
+            label: {
+              en: "Target market",
+              nl: "Doelmarkt",
+              ar: "السوق المستهدف",
+            },
+          },
+          {
+            name: "activity",
+            label: {
+              en: "Type of activity",
+              nl: "Type activiteit",
+              ar: "نوع النشاط",
+            },
+          },
+        ],
+        searchLabel: {
+          en: "Search",
+          nl: "Zoeken",
+          ar: "بحث",
         },
-        b: {
-          title: { en: "I need", nl: "Ik zoek", ar: "ما أبحث عنه" },
-          items: [
-            { en: "A distributor on the other side", nl: "Een distributeur aan de andere kant", ar: "موزّع على الضفة الأخرى" },
-            { en: "A verified supplier or manufacturer", nl: "Een geverifieerde leverancier of fabrikant", ar: "مورّد أو مصنع موثّق" },
-            { en: "Buyers for goods, stock or capacity", nl: "Kopers voor goederen, voorraad of capaciteit", ar: "مشترون لبضائع أو مخزون أو طاقة إنتاجية" },
-            { en: "A way into a new market", nl: "Een weg naar een nieuwe markt", ar: "مدخل إلى سوق جديدة" },
-            { en: "Advice on structure, contracts and customs", nl: "Advies over structuur, contracten en douane", ar: "مشورة في الهيكلة والعقود والجمارك" },
-          ],
+        empty: {
+          en: "We found no results matching your selection. Try another sector or country, or send us your requirement.",
+          nl: "We hebben geen resultaten gevonden die overeenkomen met uw keuze. Probeer een andere sector of een ander land, of laat ons weten wat u nodig heeft.",
+          ar: "لم نجد نتائج تطابق اختيارك. جرّب قطاعًا أو دولة أخرى، أو أرسل لنا احتياجك.",
         },
-        note: {
-          en: "We match a member’s need to the right offer, inside the network and beyond it. Technology narrows the search; people verify.",
-          nl: "Wij koppelen de vraag van een lid aan het juiste aanbod, binnen het netwerk en daarbuiten. Technologie verkleint het zoekveld; mensen verifiëren.",
-          ar: "نربط حاجة العضو بالعرض المناسب، داخل الشبكة وخارجها. التقنية تضيّق البحث؛ والبشر يتحققون.",
-        },
+        links: [
+          {
+            href: "#company-profile",
+            label: {
+              en: "Submit your company profile",
+              nl: "Dien uw bedrijfsprofiel in",
+              ar: "قدّم ملف شركتك",
+            },
+          },
+          {
+            href: "contact?subject=introductions#contact-form",
+            label: {
+              en: "Request an introduction",
+              nl: "Vraag een kennismaking aan",
+              ar: "اطلب التعارف",
+            },
+          },
+        ],
       },
       {
         kind: "prose",
-        label: { en: "What binds it", nl: "Wat het bindt", ar: "ما يجمعها" },
-        heading: { en: "Admitted, not *collected.*", nl: "Toegelaten, niet *verzameld.*", ar: "أعضاءٌ يُقبَلون، لا *يُجمَعون.*" },
+        heading: {
+          en: "Clarity of information and trust",
+          nl: "Duidelijke informatie en vertrouwen",
+          ar: "وضوح المعلومات والثقة",
+        },
+        body: [
+          {
+            en: "We distinguish between information provided by the company and any data that has actually been reviewed. Where a review of a piece of information is shown, we set out its subject, date and scope; neither membership nor the listing of a profile implies a guarantee of the company or of the quality of its dealings.",
+            nl: "We maken onderscheid tussen de informatie die het bedrijf verstrekt en eventuele gegevens die daadwerkelijk zijn gecontroleerd. Wanneer we een controle van een gegeven weergeven, maken we het onderwerp, de datum en de reikwijdte ervan duidelijk; lidmaatschap of opname van het profiel betekent geen garantie voor het bedrijf of voor de kwaliteit van zijn transacties.",
+            ar: "نميّز بين المعلومات التي تقدّمها الشركة وأي بيانات تمت مراجعتها فعليًا. عند عرض مراجعة لمعلومة، نوضح موضوعها وتاريخها ونطاقها؛ ولا تعني العضوية أو إدراج الملف ضمان الشركة أو جودة تعاملاتها.",
+          },
+        ],
+        photo: "dir-profile",
+        size: "tall",
+        side: "end",
+      },
+      {
+        kind: "form",
+        form: {
+          id: "company-profile",
+          title: {
+            en: "Submit your company profile",
+            nl: "Dien uw bedrijfsprofiel in",
+            ar: "قدّم ملف شركتك",
+          },
+          fields: [
+            /* the profile fields */
+            {
+              name: "companyName",
+              label: {
+                en: "Company name",
+                nl: "Bedrijfsnaam",
+                ar: "اسم الشركة",
+              },
+            },
+            {
+              name: "logo",
+              type: "file",
+              label: {
+                en: "Logo",
+                nl: "Logo",
+                ar: "الشعار",
+              },
+            },
+            {
+              name: "location",
+              label: {
+                en: "Country and city",
+                nl: "Land en stad",
+                ar: "الدولة والمدينة",
+              },
+            },
+            {
+              name: "sector",
+              label: {
+                en: "Sector",
+                nl: "Sector",
+                ar: "القطاع",
+              },
+            },
+            {
+              name: "website",
+              type: "url",
+              label: {
+                en: "Website",
+                nl: "Website",
+                ar: "الموقع الإلكتروني",
+              },
+            },
+            {
+              name: "languages",
+              label: {
+                en: "Languages of communication",
+                nl: "Communicatietalen",
+                ar: "لغات التواصل",
+              },
+            },
+            {
+              name: "representative",
+              type: "textarea",
+              wide: true,
+              label: {
+                en: "The details of the company representative that are cleared for publication",
+                nl: "De gegevens van de bedrijfsvertegenwoordiger die gepubliceerd mogen worden",
+                ar: "بيانات ممثل الشركة المسموح بنشرها",
+              },
+            },
+            /* the profile headings */
+            {
+              name: "about",
+              type: "textarea",
+              wide: true,
+              label: {
+                en: "About us",
+                nl: "Over ons",
+                ar: "نبذة عنا",
+              },
+            },
+            {
+              name: "productsServices",
+              type: "textarea",
+              wide: true,
+              label: {
+                en: "Our products and services",
+                nl: "Onze producten en diensten",
+                ar: "منتجاتنا وخدماتنا",
+              },
+            },
+            {
+              name: "markets",
+              type: "textarea",
+              wide: true,
+              label: {
+                en: "Markets we serve",
+                nl: "Markten die wij bedienen",
+                ar: "الأسواق التي نخدمها",
+              },
+            },
+            {
+              name: "offer",
+              type: "textarea",
+              wide: true,
+              label: {
+                en: "What we offer",
+                nl: "Wat wij bieden",
+                ar: "ما نقدّمه",
+              },
+            },
+            {
+              name: "seeking",
+              type: "textarea",
+              wide: true,
+              label: {
+                en: "What we are looking for",
+                nl: "Wat wij zoeken",
+                ar: "ما نبحث عنه",
+              },
+            },
+            {
+              name: "catalogue",
+              type: "file",
+              wide: true,
+              label: {
+                en: "Photos and catalogue",
+                nl: "Foto's en catalogus",
+                ar: "الصور والكتالوج",
+              },
+            },
+            {
+              name: "contactInformation",
+              type: "textarea",
+              wide: true,
+              label: {
+                en: "Contact information",
+                nl: "Contactgegevens",
+                ar: "معلومات التواصل",
+              },
+            },
+          ],
+          common: "request",
+          submit: {
+            en: "Submit your company profile",
+            nl: "Dien uw bedrijfsprofiel in",
+            ar: "قدّم ملف شركتك",
+          },
+        },
+      },
+      /* kept extras (owner's choice), verbatim from 2336702: the closed character of the directory */
+      {
+        kind: "prose",
+        label: {
+          en: "What binds it",
+          nl: "Wat het bindt",
+          ar: "ما يجمعها",
+        },
+        heading: {
+          en: "Admitted, not *collected.*",
+          nl: "Toegelaten, niet *verzameld.*",
+          ar: "أعضاءٌ يُقبَلون، لا *يُجمَعون.*",
+        },
         body: [
           {
             en: "A network is only as useful as the trust between its people. Every member of DUKAAT is admitted on reputation — nominated by a member, invited by us or after applying — and verified before their name reaches anyone else: registration, activity, references.",
@@ -80,303 +314,425 @@ export const network: PageSet = {
         ],
       },
       {
-        kind: "next",
-        heading: { en: "How a name *enters* the network.", nl: "Hoe een naam het netwerk *binnenkomt.*", ar: "كيف *يدخل* الاسم إلى الشبكة." },
-        body: {
-          en: "Membership is by nomination or invitation: a name enters when a member puts it forward, when we invite a company ourselves, or when a company applies and is admitted after review.",
-          nl: "Lidmaatschap is op voordracht of uitnodiging: een naam komt binnen wanneer een lid die voordraagt, wanneer wij zelf een bedrijf uitnodigen, of wanneer een bedrijf zich aanmeldt en na beoordeling wordt toegelaten.",
-          ar: "العضوية بالترشيح أو الدعوة: يدخل الاسم حين يرشّحه أحد الأعضاء، أو حين ندعو نحن شركةً ما، أو حين تتقدّم شركة بطلب انضمام وتُقبل بعد المراجعة.",
-        },
-        links: [
-          { href: "how-we-work/verification", label: { en: "Verification & admission", nl: "Verificatie & toelating", ar: "التحقق والقبول" } },
-          { href: "membership", label: { en: "Membership", nl: "Lidmaatschap", ar: "العضوية" } },
-          { href: "contact?intent=nominated#intake", label: { en: "I have been nominated", nl: "Ik ben voorgedragen", ar: "تمّت تزكيتي" } },
-        ],
-      },
-    ],
-  },
-
-  /* ───────────────────────── directory ───────────────────────── */
-  "network/directory": {
-    masthead: { variant: "plate", photo: "dir-hero" },
-    blocks: [
-      {
-        kind: "lead",
-        text: {
-          en: "Not just a list of company names: a directory of business opportunities. Every admitted member has a profile that says what the company does, what it offers and what it is looking for — so that the right counterparty can recognise it.",
-          nl: "Niet zomaar een lijst met bedrijfsnamen: een register van zakelijke kansen. Elk toegelaten lid heeft een profiel dat laat zien wat het bedrijf doet, wat het aanbiedt en wat het zoekt — zodat de juiste tegenpartij het kan herkennen.",
-          ar: "ليس دليلَ أسماءٍ فحسب، بل دليلُ فرص. لكل عضو مقبول ملفٌّ يبيّن مجال عمل شركته، وما تقدّمه، وما تبحث عنه — حتى يتعرّف إليها الطرف المقابل المناسب.",
-        },
-      },
-      {
-        kind: "specimen",
-        label: { en: "The profile", nl: "Het profiel", ar: "الملف" },
-        heading: { en: "One form for *every member.*", nl: "Eén opbouw voor *elk lid.*", ar: "نموذجٌ واحد *لكل عضو.*" },
-        intro: {
-          en: "Every profile follows the same form, so that companies can be compared on what matters: what they make, where they sell, and what they need.",
-          nl: "Elk profiel heeft dezelfde opbouw, zodat bedrijven te vergelijken zijn op wat ertoe doet: wat zij maken, waar zij verkopen en wat zij nodig hebben.",
-          ar: "تتبع الملفات كلها النموذج نفسه، حتى تُقارَن الشركات على أساس ما يهمّ فعلاً: ماذا تنتج، وأين تبيع، وماذا تحتاج.",
-        },
-        title: { en: "A member profile", nl: "Een ledenprofiel", ar: "ملف عضو" },
-        fields: [
-          {
-            label: { en: "Company name", nl: "Bedrijfsnaam", ar: "اسم الشركة" },
-            hint: { en: "As entered in the commercial register", nl: "Zoals ingeschreven in het handelsregister", ar: "كما هو مقيّد في السجل التجاري" },
-          },
-          { label: { en: "Logo", nl: "Logo", ar: "الشعار" } },
-          {
-            label: { en: "Industry", nl: "Branche", ar: "القطاع" },
-            hint: { en: "The trade the company works in", nl: "De sector waarin het bedrijf actief is", ar: "المجال الذي تعمل فيه الشركة" },
-          },
-          {
-            label: { en: "Country", nl: "Land", ar: "الدولة" },
-            hint: { en: "Where the company is registered", nl: "Waar het bedrijf is ingeschreven", ar: "بلد تسجيل الشركة" },
-          },
-          {
-            label: { en: "Products", nl: "Producten", ar: "المنتجات" },
-            hint: { en: "What the company makes, packs or trades", nl: "Wat het bedrijf maakt, verpakt of verhandelt", ar: "ما تصنعه الشركة أو تعبّئه أو تتاجر به" },
-          },
-          {
-            label: { en: "Services", nl: "Diensten", ar: "الخدمات" },
-            hint: { en: "What it provides to other companies", nl: "Wat het aan andere bedrijven levert", ar: "ما تقدّمه لغيرها من الشركات" },
-          },
-          {
-            label: { en: "Markets", nl: "Markten", ar: "الأسواق" },
-            hint: { en: "Where it sells, and where it intends to", nl: "Waar het verkoopt en waar het wil verkopen", ar: "الأسواق التي تبيع فيها، والتي تنوي البيع فيها" },
-          },
-          {
-            label: { en: "Images and video", nl: "Foto’s en video", ar: "الصور والفيديو" },
-            hint: { en: "Of products, premises and production", nl: "Van producten, locatie en productie", ar: "للمنتجات والمقرّ وعمليات الإنتاج" },
-          },
-          {
-            label: { en: "What the company offers", nl: "Wat het bedrijf aanbiedt", ar: "ما تقدّمه الشركة" },
-            hint: { en: "“I offer”: what it brings to the table", nl: "“Ik bied”: wat het bedrijf inbrengt", ar: "«ما أقدّمه»: ما تسهم به الشركة" },
-          },
-          {
-            label: { en: "What the company is looking for", nl: "Wat het bedrijf zoekt", ar: "ما تبحث عنه الشركة" },
-            hint: {
-              en: "“I need”: the product, partner or market it wants to find",
-              nl: "“Ik zoek”: het product, de partner of de markt die het wil vinden",
-              ar: "«ما أبحث عنه»: ما تسعى الشركة إلى إيجاده من منتج أو شريك أو سوق",
-            },
-          },
-        ],
-        note: {
-          en: "Profiles are organised by country, industry, product, service, language, market and business need, so that the DUKAAT team can match a request to the right company.",
-          nl: "Profielen zijn geordend op land, branche, product, dienst, taal, markt en zakelijke behoefte, zodat het DUKAAT-team een aanvraag aan het juiste bedrijf kan koppelen.",
-          ar: "تُصنَّف الملفات بحسب الدولة، والقطاع، والمنتج، والخدمة، واللغة، والسوق، والحاجة التجارية، حتى يتمكّن فريق DUKAAT من مطابقة كل طلب مع الشركة المناسبة.",
-        },
-      },
-      {
-        kind: "register",
-        photo: "dir-profile",
-        label: { en: "Visibility per level", nl: "Zichtbaarheid per niveau", ar: "الظهور حسب المستوى" },
-        heading: { en: "What each level *shows.*", nl: "Wat elk niveau *laat zien.*", ar: "ما يُظهره *كل مستوى.*" },
-        intro: {
-          en: "Every admitted member is listed. How much the profile carries follows the level of membership.",
-          nl: "Elk toegelaten lid staat in het Ledenregister. Hoeveel het profiel laat zien, volgt het niveau van het lidmaatschap.",
-          ar: "يُدرَج كل عضو مقبول في الدليل، أما مقدار ما يعرضه ملفه فيتبع مستوى عضويته.",
-        },
-        items: [
-          {
-            title: { en: "Member: a listing", nl: "Member: een vermelding", ar: "Member: إدراجٌ في الدليل" },
-            body: {
-              en: "A listing in the directory with a company profile: what you offer, what you look for, and in which markets. Your profile is published within 10 working days of admission.",
-              nl: "Een vermelding in het Ledenregister met een bedrijfsprofiel: wat u aanbiedt, wat u zoekt en in welke markten. Uw profiel wordt binnen 10 werkdagen na toelating gepubliceerd.",
-              ar: "إدراجٌ في دليل الأعضاء مع ملفٍّ لشركتك: ما تقدّمه، وما تبحث عنه، وفي أيّ الأسواق. ويُنشر ملفك خلال 10 أيام عمل من قبولك.",
-            },
-          },
-          {
-            title: { en: "Professional: enhanced visibility", nl: "Professional: grotere zichtbaarheid", ar: "Professional: ظهورٌ أعلى" },
-            body: {
-              en: "Enhanced visibility in the directory and an advanced company profile, with your products and services listed one by one, so that each can be matched on its own.",
-              nl: "Grotere zichtbaarheid in het Ledenregister en een uitgebreid bedrijfsprofiel, met uw producten en diensten elk afzonderlijk vermeld, zodat elk ervan afzonderlijk kan worden gekoppeld.",
-              ar: "ظهورٌ أعلى في الدليل، وملفُّ شركةٍ متقدّم تُدرَج فيه منتجاتك وخدماتك بنداً بنداً، حتى يمكن مطابقة كلٍّ منها بمفرده.",
-            },
-          },
-          {
-            title: { en: "Executive: premium visibility", nl: "Executive: prominente zichtbaarheid", ar: "Executive: ظهورٌ مميّز" },
-            body: {
-              en: "Premium visibility in the directory, on top of everything a Professional profile carries: the advanced profile and the individual listing of products and services.",
-              nl: "Prominente zichtbaarheid in het Ledenregister, bovenop alles wat een Professional-profiel bevat: het uitgebreide profiel en de afzonderlijke vermelding van producten en diensten.",
-              ar: "ظهورٌ مميّز في الدليل، فوق كل ما يتضمّنه ملف Professional: الملف المتقدّم، وإدراج المنتجات والخدمات بنداً بنداً.",
-            },
-          },
-        ],
-      },
-      {
         kind: "notice",
-        label: { en: "Publication", nl: "Publicatie", ar: "النشر" },
-        heading: { en: "Only what you *approve.*", nl: "Alleen wat u *goedkeurt.*", ar: "لا يُنشر إلا ما *توافق عليه.*" },
+        label: {
+          en: "Publication",
+          nl: "Publicatie",
+          ar: "النشر",
+        },
+        heading: {
+          en: "Only what you *approve.*",
+          nl: "Alleen wat u *goedkeurt.*",
+          ar: "لا يُنشر إلا ما *توافق عليه.*",
+        },
         body: [
           {
             en: "Your profile shows only what you have explicitly approved. You can withdraw that approval, or ask for correction or deletion, at any time. We process members’ data in accordance with the GDPR.",
             nl: "Uw profiel toont alleen wat u uitdrukkelijk hebt goedgekeurd. U kunt die goedkeuring op elk moment intrekken, of om correctie of verwijdering vragen. Wij verwerken ledengegevens conform de AVG.",
             ar: "لا يَعرض ملفك إلا ما وافقت عليه صراحةً. ويمكنك في أي وقت أن تسحب هذه الموافقة، أو أن تطلب التصحيح أو الحذف. ونعالج بيانات الأعضاء وفقاً للائحة العامة لحماية البيانات (GDPR).",
           },
-          {
-            en: "This information does not constitute a guarantee, endorsement or warranty by DUKAAT regarding any company, product or transaction. It is provided to support more informed business decisions. Members remain fully responsible for their own due diligence.",
-            nl: "Deze informatie vormt geen garantie, aanbeveling of waarborg van DUKAAT ten aanzien van enig bedrijf, product of enige transactie. Zij wordt verstrekt om beter geïnformeerde zakelijke beslissingen te ondersteunen. Leden blijven volledig verantwoordelijk voor hun eigen due diligence.",
-            ar: "لا تُشكّل هذه المعلومات ضماناً أو تأييداً أو كفالةً من DUKAAT بشأن أي شركة أو منتج أو معاملة، وإنما تُقدَّم لدعم اتخاذ قراراتٍ تجارية أكثر وعياً. ويبقى الأعضاء مسؤولين مسؤوليةً كاملة عن إجراء الفحص النافي للجهالة بأنفسهم.",
-          },
-        ],
-      },
-      {
-        kind: "next",
-        heading: { en: "What stands *behind* a profile.", nl: "Wat er *achter* een profiel staat.", ar: "ما يقف *خلف* الملف." },
-        links: [
-          { href: "how-we-work/verification", label: { en: "Verification & admission", nl: "Verificatie & toelating", ar: "التحقق والقبول" } },
-          { href: "membership/levels", label: { en: "The three levels", nl: "De drie niveaus", ar: "المستويات الثلاثة" } },
-          { href: "legal/member-data", label: { en: "Publication of member data", nl: "Publicatie van ledengegevens", ar: "نشر بيانات الأعضاء" } },
         ],
       },
     ],
   },
 
-  /* ───────────────────────── sector clubs ───────────────────────── */
-  "network/sector-clubs": {
-    masthead: { variant: "band", photo: "sec-hero" },
+  /* ------------------------------------------------------------------ 15. Studies and reports */
+  "services/intelligence": {
+    masthead: { variant: "band", photo: "int-hero" },
+    eyebrow: {
+      en: "DUKAAT Intelligence",
+      nl: "DUKAAT Intelligence",
+      ar: "DUKAAT Intelligence",
+    },
+    headline: {
+      en: "Understand the market before you step into it",
+      nl: "Begrijp de markt voordat u erin stapt",
+      ar: "افهم السوق قبل أن تخطو إليه",
+    },
     blocks: [
       {
         kind: "lead",
         text: {
-          en: "Inside DUKAAT, members also meet by trade. A sector club gathers the companies of one sector — producers, buyers, suppliers and the specialists who serve them — so that opportunities, reports and meetings reach the people they concern.",
-          nl: "Binnen DUKAAT treffen leden elkaar ook per vak. Een sectorclub brengt de bedrijven uit één sector samen — producenten, kopers, leveranciers en de specialisten die hen bedienen — zodat kansen, rapporten en bijeenkomsten terechtkomen bij wie ze aangaan.",
-          ar: "يلتقي الأعضاء داخل DUKAAT بحسب القطاع أيضاً. فالنادي القطاعي يجمع شركات قطاعٍ واحد — المنتجين والمشترين والمورّدين والمختصين الذين يخدمونهم — حتى تصل الفرص والتقارير واللقاءات إلى من يعنيهم أمرها.",
+          en: "Content that helps business owners understand sectors and markets and ask the right questions. We focus on the information that bears on the decision: who are the potential customers? How do you reach them? Which requirements need researching? And what information is missing before you begin?",
+          nl: "Content die ondernemers helpt sectoren en markten te begrijpen en de juiste vragen te stellen. We richten ons op de informatie die met de beslissing samenhangt: wie zijn de potentiële klanten? Hoe bereikt u hen? Welke vereisten vragen om onderzoek? En welke informatie ontbreekt voordat u begint?",
+          ar: "محتوى يساعد أصحاب الأعمال على فهم القطاعات والأسواق وطرح الأسئلة الصحيحة. نركّز على المعلومات المرتبطة بالقرار: من العملاء المحتملون؟ كيف تصل إليهم؟ ما المتطلبات التي تحتاج إلى بحث؟ وما المعلومات الناقصة قبل البدء؟",
         },
       },
       {
         kind: "register",
-        cols: 2,
-        label: { en: "The sectors", nl: "De sectoren", ar: "القطاعات" },
-        heading: { en: "A club for *each trade.*", nl: "Een club voor *elk vak.*", ar: "نادٍ *لكل قطاع.*" },
-        intro: {
-          en: "Each club covers one trade and the companies around it, in the Netherlands and Europe as well as in the Arab world.",
-          nl: "Elke club omvat één vak en de bedrijven eromheen, in Nederland en Europa én in de Arabische wereld.",
-          ar: "يغطي كل نادٍ قطاعاً واحداً والشركات المرتبطة به، في هولندا وأوروبا كما في العالم العربي.",
+        heading: {
+          en: "Types of content",
+          nl: "Soorten content",
+          ar: "أنواع المحتوى",
         },
+        cols: 2,
         items: [
           {
-            title: { en: "Food & Agriculture", nl: "Voeding & landbouw", ar: "الغذاء والزراعة" },
+            title: {
+              en: "Market entry guides",
+              nl: "Gidsen voor markttoetreding",
+              ar: "أدلة دخول الأسواق",
+            },
             body: {
-              en: "Growers, processors, packers, importers and buyers of food: fresh and dried produce, legumes, nuts, dates, ingredients and packaged goods.",
-              nl: "Telers, verwerkers, verpakkers, importeurs en inkopers van voedingsmiddelen: verse en gedroogde producten, peulvruchten, noten, dadels, ingrediënten en verpakte levensmiddelen.",
-              ar: "المزارعون، ومصنّعو الأغذية ومعبّئوها ومستوردوها ومشتروها: المنتجات الطازجة والمجفّفة، والبقوليات، والمكسرات، والتمور، والمكوّنات الغذائية، والأغذية المعبّأة.",
+              en: "a structured look at the steps of preparation and the topics that need follow-up.",
+              nl: "een gestructureerde blik op de voorbereidingsstappen en de onderwerpen die opvolging vragen.",
+              ar: "نظرة منظمة إلى خطوات الاستعداد والموضوعات التي تحتاج إلى متابعة.",
             },
           },
           {
-            title: { en: "Real Estate", nl: "Vastgoed", ar: "العقارات" },
+            title: {
+              en: "Sector reports",
+              nl: "Sectorrapporten",
+              ar: "تقارير قطاعية",
+            },
             body: {
-              en: "Developers, project owners, investors and advisers in residential, commercial and hospitality property, and the questions of ownership, law and tax that come with it.",
-              nl: "Ontwikkelaars, projecteigenaren, investeerders en adviseurs in woon-, bedrijfs- en hotelvastgoed, en de vragen over eigendom, recht en belasting die daarbij horen.",
-              ar: "المطوّرون العقاريون وأصحاب المشاريع والمستثمرون والمستشارون في العقارات السكنية والتجارية والفندقية، وما يرافقها من مسائل الملكية والقانون والضرائب.",
+              en: "information on the nature of the sector, its customers, channels and challenges.",
+              nl: "informatie over de aard van de sector, de klanten, de kanalen en de uitdagingen.",
+              ar: "معلومات عن طبيعة القطاع والعملاء والقنوات والتحديات.",
             },
           },
           {
-            title: { en: "Construction", nl: "Bouw", ar: "البناء والتشييد" },
+            title: {
+              en: "Opportunity notes",
+              nl: "Kansennotities",
+              ar: "مذكرات فرص",
+            },
             body: {
-              en: "Contractors, engineers and suppliers of building materials, from natural stone and steel to finishing materials, and the equipment a site runs on.",
-              nl: "Aannemers, ingenieurs en leveranciers van bouwmaterialen, van natuursteen en staal tot afwerkingsmaterialen, en het materieel waarop een bouwplaats draait.",
-              ar: "المقاولون والمهندسون ومورّدو مواد البناء، من الحجر الطبيعي والصلب إلى مواد التشطيب، والمعدات التي يقوم عليها العمل في موقع البناء.",
+              en: "a concise overview of an opportunity, its context and the information still to be completed.",
+              nl: "een beknopte weergave van een kans, de context ervan en de informatie die moet worden aangevuld.",
+              ar: "عرض موجز لفرصة وسياقها والمعلومات التي يلزم استكمالها.",
             },
           },
           {
-            title: { en: "Technology", nl: "Technologie", ar: "التكنولوجيا" },
+            title: {
+              en: "Practical materials",
+              nl: "Praktisch materiaal",
+              ar: "مواد عملية",
+            },
             body: {
-              en: "Software, systems and industrial technology: companies that need distributors, integration partners or clients on the other side.",
-              nl: "Software, systemen en industriële technologie: bedrijven die aan de andere kant distributeurs, integratiepartners of klanten zoeken.",
-              ar: "البرمجيات والأنظمة والتقنيات الصناعية: شركاتٌ تحتاج على الضفة الأخرى إلى موزّعين، أو شركاء في تكامل الأنظمة، أو عملاء.",
+              en: "lists of questions and templates that help you prepare for a meeting or a business request.",
+              nl: "lijsten met vragen en sjablonen die helpen bij de voorbereiding op een bespreking of een zakelijke aanvraag.",
+              ar: "قوائم أسئلة ونماذج تساعد على التحضير للاجتماع أو الطلب التجاري.",
             },
           },
           {
-            title: { en: "Printing & Packaging", nl: "Drukwerk & verpakking", ar: "الطباعة والتغليف" },
+            title: {
+              en: "Knowledge content",
+              nl: "Kenniscontent",
+              ar: "محتوى معرفي",
+            },
             body: {
-              en: "Printers, paper and board suppliers, packaging manufacturers and converters — and the presses, lines and stocklots that change hands between them.",
-              nl: "Drukkerijen, leveranciers van papier en karton, verpakkingsproducenten en -verwerkers — en de persen, productielijnen en partijen die tussen hen van eigenaar wisselen.",
-              ar: "المطابع، ومورّدو الورق والكرتون، ومصنّعو مواد التغليف، وشركات تحويل الورق والكرتون — وآلات الطباعة وخطوط الإنتاج ودفعات المخزون التي تنتقل ملكيتها بينهم.",
+              en: "articles, summaries of meetings and lessons drawn from practical experience.",
+              nl: "artikelen, samenvattingen van bijeenkomsten en lessen uit praktijkervaringen.",
+              ar: "مقالات وملخصات لقاءات ودروس من الخبرات العملية.",
+            },
+          },
+        ],
+      },
+      { kind: "band", photo: "int-band" },
+      {
+        kind: "listing",
+        id: "publications",
+        heading: {
+          en: "Browse the content",
+          nl: "Bekijk de content",
+          ar: "استعرض المحتوى",
+        },
+        empty: {
+          en: "[text missing in the source: text for when no content is published]",
+          nl: "[tekst ontbreekt in de bron: tekst voor wanneer er geen content is gepubliceerd]",
+          ar: "[نص غير موجود في المصدر: نص عند عدم نشر أي محتوى]",
+        },
+        links: [
+          {
+            href: "contact?subject=consultancy#contact-form",
+            label: {
+              en: "Request a tailored study",
+              nl: "Vraag een studie op maat aan",
+              ar: "اطلب دراسة مخصصة",
             },
           },
           {
-            title: { en: "Logistics", nl: "Logistiek", ar: "اللوجستيات" },
-            body: {
-              en: "Forwarders, carriers, warehouses and customs specialists who move goods between Rotterdam, the rest of Europe and the Arab world.",
-              nl: "Expediteurs, vervoerders, opslagbedrijven en douanespecialisten die de goederenstroom verzorgen tussen Rotterdam, de rest van Europa en de Arabische wereld.",
-              ar: "وكلاء الشحن والناقلون وشركات التخزين والمختصون في التخليص الجمركي، الذين يتولّون حركة البضائع بين روتردام وبقية أوروبا والعالم العربي.",
-            },
-          },
-          {
-            title: { en: "Energy", nl: "Energie", ar: "الطاقة" },
-            body: {
-              en: "Conventional and renewable energy: the equipment and components, the contractors who install them, and the service companies that keep them running.",
-              nl: "Conventionele en duurzame energie: apparatuur en componenten, de aannemers die ze installeren en de servicebedrijven die ze draaiende houden.",
-              ar: "الطاقة التقليدية والمتجددة: المعدات والمكوّنات، والمقاولون الذين يركّبونها، وشركات الخدمات التي تُبقيها قيد التشغيل.",
-            },
-          },
-          {
-            title: { en: "Professional Services", nl: "Zakelijke dienstverlening", ar: "الخدمات المهنية" },
-            body: {
-              en: "Lawyers, tax advisers, accountants, translators and other specialists whose work makes cross-border trade possible: contracts, structures, filings, language.",
-              nl: "Advocaten, belastingadviseurs, accountants, vertalers en andere specialisten wier werk grensoverschrijdende handel mogelijk maakt: contracten, structuren, aangiften, taal.",
-              ar: "المحامون والمستشارون الضريبيون والمحاسبون والمترجمون وسائر المختصين الذين يجعل عملُهم التجارةَ عبر الحدود ممكنة: العقود، والهياكل، والإقرارات، واللغة.",
+            href: "membership/sector-networks#circle",
+            label: {
+              en: "Register your interest in a sector",
+              nl: "Registreer uw interesse in een sector",
+              ar: "سجّل اهتمامك بقطاع",
             },
           },
         ],
       },
       {
-        kind: "mosaic",
-        photos: ["sec-dates", "sec-pack", "sec-energy", "sec-seeds"],
-        caption: {
-          en: "Every trade has its own language. A sector club is where it is spoken.",
-          nl: "Elk vak heeft zijn eigen taal. In een sectorclub wordt die gesproken.",
-          ar: "لكل قطاعٍ لغته، وفي النادي القطاعي يُتحدَّث بها.",
-        },
-      },
-      {
-        kind: "statement",
-        text: {
-          en: "Each club brings together members, opportunities, reports, events and specialists from one trade.",
-          nl: "Elke club brengt leden, kansen, rapporten, bijeenkomsten en specialisten uit één vak samen.",
-          ar: "يجمع كل نادٍ أعضاءَ قطاعٍ واحد، وفرصَه، وتقاريرَه، وفعالياتِه، وخبراءَه.",
-        },
-        note: {
-          en: "Access to the sector clubs is part of every level of membership.",
-          nl: "Toegang tot de sectorclubs hoort bij elk niveau van lidmaatschap.",
-          ar: "الوصول إلى الأندية القطاعية مشمولٌ في كل مستوى من مستويات العضوية.",
-        },
-      },
-      {
-        kind: "next",
-        heading: { en: "What a club *draws on.*", nl: "Waaruit een club *put.*", ar: "ما يستند إليه *النادي.*" },
-        links: [
-          { href: "events/calendar", label: { en: "Events", nl: "Evenementen", ar: "الفعاليات" } },
-          { href: "events/intelligence", label: { en: "Market reports", nl: "Marktrapporten", ar: "تقارير الأسواق" } },
-          { href: "network/directory", label: { en: "Member directory", nl: "Ledenregister", ar: "دليل الأعضاء" } },
+        kind: "notice",
+        body: [
+          {
+            en: "The content reflects the information available as of the date it was prepared; details relevant to a decision are reviewed according to the case and the market.",
+            nl: "De content weerspiegelt de informatie die beschikbaar was op de datum waarop deze is opgesteld; de details die met de beslissing samenhangen, worden gecontroleerd afhankelijk van de situatie en de markt.",
+            ar: "يعكس المحتوى المعلومات المتاحة بتاريخ إعداده؛ تُراجع التفاصيل المرتبطة بالقرار بحسب الحالة والسوق.",
+          },
         ],
       },
     ],
   },
 
-  /* ───────────────────────── stories ───────────────────────── */
-  "network/stories": {
-    masthead: { variant: "portrait", photo: "sto-hero" },
+  /* ------------------------------------------------------------------ 16. Sector communities */
+  "membership/sector-networks": {
+    masthead: { variant: "portrait", photo: "sec-hero" },
+    eyebrow: {
+      en: "DUKAAT Circles",
+      nl: "DUKAAT Circles",
+      ar: "DUKAAT Circles",
+    },
+    headline: {
+      en: "Meet those who understand your sector",
+      nl: "Ontmoet wie uw sector begrijpt",
+      ar: "اجتمع بمن يفهم قطاعك",
+    },
     blocks: [
       {
         kind: "lead",
         text: {
-          en: "The best proof of a network’s value is what happens inside it. Our stories follow how a search becomes an introduction, and an introduction becomes business — told only with the permission of everyone involved.",
-          nl: "Het beste bewijs van de waarde van een netwerk is wat erbinnen gebeurt. Onze verhalen volgen hoe een zoektocht een introductie wordt en een introductie tot zaken leidt — alleen verteld met toestemming van iedereen die erbij betrokken is.",
-          ar: "أفضل دليل على قوة الشبكة هو ما يحدث داخلها. تتبع قصصنا كيف يتحوّل البحث إلى تعريف، والتعريف إلى عمل تجاري — ولا تُروى إلا بموافقة جميع الأطراف المعنية.",
+          en: "Within the DUKAAT community, we develop specialised spaces that bring together people with related interests and expertise. These communities enable more work-relevant discussions, the exchange of information, and getting to know parties and topics that matter to the sector.",
+          nl: "Binnen de DUKAAT-community ontwikkelen we gespecialiseerde ruimtes die mensen met verwante belangen en expertise samenbrengen. Deze community’s maken het mogelijk om discussies te voeren die relevanter zijn voor het werk, informatie uit te wisselen en kennis te maken met partijen en onderwerpen die voor de sector van belang zijn.",
+          ar: "داخل مجتمع دوكات، نطوّر مساحات متخصصة تجمع أصحاب المصالح والخبرات المتقاربة. تتيح هذه المجتمعات نقاشات أكثر صلة بالعمل، وتبادل معلومات، والتعرف إلى أطراف وموضوعات تهم القطاع.",
         },
       },
+      {
+        kind: "terms",
+        heading: {
+          en: "Target sectors",
+          nl: "Beoogde sectoren",
+          ar: "القطاعات المستهدفة",
+        },
+        items: [
+          { en: "Food and agriculture", nl: "Voeding en landbouw", ar: "الأغذية والزراعة" },
+          { en: "Real estate", nl: "Vastgoed", ar: "العقارات" },
+          { en: "Construction", nl: "Bouw", ar: "البناء" },
+          { en: "Technology", nl: "Technologie", ar: "التكنولوجيا" },
+          { en: "Printing and packaging", nl: "Drukwerk en verpakking", ar: "الطباعة والتغليف" },
+          { en: "Logistics", nl: "Logistieke diensten", ar: "الخدمات اللوجستية" },
+          { en: "Energy", nl: "Energie", ar: "الطاقة" },
+          { en: "Professional services", nl: "Professionele diensten", ar: "الخدمات المهنية" },
+        ],
+      },
+      { kind: "mosaic", photos: ["sec-dates", "sec-pack", "sec-energy", "sec-seeds"] },
+      {
+        kind: "prose",
+        body: [
+          {
+            en: "The community's activities may include specialist meetings, discussion of shared challenges, the sharing of business needs, and workshops and reports linked to the interests of its members. Available activities and groups are announced in line with the club's programme.",
+            nl: "Tot de activiteiten van de community kunnen behoren: gespecialiseerde bijeenkomsten, het bespreken van gedeelde uitdagingen, het delen van zakelijke behoeften, en workshops en rapporten die verband houden met de interesses van haar leden. De beschikbare activiteiten en groepen worden aangekondigd volgens het programma van de club.",
+            ar: "يمكن أن تضم أنشطة المجتمع لقاءات تخصصية، ومناقشة تحديات مشتركة، ومشاركة احتياجات تجارية، وورشًا وتقارير مرتبطة باهتمامات أعضائه. تُعلن الأنشطة والمجموعات المتاحة بحسب برنامج النادي.",
+          },
+        ],
+      },
+      {
+        kind: "actions",
+        links: [
+          {
+            href: "#circle",
+            label: {
+              en: "Choose your sector",
+              nl: "Kies uw sector",
+              ar: "اختر قطاعك",
+            },
+          },
+          {
+            href: "#circle",
+            label: {
+              en: "Register your interest in a community",
+              nl: "Registreer uw interesse in een community",
+              ar: "سجّل اهتمامك بمجتمع",
+            },
+          },
+          {
+            href: "#circle",
+            label: {
+              en: "Propose a new community",
+              nl: "Stel een nieuwe community voor",
+              ar: "اقترح مجتمعًا جديدًا",
+            },
+          },
+        ],
+      },
+      {
+        kind: "form",
+        form: {
+          id: "circle",
+          title: {
+            en: "Choose your sector",
+            nl: "Kies uw sector",
+            ar: "اختر قطاعك",
+          },
+          fields: [
+            {
+              name: "sector",
+              type: "select",
+              label: {
+                en: "Sector",
+                nl: "Sector",
+                ar: "القطاع",
+              },
+              options: [
+                { en: "Food and agriculture", nl: "Voeding en landbouw", ar: "الأغذية والزراعة" },
+                { en: "Real estate", nl: "Vastgoed", ar: "العقارات" },
+                { en: "Construction", nl: "Bouw", ar: "البناء" },
+                { en: "Technology", nl: "Technologie", ar: "التكنولوجيا" },
+                { en: "Printing and packaging", nl: "Drukwerk en verpakking", ar: "الطباعة والتغليف" },
+                { en: "Logistics", nl: "Logistieke diensten", ar: "الخدمات اللوجستية" },
+                { en: "Energy", nl: "Energie", ar: "الطاقة" },
+                { en: "Professional services", nl: "Professionele diensten", ar: "الخدمات المهنية" },
+              ],
+            },
+            {
+              name: "specialisation",
+              label: {
+                en: "Specialisation",
+                nl: "Specialisatie",
+                ar: "التخصص",
+              },
+            },
+            {
+              name: "share",
+              type: "textarea",
+              wide: true,
+              label: {
+                en: "What you can share",
+                nl: "Wat u kunt delen",
+                ar: "ما تستطيع مشاركته",
+              },
+            },
+            {
+              name: "learn",
+              type: "textarea",
+              wide: true,
+              label: {
+                en: "What you would like to learn or gain access to",
+                nl: "Wat u wilt leren of bereiken",
+                ar: "ما ترغب في تعلمه أو الوصول إليه",
+              },
+            },
+          ],
+          common: "request",
+          submit: {
+            en: "Register your interest in a community",
+            nl: "Registreer uw interesse in een community",
+            ar: "سجّل اهتمامك بمجتمع",
+          },
+        },
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ 17. Success stories */
+  "membership/stories": {
+    masthead: { variant: "plate", photo: "sto-hero" },
+    eyebrow: {
+      en: "DUKAAT Stories",
+      nl: "DUKAAT Stories",
+      ar: "DUKAAT Stories",
+    },
+    headline: {
+      en: "Relationships that led to a step worth recounting",
+      nl: "Relaties die een stap tot stand brachten die het vertellen waard is",
+      ar: "علاقات صنعت خطوة تستحق أن تُروى",
+    },
+    blocks: [
+      {
+        kind: "lead",
+        text: {
+          en: "We share real stories from the DUKAAT community: how the need arose, how the introduction or the learning came about, and what step was achieved afterwards. We publish with the consent of the people whose stories they are, and in a way that protects the commercial information they wish to keep private.",
+          nl: "We delen echte verhalen uit de DUKAAT-community: hoe de behoefte ontstond, hoe de kennismaking of het leren plaatsvond en welke stap daarna werd gerealiseerd. We publiceren met toestemming van degenen van wie het verhaal is, en op een manier die de zakelijke informatie beschermt die zij voor zich willen houden.",
+          ar: "نشارك قصصًا حقيقية من مجتمع دوكات: كيف بدأ الاحتياج، وكيف جرى التعارف أو التعلم، وما الخطوة التي تحققت بعد ذلك. ننشر بموافقة أصحاب القصة وبما يحفظ المعلومات التجارية التي يرغبون في إبقائها خاصة.",
+        },
+      },
+      {
+        kind: "register",
+        items: [
+          {
+            title: {
+              en: "A story of collaboration",
+              nl: "Samenwerkingsverhaal",
+              ar: "قصة تعاون",
+            },
+            body: {
+              en: "The journey of a company or member from a specific need to a documented collaboration, making clear DUKAAT's role and what the parties achieved.",
+              nl: "De reis die een bedrijf of lid maakt van een specifieke behoefte naar een gedocumenteerde samenwerking, met een toelichting op de rol van DUKAAT en op wat de partijen hebben bereikt.",
+              ar: "رحلة شركة أو عضو من حاجة محددة إلى تعاون موثّق، مع توضيح دور دوكات وما أنجزته الأطراف.",
+            },
+          },
+          {
+            title: {
+              en: "Member in the spotlight",
+              nl: "Lid in de schijnwerpers",
+              ar: "عضو تحت الضوء",
+            },
+            body: {
+              en: "Get to know a member's expertise and activity, what they offer, what they are looking for, and what they can add to the community.",
+              nl: "Maak kennis met de expertise en de activiteiten van een van de leden, met wat dit lid biedt, waar het naar zoekt en wat het aan de community kan toevoegen.",
+              ar: "تعرّف إلى خبرة أحد الأعضاء ونشاطه، وما يقدّمه، وما يبحث عنه، وما يستطيع إضافته للمجتمع.",
+            },
+          },
+          {
+            title: {
+              en: "From knowledge to practice",
+              nl: "Van kennis naar toepassing",
+              ar: "من المعرفة إلى التطبيق",
+            },
+            body: {
+              en: "The experience of a participant who used what they learned in a programme or workshop to develop a skill or take a professional step.",
+              nl: "De ervaring van een deelnemer die wat hij of zij in een programma of workshop had geleerd, gebruikte om een vaardigheid of een professionele stap te ontwikkelen.",
+              ar: "تجربة مشارك استخدم ما تعلّمه في برنامج أو ورشة لتطوير مهارة أو خطوة مهنية.",
+            },
+          },
+        ],
+      },
+      {
+        kind: "listing",
+        id: "stories",
+        heading: {
+          en: "Read the stories",
+          nl: "Lees de verhalen",
+          ar: "اقرأ القصص",
+        },
+        empty: {
+          en: "This is where we will share experiences from the DUKAAT community once they have been documented and those involved have given their consent. If you have an experience worth sharing, we would be glad to hear it.",
+          nl: "Hier zullen we de ervaringen van de DUKAAT-community delen, nadat ze zijn gedocumenteerd en we toestemming hebben gekregen van degenen van wie ze zijn. Heeft u een ervaring die het delen waard is, dan horen we die graag.",
+          ar: "هنا سنشارك تجارب مجتمع دوكات بعد توثيقها والحصول على موافقة أصحابها. إذا كانت لديك تجربة تستحق المشاركة، يسعدنا سماعها.",
+        },
+        links: [
+          {
+            href: "contact?subject=other#contact-form",
+            label: {
+              en: "Share your experience with us",
+              nl: "Deel uw ervaring met ons",
+              ar: "شاركنا تجربتك",
+            },
+          },
+        ],
+      },
+      /* kept extra (owner's choice), verbatim from 2336702: the named story formats */
       {
         kind: "register",
         cols: 1,
         numbered: true,
-        label: { en: "The formats", nl: "De rubrieken", ar: "الصيغ" },
-        heading: { en: "The forms a story *takes.*", nl: "De vormen die een verhaal *aanneemt.*", ar: "الأشكال التي تتخذها *القصة.*" },
+        label: {
+          en: "The formats",
+          nl: "De rubrieken",
+          ar: "الصيغ",
+        },
+        heading: {
+          en: "The forms a story *takes.*",
+          nl: "De vormen die een verhaal *aanneemt.*",
+          ar: "الأشكال التي تتخذها *القصة.*",
+        },
         items: [
           {
-            title: { en: "Deal of the Month", nl: "Deal of the Month", ar: "Deal of the Month" },
+            title: {
+              en: "Deal of the Month",
+              nl: "Deal of the Month",
+              ar: "Deal of the Month",
+            },
             body: {
               en: "Each month, one opportunity or cooperation that began through DUKAAT: what was needed, how the parties found each other, and what they agreed to share.",
               nl: "Elke maand één kans of samenwerking die via DUKAAT is begonnen: wat er nodig was, hoe de partijen elkaar vonden, en wat zij bereid zijn te delen.",
@@ -384,7 +740,11 @@ export const network: PageSet = {
             },
           },
           {
-            title: { en: "Member Spotlight", nl: "Member Spotlight", ar: "Member Spotlight" },
+            title: {
+              en: "Member Spotlight",
+              nl: "Member Spotlight",
+              ar: "Member Spotlight",
+            },
             body: {
               en: "A portrait of one member: the story behind the company, what it offers and what it is looking for. Being featured is open to Professional and Executive members.",
               nl: "Een portret van één lid: het verhaal achter het bedrijf, wat het aanbiedt en wat het zoekt. Open voor leden op de niveaus Professional en Executive.",
@@ -392,7 +752,11 @@ export const network: PageSet = {
             },
           },
           {
-            title: { en: "Success Stories", nl: "Succesverhalen", ar: "قصص النجاح" },
+            title: {
+              en: "Success Stories",
+              nl: "Succesverhalen",
+              ar: "قصص النجاح",
+            },
             body: {
               en: "Longer accounts of how a connection became business: the search, the introduction, the checks on both sides, and the first shipment or contract.",
               nl: "Langere verslagen van hoe een contact tot zaken leidde: de zoektocht, de introductie, de controles aan beide kanten, en de eerste zending of het eerste contract.",
@@ -401,246 +765,233 @@ export const network: PageSet = {
           },
         ],
       },
-      {
-        kind: "register",
-        cols: 2,
-        label: { en: "The subjects", nl: "De onderwerpen", ar: "الموضوعات" },
-        heading: { en: "The stories we *tell.*", nl: "De verhalen die wij *vertellen.*", ar: "القصص التي *نرويها.*" },
-        intro: {
-          en: "Every story starts with one of the needs members bring to us.",
-          nl: "Elk verhaal begint bij een van de behoeften die leden bij ons neerleggen.",
-          ar: "تبدأ كل قصة بحاجةٍ من الحاجات التي يحملها الأعضاء إلينا.",
-        },
-        items: [
-          {
-            title: { en: "A member finding a distributor", nl: "Een lid dat een distributeur vindt", ar: "عضوٌ يجد موزّعاً" },
-            body: {
-              en: "A product that sells at home, and the distributor on the other side who takes it into a new market.",
-              nl: "Een product dat thuis verkoopt, en de distributeur aan de andere kant die het een nieuwe markt in brengt.",
-              ar: "منتجٌ يُباع في بلده، وموزّعٌ على الضفة الأخرى يحمله إلى سوقٍ جديدة.",
-            },
-          },
-          {
-            title: { en: "A company identifying a supplier", nl: "Een bedrijf dat de juiste leverancier vindt", ar: "شركةٌ تجد مورّداً" },
-            body: {
-              en: "A specification, a volume, a certificate the buyer requires — and the verified source that can deliver it.",
-              nl: "Een specificatie, een volume, een certificaat dat de koper eist — en de geverifieerde bron die het kan leveren.",
-              ar: "مواصفةٌ وكميةٌ وشهادةٌ يشترطها المشتري — ومصدرٌ موثّق قادرٌ على التوريد.",
-            },
-          },
-          {
-            title: { en: "A manufacturer entering a new market", nl: "Een fabrikant die een nieuwe markt betreedt", ar: "مصنعٌ يدخل سوقاً جديدة" },
-            body: {
-              en: "From the Netherlands into the Arab world, or the other way round: the structure, the partner, the first order.",
-              nl: "Van Nederland naar de Arabische wereld, of andersom: de structuur, de partner, de eerste order.",
-              ar: "من هولندا إلى العالم العربي أو بالعكس: الهيكل، والشريك، والطلبية الأولى.",
-            },
-          },
-          {
-            title: { en: "An investor discovering a project", nl: "Een investeerder die een project ontdekt", ar: "مستثمرٌ يتعرّف إلى مشروع" },
-            body: {
-              en: "A company or project that needs capital, presented for information only, and an investor who takes it further on the strength of their own due diligence.",
-              nl: "Een bedrijf of project dat kapitaal zoekt, uitsluitend ter informatie gepresenteerd, en een investeerder die het op basis van eigen onderzoek verder brengt.",
-              ar: "شركةٌ أو مشروعٌ يحتاج إلى رأس مال ويُعرض للاطلاع فقط، ومستثمرٌ يمضي فيه قُدماً استناداً إلى الفحص النافي للجهالة الذي يجريه بنفسه.",
-            },
-          },
-        ],
-      },
-      {
-        kind: "notice",
-        label: { en: "Permission", nl: "Toestemming", ar: "الموافقة" },
-        heading: { en: "Nothing without *permission.*", nl: "Niets zonder *toestemming.*", ar: "لا شيء *دون موافقة.*" },
-        body: [
-          {
-            en: "A story is published only with the explicit permission of every party involved, and each party reads the final text before it appears.",
-            nl: "Een verhaal wordt alleen gepubliceerd met uitdrukkelijke toestemming van elke betrokken partij, en elke partij leest de definitieve tekst voordat die verschijnt.",
-            ar: "لا تُنشر أي قصة إلا بموافقةٍ صريحة من كل طرف معنيّ بها، ويطّلع كل طرف على النص النهائي قبل نشره.",
-          },
-          {
-            en: "Figures — volumes, values, prices — appear only when the parties have approved them. On request, a story is told without names: the sector, the market and how the connection was made, not the companies.",
-            nl: "Cijfers — volumes, bedragen, prijzen — verschijnen alleen als de partijen ze hebben goedgekeurd. Op verzoek wordt een verhaal zonder namen verteld: de sector, de markt en hoe het contact tot stand kwam, niet de bedrijven.",
-            ar: "ولا تظهر الأرقام — الكميات والمبالغ والأسعار — إلا إذا وافق عليها الأطراف. وعند الطلب تُروى القصة دون أسماء: يُذكر القطاع والسوق وكيف نشأت الصلة، لا الشركات.",
-          },
-        ],
-      },
-      {
-        kind: "next",
-        heading: { en: "Every story starts with a *need.*", nl: "Elk verhaal begint met een *behoefte.*", ar: "كل قصة تبدأ *بحاجة.*" },
-        links: [
-          { href: "contact?intent=distributor#intake", label: { en: "I need a distributor", nl: "Ik zoek een distributeur", ar: "أحتاج إلى موزّع" } },
-          { href: "contact?intent=supplier#intake", label: { en: "I need a supplier", nl: "Ik zoek een leverancier", ar: "أحتاج إلى مورّد" } },
-          { href: "how-we-work", label: { en: "How we work", nl: "Zo werken wij", ar: "كيف نعمل" } },
-        ],
-      },
     ],
   },
 
-  /* ───────────────────────── ambassadors ───────────────────────── */
-  "network/ambassadors": {
-    masthead: { variant: "band", photo: "amb-hero" },
+  /* ------------------------------------------------------------------ 18. Partnerships and sponsorship */
+  partnerships: {
+    masthead: { variant: "portrait", photo: "par-hero" },
+    headline: {
+      en: "Let us build broader value together",
+      nl: "Laten we samen bredere waarde opbouwen",
+      ar: "لنبنِ قيمة أوسع معًا",
+    },
     blocks: [
       {
         kind: "lead",
         text: {
-          en: "DUKAAT works with ambassadors in various markets and cities. An ambassador is an established business figure in their own market — someone who knows its people, its customs and its doors.",
-          nl: "DUKAAT werkt met ambassadeurs in verschillende markten en steden. Een ambassadeur is een gevestigde ondernemer in de eigen markt — iemand die de mensen, de gebruiken en de deuren daar kent.",
-          ar: "يعمل DUKAAT مع سفراء في أسواق ومدن مختلفة. والسفير شخصيةُ أعمالٍ راسخة في سوقها، تعرف أهلها وأعرافها وأبوابها.",
+          en: "We seek to collaborate with companies, universities, training bodies, professional firms, economic institutions, exhibition organisers and service providers, to develop programmes and opportunities that serve the Dutch and Arab community.",
+          nl: "We streven naar samenwerking met bedrijven, universiteiten, opleidingsinstanties, professionele kantoren, economische instellingen, beursorganisatoren en dienstverleners, om programma's en kansen te ontwikkelen die de Nederlandse en Arabische community dienen.",
+          ar: "نسعى إلى التعاون مع الشركات والجامعات والجهات التدريبية والمكاتب المهنية والمؤسسات الاقتصادية ومنظمي المعارض ومقدمي الخدمات، لتطوير برامج وفرص تخدم المجتمع الهولندي والعربي.",
         },
       },
       {
-        kind: "register",
-        cols: 1,
-        numbered: true,
-        label: { en: "The role", nl: "De rol", ar: "الدور" },
-        heading: { en: "What an ambassador *does.*", nl: "Wat een ambassadeur *doet.*", ar: "ما يقوم به *السفير.*" },
-        items: [
+        kind: "prose",
+        heading: {
+          en: "Partnerships",
+          nl: "Partnerschappen",
+          ar: "الشراكات",
+        },
+        body: [
           {
-            title: { en: "Opens doors", nl: "Opent deuren", ar: "يفتح الأبواب" },
-            body: {
-              en: "Introductions to the companies, decision-makers and institutions of their market, made personally and with the standing of someone who is known there.",
-              nl: "Introducties bij de bedrijven, beslissers en instellingen in zijn markt, persoonlijk verzorgd en met het gezag van iemand die daar bekend is.",
-              ar: "تعريفاتٌ بالشركات وأصحاب القرار والمؤسسات في سوقه، يُجريها بنفسه وبمكانة من يعرفه الناس هناك.",
-            },
-          },
-          {
-            title: { en: "Hosts visiting members", nl: "Ontvangt bezoekende leden", ar: "يستقبل الأعضاء الزائرين" },
-            body: {
-              en: "When DUKAAT members travel to the ambassador’s country, the ambassador receives them and helps them understand how business is done there, before the first meeting.",
-              nl: "Wanneer leden van DUKAAT naar het land van de ambassadeur reizen, ontvangt de ambassadeur hen en helpt hen te begrijpen hoe daar zaken worden gedaan, nog vóór het eerste gesprek.",
-              ar: "حين يسافر أعضاء DUKAAT إلى بلده، يستقبلهم ويعينهم على فهم كيف تُدار الأعمال هناك، قبل اللقاء الأول.",
-            },
-          },
-          {
-            title: { en: "Brings local opportunities in", nl: "Brengt lokale kansen binnen", ar: "يأتي بالفرص المحلية إلى الشبكة" },
-            body: {
-              en: "Needs, suppliers, projects and openings in their market reach DUKAAT through the ambassador — and are verified like any other before they reach a member.",
-              nl: "Vraag, aanbod en projecten uit zijn markt bereiken DUKAAT via de ambassadeur — en worden geverifieerd zoals al het andere, voordat ze een lid bereiken.",
-              ar: "تصل إلى DUKAAT عن طريق السفير احتياجاتُ سوقه ومورّدوها ومشاريعها وفرصها — ويُتحقَّق منها كما يُتحقَّق من غيرها قبل أن تُعرض على أي عضو.",
-            },
-          },
-          {
-            title: { en: "Represents DUKAAT in that market", nl: "Vertegenwoordigt DUKAAT in die markt", ar: "يمثّل DUKAAT في تلك السوق" },
-            body: {
-              en: "A named position: the ambassador represents DUKAAT in their market or city, within a role agreed in writing.",
-              nl: "Een benoemde functie: de ambassadeur vertegenwoordigt DUKAAT in zijn markt of stad, binnen een rol die schriftelijk is vastgelegd.",
-              ar: "تعيينٌ رسمي بالاسم: يمثّل السفير DUKAAT في سوقه أو مدينته، ضمن دورٍ محدّدٍ كتابةً.",
-            },
+            en: "Collaboration can begin with specialist expertise, a training programme, a business meeting, a sector activity, or an initiative that serves students and professionals. We look for shared goals, clear roles and a beneficial experience for participants.",
+            nl: "Een samenwerking kan beginnen met specialistische expertise, een opleidingsprogramma, een zakelijke bijeenkomst, een sectoractiviteit of een initiatief dat studenten en professionals dient. We zoeken naar gedeelde doelen, duidelijke rollen en een nuttige ervaring voor de deelnemers.",
+            ar: "يمكن أن يبدأ التعاون بخبرة متخصصة، أو برنامج تدريبي، أو لقاء أعمال، أو نشاط قطاعي، أو مبادرة تخدم الطلاب والمهنيين. نبحث عن أهداف مشتركة وأدوار واضحة وتجربة مفيدة للمشاركين.",
           },
         ],
       },
       {
         kind: "prose",
-        photo: "amb-facade",
-        size: "tall",
-        side: "end",
-        label: { en: "The choice", nl: "De keuze", ar: "الاختيار" },
-        heading: { en: "By invitation, *on reputation.*", nl: "Op uitnodiging, *op reputatie.*", ar: "بالدعوة، *وعلى أساس السمعة.*" },
+        heading: {
+          en: "Sponsorship",
+          nl: "Sponsoring",
+          ar: "الرعاية",
+        },
         body: [
           {
-            en: "The position is not advertised, and there is no form for it. DUKAAT invites its ambassadors in the same way that members are admitted: on reputation, after verifying the company, its activity and its references.",
-            nl: "De functie wordt niet uitgeschreven, en er is geen formulier voor. DUKAAT nodigt zijn ambassadeurs uit op dezelfde manier waarop leden worden toegelaten: op reputatie, na verificatie van het bedrijf, de activiteit en de referenties.",
-            ar: "لا يُعلَن عن هذا المنصب، وليست له استمارة. يدعو DUKAAT سفراءه بالطريقة نفسها التي يُقبل بها الأعضاء: على أساس السمعة، وبعد التحقق من الشركة ونشاطها ومراجعها.",
-          },
-          {
-            en: "What we look for is standing, not size: a business person with a real trading life in their own market, trusted there, and at ease on both sides — in the Netherlands and Europe as well as in the Arab world.",
-            nl: "Wij zoeken aanzien, geen omvang: een ondernemer die in zijn eigen markt werkelijk handel drijft, daar vertrouwen geniet en aan beide kanten thuis is — in Nederland en Europa én in de Arabische wereld.",
-            ar: "ما نبحث عنه هو المكانة لا الحجم: صاحبُ أعمالٍ يمارس التجارة فعلاً في سوقه، ويحظى فيها بالثقة، ويألف العمل على الضفتين — في هولندا وأوروبا كما في العالم العربي.",
-          },
-          {
-            en: "The choice is made with care, and the market or city, the scope of the role and its terms are agreed in writing.",
-            nl: "De keuze wordt zorgvuldig gemaakt, en de markt of stad, de reikwijdte van de rol en de voorwaarden worden schriftelijk vastgelegd.",
-            ar: "ويجري الاختيار بعناية، وتُحدَّد كتابةً السوقُ أو المدينة، ونطاقُ الدور، وشروطُه.",
+            en: "Sponsoring programmes and events enables companies to support a specific activity and to introduce their brand to the relevant audience. The sponsorship proposal sets out the type of visibility, its duration, the channels and what delivery includes.",
+            nl: "Sponsoring van programma's en evenementen stelt bedrijven in staat een specifieke activiteit te ondersteunen en hun merk bekend te maken bij het betreffende publiek. Het sponsorvoorstel geeft duidelijkheid over het soort zichtbaarheid, de duur ervan, de kanalen en wat de uitvoering omvat.",
+            ar: "تتيح رعاية البرامج والفعاليات للشركات دعم نشاط محدد والتعريف بعلامتها أمام الجمهور المعني. يوضح عرض الرعاية نوع الظهور، ومدته، والقنوات، وما يشمله التنفيذ.",
           },
         ],
       },
       {
-        kind: "next",
-        heading: { en: "Into the market, *in person.*", nl: "De markt in, *persoonlijk.*", ar: "إلى السوق، *حضورياً.*" },
+        kind: "terms",
+        heading: {
+          en: "Possible areas",
+          nl: "Mogelijke terreinen",
+          ar: "مجالات ممكنة",
+        },
+        items: [
+          { en: "Courses and participation grants", nl: "Cursussen en deelnamebeurzen", ar: "دورات ومنح مشاركة" },
+          { en: "Workshops", nl: "Workshops", ar: "ورش عمل" },
+          { en: "Sector meetings", nl: "Sectorbijeenkomsten", ar: "لقاءات قطاعية" },
+          { en: "Exhibitions and conferences", nl: "Beurzen en conferenties", ar: "معارض ومؤتمرات" },
+          { en: "Reports", nl: "Rapporten", ar: "تقارير" },
+          { en: "Trade delegations", nl: "Handelsdelegaties", ar: "وفود تجارية" },
+        ],
+      },
+      {
+        kind: "actions",
         links: [
-          { href: "events/missions", label: { en: "Trade missions", nl: "Handelsmissies", ar: "البعثات التجارية" } },
-          { href: "services/market-entry", label: { en: "Market entry", nl: "Markttoetreding", ar: "دخول الأسواق" } },
-          { href: "services/representation", label: { en: "Representation", nl: "Vertegenwoordiging", ar: "التمثيل" } },
+          {
+            href: "#partnership",
+            label: {
+              en: "Propose a partnership",
+              nl: "Stel een partnerschap voor",
+              ar: "اقترح شراكة",
+            },
+          },
+          {
+            href: "#partnership",
+            label: {
+              en: "Request a sponsorship proposal",
+              nl: "Vraag een sponsorvoorstel aan",
+              ar: "اطلب عرض رعاية",
+            },
+          },
         ],
       },
-    ],
-  },
-
-  /* ───────────────────────── partners ───────────────────────── */
-  "network/partners": {
-    masthead: { variant: "plate", photo: "par-hero" },
-    blocks: [
       {
-        kind: "lead",
-        text: {
-          en: "DUKAAT does not try to do everything itself. It works with institutions whose expertise its members need, and with sponsors who support the programmes where members meet and learn.",
-          nl: "DUKAAT probeert niet alles zelf te doen. Het werkt samen met instellingen wier expertise zijn leden nodig hebben, en met sponsors die de programma’s steunen waar leden elkaar ontmoeten en kennis opdoen.",
-          ar: "لا يبني DUKAAT منظومته وحده. فهو يتعاون مع مؤسساتٍ يحتاج أعضاؤه إلى خبرتها، ومع رعاةٍ يدعمون البرامج التي يلتقي فيها الأعضاء ويتعلّمون.",
+        kind: "form",
+        form: {
+          id: "partnership",
+          title: {
+            en: "Have an idea for collaboration?",
+            nl: "Heeft u een idee voor samenwerking?",
+            ar: "لديك فكرة تعاون؟",
+          },
+          intro: {
+            en: "Introduce us to your organisation, the audience you serve, what you can offer and the outcome you want to achieve. We will explore with you the possibility of developing a suitable collaboration.",
+            nl: "Maak ons bekend met uw organisatie, het publiek dat u bedient, wat u kunt bieden en het resultaat dat u wilt bereiken. We onderzoeken samen met u de mogelijkheid om een passende samenwerking te ontwikkelen.",
+            ar: "عرّفنا بمؤسستك، والجمهور الذي تخدمه، وما تستطيع تقديمه، والنتيجة التي تريد تحقيقها. سنبحث معك إمكان تطوير تعاون مناسب.",
+          },
+          fields: [
+            {
+              name: "organisation",
+              required: true,
+              label: {
+                en: "Organisation",
+                nl: "Organisatie",
+                ar: "المؤسسة",
+              },
+            },
+            {
+              name: "country",
+              label: {
+                en: "Country",
+                nl: "Land",
+                ar: "الدولة",
+              },
+            },
+            {
+              name: "website",
+              type: "url",
+              label: {
+                en: "Website",
+                nl: "Website",
+                ar: "الموقع الإلكتروني",
+              },
+            },
+            {
+              name: "contactPerson",
+              required: true,
+              label: {
+                en: "Name of contact person",
+                nl: "Naam van de verantwoordelijke",
+                ar: "اسم المسؤول",
+              },
+            },
+            {
+              name: "email",
+              type: "email",
+              required: true,
+              label: {
+                en: "Email",
+                nl: "E-mail",
+                ar: "البريد",
+              },
+            },
+            {
+              name: "collaborationType",
+              label: {
+                en: "Type of collaboration",
+                nl: "Type samenwerking",
+                ar: "نوع التعاون",
+              },
+            },
+            {
+              name: "idea",
+              type: "textarea",
+              wide: true,
+              label: {
+                en: "Idea",
+                nl: "Idee",
+                ar: "الفكرة",
+              },
+            },
+            {
+              name: "audience",
+              label: {
+                en: "Target audience",
+                nl: "Doelgroep",
+                ar: "الجمهور المستهدف",
+              },
+            },
+            {
+              name: "period",
+              label: {
+                en: "Proposed period",
+                nl: "Voorgestelde periode",
+                ar: "الفترة المقترحة",
+              },
+            },
+            {
+              name: "attachments",
+              type: "file",
+              wide: true,
+              label: {
+                en: "Optional attachments",
+                nl: "Optionele bijlagen",
+                ar: "مرفقات اختيارية",
+              },
+            },
+          ],
+          common: "none",
+          submit: {
+            en: "Propose a partnership",
+            nl: "Stel een partnerschap voor",
+            ar: "اقترح شراكة",
+          },
         },
       },
-      {
-        kind: "terms",
-        label: { en: "Cooperation", nl: "Samenwerking", ar: "التعاون" },
-        heading: { en: "Whom we *work with.*", nl: "Met wie wij *samenwerken.*", ar: "الجهات التي *نتعاون معها.*" },
-        intro: {
-          en: "Institutions that bring members what they need beyond an introduction: knowledge, finance, law, freight, venues and training.",
-          nl: "Instellingen die leden bieden wat zij naast een introductie nodig hebben: kennis, financiering, recht, vracht, locaties en opleiding.",
-          ar: "مؤسساتٌ تقدّم للأعضاء ما يحتاجون إليه إلى جانب التعريف: المعرفة، والتمويل، والقانون، والشحن، وأماكن الفعاليات، والتدريب.",
-        },
-        items: [
-          { en: "Companies", nl: "Bedrijven", ar: "الشركات" },
-          { en: "Universities", nl: "Universiteiten", ar: "الجامعات" },
-          { en: "Banks", nl: "Banken", ar: "البنوك" },
-          { en: "Law firms", nl: "Advocatenkantoren", ar: "المكاتب القانونية" },
-          { en: "Accountants", nl: "Accountantskantoren", ar: "مكاتب المحاسبة" },
-          { en: "Logistics companies", nl: "Logistieke bedrijven", ar: "الشركات اللوجستية" },
-          { en: "Exhibition organisers", nl: "Beursorganisatoren", ar: "منظّمو المعارض" },
-          { en: "Economic organisations", nl: "Economische organisaties", ar: "الجهات الاقتصادية" },
-          { en: "Training institutions", nl: "Opleidingsinstituten", ar: "مؤسسات التدريب" },
-        ],
-        note: {
-          en: "Where a partner advises or acts for a member, that engagement — and the responsibility for it — sits between the member and the partner.",
-          nl: "Waar een partner een lid adviseert of voor een lid optreedt, ligt die opdracht — en de verantwoordelijkheid ervoor — tussen het lid en de partner.",
-          ar: "حين يقدّم شريكٌ المشورة لعضو أو يتصرّف نيابةً عنه، فإن هذا التكليف — والمسؤولية عنه — قائمٌ بين العضو والشريك.",
-        },
-      },
-      {
-        kind: "terms",
-        label: { en: "Sponsorship", nl: "Sponsoring", ar: "الرعاية" },
-        heading: { en: "What sponsors *support.*", nl: "Wat sponsors *mogelijk maken.*", ar: "ما يدعمه *الرعاة.*" },
-        intro: {
-          en: "Companies can support the programmes where members meet and learn, with visibility agreed per programme.",
-          nl: "Bedrijven kunnen de programma’s steunen waar leden elkaar ontmoeten en kennis opdoen, met zichtbaarheid die per programma wordt afgesproken.",
-          ar: "يمكن للشركات أن تدعم البرامج التي يلتقي فيها الأعضاء ويتعلّمون، بباقات ظهورٍ يُتّفق عليها لكل برنامج على حدة.",
-        },
-        items: [
-          { en: "Conferences", nl: "Conferenties", ar: "المؤتمرات" },
-          { en: "Exhibitions", nl: "Beurzen", ar: "المعارض" },
-          { en: "Executive Dinners", nl: "Executive Dinners", ar: "Executive Dinners" },
-          { en: "Sector clubs", nl: "Sectorclubs", ar: "الأندية القطاعية" },
-          { en: "Trade missions", nl: "Handelsmissies", ar: "البعثات التجارية" },
-          { en: "Reports", nl: "Rapporten", ar: "التقارير" },
-          { en: "Academy programmes", nl: "Academy-programma’s", ar: "برامج الأكاديمية" },
-        ],
-        note: {
-          en: "Sponsorship opportunities are also part of the Executive level of membership.",
-          nl: "Sponsormogelijkheden horen ook bij het Executive-niveau van het lidmaatschap.",
-          ar: "وتدخل فرص الرعاية أيضاً ضمن مزايا مستوى Executive.",
-        },
-      },
+      /* kept extra (owner's choice), verbatim from 2336702: the Golden Ten, the ten principal sponsors */
       {
         kind: "register",
         cols: 2,
         numbered: true,
-        label: { en: "Golden Ten", nl: "Golden Ten", ar: "Golden Ten" },
-        heading: { en: "Ten places, *at the front.*", nl: "Tien plaatsen, *vooraan.*", ar: "عشرة مقاعد، *في الصدارة.*" },
+        label: {
+          en: "Golden Ten",
+          nl: "Golden Ten",
+          ar: "Golden Ten",
+        },
+        heading: {
+          en: "Ten places, *at the front.*",
+          nl: "Tien plaatsen, *vooraan.*",
+          ar: "عشرة مقاعد، *في الصدارة.*",
+        },
         intro: {
-          en: "The Golden Ten are the ten companies that support DUKAAT as its principal sponsors. There are never more than ten, and what each place brings is agreed in writing.",
-          nl: "De Golden Ten zijn de tien bedrijven die DUKAAT steunen als hoofdsponsors. Het zijn er nooit meer dan tien, en wat elke plaats omvat, wordt schriftelijk vastgelegd.",
-          ar: "Golden Ten هي الشركات العشر التي تدعم DUKAAT بوصفها رعاته الرئيسيين. ولا يزيد عددها على عشر أبداً، ويُحدَّد كتابةً ما يشمله كل مقعد.",
+          en: "The Golden Ten are the ten companies that support DUKAAT as its principal sponsors. There are never more than ten.",
+          nl: "De Golden Ten zijn de tien bedrijven die DUKAAT steunen als hoofdsponsors. Het zijn er nooit meer dan tien.",
+          ar: "Golden Ten هي الشركات العشر التي تدعم DUKAAT بوصفها رعاته الرئيسيين. ولا يزيد عددها على عشر أبداً.",
         },
         items: [
           {
-            title: { en: "A place on this website", nl: "Een plaats op deze website", ar: "مكانٌ في هذا الموقع" },
+            title: {
+              en: "A place on this website",
+              nl: "Een plaats op deze website",
+              ar: "مكانٌ في هذا الموقع",
+            },
             body: {
               en: "The company’s name and mark in a place of its own on the DUKAAT website, beside the programmes it supports.",
               nl: "Naam en beeldmerk van het bedrijf op een eigen plek op de website van DUKAAT, naast de programma’s die het steunt.",
@@ -648,7 +999,11 @@ export const network: PageSet = {
             },
           },
           {
-            title: { en: "Its story, told on the site", nl: "Het eigen verhaal, op de site", ar: "قصتها على الموقع" },
+            title: {
+              en: "Its story, told on the site",
+              nl: "Het eigen verhaal, op de site",
+              ar: "قصتها على الموقع",
+            },
             body: {
               en: "A portrait of the company — what it makes, where it trades, what drives it — written with the company and published with its approval.",
               nl: "Een portret van het bedrijf — wat het maakt, waar het handelt, wat het drijft — samen met het bedrijf geschreven en met zijn goedkeuring gepubliceerd.",
@@ -656,7 +1011,11 @@ export const network: PageSet = {
             },
           },
           {
-            title: { en: "Closer guidance", nl: "Nauwere begeleiding", ar: "مرافقةٌ أوثق" },
+            title: {
+              en: "Closer guidance",
+              nl: "Nauwere begeleiding",
+              ar: "مرافقةٌ أوثق",
+            },
             body: {
               en: "More time from the DUKAAT team: a direct line, and support that reaches beyond what a membership level includes.",
               nl: "Meer tijd van het DUKAAT-team: een directe lijn, en ondersteuning die verder gaat dan wat een lidmaatschapsniveau omvat.",
@@ -664,44 +1023,17 @@ export const network: PageSet = {
             },
           },
           {
-            title: { en: "Presence at the programmes", nl: "Aanwezigheid bij de programma’s", ar: "حضورٌ في البرامج" },
+            title: {
+              en: "Presence at the programmes",
+              nl: "Aanwezigheid bij de programma’s",
+              ar: "حضورٌ في البرامج",
+            },
             body: {
               en: "Visibility at the events, missions and reports the company chooses to support, agreed per programme.",
               nl: "Zichtbaarheid bij de evenementen, missies en rapporten die het bedrijf wil steunen, per programma afgesproken.",
               ar: "ظهورٌ في الفعاليات والبعثات والتقارير التي تختار الشركة دعمها، يُتّفق عليه لكل برنامج.",
             },
           },
-        ],
-      },
-      {
-        kind: "prose",
-        label: { en: "Our criteria", nl: "Onze criteria", ar: "معاييرنا" },
-        heading: { en: "Chosen for what members *need.*", nl: "Gekozen naar wat leden *nodig hebben.*", ar: "نختارهم بحسب *حاجة الأعضاء.*" },
-        body: [
-          {
-            en: "We choose partners by one test: does this make a member’s trade easier, safer or better informed? A bank, a law firm or a forwarder earns its place through relevance to what members actually need — not through the size of its name.",
-            nl: "Wij kiezen partners aan de hand van één vraag: maakt dit de handel van een lid eenvoudiger, veiliger of beter onderbouwd? Een bank, een advocatenkantoor of een expediteur verdient zijn plaats door wat hij bijdraagt aan wat leden werkelijk nodig hebben — niet door de bekendheid van zijn naam.",
-            ar: "نختار شركاءنا بمعيارٍ واحد: هل تجعل هذه الشراكة تجارةَ العضو أيسر، أو أكثر أماناً، أو أوضح رؤية؟ فالمصرف أو مكتب المحاماة أو وكيل الشحن يكسب مكانه بمدى صلته بما يحتاج إليه الأعضاء فعلاً — لا بشهرة اسمه.",
-          },
-          {
-            en: "Every partnership and every sponsorship is set down in writing: what each side contributes, what is visible and where, and for how long. Sponsorship buys visibility, never influence. It has no bearing on who is admitted, who is introduced, or what we write.",
-            nl: "Elke samenwerking en elke sponsoring wordt schriftelijk vastgelegd: wat elke partij inbrengt, wat zichtbaar is en waar, en voor hoe lang. Sponsoring levert zichtbaarheid op, nooit invloed. Zij speelt geen rol bij wie wordt toegelaten, wie wordt geïntroduceerd of wat wij schrijven.",
-            ar: "وتُوثَّق كل شراكة وكل رعاية كتابةً: ما يقدّمه كل طرف، وما يظهر وأين، ولأي مدة. فالرعاية تشتري الظهور، لا النفوذ أبداً؛ ولا أثر لها في قرارات القبول، ولا في التعريفات التي نجريها، ولا فيما نكتبه.",
-          },
-        ],
-      },
-      {
-        kind: "next",
-        heading: { en: "To discuss a *partnership.*", nl: "Een samenwerking *bespreken.*", ar: "للحديث عن *شراكة.*" },
-        body: {
-          en: "Institutions and companies that would like to work with DUKAAT, support one of its programmes or take a place among the Golden Ten can write to us with a short description of what they bring.",
-          nl: "Instellingen en bedrijven die met DUKAAT willen samenwerken, een van zijn programma’s willen steunen of een plaats in de Golden Ten willen innemen, kunnen ons schrijven met een korte beschrijving van wat zij inbrengen.",
-          ar: "يمكن للمؤسسات والشركات الراغبة في التعاون مع DUKAAT، أو في دعم أحد برامجه، أو في شغل مقعدٍ ضمن Golden Ten، أن تراسلنا بوصفٍ موجز لما تسهم به.",
-        },
-        links: [
-          { href: "contact", label: { en: "Write to us", nl: "Schrijf ons", ar: "راسلنا" } },
-          { href: "events/calendar", label: { en: "Events", nl: "Evenementen", ar: "الفعاليات" } },
-          { href: "events/academy", label: { en: "Academy", nl: "Academy", ar: "الأكاديمية" } },
         ],
       },
     ],

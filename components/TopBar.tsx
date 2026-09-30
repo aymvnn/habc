@@ -4,29 +4,24 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Dict, GroupKey, Locale } from "@/content/types";
-import { groups, groupOfPathname, hrefOf } from "@/lib/site";
+import { groups, groupOfPathname, hrefOf, type SiteGroup } from "@/lib/site";
 
+// the source's order: ع | EN | NL (1.1)
 const LOCALES: { code: Locale; short: string; name: string }[] = [
+  { code: "ar", short: "ع", name: "العربية" },
   { code: "en", short: "EN", name: "English" },
   { code: "nl", short: "NL", name: "Nederlands" },
-  { code: "ar", short: "ع", name: "العربية" },
 ];
 
-type Props = {
-  locale: Locale;
-  nav: Dict["nav"];
-  site: Dict["site"];
-  chips: [string, string];
-  routes: Dict["routes"]["items"];
-};
+type Props = { locale: Locale; nav: Dict["nav"]; site: Dict["site"]; extra: Dict["extra"] };
 
 /**
- * Two rows. A thin utility line (what the club is, FAQ, "I have been nominated", languages) that folds
- * away once you scroll, and the main row: four groups, the name in the centre, three groups and Contact.
- * Every group opens a panel with all of its pages and a one-line blurb for each, so every page on the
- * site is one hover or one tap away. On phones the same groups fold open inside the full-screen menu.
+ * The menu of the source (1.1): Home | Over ons | Academie | Zakelijke diensten | Lidmaatschap | Evenementen | Contact,
+ * with the name in the centre. A button with sections under it opens a panel with every page and the source's own
+ * title line of each; on phones the same buttons fold open inside the full-screen menu.
+ * Above it a thin line with the club's descriptor and the language choice, which folds away once you scroll.
  */
-export function TopBar({ locale, nav, site, chips, routes }: Props) {
+export function TopBar({ locale, nav, site, extra }: Props) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false); // phones: the full-screen menu
@@ -38,8 +33,6 @@ export function TopBar({ locale, nav, site, chips, routes }: Props) {
   // same page in another language: swap the first path segment
   const rest = pathname.replace(/^\/(en|nl|ar)(?=\/|$)/, "");
   const inLang = (code: Locale) => `/${code}${rest}`;
-  const nominated = `/${locale}/contact?intent=nominated#intake`;
-  const contactHref = `/${locale}/contact`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -77,21 +70,31 @@ export function TopBar({ locale, nav, site, chips, routes }: Props) {
   };
   const closeOnLink = (e: React.MouseEvent) => { if ((e.target as HTMLElement).closest("a")) { setPanel(null); setOpen(false); } };
 
-  const item = (g: (typeof groups)[number]) => (
-    <li key={g.key} className={`ni${panel === g.key ? " on" : ""}`} onMouseEnter={() => hoverOpen(g.key)}>
-      <Link href={hrefOf(locale, g)} aria-current={current === g.key ? "true" : undefined}>{site.groups[g.key].label}</Link>
-      <button
-        type="button"
-        className="ni-t"
-        aria-expanded={panel === g.key}
-        aria-controls={`mp-${g.key}`}
-        aria-label={site.ui.submenu.replace("{group}", site.groups[g.key].label)}
-        onClick={() => setPanel((p) => (p === g.key ? null : g.key))}
+  const item = (g: SiteGroup) => {
+    const label = site.groups[g.key].label;
+    const has = g.children.length > 0;
+    return (
+      <li
+        key={g.key}
+        className={`ni${panel === g.key ? " on" : ""}${g.key === "contact" ? " ni-contact" : ""}`}
+        onMouseEnter={() => (has ? hoverOpen(g.key) : hoverClose())}
       >
-        <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" /></svg>
-      </button>
-    </li>
-  );
+        <Link href={hrefOf(locale, g)} aria-current={current === g.key ? "true" : undefined}>{label}</Link>
+        {has && (
+          <button
+            type="button"
+            className="ni-t"
+            aria-expanded={panel === g.key}
+            aria-controls={`mp-${g.key}`}
+            aria-label={site.ui.submenu.replace("{group}", label)}
+            onClick={() => setPanel((p) => (p === g.key ? null : g.key))}
+          >
+            <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" /></svg>
+          </button>
+        )}
+      </li>
+    );
+  };
 
   const langs = (cls: string, all: boolean) => (
     <div className={cls} role="group" aria-label={nav.langLabel}>
@@ -111,6 +114,8 @@ export function TopBar({ locale, nav, site, chips, routes }: Props) {
     </div>
   );
 
+  const withPanel = groups.filter((g) => g.children.length > 0);
+
   return (
     <>
       <header
@@ -120,14 +125,15 @@ export function TopBar({ locale, nav, site, chips, routes }: Props) {
       >
         <div className="tb-util">
           <p className="util-l">
-            <span>{nav.descriptor}</span><i aria-hidden="true">◆</i><span>{chips[0]}</span><i aria-hidden="true">◆</i><span>{chips[1]}</span>
+            <span>DUKAAT</span><i aria-hidden="true">◆</i><span>{nav.descriptor}</span>
+            <i aria-hidden="true">◆</i><span title={extra.annoTitle}>{extra.anno}</span>
+            <i aria-hidden="true">◆</i><span title={extra.byNominationTitle}>{extra.byNomination}</span>
           </p>
-          <nav className="util-r" aria-label={site.ui.utilNav}>
-            <Link href={`/${locale}/faq`}>{site.ui.faq}</Link>
-            <Link className="util-key" href={nominated}>
+          <nav className="util-r" aria-label={nav.langLabel}>
+            <Link className="util-key" href={`/${locale}/contact?subject=nominated#contact-form`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo/dukaat-beeldmerk.svg" alt="" width={859} height={998} />
-              {site.pages["membership/nominated"].title}
+              {extra.nominated}
             </Link>
             {langs("lang", true)}
           </nav>
@@ -140,15 +146,15 @@ export function TopBar({ locale, nav, site, chips, routes }: Props) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="wordmark" src="/logo/dukaat-woordmerk.svg" alt="DUKAAT" width={748} height={120} />
           </Link>
-          {/* symmetric: four groups left, the name in the centre, three groups and Contact right */}
+          {/* the source's seven buttons: Home and two groups left of the name, four right */}
           <nav className="tb-nav" aria-label={site.ui.mainNav}>
-            <ul className="nav-l">{groups.slice(0, 4).map(item)}</ul>
-            <ul className="nav-r">
-              {groups.slice(4).map(item)}
-              <li className="ni ni-contact" onMouseEnter={hoverClose}>
-                <Link href={contactHref} aria-current={pathname.startsWith(contactHref) ? "page" : undefined}>{nav.contact}</Link>
+            <ul className="nav-l">
+              <li className="ni" onMouseEnter={hoverClose}>
+                <Link href={home} aria-current={isHome ? "page" : undefined}>{nav.home}</Link>
               </li>
+              {groups.slice(0, 2).map(item)}
             </ul>
+            <ul className="nav-r">{groups.slice(2).map(item)}</ul>
           </nav>
           {/* phones: the other two languages stay in the header, beside the menu */}
           {langs("lang-m", false)}
@@ -165,16 +171,17 @@ export function TopBar({ locale, nav, site, chips, routes }: Props) {
         </div>
 
         <div className={`mega${panel ? " on" : ""}`} onClick={closeOnLink}>
-          {groups.map((g, gi) => {
+          {withPanel.map((g) => {
             const on = panel === g.key;
             return (
               <div key={g.key} id={`mp-${g.key}`} className={`mp${on ? " on" : ""}`} role="region" aria-label={site.groups[g.key].label} inert={!on}>
                 <div className="mp-grid">
                   <div className="mp-intro">
-                    <span className="mp-n">{String(gi + 1).padStart(2, "0")}</span>
                     <p className="mp-title">{site.groups[g.key].label}</p>
                     <p className="mp-lede">{site.groups[g.key].lede}</p>
-                    <Link className="more" href={hrefOf(locale, g)}>{site.ui.overview} <span className="arrow" aria-hidden="true">→</span></Link>
+                    <Link className="more" href={hrefOf(locale, g)} aria-current={pathname === hrefOf(locale, g) ? "page" : undefined}>
+                      {site.groups[g.key].label} <span className="arrow" aria-hidden="true">→</span>
+                    </Link>
                   </div>
                   <ul className="mp-list">
                     {g.children.map((c) => (
@@ -186,16 +193,6 @@ export function TopBar({ locale, nav, site, chips, routes }: Props) {
                       </li>
                     ))}
                   </ul>
-                  {g.aside === "routes" && (
-                    <div className="mp-aside">
-                      <p className="mp-aside-h">{site.ui.intake}</p>
-                      {routes.slice(0, 7).map((r, i) => (
-                        <Link key={r.intent} href={`/${locale}/contact?intent=${r.intent}#intake`}>
-                          <i>{String(i + 1).padStart(2, "0")}</i>{r.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
                 </div>
               </div>
             );
@@ -205,28 +202,31 @@ export function TopBar({ locale, nav, site, chips, routes }: Props) {
 
       <div className={`veil${open ? " open" : ""}`} id="veil" onClick={closeOnLink} inert={!open}>
         <nav className="veil-in" aria-label={site.ui.mainNav}>
-          {groups.map((g) => (
-            <details key={g.key} className="vg" open={current === g.key || undefined}>
-              <summary>
-                <span>{site.groups[g.key].label}</span>
-                <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" /></svg>
-              </summary>
-              <div className="vg-list">
-                <Link className="vg-all" href={hrefOf(locale, g)}>{site.ui.overview} <span className="arrow" aria-hidden="true">→</span></Link>
-                {g.children.map((c) => (
-                  <Link key={c.path} href={hrefOf(locale, c)}>{site.pages[c.path].title}</Link>
-                ))}
-              </div>
-            </details>
-          ))}
-          <Link className="vg-solo" href={contactHref}>{nav.contact}</Link>
+          <Link className="vg-solo" href={home}>{nav.home}</Link>
+          {groups.map((g) =>
+            g.children.length === 0 ? (
+              <Link key={g.key} className="vg-solo" href={hrefOf(locale, g)}>{site.groups[g.key].label}</Link>
+            ) : (
+              <details key={g.key} className="vg" open={current === g.key || undefined}>
+                <summary>
+                  <span>{site.groups[g.key].label}</span>
+                  <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" /></svg>
+                </summary>
+                <div className="vg-list">
+                  <Link className="vg-all" href={hrefOf(locale, g)}>{site.groups[g.key].label} <span className="arrow" aria-hidden="true">→</span></Link>
+                  {g.children.map((c) => (
+                    <Link key={c.path} href={hrefOf(locale, c)}>{site.pages[c.path].title}</Link>
+                  ))}
+                </div>
+              </details>
+            ),
+          )}
           <div className="veil-foot">
-            <Link className="util-key" href={nominated}>
+            <Link className="util-key" href={`/${locale}/contact?subject=nominated#contact-form`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo/dukaat-beeldmerk.svg" alt="" width={859} height={998} />
-              {site.pages["membership/nominated"].title}
+              {extra.nominated}
             </Link>
-            <Link href={`/${locale}/faq`}>{site.ui.faq}</Link>
             <span className="lang-row">
               {LOCALES.filter((l) => l.code !== locale).map((l) => (
                 <Link key={l.code} href={inLang(l.code)} hrefLang={l.code} lang={l.code}>{l.name}</Link>

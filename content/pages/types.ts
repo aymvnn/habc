@@ -1,21 +1,62 @@
 import type { Locale } from "../types";
 
 /**
- * The inner pages are built from blocks. One file per menu group (content/pages/<group>.ts) holds every page
- * of that group in all three languages at once, so the layout is defined once and the languages cannot drift.
+ * The inner pages are built from blocks. Every word on them comes from the compagnon's text
+ * (owntext/DUKAAT_محتوى كتابة الموقع حديد _AR.md): the Arabic verbatim, Dutch and English as faithful translations
+ * (owntext/vertalingen/). One file per part of the source holds every page of that part in all three languages at once,
+ * so the layout is defined once and the languages cannot drift.
  *
- *   T      one string per language. *word* = emphasised (bordeaux in headings), "\n" = line break.
+ *   T      one string per language. "\n" = line break. [bracketed] text is shown as pending (components/Rich.tsx).
  *   Photo  an id from content/photos.ts (files in public/photos/pages/<id>.jpg).
  *
- * Titles and one-line blurbs of every page stay in content/site.{en,nl,ar}.ts (they feed the menu too).
+ * Titles and one-line blurbs of every page (menu, breadcrumb) stay in content/site.{en,nl,ar}.ts.
  */
 export type T = Record<Locale, string>;
 export type Photo = string;
-/** a link inside the site: a path under /{locale}/ such as "how-we-work" or "contact?intent=supplier#intake" */
+/** a link inside the site: a path under /{locale}/ such as "services/connect", "contact?subject=membership#form" or "#offers" */
 export type Href = string;
 
 export type Item = { title: T; body?: T };
 export type PhotoItem = { title: T; body: T; photo?: Photo };
+export type Link = { href: Href; label: T };
+
+/** one field of a form. The label is the source's wording; type and required are how the form works, not text */
+export type Field = {
+  name: string;
+  label: T;
+  type?: "text" | "email" | "tel" | "url" | "number" | "date" | "textarea" | "select" | "file";
+  required?: boolean;
+  options?: T[];
+  /** stable values for the options (e.g. the contact subjects, so a link can preselect one with ?subject=) */
+  values?: string[];
+  /** the source's example text inside the field */
+  placeholder?: T;
+  /** span both columns */
+  wide?: boolean;
+};
+
+/**
+ * A form. Every form sends its fields by e-mail (app/actions/forms.ts); nothing is stored on the site.
+ * common: which shared fields follow the form's own fields —
+ *   "request" = the shared fields of the six "What are you looking for?" forms (source 10)
+ *   "none"    = the form lists its own contact fields (contact 19, partnership 18)
+ */
+export type FormDef = {
+  id: string;
+  /** in a formset: the name of the choice (the source's heading, e.g. "Ik zoek een leverancier") */
+  choice?: T;
+  /** the heading above the form; omitted where the source gives none (the page title already says it) */
+  title?: T;
+  intro?: T;
+  fields: Field[];
+  common: "request" | "none";
+  submit: T;
+  /** a consent line the source gives for this form (e.g. the publication option of a purchase request) */
+  option?: T;
+  /** confirmation after sending; default: the confirmation of source 10 */
+  success?: T;
+  successNote?: T;
+};
 
 export type Block =
   /** opening statement in large type, straight under the masthead; optional small photo plate beside it */
@@ -28,31 +69,21 @@ export type Block =
   | { kind: "duo"; photos: [Photo, Photo]; label?: T; heading?: T; body?: T[] }
   /** four small photographs in a staggered row */
   | { kind: "mosaic"; photos: [Photo, Photo, Photo, Photo]; caption?: T }
-  /** a ledger of items. cols 1 or 2; numbered 01, 02…; variant "quotes" sets the titles as spoken lines; photo = sticky portrait beside */
-  | { kind: "register"; label?: T; heading?: T; intro?: T; items: Item[]; cols?: 1 | 2; numbered?: boolean; variant?: "quotes"; photo?: Photo }
-  /** a compact list of short terms (categories, topics) set as a typographic specimen in columns */
+  /** a ledger of items. cols 1 or 2; numbered 01, 02… only when the source numbers them; photo = sticky portrait beside */
+  | { kind: "register"; label?: T; heading?: T; intro?: T; items: Item[]; cols?: 1 | 2; numbered?: boolean; photo?: Photo }
+  /** a compact list of short terms (sectors, topics) set in columns */
   | { kind: "terms"; label?: T; heading?: T; intro?: T; items: T[]; note?: T }
-  /** a numbered process, three to five steps */
+  /** a numbered process (the source numbers it) */
   | { kind: "steps"; label?: T; heading?: T; intro?: T; items: Item[] }
-  /** a horizontal chain of words with arrows (Search → Introduction → Trust …) */
-  | { kind: "sequence"; label?: T; heading?: T; items: T[]; body?: T }
   /** one large sentence on the gold rule */
   | { kind: "statement"; text: T; note?: T }
-  /** a quotation in the first person, with who says it; optional photo */
-  | { kind: "quote"; text: T[]; by: T; role?: T; photo?: Photo }
-  /** two columns set against each other: for / not for, included / quoted */
-  | { kind: "contrast"; label?: T; heading?: T; intro?: T; a: { title: T; items: T[] }; b: { title: T; items: T[] }; note?: T }
-  /** a specification sheet: term … value, with an optional photo, or the name film (media: "film") */
-  | { kind: "facts"; label?: T; heading?: T; intro?: T; items: { term: T; value: T }[]; photo?: Photo; media?: "film"; note?: T }
-  /** the membership levels side by side; `promise` holds the written commitments of a level */
-  | { kind: "tiers"; label?: T; heading?: T; intro?: T; tiers: { name: string; tagline: T; items: T[]; promise?: T[] }[]; note?: T }
-  /** a typeset specimen of a form or profile: its fields, and optionally sample lines (a label only when one is given) */
-  | { kind: "specimen"; label?: T; heading?: T; intro?: T; title: T; fields: { label: T; hint?: T }[]; examplesLabel?: T; examples?: T[]; note?: T }
+  /** the membership levels side by side */
+  | { kind: "tiers"; label?: T; heading?: T; intro?: T; tiers: { name: string; subtitle: T; tagline: T; forWhom: T; itemsLabel: T; items: T[]; action: Link }[]; note?: T }
   /** sticky heading on one side, items flowing on the other; items may carry a small photo plate */
-  | { kind: "chapter"; label?: T; heading: T; intro?: T; items: PhotoItem[] }
-  /** questions and answers, optionally grouped */
-  | { kind: "faq"; label?: T; heading?: T; groups: { title?: T; items: { q: T; a: T }[] }[] }
-  /** a framed notice: disclaimers, legal lines */
+  | { kind: "chapter"; label?: T; heading?: T; intro?: T; items: PhotoItem[] }
+  /** questions and answers */
+  | { kind: "faq"; label?: T; heading?: T; items: { q: T; a: T }[] }
+  /** a framed notice: the source's clarifications ("Toelichting") */
   | { kind: "notice"; label?: T; heading?: T; body: T[] }
   /** the one dark bordeaux block of a page */
   | { kind: "dark"; label?: T; heading: T; body: T[]; items?: T[]; photo?: Photo }
@@ -60,12 +91,14 @@ export type Block =
   | { kind: "legal"; updated: T; intro?: T[]; articles: { title: T; body: T[] }[] }
   /** overview pages only: every page in the group as an editorial index, with the pages' own photographs */
   | { kind: "index"; label?: T; heading?: T }
-  /** the eight routes from the home page */
-  | { kind: "routes" }
-  /** reuse a section from the home page as it is */
-  | { kind: "home"; section: "why" | "name" | "behind" | "membership" }
-  /** the close of a page: where to go next. Links go to other pages or to the intake with an intent — never "join" */
-  | { kind: "next"; heading: T; body?: T; links: { href: Href; label: T }[] };
+  /** the source's buttons, in the source's order */
+  | { kind: "actions"; heading?: T; body?: T; links: Link[] }
+  /** where published items appear ("Bekijk het aanbod"): optional search fields, and the source's text for when nothing is published */
+  | { kind: "listing"; id: string; heading: T; intro?: T; search?: Field[]; searchLabel?: T; empty: T; links?: Link[] }
+  /** a form on the page, reachable at #<form.id> */
+  | { kind: "form"; form: FormDef; label?: T }
+  /** several forms behind one choice (the six "What are you looking for?" forms) */
+  | { kind: "formset"; id: string; heading?: T; intro?: T; forms: FormDef[] };
 
 export type Masthead =
   /** a wide photograph under the title (the big one) */
@@ -77,5 +110,10 @@ export type Masthead =
   /** type only (legal texts) */
   | { variant: "type" };
 
-export type PageDef = { masthead: Masthead; blocks: Block[] };
+/**
+ * eyebrow  the source's "supporting name" (DUKAAT Connect …); default: the menu group
+ * headline the source's title of the section; default: the page title from content/site.*.ts
+ * lede     the source's introduction line, when it has one
+ */
+export type PageDef = { masthead: Masthead; eyebrow?: T; headline?: T; lede?: T; blocks: Block[] };
 export type PageSet = Record<string, PageDef>;

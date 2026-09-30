@@ -1,179 +1,171 @@
 import type { Dict } from "./types";
 import { siteNl } from "./site.nl";
 
+/**
+ * Dutch copy, verbatim from the translation (owntext/vertalingen/DUKAAT_Website_Copy_NL_uit_AR.md):
+ * the homepage (1.1–1.6), the footer, newsletter and form messages (21), the shared form fields (10).
+ * Words marked UI in content/types.ts are interface words the source does not give.
+ */
 export const nl: Dict = {
   locale: "nl",
   meta: {
-    title: "DUKAAT — Dutch–Arab Business Club",
+    title: "DUKAAT — Nederlands-Arabische Businessclub",
     description:
-      "Een besloten businessclub die bedrijven verbindt tussen Nederland en de Arabische wereld. Geverifieerde introducties, geleid door handelaren, niet door consultants. Anno 2018.",
-    ogTitle: "DUKAAT — Waar waarde grenzen oversteekt",
-    ogDescription:
-      "De besloten Nederlands–Arabische businessclub die een geverifieerde introductie omzet in een eerste zending. Lidmaatschap op voordracht of uitnodiging. Anno 2018.",
+      "Wij verbinden bedrijven en ondernemers met kennis, partners en kansen tussen Nederland en de Arabische wereld via training, het verbinden van ondernemingen, bijeenkomsten en diensten.",
     ogImageAlt: "Het DUKAAT-beeldmerk en woordmerk op linnen papier",
   },
   nav: {
+    home: "Home",
+    descriptor: "Nederlands-Arabische Businessclub",
     toHome: "DUKAAT — naar de homepage",
-    about: "Over DUKAAT",
-    how: "Zo werken wij",
-    membership: "Lidmaatschap",
-    behind: "Achter DUKAAT",
-    contact: "Contact",
-    routes: "Wat zoekt u?",
     menuOpen: "Navigatie openen",
     menuClose: "Navigatie sluiten",
     skip: "Ga naar de inhoud",
     langLabel: "Taal",
-    descriptor: "Dutch–Arab Business Club",
   },
   hero: {
-    eyebrow: "Dutch–Arab Business Club",
-    lines: [{ text: "Waar waarde" }, { text: "grenzen" }, { text: "oversteekt.", crossed: true }],
-    echo: "حيث تعبر القيمة الحدود",
-    echoLang: "ar",
-    sentence:
-      "Een besloten businessclub voor bedrijven die werkelijk handel drijven tussen Nederland en de Arabische wereld — geleid door handelaren, niet door consultants.",
-    chip1: "Anno 2018",
-    chip1Title: "Stichting Nederlands–Arabische Handelskamer, opgericht in 2018",
-    chip2: "Op voordracht",
-    chip2Title: "Lidmaatschap op voordracht of uitnodiging, na beoordeling",
+    title: "Waar waarde grenzen oversteekt",
+    intro: "Wij verbinden bedrijven en ondernemers met kennis, partners en kansen tussen Nederland en de Arabische wereld.",
+    pillars: "Relaties – Kennis – Handel – Investering",
+    knowHeading: "Maak kennis met DUKAAT",
+    know: [
+      { title: "Over ons", text: "Wij verbinden handelaren, ondernemers en bedrijven tussen Nederland en de Arabische wereld." },
+      { title: "Onze visie", text: "Een zakelijke community die perspectieven opent voor samenwerking over grenzen heen." },
+      { title: "Onze missie", text: "Relaties omzetten in waarde en zakelijke kansen." },
+      { title: "Onze doelen", text: "Bedrijven verbinden, kennis uitwisselen en markttoetreding vergemakkelijken." },
+    ],
+    networkHeading: "Ontdek het DUKAAT-ecosysteem",
+    network: [
+      { title: "Bedrijven en ondernemers verbinden", text: "Wij helpen u de juiste partij voor uw onderneming te bereiken." },
+      { title: "Academie en trainingscursussen" },
+      { title: "Workshops, evenementen en beurzen" },
+      { title: "Zakelijke diensten en advies" },
+      { title: "Markt en handelskansen" },
+      { title: "Investering en handelsdelegaties" },
+      { title: "Lidmaatschap en de DUKAAT-community" },
+    ],
     pause: "Animatie pauzeren",
     play: "Animatie afspelen",
-    scrollcue: "Wat zoekt u?",
-    groupA: "Handel",
-    groupB: "Markten & kapitaal",
-    heading: "De besloten businessclub tussen\nNederland en *de Arabische wereld.*",
-    caption: "Kies een route. Elke route opent een korte intake — wij vragen naar uw commerciële behoefte, niet naar uw cv.",
-    other: "Iets anders?",
-    otherLink: "Schrijf ons",
   },
-  routes: {
-    label: "Zeven behoeften, één uitnodiging",
-    heading: "Wat *zoekt* u?",
-    lede: "Elke route opent een korte intake: wat u aanbiedt, wat u zoekt, in welke markt. Wij vragen niet om uw cv.",
-    items: [
-      { intent: "distributor", label: "Ik zoek een distributeur", hint: "Een product dat thuis verkoopt en aan de andere kant een verkoper nodig heeft." },
-      { intent: "supplier", label: "Ik zoek een leverancier", hint: "Een specificatie, een volume, een certificaat dat u eist — en nog geen geverifieerde bron." },
-      { intent: "sell", label: "Ik wil verkopen", hint: "Goederen, voorraad of capaciteit die kopers moeten bereiken die u nog niet kent." },
-      { intent: "buy", label: "Ik wil inkopen", hint: "U weet wat u nodig hebt. Wij vinden wie het kan leveren, geverifieerd." },
-      { intent: "market-entry", label: "Ik wil een nieuwe markt betreden", hint: "Van Nederland naar de Arabische wereld of andersom: structuur, partner, eerste order." },
-      { intent: "opportunity", label: "Ik heb een investeringskans", hint: "Een project of bedrijf dat kapitaal zoekt, en een tegenpartij die u werkelijk heeft ontmoet." },
-      { intent: "invest", label: "Ik wil investeren", hint: "Echte bedrijven en projecten, geen advertentie. Wij beginnen met een gesprek." },
-      { intent: "nominated", label: "Ik ben voorgedragen", hint: "Een lid heeft uw naam genoemd. Laat ons weten wie, dan nemen wij het van daar over." },
+  more: {
+    heading: "Onderdelen van de website",
+    rows: [
+      ["Bedrijvengids", "Zakelijke matchmaking", "Inkoopaanvragen", "Restpartijen en gebruikte apparatuur"],
+      ["Studies en rapporten", "Sectorcommunity’s", "Succesverhalen", "Partnerschappen en sponsoring"],
     ],
-    ariaPattern: "Open de intake: {label}",
-    foot: "Iets anders?",
-    footLink: "Schrijf ons.",
-  },
-  how: {
-    label: "Zo werken wij",
-    heading: "Vijf stappen, in deze volgorde, *elke keer.*",
-    lede: "Technologie verkleint het zoekveld; mensen verifiëren.",
-    steps: [
-      { title: "Vertel ons wat u nodig hebt", body: "Een kort profiel: wat u aanbiedt, wat u zoekt, in welke markt. Wij vragen niet om uw cv; wij vragen naar uw commerciële behoefte, precies." },
-      { title: "Wij verifiëren en laten toe", body: "Handelsregister, activiteit, referenties. Niet iedereen wordt toegelaten; dat is precies wat het lidmaatschap waard maakt. Kaart en lidnummer worden bij toelating uitgegeven." },
-      { title: "Wij zoeken en koppelen", body: "Binnen en buiten het netwerk. Technologie verkleint het zoekveld, maar een mens beoordeelt elke match voordat die u bereikt. Wij sturen geen lijsten." },
-      { title: "Wij introduceren u zorgvuldig", body: "Een schriftelijke briefing aan beide kanten. Waar nodig zitten wij bij het eerste gesprek en overbruggen wij het culturele verschil voordat het een misverstand wordt." },
-      { title: "Wij blijven tot de eerste deal", body: "Documenten, certificaten, vracht, douane, betalingscondities — tot de eerste zending is geland of het eerste contract is getekend. Daarna is de relatie van u." },
-    ],
-  },
-  why: {
-    label: "Waarom DUKAAT",
-    heading: "Drie dingen zijn *alleen van ons.*",
-    lede: "Een zoekmachine geeft u namen. Een relatie bouwt zij niet.",
-    claims: [
-      { roman: "I", title: "Wij zijn *handelaren,* geen consultants.", body: "DUKAAT is opgericht door iemand die zelf importeert, verpakt en verscheept — niet door een adviesbureau dat nooit een container heeft afgehandeld." },
-      { roman: "II", title: "Wij zitten naast *Rotterdam,* de grootste haven van Europa.", body: "De toegangspoort waardoor goederen Europa binnenkomen is onze omgeving, geen stip op de kaart. Eén uur van de markt die onze leden willen bereiken." },
-      { roman: "III", title: "Wij worden aan *beide kanten* vertrouwd, in beide talen.", body: "Ons netwerk begon niet met een database. Het begon met mensen die ons al kenden — in het Arabisch en in het Nederlands." },
-    ],
-    mechanism: "De actuele aanvragen van leden circuleren binnen het netwerk, geverifieerd en gekoppeld door een mens. Zij worden niet op deze pagina gepubliceerd.",
-  },
-  name: {
-    label: "De naam",
-    heading: "Een munt die beide kanten *al kenden.*",
-    body: "Sinds 4 augustus 1586 is de Nederlandse gouden dukaat een handelsmunt onder de Muntwet: 3,494 gram goud van 983/1000, en de Koninklijke Nederlandse Munt in Utrecht slaat hem vandaag nog. Zijn kracht lag niet in het goud alleen. Een koopman die hem zag, wist precies wat hij waard was. De Ottomaanse sultani van 1477–78 werd geslagen op de dukaatstandaard; Marokkaanse gouden dinars heetten bunduqi, naar Venetië, omdat de munt tot daar was gereisd.",
-    keystone: "De dukaat was een taal die beide kanten al spraken.",
-  },
-  membership: {
-    label: "Lidmaatschap",
-    heading: "Lidmaatschap met *vastgelegde toezeggingen.*",
-    text: "Drie niveaus — Member, Professional en Executive — elk met toezeggingen die wij op papier zetten: hoe snel wij antwoorden, en wat wij voor u doen aan introducties en zoekopdrachten. Founding 100 is een status daarnaast, voor honderd van de meest invloedrijke leden: een vast nummer, het oprichterstarief en een stem in de club.",
-    charge: "Het lidmaatschap is een jaarabonnement. Projectdiensten (markttoetreding, leverancierszoektocht, vertegenwoordiging) worden per opdracht schriftelijk geoffreerd. Geen verborgen commissies.",
-    note: "Lidmaatschap is op voordracht of uitnodiging. U kunt zich ook aanmelden via de intake — elke aanmelding wordt beoordeeld en garandeert geen lidmaatschap.",
-  },
-  behind: {
-    label: "Achter DUKAAT",
-    heading: "Twee oprichters, *twee vakken.*",
-    lede: "De een importeert, verpakt en verscheept. De ander adviseert over structuur, contracten en controles.",
-    founders: [
-      {
-        name: "[Oprichter 1 — handelaar]",
-        role: "Oprichter · Handelaar",
-        voice: "DUKAAT begon niet als businessplan. Het begon als een probleem waar ik steeds tegenaan liep. Ik heb een loonverpakkingsbedrijf in Nederland, peulvruchten en noten; ik koop in de Arabische wereld en verkoop in Europa. Keer op keer: een fabriek die precies kon leveren wat een koper nodig had, en een koper die haar nooit zou vinden. Jarenlang deed ik die introducties als vriendendienst. DUKAAT doet het zoals het hoort.",
-        portraitAlt: "Het vak van de oprichter-handelaar: een graanprikker in een zak kikkererwten",
-      },
-      {
-        name: "[Oprichter 2 — fiscaal recht]",
-        role: "Oprichter · Fiscaal recht",
-        voice: "Een goede introductie strandt vaker op het papierwerk dan op de mensen. Mijn achtergrond is het fiscale recht, en mijn rol bij DUKAAT is adviserend: zorgen dat de juiste vragen op tijd worden gesteld — welke entiteit tekent, wat er in het contract staat, waar de fiscale en douanevragen liggen, en of de tegenpartij is wie zij zegt te zijn. Die ervaring maakt een deal helderder. Het is geen garantie; de beslissing blijft bij het lid. Het is wat een handdruk waarde geeft.",
-        portraitAlt: "Het vak van de oprichter-fiscalist: een pen boven een contract",
-      },
-    ],
-    portraitLabel: "Portret volgt",
-  },
-  correspondence: {
-    heading: "Lidmaatschap is op voordracht of uitnodiging.\nWilt u ons schrijven, *schrijf.*",
-    routePrefix: "Uw route: ",
-    mailPending: "[e-mailadres — domein in afwachting]",
-    mailPendingTitle: "Adres op eigen domein volgt na het domeinbesluit",
-    where: "Regio Rotterdam, uitsluitend op afspraak.",
-    tagline: "Waar waarde grenzen oversteekt",
-    taglineEcho: "حيث تعبر القيمة الحدود",
-    sealText: "DUKAAT · DUTCH–ARAB BUSINESS CLUB · ANNO 2018 · ",
   },
   footer: {
-    colophon: "DUKAAT — Dutch–Arab Business Club. Een initiatief van Stichting Nederlands–Arabische Handelskamer, Anno 2018, gevestigd in Nederland.",
-    legal: "Wij nemen geen gelden van leden in bewaring, wij treden niet op als bank of betaaldienstverlener, en wij garanderen geen enkele transactie tussen leden.",
-    pages: "Pagina’s",
-    legalGroup: "Juridisch",
+    about:
+      "DUKAAT — Nederlands-Arabische Businessclub. Wij verbinden bedrijven en ondernemers met kennis, partners en kansen tussen Nederland en de Arabische wereld.",
+    values: "Waarde • Vertrouwen • Leiderschap",
+    slogan: "Waar waarde grenzen oversteekt.",
+    copyright: "© 2026 DUKAAT. Alle rechten voorbehouden.",
     languages: "Talen",
-    copyright: "© 2026 Stichting Nederlands–Arabische Handelskamer. Alle rechten voorbehouden.",
-    values: "Value · Trust · Access",
+    newsletter: {
+      title: "Blijf dicht bij kennis en kansen",
+      text: "Meld u aan om nieuws te ontvangen over de programma’s, bijeenkomsten, content en kansen die verbonden zijn aan de DUKAAT-community.",
+      field: "Uw e-mailadres",
+      button: "Aanmelden",
+      note: "U kunt zich op elk moment afmelden. Lees in het privacybeleid hoe uw gegevens worden verwerkt.",
+      success: "Uw aanmeldingsverzoek is verzonden. Als u een bevestigingsmail ontvangt, open deze dan om uw aanmelding te voltooien.",
+    },
+  },
+  forms: {
+    common: {
+      name: "Volledige naam",
+      company: "Bedrijfs- of projectnaam (indien van toepassing)",
+      role: "Functie",
+      country: "Woonland of vestigingsland van het bedrijf",
+      email: "E-mailadres",
+      phone: "Telefoon (optioneel)",
+      language: "Voorkeurstaal voor communicatie",
+      details: "Aanvullende beschrijving",
+      attachment: "Optionele bijlage",
+    },
+    note: "Wij verzoeken u bij de eerste aanvraag geen identiteitsdocumenten, bankgegevens of vertrouwelijke stukken bij te voegen.",
+    privacy: "Ik heb kennisgenomen van het privacybeleid met betrekking tot de verwerking van deze aanvraag.",
+    optIn: "Ik ontvang graag het nieuws, de programma’s en de kansen van DUKAAT, en ik kan mij op elk moment afmelden.",
+    success:
+      "Uw aanvraag is ontvangen. Wij bekijken deze en nemen contact met u op via de gegevens die u heeft doorgegeven, om de volgende stap toe te lichten.",
+    successNote:
+      "Het versturen van de aanvraag betekent niet dat een betaalde dienst start; de omvang van elke dienst en de vergoeding daarvoor worden vóór de uitvoering afgesproken.",
+    required: "Vul dit veld in.",
+    invalidEmail: "Voer een geldig e-mailadres in.",
+    sending: "Uw aanvraag wordt verzonden…",
+    failed: "De aanvraag kon op dit moment niet worden verzonden. Probeer het opnieuw.",
+    attachmentHint: "Voeg desgewenst een document toe dat ons helpt uw aanvraag te begrijpen.",
+    choose: "Kies…",
+  },
+  notFound: {
+    text: "Wij konden deze pagina niet vinden. U kunt teruggaan naar de homepage of contact met ons opnemen.",
+    back: "Terug naar de homepage.",
+  },
+  /** extras the owner kept on 30 Sep 2026 (report 9pZxu4Jeprq9yqE3KkNu5V) — not in the source; texts from commit 2336702 */
+  extra: {
+    "anno": "Anno 2018",
+    "annoTitle": "Stichting Nederlands–Arabische Handelskamer, opgericht in 2018",
+    "byNomination": "Op voordracht",
+    "byNominationTitle": "Lidmaatschap op voordracht of uitnodiging, na beoordeling",
+    "nominated": "Ik ben voorgedragen",
+    "why": {
+      "label": "Waarom DUKAAT",
+      "heading": "Drie dingen zijn *alleen van ons.*",
+      "lede": "Een zoekmachine geeft u namen. Een relatie bouwt zij niet.",
+      "claims": [
+        {
+          "roman": "I",
+          "title": "Wij zijn *ondernemers,* geen consultants.",
+          "body": "DUKAAT is opgericht door een ondernemer die zelf importeert, verpakt en verscheept, en die de handel tussen beide kanten van binnenuit kent."
+        },
+        {
+          "roman": "II",
+          "title": "Wij zitten naast *Rotterdam,* de grootste haven van Europa.",
+          "body": "De toegangspoort waardoor goederen Europa binnenkomen is onze omgeving, geen stip op de kaart. Eén uur van de markt die onze leden willen bereiken."
+        },
+        {
+          "roman": "III",
+          "title": "Wij worden aan *beide kanten* vertrouwd, in beide talen.",
+          "body": "Ons netwerk begon niet met een database. Het begon met mensen die ons al kenden — in het Arabisch en in het Nederlands."
+        }
+      ],
+      "mechanism": "De actuele aanvragen van leden circuleren binnen het netwerk, geverifieerd en gekoppeld door een mens. Zij worden niet op deze pagina gepubliceerd."
+    },
+    "name": {
+      "label": "De naam",
+      "heading": "Een munt die beide kanten *al kenden.*",
+      "body": "Sinds 4 augustus 1586 is de Nederlandse gouden dukaat een handelsmunt onder de Muntwet: 3,494 gram goud van 983/1000, en de Koninklijke Nederlandse Munt in Utrecht slaat hem vandaag nog. Zijn kracht lag niet in het goud alleen. Een koopman die hem zag, wist precies wat hij waard was. De Ottomaanse sultani van 1477–78 werd geslagen op de dukaatstandaard; Marokkaanse gouden dinars heetten bunduqi, naar Venetië, omdat de munt tot daar was gereisd.",
+      "keystone": "De dukaat was een taal die beide kanten al spraken."
+    },
+    "behind": {
+      "label": "Achter DUKAAT",
+      "heading": "Twee oprichters, *twee vakken.*",
+      "lede": "De een importeert, verpakt en verscheept. De ander adviseert over structuur, contracten en controles.",
+      "founders": [
+        {
+          "name": "[Oprichter 1 — ondernemer]",
+          "role": "Oprichter · Ondernemer",
+          "voice": "DUKAAT begon niet als businessplan. Het begon als een probleem waar ik steeds tegenaan liep. Ik heb een loonverpakkingsbedrijf in Nederland, peulvruchten en noten; ik koop in de Arabische wereld en verkoop in Europa. Keer op keer: een fabriek die precies kon leveren wat een koper nodig had, en een koper die haar nooit zou vinden. Jarenlang deed ik die introducties als vriendendienst. DUKAAT doet het zoals het hoort.",
+          "portraitAlt": "Het vak van de oprichter-ondernemer: een graanprikker in een zak kikkererwten"
+        },
+        {
+          "name": "[Oprichter 2 — fiscaal recht]",
+          "role": "Oprichter · Fiscaal recht",
+          "voice": "Een goede introductie strandt vaker op het papierwerk dan op de mensen. Mijn achtergrond is het fiscale recht, en mijn rol bij DUKAAT is adviserend: zorgen dat de juiste vragen op tijd worden gesteld — welke entiteit tekent, wat er in het contract staat, waar de fiscale en douanevragen liggen, en of de tegenpartij is wie zij zegt te zijn. Die ervaring maakt een deal helderder. Het is geen garantie; de beslissing blijft bij het lid. Het is wat een handdruk waarde geeft.",
+          "portraitAlt": "Het vak van de oprichter-fiscalist: een pen boven een contract"
+        }
+      ]
+    },
+    "correspondence": {
+      "heading": "Lidmaatschap is op voordracht of uitnodiging.\nWilt u ons schrijven, *schrijf.*",
+      "mailPending": "[e-mailadres — domein in afwachting]",
+      "mailPendingTitle": "Adres op eigen domein volgt na het domeinbesluit",
+      "where": "Regio Rotterdam, uitsluitend op afspraak.",
+      "taglineEcho": "حيث تعبر القيمة الحدود",
+      "sealText": "DUKAAT · DUTCH–ARAB BUSINESS CLUB · ANNO 2018 · "
+    },
+    "colophon": "Een initiatief van Stichting Nederlands–Arabische Handelskamer, Anno 2018, gevestigd in Nederland.",
+    "legalLine": "Wij nemen geen gelden van leden in bewaring, wij treden niet op als bank of betaaldienstverlener, en wij garanderen geen enkele transactie tussen leden.",
+    "foundation": "Stichting Nederlands–Arabische Handelskamer"
   },
   site: siteNl,
-  contact: {
-    title: "Contact — DUKAAT",
-    heading: "Vertel ons wat u nodig hebt.",
-    intro: "Hebt u een kans, een product, een project of een markt die u wilt bereiken? Spreek ons aan. Wij antwoorden binnen 5 werkdagen.",
-    intentLabel: "Wat wilt u bereiken?",
-    intentOther: "Iets anders",
-    intentApply: "Ik wil mij aanmelden als lid",
-    fields: {
-      company: "Bedrijf",
-      name: "Uw naam",
-      email: "E-mail",
-      country: "Land",
-      message: "Uw commerciële behoefte",
-      messageHint: "Wat u aanbiedt, wat u zoekt, in welke markt.",
-    },
-    submit: "Versturen",
-    sending: "Bezig met versturen…",
-    note: "Elk bedrijf wordt vóór toelating beoordeeld, of een lid het nu voordraagt, wij het uitnodigen of het zich zelf aanmeldt. Een aanmelding garandeert geen lidmaatschap.",
-    investNotice:
-      "DUKAAT geeft geen beleggingsadvies, bemiddelt niet bij investeringen en biedt geen effecten aan. Kansen worden uitsluitend ter informatie gepresenteerd. Onafhankelijk juridisch, financieel en technisch onderzoek blijft essentieel vóór elke investeringsbeslissing.",
-    success: "Ontvangen. Wij antwoorden binnen 5 werkdagen.",
-    errorGeneric: "Versturen is niet gelukt. Probeer het opnieuw of schrijf ons rechtstreeks.",
-    errorUnconfigured: "De intake-mailbox is nog niet ingericht. Schrijf ons rechtstreeks op het adres hieronder.",
-    faqHeading: "Veelgestelde vragen",
-    faq: [
-      { q: "Is DUKAAT een officiële kamer van koophandel?", a: "Nee. DUKAAT is een besloten businessclub en platform. Wij vertegenwoordigen geen overheid en geven geen officiële documenten af — al werken wij samen met kamers en officiële instanties waar dat onze leden ten goede komt." },
-      { q: "Staat u garant voor de vermelde bedrijven?", a: "Nee. Wij verifiëren basisgegevens en publiceren die helder, maar de beslissing om zaken te doen — en de verantwoordelijkheid voor due diligence — blijft bij het lid. Wie u een volledige garantie belooft in de internationale handel, begrijpt die handel niet of is niet eerlijk tegen u." },
-      { q: "Wat is het verschil met een platform als Alibaba?", a: "Dat zijn open platforms met miljoenen leveranciers; hun kracht is schaal. Wij zijn een besloten gemeenschap; onze kracht is dat iemand de andere kant werkelijk heeft ontmoet. Wij concurreren niet op volume — wij concurreren op vertrouwen." },
-      { q: "Ik heb een klein bedrijf. Is DUKAAT iets voor mij?", a: "Ja, als u werkelijk handelt. Wij stellen geen omvangseis — wij stellen een activiteitseis. Veel van de beste kansen beginnen bij kleine bedrijven die snel kunnen beslissen." },
-      { q: "Wat gebeurt er na de intake, of nadat ik ben voorgedragen?", a: "Wij beoordelen uw profiel en kunnen om documenten of een kort gesprek vragen. U ontvangt binnen 10 werkdagen een toelating of een afwijzing. Niet iedereen wordt toegelaten." },
-      { q: "Rekent u commissie op deals?", a: "Geen verborgen commissies. Het lidmaatschap is een jaarabonnement en projectdiensten worden per opdracht schriftelijk geoffreerd; elke andere vergoeding wordt helder gecommuniceerd en vooraf schriftelijk afgesproken met iedere betrokken partij." },
-      { q: "In welke taal kan ik terecht?", a: "Arabisch, Nederlands of Engels — wat u verkiest." },
-      { q: "Zijn de gegevens van mijn bedrijf beschermd?", a: "Ja. Wij verwerken gegevens conform de AVG. Alleen wat u uitdrukkelijk goedkeurt wordt in uw profiel gepubliceerd, en u kunt op elk moment correctie of verwijdering vragen." },
-    ],
-  },
 };

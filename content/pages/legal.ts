@@ -34,68 +34,8 @@ const precedence = {
   },
 };
 
-const link = {
-  contact: { href: "contact", label: { en: "Write to us", nl: "Schrijf ons", ar: "راسلنا" } },
-  privacy: { href: "legal/privacy", label: { en: "Privacy statement", nl: "Privacyverklaring", ar: "بيان الخصوصية" } },
-  cookies: { href: "legal/cookies", label: { en: "Cookie policy", nl: "Cookiebeleid", ar: "سياسة ملفات تعريف الارتباط" } },
-  transfers: {
-    href: "legal/data-transfers",
-    label: { en: "Transfers outside the EU", nl: "Doorgifte buiten de EU", ar: "نقل البيانات خارج الاتحاد الأوروبي" },
-  },
-  memberData: {
-    href: "legal/member-data",
-    label: { en: "Publication of member data", nl: "Publicatie van ledengegevens", ar: "نشر بيانات الأعضاء" },
-  },
-  founders: { href: "about/founders", label: { en: "Behind DUKAAT", nl: "Achter DUKAAT", ar: "خلف DUKAAT" } },
-};
-
 export const legal: PageSet = {
   /* ------------------------------------------------------------------ overview */
-  legal: {
-    masthead: { variant: "plate", photo: "legal-hero" },
-    blocks: [
-      {
-        kind: "lead",
-        text: {
-          en: "We do not take custody of members’ funds, we do not act as a bank or payment provider, and we do not guarantee any transaction between members.",
-          nl: "Wij nemen geen gelden van leden in bewaring, wij treden niet op als bank of betaaldienstverlener, en wij garanderen geen enkele transactie tussen leden.",
-          ar: "نحن لا نحتفظ بأموال الأعضاء، ولا نعمل كمصرف أو مزوّد خدمات دفع، ولا نضمن أي معاملة بين الأعضاء.",
-        },
-      },
-      {
-        kind: "index",
-        label: { en: "The texts", nl: "De teksten", ar: "النصوص" },
-        heading: { en: "What we put *in writing.*", nl: "Wat wij *op papier zetten.*", ar: "ما نلتزم به *كتابةً.*" },
-      },
-      {
-        kind: "notice",
-        label: { en: "Language versions", nl: "Taalversies", ar: "النسخ اللغوية" },
-        heading: { en: "Three languages, *one text.*", nl: "Drie talen, *één tekst.*", ar: "ثلاث لغات، *ونصٌّ واحد.*" },
-        body: [
-          {
-            en: "The legal texts on this site are published in English, Dutch and Arabic, and the three versions are written to mean the same. They are drawn up under Dutch law; in case of any difference between the language versions, the Dutch text prevails.",
-            nl: "De juridische teksten op deze site verschijnen in het Engels, het Nederlands en het Arabisch, en de drie versies hebben dezelfde strekking. Zij zijn opgesteld naar Nederlands recht; bij verschil tussen de taalversies gaat de Nederlandse tekst voor.",
-            ar: "تُنشر النصوص القانونية في هذا الموقع بالإنجليزية والهولندية والعربية، وقد صيغت نسخها الثلاث لتؤدي المعنى نفسه. وهي محرَّرة وفق القانون الهولندي؛ وعند أي اختلاف بين النسخ اللغوية يكون النص الهولندي هو المرجع.",
-          },
-          {
-            en: "Questions about any of these texts, or about the personal data we hold, go to [enquiries@ — domain pending]. Requests to exercise your rights under the GDPR are answered within one month.",
-            nl: "Vragen over deze teksten, of over de persoonsgegevens die wij van u verwerken, kunt u sturen aan [e-mailadres — domein in afwachting]. Verzoeken om uw rechten onder de AVG uit te oefenen beantwoorden wij binnen een maand.",
-            ar: "تُوجَّه الأسئلة المتعلقة بأيٍّ من هذه النصوص، أو بالبيانات الشخصية التي نحتفظ بها عنك، إلى [البريد الإلكتروني — بانتظار قرار النطاق]. ونرد على طلبات ممارسة حقوقك بموجب اللائحة العامة لحماية البيانات خلال شهر واحد.",
-          },
-        ],
-      },
-      {
-        kind: "next",
-        heading: { en: "Ask us *directly.*", nl: "Vraag het ons *rechtstreeks.*", ar: "اسألنا *مباشرةً.*" },
-        body: {
-          en: "Where these texts leave a question open, write to us — in Arabic, Dutch or English.",
-          nl: "Laat een tekst een vraag open, schrijf ons dan — in het Arabisch, het Nederlands of het Engels.",
-          ar: "إن بقي سؤالٌ لم تُجب عنه هذه النصوص، فراسلنا — بالعربية أو الهولندية أو الإنجليزية.",
-        },
-        links: [link.contact, link.privacy],
-      },
-    ],
-  },
 
   /* ------------------------------------------------------------------ privacy statement */
   "legal/privacy": {
@@ -334,11 +274,6 @@ export const legal: PageSet = {
           },
         ],
       },
-      {
-        kind: "next",
-        heading: { en: "Texts that *belong with this one.*", nl: "Teksten die *hierbij horen.*", ar: "نصوص *مكمّلة لهذا البيان.*" },
-        links: [link.transfers, link.memberData, link.cookies],
-      },
     ],
   },
 
@@ -440,11 +375,6 @@ export const legal: PageSet = {
           },
         ],
       },
-      {
-        kind: "next",
-        heading: { en: "What happens to *what you send.*", nl: "Wat er gebeurt met *wat u verstuurt.*", ar: "ما يحدث *لما ترسله.*" },
-        links: [link.privacy, link.contact],
-      },
     ],
   },
 
@@ -453,7 +383,8 @@ export const legal: PageSet = {
     masthead: { variant: "plate", photo: "leg-company" },
     blocks: [
       {
-        kind: "facts",
+        kind: "register",
+        cols: 2,
         label: { en: "The entity", nl: "De rechtspersoon", ar: "الكيان القانوني" },
         heading: { en: "The foundation *behind the club.*", nl: "De stichting *achter de club.*", ar: "المؤسسة *خلف النادي.*" },
         intro: {
@@ -463,48 +394,48 @@ export const legal: PageSet = {
         },
         items: [
           {
-            term: { en: "Legal name", nl: "Statutaire naam", ar: "الاسم القانوني" },
-            value: {
+            title: { en: "Legal name", nl: "Statutaire naam", ar: "الاسم القانوني" },
+            body: {
               en: "Stichting Nederlands–Arabische Handelskamer",
               nl: "Stichting Nederlands–Arabische Handelskamer",
               ar: "Stichting Nederlands–Arabische Handelskamer",
             },
           },
           {
-            term: { en: "Legal form", nl: "Rechtsvorm", ar: "الشكل القانوني" },
-            value: { en: "Foundation (stichting) under Dutch law", nl: "Stichting naar Nederlands recht", ar: "مؤسسة (Stichting) خاضعة للقانون الهولندي" },
+            title: { en: "Legal form", nl: "Rechtsvorm", ar: "الشكل القانوني" },
+            body: { en: "Foundation (stichting) under Dutch law", nl: "Stichting naar Nederlands recht", ar: "مؤسسة (Stichting) خاضعة للقانون الهولندي" },
           },
           {
-            term: { en: "Trading as", nl: "Handelend onder de naam", ar: "الاسم التجاري" },
-            value: { en: "DUKAAT — Dutch–Arab Business Club", nl: "DUKAAT — Dutch–Arab Business Club", ar: "DUKAAT — نادي الأعمال الهولندي العربي" },
+            title: { en: "Trading as", nl: "Handelend onder de naam", ar: "الاسم التجاري" },
+            body: { en: "DUKAAT — Dutch–Arab Business Club", nl: "DUKAAT — Dutch–Arab Business Club", ar: "DUKAAT — نادي الأعمال الهولندي العربي" },
           },
           {
-            term: { en: "Founded", nl: "Opgericht", ar: "سنة التأسيس" },
-            value: { en: "2018", nl: "2018", ar: "2018" },
+            title: { en: "Founded", nl: "Opgericht", ar: "سنة التأسيس" },
+            body: { en: "2018", nl: "2018", ar: "2018" },
           },
           {
-            term: { en: "Based in", nl: "Gevestigd in", ar: "المقرّ" },
-            value: { en: "Rotterdam region, the Netherlands", nl: "Regio Rotterdam", ar: "منطقة روتردام، هولندا" },
+            title: { en: "Based in", nl: "Gevestigd in", ar: "المقرّ" },
+            body: { en: "Rotterdam region, the Netherlands", nl: "Regio Rotterdam", ar: "منطقة روتردام، هولندا" },
           },
           {
-            term: { en: "Visiting address", nl: "Bezoekadres", ar: "عنوان الزيارة" },
-            value: {
+            title: { en: "Visiting address", nl: "Bezoekadres", ar: "عنوان الزيارة" },
+            body: {
               en: "[Address] — meetings by appointment",
               nl: "[Adres] — uitsluitend op afspraak",
               ar: "[العنوان] — اللقاءات بموعد مسبق",
             },
           },
           {
-            term: { en: "Chamber of Commerce (KvK)", nl: "KvK-nummer", ar: "رقم السجل لدى غرفة التجارة الهولندية (KvK)" },
-            value: { en: "[number]", nl: "[nummer]", ar: "[الرقم]" },
+            title: { en: "Chamber of Commerce (KvK)", nl: "KvK-nummer", ar: "رقم السجل لدى غرفة التجارة الهولندية (KvK)" },
+            body: { en: "[number]", nl: "[nummer]", ar: "[الرقم]" },
           },
           {
-            term: { en: "VAT number", nl: "Btw-nummer", ar: "رقم ضريبة القيمة المضافة" },
-            value: { en: "[number]", nl: "[nummer]", ar: "[الرقم]" },
+            title: { en: "VAT number", nl: "Btw-nummer", ar: "رقم ضريبة القيمة المضافة" },
+            body: { en: "[number]", nl: "[nummer]", ar: "[الرقم]" },
           },
           {
-            term: { en: "E-mail", nl: "E-mail", ar: "البريد الإلكتروني" },
-            value: {
+            title: { en: "E-mail", nl: "E-mail", ar: "البريد الإلكتروني" },
+            body: {
               en: "[enquiries@ — domain pending]",
               nl: "[e-mailadres — domein in afwachting]",
               ar: "[البريد الإلكتروني — بانتظار قرار النطاق]",
@@ -527,11 +458,6 @@ export const legal: PageSet = {
             ar: "ولا يمثّل DUKAAT أي حكومة، وإن كان يتعاون مع غرف التجارة والجهات الرسمية حيثما يفيد ذلك أعضاءه.",
           },
         ],
-      },
-      {
-        kind: "next",
-        heading: { en: "The people *behind the entity.*", nl: "De mensen *achter de rechtspersoon.*", ar: "الأشخاص *خلف الكيان.*" },
-        links: [link.contact, link.founders],
       },
     ],
   },
@@ -612,11 +538,6 @@ export const legal: PageSet = {
             ],
           },
         ],
-      },
-      {
-        kind: "next",
-        heading: { en: "Everything else about *your data.*", nl: "Al het andere over *uw gegevens.*", ar: "سائر ما يخصّ *بياناتك.*" },
-        links: [link.privacy, link.contact],
       },
     ],
   },

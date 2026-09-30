@@ -329,7 +329,8 @@ footer .bottom .values i{ font-style:normal; color:var(--bar) }
 .field .hint{ color:var(--muted); font-size:.9rem }
 .field.two{ grid-template-columns:1fr 1fr; gap:var(--s-lg) }
 .field.two > div{ display:grid; gap:8px }
-.hp{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden }
+/* the honeypot: clipped in place, never pushed off-screen (an offset widens the page in RTL) */
+.hp{ position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; opacity:0; pointer-events:none }
 .btn{ font-family:var(--display); font-weight:700; font-size:var(--t-1); letter-spacing:.12em; text-transform:uppercase; color:var(--paper); background:var(--wine); border:1px solid var(--wine); padding:16px 26px; border-radius:999px; cursor:pointer; justify-self:start; display:inline-flex; align-items:center; gap:12px; transition:background var(--d-mid) var(--ease-out), transform var(--d-fast) }
 .btn:hover{ background:var(--wine-deep) }
 .btn:active{ transform:scale(.98) }
@@ -389,4 +390,34 @@ footer .bottom .values i{ font-style:normal; color:var(--bar) }
   .rise,.rv,.hero h1 .line > span,.hero h1 .crossed::after,.kruising path{ opacity:1; transform:none; transition:none; stroke-dashoffset:0 }
   .scrollcue::after,.seal-wrap .ring{ animation:none }
   .router::after,.more::after{ transition:none }
+}
+
+/* ---------- homepage bottom (source 1.6), footer newsletter and links (21), 404 ---------- */
+.more-sx{ padding-block:var(--s-2xl) var(--s-3xl) }
+.more-sx .label{ margin-bottom:var(--s-lg) }
+.mx-row{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--line-strong) }
+.mx-row + .mx-row{ border-top:0 }
+.mx-row a{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:20px 18px 20px 0; border-bottom:1px solid var(--line); font-family:var(--display); font-weight:700; font-size:var(--t1); letter-spacing:-.015em; color:var(--ink); transition:color var(--d-fast) }
+[dir="rtl"] .mx-row a{ font-family:var(--arabic); letter-spacing:0; padding:20px 0 20px 18px }
+.mx-row a .arrow{ color:var(--gold-deep) }
+.mx-row a:hover{ color:var(--wine) }
+footer .colophon .values{ font-family:var(--display); font-weight:600; font-size:var(--t-1); letter-spacing:.14em; text-transform:uppercase; color:var(--gold-deep) }
+footer .colophon .slogan{ font-family:var(--display); font-weight:700; color:var(--ink) }
+[dir="rtl"] footer .colophon :is(.values,.slogan){ font-family:var(--arabic); letter-spacing:0 }
+footer .f-news{ grid-column:7 / span 6; display:grid; gap:var(--s-md); align-content:start }
+footer .f-news-t{ font-size:var(--t2); letter-spacing:-.025em }
+footer .f-news > p{ color:var(--ink-soft); max-width:52ch }
+footer .f-news .fm-grid{ grid-template-columns:1fr }
+footer .f-news-note{ color:var(--muted); font-size:.88rem }
+footer .f-links{ display:flex; flex-wrap:wrap; gap:8px 26px; margin-top:var(--s-2xl); padding-top:var(--s-lg); border-top:1px solid var(--line) }
+footer .f-links a{ font-family:var(--display); font-weight:600; font-size:.9rem; color:var(--ink-soft) }
+footer .f-links a:hover{ color:var(--wine) }
+[dir="rtl"] footer .f-links a{ font-family:var(--arabic) }
+.nf-in{ padding-block:var(--s-3xl); display:grid; gap:var(--s-lg); justify-items:start }
+.nf-code{ font-family:var(--display); font-weight:800; font-size:var(--t5); line-height:.9; color:var(--wine); letter-spacing:-.05em }
+.nf-text{ font-size:var(--t2); max-width:40ch; line-height:1.3 }
+.nf-links{ display:flex; flex-wrap:wrap; gap:var(--s-lg); align-items:center }
+@media (max-width:900px){
+  .mx-row{ grid-template-columns:1fr 1fr }
+  footer .f-news{ grid-column:1 / span 12 }
 }

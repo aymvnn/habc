@@ -1,199 +1,128 @@
 import type { PageSet } from "./types";
 
 /**
- * About DUKAAT — the group overview and its four pages.
- * Facts about the ducat: only the verified ones (4 Aug 1586 · 3.494 g · 983/1000 · Royal Dutch Mint, Utrecht ·
- * sultani 1477–78 under Mehmed II · bunduqi after al-Bunduqiyya, Venice). The keystone sentence stays verbatim.
- * Sources: content master p.4–5 (who we are, more than a club), p.7–8 (vision, mission, objectives), p.23 (why),
- * p.24 (the trader's own text); the compagnon's Arabic draft (the Netherlands as starting point, values, who we serve,
- * technology and human connection). Founder names stay in brackets until the founders decide.
- * Founder 2's long voice is a proposal: he approves or rewrites it before launch.
+ * About DUKAAT — source section 2 (2.1 who we are, 2.2 the story of the name, 2.3 vision, 2.4 mission, 2.5 goals).
+ * AR verbatim from owntext/DUKAAT_محتوى كتابة الموقع حديد _AR.md; NL and EN verbatim from owntext/vertalingen/.
+ * Editorial labels (Titel, Subtitel, Knoppen, Afsluitende zin, Afsluitende knop) are not published; the text they label is.
  */
 export const about: PageSet = {
   about: {
     masthead: { variant: "band", photo: "about-hero" },
+    headline: {
+      en: "A space where relationships meet knowledge and opportunities",
+      nl: "Een ruimte waar relaties samenkomen met kennis en kansen",
+      ar: "مساحة تلتقي فيها العلاقات بالمعرفة والفرص",
+    },
     blocks: [
       {
         kind: "lead",
         text: {
-          en: "DUKAAT is a private business club and platform that brings together entrepreneurs, companies, investors, manufacturers, suppliers, buyers and experts across the Netherlands and the Arab world — to build real business relationships and turn them into lasting trade, partnerships and investment.",
-          nl: "DUKAAT is een besloten businessclub en platform dat ondernemers, bedrijven, investeerders, fabrikanten, leveranciers, kopers en experts in Nederland en de Arabische wereld met elkaar verbindt — om echte zakelijke relaties op te bouwen en die om te zetten in blijvende handel, samenwerking en investeringen.",
-          ar: "DUKAAT نادٍ خاص ومنصة أعمال تجمع روّاد الأعمال والشركات والمستثمرين والمصنّعين والمورّدين والمشترين والخبراء بين هولندا والعالم العربي، بهدف بناء علاقات تجارية حقيقية وتحويلها إلى تجارة وشراكات واستثمارات تدوم.",
+          en: "DUKAAT is a business club and platform that connects companies, entrepreneurs, investors, manufacturers, suppliers, buyers and experts between the Netherlands and the Arab world. We are building a community that helps its members get to know one another, exchange expertise, understand markets and develop opportunities for commercial and professional cooperation.",
+          nl: "DUKAAT is een businessclub en -platform dat bedrijven, ondernemers, investeerders, fabrikanten, leveranciers, kopers en experts tussen Nederland en de Arabische wereld met elkaar verbindt. Wij bouwen een community die haar leden helpt elkaar te leren kennen, ervaringen uit te wisselen, markten te begrijpen en kansen voor commerciële en professionele samenwerking te ontwikkelen.",
+          ar: "دوكات نادٍ ومنصة أعمال تربط الشركات وروّاد الأعمال والمستثمرين والمصنّعين والمورّدين والمشترين والخبراء بين هولندا والعالم العربي. نبني مجتمعًا يساعد أفراده على التعارف، وتبادل الخبرات، وفهم الأسواق، وتطوير فرص التعاون التجاري والمهني.",
         },
       },
       {
-        kind: "register",
-        numbered: true,
-        photo: "about-maker",
-        label: { en: "Who we are", nl: "Wie wij zijn", ar: "من نحن" },
-        heading: { en: "Opportunities are *everywhere.*", nl: "Kansen zijn er *overal.*", ar: "الفرص موجودة *في كل مكان.*" },
-        intro: {
-          en: "DUKAAT was built around a simple idea: what makes the difference is reaching the right person, the right information and the right market at the right time.",
-          nl: "DUKAAT is gebouwd rond een eenvoudig idee: het verschil zit in het bereiken van de juiste persoon, de juiste informatie en de juiste markt, op het juiste moment.",
-          ar: "قام DUKAAT على مبدأ بسيط: الوصول إلى الشخص الصحيح، والمعلومة الصحيحة، والسوق الصحيحة في الوقت الصحيح هو ما يصنع الفرق.",
+        kind: "prose",
+        photo: "about-room",
+        size: "half",
+        side: "end",
+        body: [
+          {
+            en: "You may be a company looking for a distributor in a new market, an importer in need of a suitable supplier, or the owner of a venture looking for a partner. Or you may be a professional looking to develop your expertise, or a student preparing for the start of your working life. At DUKAAT, we begin by understanding what you need and what you can offer, and then help you choose the right path.",
+            nl: "Misschien bent u een bedrijf dat op een nieuwe markt een distributeur zoekt, een importeur die een geschikte leverancier nodig heeft, of een projecteigenaar die een partner zoekt. Of misschien bent u professional en wilt u uw expertise ontwikkelen, of bent u student en bereidt u zich voor op de start van uw loopbaan. Bij DUKAAT beginnen wij met het begrijpen van wat u nodig heeft en wat u kunt bieden, en daarna helpen wij u de passende route te kiezen.",
+            ar: "قد تكون شركة تبحث عن موزّع في سوق جديد، أو مستوردًا يحتاج إلى مورّد مناسب، أو صاحب مشروع يبحث عن شريك. وقد تكون مهنيًا يريد تطوير خبرته، أو طالبًا يستعد لبدايته العملية. في دوكات، نبدأ بفهم ما تحتاجه وما تستطيع تقديمه، ثم نساعدك على اختيار المسار المناسب.",
+          },
+          {
+            en: "The DUKAAT ecosystem brings together business connections, training, meetings, consultancy and the showcasing of products and opportunities. We believe that a good relationship grows when clarity comes together with knowledge and mutual interest, and that cooperation between the Netherlands and the Arab world holds value in both directions.",
+            nl: "Het DUKAAT-ecosysteem combineert zakelijke verbindingen, training, ontmoetingen, advies en het presenteren van producten en kansen. Wij geloven dat een goede relatie groeit wanneer duidelijkheid samenkomt met kennis en wederzijds belang, en dat samenwerking tussen Nederland en de Arabische wereld waarde heeft in beide richtingen.",
+            ar: "تجمع منظومة دوكات بين ربط الأعمال، والتدريب، واللقاءات، والاستشارات، وعرض المنتجات والفرص. نؤمن بأن العلاقة الجيدة تنمو حين يجتمع الوضوح مع المعرفة والمصلحة المتبادلة، وأن التعاون بين هولندا والعالم العربي يحمل قيمة في الاتجاهين.",
+          },
+        ],
+      },
+      {
+        kind: "prose",
+        photo: "about-coffee",
+        size: "tall",
+        side: "start",
+        heading: { en: "Why DUKAAT?", nl: "Waarom DUKAAT?", ar: "لماذا دوكات؟" },
+        body: [
+          {
+            en: "Because finding a company's name is only the beginning of the search. After that, you need to understand how well it fits, know what you are looking for, and know how to begin a useful conversation with it. DUKAAT helps you structure your needs, develop your knowledge and build relationships tied to a clear goal.",
+            nl: "Omdat het vinden van een bedrijfsnaam pas het begin van de zoektocht is. Daarna moet u begrijpen in hoeverre dat bedrijf geschikt is, weten wat u zoekt en hoe u er een nuttig gesprek mee begint. DUKAAT helpt u uw behoefte te ordenen, uw kennis te ontwikkelen en relaties op te bouwen die gekoppeld zijn aan een duidelijk doel.",
+            ar: "لأن الوصول إلى اسم شركة هو بداية البحث فقط. تحتاج بعدها إلى فهم مدى ملاءمتها، ومعرفة ما تبحث عنه، وطريقة بدء حوار مفيد معها. تساعدك دوكات على ترتيب احتياجك، وتطوير معرفتك، وبناء علاقات مرتبطة بهدف واضح.",
+          },
+        ],
+      },
+      {
+        kind: "actions",
+        links: [
+          { href: "services", label: { en: "Discover our services", nl: "Ontdek onze diensten", ar: "اكتشف خدماتنا" } },
+          { href: "membership", label: { en: "Learn about membership", nl: "Maak kennis met het lidmaatschap", ar: "تعرّف إلى العضوية" } },
+        ],
+      },
+    ],
+  },
+
+  "about/name": {
+    masthead: { variant: "portrait", photo: "story-tulip" },
+    headline: {
+      en: "From value that crosses markets to relationships that cross borders",
+      nl: "Van waarde die markten oversteekt naar relaties die grenzen oversteken",
+      ar: "من قيمة تعبر الأسواق إلى علاقات تعبر الحدود",
+    },
+    blocks: [
+      {
+        kind: "lead",
+        text: {
+          en: "The name DUKAAT draws its inspiration from the Dutch ducat and its trading heritage: a symbol we reinterpret today through the value of people, their knowledge and their relationships.",
+          nl: "De naam DUKAAT ontleent zijn idee aan de Nederlandse dukaat en het handelserfgoed daarvan; een symbool dat wij vandaag opnieuw duiden vanuit de waarde van de mens, zijn kennis en zijn relaties.",
+          ar: "يستلهم اسم دوكات فكرته من الدوكات الهولندي وإرثه التجاري؛ رمزٌ نعيد قراءته اليوم من خلال قيمة الإنسان ومعرفته وعلاقاته.",
         },
-        items: [
+      },
+      {
+        kind: "prose",
+        photo: "story-balance",
+        size: "tall",
+        side: "end",
+        body: [
           {
-            title: {
-              en: "A Dutch company with an excellent product",
-              nl: "Een Nederlands bedrijf met een uitstekend product",
-              ar: "شركة هولندية تمتلك منتجاً ممتازاً",
-            },
-            body: {
-              en: "The product is ready. What is missing is a distributor in the Arab world: someone who knows the market, reaches the buyers and can be trusted with the brand.",
-              nl: "Het product is er. Wat ontbreekt, is een distributeur in de Arabische wereld: iemand die de markt kent, de kopers bereikt en aan wie u het merk kunt toevertrouwen.",
-              ar: "المنتج جاهز، وما ينقصها موزّعٌ في العالم العربي: جهةٌ تعرف السوق، وتصل إلى المشترين، ويمكن أن تُؤتمن على العلامة التجارية.",
-            },
+            en: "Value may be expertise shared by a specialist, a product that finds its market, or an idea that meets someone who helps it grow. And it may begin with a meeting that brings together two people who were each looking for the other.",
+            nl: "Waarde kan immers expertise zijn die een specialist deelt, een product dat zijn markt vindt, of een idee dat iemand ontmoet die het helpt groeien. En waarde kan beginnen met een ontmoeting die twee mensen samenbrengt die naar elkaar op zoek waren.",
+            ar: "فالقيمة قد تكون خبرة يشاركها مختص، أو منتجًا يجد سوقه، أو فكرة تلتقي بمن يساعدها على النمو. وقد تبدأ بلقاء يجمع شخصين كان كل منهما يبحث عن الآخر.",
           },
           {
-            title: {
-              en: "An Arab investor looking at Europe",
-              nl: "Een Arabische investeerder met het oog op Europa",
-              ar: "مستثمر عربي يتطلّع إلى أوروبا",
-            },
-            body: {
-              en: "The capital and the intent are there. What is missing is the right European company or project — and a counterparty who has been checked before anything is signed.",
-              nl: "Het kapitaal en de bereidheid zijn er. Wat ontbreekt, is het juiste Europese bedrijf of project — en een tegenpartij die is gecontroleerd voordat er iets wordt getekend.",
-              ar: "رأس المال موجود، والنيّة كذلك. وما ينقصه شركة أو مشروع أوروبي مناسب — وطرفٌ مقابل جرى التحقق منه قبل توقيع أي شيء.",
-            },
+            en: "This is where the DUKAAT story comes from: a community that carries value from person to person, from company to company and from market to market. At its heart are three values: value, trust and leadership.",
+            nl: "Hier komt het verhaal van DUKAAT vandaan: een community die waarde overbrengt van persoon tot persoon, van bedrijf tot bedrijf en van markt tot markt. In het hart ervan staan drie waarden: waarde, vertrouwen en leiderschap.",
+            ar: "من هنا تأتي قصة دوكات: مجتمع يحمل القيمة من شخص إلى شخص، ومن شركة إلى شركة، ومن سوق إلى سوق. وفي قلبه ثلاث قيم: القيمة، والثقة، والقيادة.",
           },
+        ],
+      },
+      { kind: "band", photo: "story-river" },
+      {
+        kind: "prose",
+        heading: {
+          en: "Every member carries the meaning of nobility",
+          nl: "Ieder lid draagt de betekenis van nobelheid in zich",
+          ar: "كل عضو يحمل معنى النُبل",
+        },
+        body: [
           {
-            title: {
-              en: "An Arab manufacturer ready to export",
-              nl: "Een Arabische fabrikant die klaar is voor export",
-              ar: "مصنع عربي جاهز للتصدير",
-            },
-            body: {
-              en: "The capacity to supply Europe is there. What is missing is knowing where to begin: which buyers, which standards and certificates, which first step.",
-              nl: "De capaciteit om Europa te beleveren is er. Wat ontbreekt, is weten waar te beginnen: welke kopers, welke normen en certificaten, welke eerste stap.",
-              ar: "القدرة على التوريد إلى أوروبا موجودة، وما ينقصه أن يعرف من أين يبدأ: أيّ المشترين، وأيّ المعايير والشهادات، وما الخطوة الأولى.",
-            },
-          },
-          {
-            title: {
-              en: "A trader in search of a source",
-              nl: "Een handelaar op zoek naar een bron",
-              ar: "تاجر يبحث عن مصدر",
-            },
-            body: {
-              en: "A supplier, a factory, a stocklot, a used machine. The right opportunity exists somewhere else — and neither side knows that the other is there.",
-              nl: "Een leverancier, een fabriek, een partij restvoorraad, een gebruikte machine. De juiste kans bestaat ergens anders — en geen van beide kanten weet dat de ander er is.",
-              ar: "يبحث عن مورّد أو مصنع أو دفعة مخزون أو آلة مستعملة، والفرصة المناسبة موجودة في مكان آخر — دون أن يعلم أيٌّ من الطرفين بوجود الآخر.",
-            },
+            en: "In DUKAAT's culture, we use ‘the Duke’ as a symbol of noble conduct and responsible leadership: someone who keeps their word, respects others, shares their knowledge and opens a door to a new opportunity. It is a symbolic identity of belonging within the club, not a formal aristocratic title.",
+            nl: "In de cultuur van DUKAAT gebruiken wij de ‘Duke’ als symbool voor nobel handelen en verantwoordelijk leiderschap: iemand die zijn woord houdt, anderen respecteert, zijn kennis deelt en een deur opent naar een nieuwe kans. Het is een symbolische identiteit van verbondenheid binnen de club, en geen officiële adellijke titel.",
+            ar: "نستخدم «الدوق» في ثقافة دوكات رمزًا لنُبل التعامل والقيادة المسؤولة: شخص يحفظ كلمته، ويحترم الآخرين، ويشارك معرفته، ويفتح بابًا لفرصة جديدة. إنها هوية انتماء رمزية داخل النادي، وليست لقبًا أرستقراطيًا رسميًا.",
           },
         ],
       },
       {
         kind: "statement",
         text: {
-          en: "This is where DUKAAT comes in: we build the environment in which the right people, companies and opportunities find each other.",
-          nl: "Hier komt DUKAAT in beeld: wij bouwen de omgeving waarin de juiste mensen, bedrijven en kansen elkaar vinden.",
-          ar: "هنا يأتي دور DUKAAT: نبني البيئة التي تساعد الأشخاص والشركات والفرص المناسبة على أن تجد بعضها بعضاً.",
+          en: "At DUKAAT, a member's nobility shows in the mark they leave: knowledge they share, a pledge they keep and an opportunity they open.",
+          nl: "Bij DUKAAT toont de nobelheid van een lid zich in zijn impact: kennis die hij deelt, een belofte die hij houdt en een kans die hij opent.",
+          ar: "في دوكات، نُبل العضو يظهر في أثره: معرفة يشاركها، وعهد يحفظه، وفرصة يفتحها.",
         },
       },
-      {
-        kind: "duo",
-        photos: ["about-room", "about-coffee"],
-        label: { en: "Beyond networking", nl: "Meer dan netwerken", ar: "أكثر من نادٍ" },
-        heading: { en: "From searching *to finding.*", nl: "Van zoeken *tot vinden.*", ar: "من البحث *حتى تجد.*" },
-        body: [
-          {
-            en: "DUKAAT is not meant as one more networking club or a place to exchange business cards, and its strength is not measured by the number of its members. It is one connected environment that supports a member from the moment they say “I am looking for…” until they can say “I found the person, company or opportunity I needed.”",
-            nl: "DUKAAT is niet bedoeld als de zoveelste netwerkclub of als plek om visitekaartjes uit te wisselen, en de kracht van de club wordt niet afgemeten aan het aantal leden. Het is één samenhangende omgeving die leden bijstaat vanaf het eerste “Ik zoek…” tot het moment waarop zij kunnen zeggen: “Ik heb de persoon, het bedrijf of de kans gevonden die ik nodig had.”",
-            ar: "لا يُراد لـDUKAAT أن يكون نادياً آخر من نوادي التعارف، ولا مكاناً لتبادل بطاقات العمل، ولا تُقاس قوته بعدد أعضائه. إنه منظومة أعمال متكاملة تساند العضو منذ اللحظة التي يقول فيها: «أبحث عن…»، حتى يصل إلى: «وجدت الشخص أو الشركة أو الفرصة التي أحتاجها».",
-          },
-          {
-            en: "That is why DUKAAT brings together, in one place, what is usually scattered: connections, trade, investment, knowledge, technology and human expertise. Each is useful on its own; together they carry a member from the first question to the first deal.",
-            nl: "Daarom brengt DUKAAT op één plek samen wat meestal verspreid ligt: relaties, handel, investeringen, kennis, technologie en menselijke expertise. Elk onderdeel is op zichzelf nuttig; samen brengen zij een lid van de eerste vraag tot de eerste deal.",
-            ar: "لهذا يجمع DUKAAT في مكان واحد ما يكون متفرّقاً عادةً: العلاقات، والتجارة، والاستثمار، والمعرفة، والتكنولوجيا، والخبرة البشرية. لكلٍّ منها فائدته على حدة؛ ومجتمعةً تأخذ بيد العضو من السؤال الأول إلى الصفقة الأولى.",
-          },
-        ],
-      },
-      {
-        kind: "band",
-        photo: "about-port",
-        caption: {
-          en: "The Netherlands is the starting point; the world is the direction.",
-          nl: "Nederland is het beginpunt; de wereld is de richting.",
-          ar: "هولندا نقطة البداية… والعالم هو الاتجاه.",
-        },
-      },
-      {
-        kind: "facts",
-        label: { en: "Anno 2018", nl: "Anno 2018", ar: "منذ 2018" },
-        heading: {
-          en: "Dutch in origin, *built to connect.*",
-          nl: "Nederlands van oorsprong, *gebouwd om te verbinden.*",
-          ar: "هولنديّ النشأة، *صُمّم ليربط.*",
-        },
-        intro: {
-          en: "The Netherlands is one of Europe’s key gateways for trade; the Arab world spans markets of great variety. DUKAAT was built from the start to connect the two: the Netherlands and Europe with the Arab world.",
-          nl: "Nederland is een van de belangrijkste handelspoorten van Europa; de Arabische wereld omvat zeer uiteenlopende markten. DUKAAT is vanaf het begin gebouwd om die twee te verbinden: Nederland en Europa met de Arabische wereld.",
-          ar: "هولندا واحدة من أهم بوابات التجارة الأوروبية، والعالم العربي يضمّ أسواقاً شديدة التنوّع. وقد صُمّم DUKAAT منذ البداية ليربط بينهما: هولندا وأوروبا من جهة، والعالم العربي من جهة أخرى.",
-        },
-        items: [
-          {
-            term: { en: "Legal entity", nl: "Rechtspersoon", ar: "الكيان القانوني" },
-            value: {
-              en: "Stichting Nederlands–Arabische Handelskamer, a Dutch foundation",
-              nl: "Stichting Nederlands–Arabische Handelskamer",
-              ar: "Stichting Nederlands–Arabische Handelskamer، مؤسسة هولندية",
-            },
-          },
-          {
-            term: { en: "Founded", nl: "Opgericht", ar: "التأسيس" },
-            value: {
-              en: "2018, Rotterdam",
-              nl: "2018, Rotterdam",
-              ar: "2018، روتردام",
-            },
-          },
-          {
-            term: { en: "The club", nl: "De club", ar: "النادي" },
-            value: {
-              en: "DUKAAT — Dutch–Arab Business Club",
-              nl: "DUKAAT — Dutch–Arab Business Club",
-              ar: "DUKAAT — نادي الأعمال الهولندي العربي",
-            },
-          },
-          {
-            term: { en: "Languages", nl: "Talen", ar: "اللغات" },
-            value: { en: "Arabic, Dutch, English", nl: "Arabisch, Nederlands, Engels", ar: "العربية، والهولندية، والإنجليزية" },
-          },
-          {
-            term: { en: "Admission", nl: "Toelating", ar: "القبول" },
-            value: { en: "By nomination or invitation, after review", nl: "Op voordracht of uitnodiging, na beoordeling", ar: "بالترشيح أو الدعوة، بعد المراجعة" },
-          },
-        ],
-      },
-      {
-        kind: "index",
-        label: { en: "Read on", nl: "Lees verder", ar: "تابع القراءة" },
-        heading: {
-          en: "The name, the reasons, the values, *the people.*",
-          nl: "De naam, de redenen, de waarden, *de mensen.*",
-          ar: "الاسم، والدوافع، والقيم، *والأشخاص.*",
-        },
-      },
-      {
-        kind: "next",
-        heading: { en: "Begin with *the name.*", nl: "Begin bij *de naam.*", ar: "ابدأ *بالاسم.*" },
-        body: {
-          en: "Or go straight to the five steps between a need and a first deal.",
-          nl: "Of ga direct naar de vijf stappen tussen een behoefte en een eerste deal.",
-          ar: "أو انتقل مباشرةً إلى الخطوات الخمس التي تقود من الحاجة إلى الصفقة الأولى.",
-        },
-        links: [
-          { href: "about/story", label: { en: "The name", nl: "De naam", ar: "الاسم" } },
-          { href: "how-we-work", label: { en: "How we work", nl: "Zo werken wij", ar: "كيف نعمل" } },
-        ],
-      },
-    ],
-  },
-
-  "about/story": {
-    masthead: { variant: "portrait", photo: "story-balance" },
-    blocks: [
+      /* Extra kept by the owner ("laat beiden"): the blocks of the former page "about/story" (commit 2336702), after the source blocks. */
       {
         kind: "lead",
         text: {
@@ -203,38 +132,38 @@ export const about: PageSet = {
         },
       },
       {
-        kind: "facts",
-        media: "film",
+        kind: "register",
+        cols: 2,
         label: { en: "The coin", nl: "De munt", ar: "العملة" },
         heading: { en: "A known *weight.*", nl: "Een bekend *gewicht.*", ar: "وزنٌ *معروف.*" },
         items: [
           {
-            term: { en: "Trade coin since", nl: "Handelsmunt sinds", ar: "عملة تجارية منذ" },
-            value: { en: "4 August 1586, under the Dutch Mint Act", nl: "4 augustus 1586, onder de Muntwet", ar: "4 أغسطس 1586، بموجب قانون السكّ الهولندي" },
+            title: { en: "Trade coin since", nl: "Handelsmunt sinds", ar: "عملة تجارية منذ" },
+            body: { en: "4 August 1586, under the Dutch Mint Act", nl: "4 augustus 1586, onder de Muntwet", ar: "4 أغسطس 1586، بموجب قانون السكّ الهولندي" },
           },
           {
-            term: { en: "Weight", nl: "Gewicht", ar: "الوزن" },
-            value: { en: "3.494 grams", nl: "3,494 gram", ar: "3.494 غرام" },
+            title: { en: "Weight", nl: "Gewicht", ar: "الوزن" },
+            body: { en: "3.494 grams", nl: "3,494 gram", ar: "3.494 غرام" },
           },
           {
-            term: { en: "Fineness", nl: "Gehalte", ar: "العيار" },
-            value: { en: "983/1000 gold", nl: "983/1000 goud", ar: "ذهب بعيار 983/1000" },
+            title: { en: "Fineness", nl: "Gehalte", ar: "العيار" },
+            body: { en: "983/1000 gold", nl: "983/1000 goud", ar: "ذهب بعيار 983/1000" },
           },
           {
-            term: { en: "Struck today by", nl: "Vandaag geslagen door", ar: "تسكّه اليوم" },
-            value: { en: "The Royal Dutch Mint, Utrecht", nl: "De Koninklijke Nederlandse Munt, Utrecht", ar: "دار السكّ الملكية الهولندية، أوتريخت" },
+            title: { en: "Struck today by", nl: "Vandaag geslagen door", ar: "تسكّه اليوم" },
+            body: { en: "The Royal Dutch Mint, Utrecht", nl: "De Koninklijke Nederlandse Munt, Utrecht", ar: "دار السكّ الملكية الهولندية، أوتريخت" },
           },
           {
-            term: { en: "Ottoman sultani", nl: "Ottomaanse sultani", ar: "السلطاني العثماني" },
-            value: {
+            title: { en: "Ottoman sultani", nl: "Ottomaanse sultani", ar: "السلطاني العثماني" },
+            body: {
               en: "First struck 1477–78 under Mehmed II, on the ducat standard",
               nl: "Voor het eerst geslagen in 1477–78 onder Mehmed II, op de dukaatstandaard",
               ar: "سُكّ لأول مرة عام 1477–78 في عهد محمد الثاني، على معيار الدوقات",
             },
           },
           {
-            term: { en: "Bunduqi", nl: "Bunduqi", ar: "البندقي" },
-            value: {
+            title: { en: "Bunduqi", nl: "Bunduqi", ar: "البندقي" },
+            body: {
               en: "The name of Moroccan gold dinars — after al-Bunduqiyya, Venice",
               nl: "De naam van Marokkaanse gouden dinars — naar al-Bunduqiyya, Venetië",
               ar: "اسم الدنانير الذهبية المغربية — نسبةً إلى البندقية",
@@ -273,7 +202,6 @@ export const about: PageSet = {
       },
       {
         kind: "prose",
-        photo: "story-tulip",
         size: "half",
         side: "start",
         label: { en: "The mark", nl: "Het beeldmerk", ar: "الشعار" },
@@ -310,7 +238,7 @@ export const about: PageSet = {
       },
       {
         kind: "band",
-        photo: "story-river",
+        photo: "about-port",
         caption: {
           en: "The ducat carried value from market to market. DUKAAT carries it from person to person, company to company, market to market.",
           nl: "De dukaat bracht waarde van markt naar markt. DUKAAT brengt haar van mens tot mens, van bedrijf tot bedrijf, van markt tot markt.",
@@ -318,16 +246,172 @@ export const about: PageSet = {
         },
       },
       {
-        kind: "next",
+        kind: "actions",
         heading: { en: "What the name *commits us to.*", nl: "Waartoe de naam ons *verplicht.*", ar: "ما يُلزمنا به *الاسم.*" },
         links: [
-          { href: "about/values", label: { en: "Vision, mission & values", nl: "Visie, missie & waarden", ar: "الرؤية والرسالة والقيم" } },
+          { href: "about/vision", label: { en: "Vision, mission & values", nl: "Visie, missie & waarden", ar: "الرؤية والرسالة والقيم" } },
           { href: "about/why", label: { en: "Why DUKAAT", nl: "Waarom DUKAAT", ar: "لماذا DUKAAT" } },
         ],
       },
     ],
   },
 
+  "about/vision": {
+    masthead: { variant: "band", photo: "values-court" },
+    headline: {
+      en: "A business community that opens horizons for cooperation across borders",
+      nl: "Een zakelijke community die perspectieven opent voor samenwerking over grenzen heen",
+      ar: "مجتمع أعمال يفتح آفاق التعاون عبر الحدود",
+    },
+    blocks: [
+      {
+        kind: "lead",
+        text: {
+          en: "For DUKAAT to become a point of reference for business and knowledge between the Netherlands and the Arab world, and a community that people with ambition turn to when they are looking for a partner, a market, expertise or an opportunity to grow.",
+          nl: "Dat DUKAAT een referentiepunt wordt voor zakendoen en kennis tussen Nederland en de Arabische wereld, en een community waartoe mensen met ambitie zich wenden wanneer zij op zoek zijn naar een partner, een markt, expertise of een kans om te groeien.",
+          ar: "أن تصبح دوكات مرجعًا للأعمال والمعرفة بين هولندا والعالم العربي، ومجتمعًا يلجأ إليه أصحاب الطموح عندما يبحثون عن شريك، أو سوق، أو خبرة، أو فرصة للنمو.",
+        },
+      },
+      {
+        kind: "prose",
+        photo: "why-hero",
+        size: "half",
+        side: "end",
+        body: [
+          {
+            en: "We aspire to build long-term relationships that make cooperation between companies and individuals clearer and more effective, and that allow expertise, products and ideas to reach those who need them, with scope to extend this connection to Europe and other markets.",
+            nl: "Wij streven ernaar langdurige relaties op te bouwen die de samenwerking tussen bedrijven en individuen duidelijker en effectiever maken, en waardoor expertise, producten en ideeën terecht kunnen komen bij wie ze nodig heeft, met de mogelijkheid om dit contact uit te breiden naar Europa en andere markten.",
+            ar: "نطمح إلى بناء علاقات طويلة الأمد تجعل التعاون بين الشركات والأفراد أكثر وضوحًا وفاعلية، وتتيح للخبرات والمنتجات والأفكار أن تصل إلى من يحتاجها، مع قابلية توسيع هذا التواصل إلى أوروبا وأسواق أخرى.",
+          },
+        ],
+      },
+    ],
+  },
+
+  "about/mission": {
+    masthead: { variant: "portrait", photo: "how-hero" },
+    headline: {
+      en: "Turning relationships into value and business opportunities",
+      nl: "Relaties omzetten in waarde en zakelijke kansen",
+      ar: "تحويل العلاقات إلى قيمة وفرص أعمال",
+    },
+    blocks: [
+      {
+        kind: "lead",
+        text: {
+          en: "We connect companies and entrepreneurs with knowledge, partners and opportunities between the Netherlands and the Arab world, through guided professional introductions, practical training, specialised events, and information and services that support taking the next step.",
+          nl: "Wij verbinden bedrijven en ondernemers met kennis, partners en kansen tussen Nederland en de Arabische wereld, door middel van gerichte professionele kennismaking, praktijkgerichte training, gespecialiseerde evenementen, en informatie en diensten die ondersteunen bij het zetten van de volgende stap.",
+          ar: "نصل الشركات وروّاد الأعمال بالمعرفة والشركاء والفرص بين هولندا والعالم العربي، من خلال التعارف المهني الموجّه، والتدريب التطبيقي، والفعاليات المتخصصة، والمعلومات والخدمات التي تدعم اتخاذ الخطوة التالية.",
+        },
+      },
+      {
+        kind: "prose",
+        body: [
+          {
+            en: "We start from a clear need and help turn it into a structured search, and then into dialogue and cooperation that can be built upon.",
+            nl: "Wij beginnen bij een duidelijke behoefte en helpen die om te zetten in een gestructureerde zoektocht, en vervolgens in een gesprek en samenwerking waarop kan worden voortgebouwd.",
+            ar: "نبدأ من حاجة واضحة، ونساعد على تحويلها إلى بحث منظم، ثم حوار وتعاون يمكن البناء عليه.",
+          },
+        ],
+      },
+    ],
+  },
+
+  /* 2.5 has no title line: the masthead shows the page title and blurb from content/site.*.ts */
+  "about/goals": {
+    masthead: { variant: "plate", photo: "values-value" },
+    blocks: [
+      {
+        kind: "register",
+        photo: "values-trust",
+        items: [
+          {
+            title: { en: "Connecting the business community", nl: "De zakelijke community verbinden", ar: "ربط مجتمع الأعمال" },
+            body: {
+              en: "bringing companies, entrepreneurs and experts together around shared needs and interests.",
+              nl: "bedrijven, ondernemers en experts samenbrengen rond gemeenschappelijke behoeften en belangen.",
+              ar: "جمع الشركات وروّاد الأعمال والخبراء حول احتياجات ومصالح مشتركة.",
+            },
+          },
+          {
+            title: { en: "Exchanging knowledge", nl: "Kennis uitwisselen", ar: "تبادل المعرفة" },
+            body: {
+              en: "offering courses, workshops and meetings that turn expertise into practical application.",
+              nl: "cursussen, workshops en ontmoetingen aanbieden die expertise vertalen naar praktische toepassing.",
+              ar: "تقديم دورات وورش ولقاءات تنقل الخبرة إلى تطبيق عملي.",
+            },
+          },
+          {
+            title: { en: "Facilitating market entry", nl: "Markttoetreding vergemakkelijken", ar: "تسهيل دخول الأسواق" },
+            body: {
+              en: "helping companies understand the target market and prepare to engage with it.",
+              nl: "bedrijven helpen de doelmarkt te begrijpen en zich voor te bereiden op zakendoen op die markt.",
+              ar: "مساعدة الشركات على فهم السوق المستهدف والاستعداد للتعامل معه.",
+            },
+          },
+          {
+            title: { en: "Growing trade", nl: "Handel laten groeien", ar: "تنمية التجارة" },
+            body: {
+              en: "supporting introductions in supply, purchasing, distribution, import, export and manufacturing.",
+              nl: "kennismakingen ondersteunen op het gebied van levering, inkoop, distributie, import, export en productie.",
+              ar: "دعم التعارف في التوريد والشراء والتوزيع والاستيراد والتصدير والتصنيع.",
+            },
+          },
+          {
+            title: { en: "Showcasing products and opportunities", nl: "Producten en kansen zichtbaar maken", ar: "إبراز المنتجات والفرص" },
+            body: {
+              en: "providing an organised space for trade offers, purchase requests, clearance stock and equipment.",
+              nl: "een gestructureerde ruimte bieden voor commerciële aanbiedingen, inkoopaanvragen, restpartijen en materieel.",
+              ar: "توفير مساحة منظمة للعروض التجارية وطلبات الشراء والتصفيات والمعدات.",
+            },
+          },
+          {
+            title: { en: "Supporting investment connections", nl: "Contact rond investeringen ondersteunen", ar: "دعم التواصل الاستثماري" },
+            body: {
+              en: "enabling introductions between project owners and those interested in investing.",
+              nl: "kennismaking mogelijk maken tussen projecteigenaren en mensen die geïnteresseerd zijn in investeren.",
+              ar: "إتاحة التعارف بين أصحاب المشاريع والمهتمين بالاستثمار.",
+            },
+          },
+          {
+            title: { en: "Developing professional skills", nl: "Professionele vaardigheden ontwikkelen", ar: "تطوير المهارات المهنية" },
+            body: {
+              en: "serving professionals, university students and those about to enter the job market.",
+              nl: "van dienst zijn aan professionals, universiteitsstudenten en mensen die op het punt staan de arbeidsmarkt te betreden.",
+              ar: "خدمة المهنيين وطلاب الجامعات والمقبلين على سوق العمل.",
+            },
+          },
+          {
+            title: { en: "Strengthening trust", nl: "Vertrouwen versterken", ar: "تعزيز الثقة" },
+            body: {
+              en: "encouraging clear information and respect for commitments, privacy and mutual interests.",
+              nl: "duidelijke informatie en respect voor toezeggingen, privacy en wederzijdse belangen stimuleren.",
+              ar: "تشجيع المعلومات الواضحة واحترام الالتزامات والخصوصية والمصالح المتبادلة.",
+            },
+          },
+          {
+            title: { en: "Organising purposeful meetings", nl: "Ontmoetingen met een doel organiseren", ar: "تنظيم لقاءات ذات هدف" },
+            body: {
+              en: "linking workshops, exhibitions and delegations to the needs of participants.",
+              nl: "workshops, beurzen en delegaties koppelen aan de behoeften van de deelnemers.",
+              ar: "ربط ورش العمل والمعارض والوفود باحتياجات المشاركين.",
+            },
+          },
+        ],
+      },
+      {
+        kind: "actions",
+        links: [
+          {
+            href: "contact#contact-form",
+            label: { en: "Tell us what you want to achieve", nl: "Vertel ons wat u wilt bereiken", ar: "أخبرنا بما تريد تحقيقه" },
+          },
+        ],
+      },
+    ],
+  },
+
+  /* Extra page kept by the owner: "about/why" from commit 2336702. */
   "about/why": {
     masthead: { variant: "plate", photo: "why-hero" },
     blocks: [
@@ -404,47 +488,21 @@ export const about: PageSet = {
           },
         ],
       },
-      { kind: "home", section: "why" },
+      // the three claims of the homepage "Why DUKAAT" (extra x-8, kept by the owner; claim I reworded per the owner's note)
       {
-        kind: "contrast",
-        label: { en: "Our model", nl: "Ons model", ar: "نموذجنا" },
-        heading: {
-          en: "A community, *not only a platform.*",
-          nl: "Een gemeenschap, *niet alleen een platform.*",
-          ar: "مجتمع، *وليس مجرد منصة.*",
-        },
-        intro: {
-          en: "DUKAAT brings connections, trade, investment, knowledge, access and support together in one place. Technology is an important part of that. But technology alone does not make business, so our model combines the two.",
-          nl: "DUKAAT brengt relaties, handel, investeringen, kennis, toegang en ondersteuning samen op één plek. Technologie is daarvan een belangrijk deel. Maar technologie alleen maakt geen zaken; daarom verbindt ons model de twee.",
-          ar: "يجمع DUKAAT في مكان واحد العلاقات، والتجارة، والاستثمار، والمعرفة، والوصول، والدعم. والتكنولوجيا جزءٌ مهمّ من ذلك، لكننا نؤمن بأن التكنولوجيا وحدها لا تصنع الأعمال؛ لذلك يقوم نموذجنا على الجمع بين الاثنين.",
-        },
-        a: {
-          title: { en: "Technology", nl: "Technologie", ar: "التكنولوجيا" },
-          items: [
-            { en: "Search", nl: "Zoeken", ar: "البحث" },
-            { en: "Data", nl: "Data", ar: "البيانات" },
-            { en: "Matching between companies", nl: "Koppeling tussen bedrijven", ar: "المطابقة بين الشركات" },
-            { en: "Alerts", nl: "Meldingen", ar: "التنبيهات" },
-            { en: "Opportunities", nl: "Kansen", ar: "الفرص" },
-          ],
-        },
-        b: {
-          title: { en: "Human connection", nl: "Menselijk contact", ar: "التواصل الإنساني" },
-          items: [
-            { en: "Introductions", nl: "Introducties", ar: "التعارف" },
-            { en: "Trust", nl: "Vertrouwen", ar: "الثقة" },
-            { en: "Meetings", nl: "Ontmoetingen", ar: "اللقاءات" },
-            { en: "Conversations", nl: "Gesprekken", ar: "المحادثات" },
-            { en: "Trade missions", nl: "Handelsmissies", ar: "البعثات التجارية" },
-            { en: "Long-term relationships", nl: "Langdurige relaties", ar: "العلاقات الطويلة الأمد" },
-          ],
-        },
-        note: {
-          en: "Technology narrows the search; people verify. Relationships create business.",
-          nl: "Technologie verkleint het zoekveld; mensen verifiëren. Uit relaties ontstaan zaken.",
-          ar: "التقنية تضيّق البحث؛ والبشر يتحققون. والعلاقات تصنع الأعمال.",
-        },
+        kind: "register",
+        label: { en: "Why DUKAAT", nl: "Waarom DUKAAT", ar: "لماذا DUKAAT" },
+        heading: { en: "Three things are *ours alone.*", nl: "Drie dingen zijn *alleen van ons.*", ar: "ثلاثة أشياء *لنا وحدنا.*" },
+        intro: { en: "A search engine gives you names. It does not build the relationship.", nl: "Een zoekmachine geeft u namen. Een relatie bouwt zij niet.", ar: "محرك البحث يعطيك أسماء. لكنه لا يبني العلاقة." },
+        numbered: true,
+        items: [
+          { title: { en: "We are *entrepreneurs,* not consultants.", nl: "Wij zijn *ondernemers,* geen consultants.", ar: "نحن *روّاد أعمال،* لا مستشارون." }, body: { en: "DUKAAT was founded by an entrepreneur who imports, packs and ships goods himself, and who knows trade between both sides from the inside.", nl: "DUKAAT is opgericht door een ondernemer die zelf importeert, verpakt en verscheept, en die de handel tussen beide kanten van binnenuit kent.", ar: "أسّس DUKAAT رائدُ أعمال يستورد ويعبّئ ويشحن البضائع بنفسه، ويعرف التجارة بين الضفتين من الداخل." } },
+          { title: { en: "We sit next to *Rotterdam,* Europe’s largest port.", nl: "Wij zitten naast *Rotterdam,* de grootste haven van Europa.", ar: "نجلس بجوار *روتردام،* أكبر موانئ أوروبا." }, body: { en: "The gateway through which goods enter Europe is our neighbourhood, not a reference on a map. One hour from the market our members want to reach.", nl: "De toegangspoort waardoor goederen Europa binnenkomen is onze omgeving, geen stip op de kaart. Eén uur van de markt die onze leden willen bereiken.", ar: "البوابة التي تدخل منها البضائع إلى أوروبا هي حيّنا، لا نقطة على خريطة. على بُعد ساعة من السوق التي يريد أعضاؤنا الوصول إليها." } },
+          { title: { en: "We are trusted on *both sides,* in both languages.", nl: "Wij worden aan *beide kanten* vertrouwd, in beide talen.", ar: "موثوقون على *الضفتين،* وباللغتين." }, body: { en: "Our network did not start with a database. It started with people who already knew us — in Arabic and in Dutch.", nl: "Ons netwerk begon niet met een database. Het begon met mensen die ons al kenden — in het Arabisch en in het Nederlands.", ar: "لم تبدأ شبكتنا بقاعدة بيانات. بدأت بأشخاص يعرفوننا أصلاً — بالعربية وبالهولندية." } },
+        ],
       },
+      { kind: "notice", body: [{ en: "Members’ current requests circulate inside the network, verified and matched by a person. They are not published on this page.", nl: "De actuele aanvragen van leden circuleren binnen het netwerk, geverifieerd en gekoppeld door een mens. Zij worden niet op deze pagina gepubliceerd.", ar: "طلبات الأعضاء الحالية تُتداول داخل الشبكة، يتحقق منها إنسان ويطابقها. ولا تُنشر على هذه الصفحة." }] },
+      // "Our model" (technology and human connection) left out: the owner, 30 Sep 2026 — no mention of technology or AI for now
       {
         kind: "statement",
         text: {
@@ -453,253 +511,10 @@ export const about: PageSet = {
           ar: "جودة العلاقة أهم من عدد الأسماء، والنتيجة أهم من عدد الفعاليات.",
         },
       },
-      {
-        kind: "next",
-        heading: { en: "How that works, *in practice.*", nl: "Hoe dat werkt, *in de praktijk.*", ar: "كيف يجري ذلك *على أرض الواقع.*" },
-        links: [
-          { href: "how-we-work", label: { en: "How we work", nl: "Zo werken wij", ar: "كيف نعمل" } },
-          {
-            href: "membership/who-for",
-            label: { en: "Who it is for — and who not", nl: "Voor wie — en voor wie niet", ar: "لمن العضوية — ولمن لا" },
-          },
-        ],
-      },
     ],
   },
 
-  "about/values": {
-    masthead: { variant: "band", photo: "values-court" },
-    blocks: [
-      {
-        kind: "terms",
-        label: { en: "Vision", nl: "Visie", ar: "رؤيتنا" },
-        heading: { en: "What companies *come looking for.*", nl: "Waar bedrijven *naar zoeken.*", ar: "ما تأتي الشركات *بحثاً عنه.*" },
-        intro: {
-          en: "DUKAAT stands for a trusted business community connecting the Netherlands and Europe with the Arab world — a fixed point of reference for companies looking for:",
-          nl: "DUKAAT staat voor een betrouwbare zakelijke gemeenschap die Nederland en Europa verbindt met de Arabische wereld — een vast ijkpunt voor bedrijven die op zoek zijn naar:",
-          ar: "يمثّل DUKAAT مجتمع أعمال موثوقاً يربط هولندا وأوروبا بالعالم العربي، ومرجعاً ثابتاً تلجأ إليه الشركات حين تبحث عن:",
-        },
-        items: [
-          { en: "New markets", nl: "Nieuwe markten", ar: "سوق جديدة" },
-          { en: "Business partners", nl: "Zakenpartners", ar: "شريك موثوق" },
-          { en: "Suppliers", nl: "Leveranciers", ar: "مورّد" },
-          { en: "Buyers", nl: "Kopers", ar: "مشترٍ" },
-          { en: "Distributors", nl: "Distributeurs", ar: "موزّع" },
-          { en: "Investors", nl: "Investeerders", ar: "مستثمر" },
-          { en: "Commercial opportunities", nl: "Commerciële kansen", ar: "فرصة تجارية" },
-          { en: "Specialised knowledge", nl: "Specialistische kennis", ar: "معرفة متخصصة" },
-          { en: "Valuable professional relationships", nl: "Waardevolle zakelijke relaties", ar: "شبكة علاقات ذات قيمة حقيقية" },
-        ],
-        note: {
-          en: "The aim is simple: cross-border business that is easier, clearer and more effective.",
-          nl: "Het doel is eenvoudig: grensoverschrijdend zakendoen dat makkelijker, overzichtelijker en doeltreffender is.",
-          ar: "والغاية بسيطة: أن تصبح التجارة والتعاون عبر الحدود أكثر سهولة، وأكثر تنظيماً، وأكثر فاعلية.",
-        },
-      },
-      {
-        kind: "sequence",
-        label: { en: "Mission", nl: "Missie", ar: "رسالتنا" },
-        heading: { en: "Turning relationships *into value.*", nl: "Relaties omzetten *in waarde.*", ar: "تحويل العلاقات *إلى قيمة.*" },
-        items: [
-          { en: "Search", nl: "Zoeken", ar: "البحث" },
-          { en: "Introduction", nl: "Introductie", ar: "التعارف" },
-          { en: "Trust", nl: "Vertrouwen", ar: "الثقة" },
-          { en: "Cooperation", nl: "Samenwerking", ar: "التعاون" },
-          { en: "Business", nl: "Zaken", ar: "الأعمال" },
-        ],
-        body: {
-          en: "We connect the right people with the right opportunities, and provide the knowledge, expertise and tools companies need to enter new markets and build long-term business relationships.",
-          nl: "Wij verbinden de juiste mensen met de juiste kansen, en bieden de kennis, expertise en middelen die bedrijven nodig hebben om nieuwe markten te betreden en duurzame zakelijke relaties op te bouwen.",
-          ar: "نربط الأشخاص المناسبين بالفرص المناسبة، ونوفّر المعلومات والخبرة والأدوات التي تساعد الشركات على دخول أسواق جديدة وبناء علاقات تجارية طويلة الأمد.",
-        },
-      },
-      {
-        kind: "chapter",
-        label: { en: "Values", nl: "Waarden", ar: "قيمنا" },
-        heading: { en: "Three values, *one measure.*", nl: "Drie waarden, *één maat.*", ar: "ثلاث قيم، *ومقياس واحد.*" },
-        intro: {
-          en: "Value, Trust and Access are the principles DUKAAT rests on — and the measure members may hold us to.",
-          nl: "Value, Trust en Access zijn de beginselen waarop DUKAAT rust — en de maat waaraan leden ons mogen houden.",
-          ar: "ترتكز فلسفة DUKAAT على ثلاثة مبادئ: القيمة والثقة والوصول — وهي المقياس الذي يحقّ للأعضاء أن يحاسبونا به.",
-        },
-        items: [
-          {
-            photo: "values-value",
-            title: { en: "Value", nl: "Value", ar: "القيمة" },
-            body: {
-              en: "Every member should find real value in being part of the network. Not merely a membership card or an invitation to an event, but a relationship, information, an opportunity, a market, a partner — or knowledge that leads to a better decision.",
-              nl: "Elk lid hoort werkelijke waarde te vinden in het netwerk. Niet alleen een lidmaatschapskaart of een uitnodiging voor een evenement, maar een relatie, informatie, een kans, een markt, een partner — of kennis die tot een betere beslissing leidt.",
-              ar: "ينبغي أن يجد كل عضو قيمة حقيقية في وجوده ضمن الشبكة. ليس مجرد بطاقة عضوية أو دعوة إلى فعالية، بل علاقة، أو معلومة، أو فرصة، أو سوق، أو شريك — أو معرفة تساعده على اتخاذ قرار أفضل.",
-            },
-          },
-          {
-            photo: "values-trust",
-            title: { en: "Trust", nl: "Trust", ar: "الثقة" },
-            body: {
-              en: "International business does not grow without trust. Members and companies are presented clearly and professionally, and their registration, activity and references are checked before parties meet. We do not promise to remove risk. We make dealing across borders clearer, better organised and easier to assess.",
-              nl: "Internationaal zakendoen groeit niet zonder vertrouwen. Leden en bedrijven worden helder en professioneel gepresenteerd, en hun inschrijving, activiteit en referenties worden gecontroleerd voordat partijen elkaar ontmoeten. Wij beloven niet dat het risico verdwijnt. Wij maken zakendoen over grenzen heen duidelijker, beter georganiseerd en eenvoudiger te beoordelen.",
-              ar: "الأعمال الدولية لا تنمو من دون ثقة. لذلك يُقدَّم الأعضاء والشركات بصورة واضحة واحترافية، ويُتحقَّق من سجلّهم التجاري ونشاطهم ومراجعهم قبل أن تلتقي الأطراف. نحن لا نَعِد بإلغاء المخاطر، لكننا نجعل التعامل عبر الحدود أوضح، وأكثر تنظيماً، وأسهل في التقييم.",
-            },
-          },
-          {
-            photo: "values-access",
-            title: { en: "Access", nl: "Access", ar: "الوصول" },
-            body: {
-              en: "The right person, the right information, the right market, the right door — at the right time. Access is what is hard to build alone: an introduction to the one who decides, and the context to make good use of it.",
-              nl: "De juiste persoon, de juiste informatie, de juiste markt, de juiste deur — op het juiste moment. Toegang is wat u alleen moeilijk opbouwt: een introductie bij degene die beslist, en de context om die goed te benutten.",
-              ar: "الشخص المناسب، والمعلومة المناسبة، والسوق المناسبة، والباب المناسب — في الوقت المناسب. الوصول هو ما يصعب على المرء بناؤه بمفرده: تعريفٌ بصاحب القرار، والسياق الذي يمكّنه من حسن الاستفادة منه.",
-            },
-          },
-        ],
-      },
-      {
-        kind: "register",
-        numbered: true,
-        cols: 2,
-        label: { en: "Objectives", nl: "Doelstellingen", ar: "أهدافنا" },
-        heading: { en: "The work, *objective by objective.*", nl: "Het werk, *doel voor doel.*", ar: "العمل، *هدفاً هدفاً.*" },
-        items: [
-          {
-            title: {
-              en: "Connecting Dutch and Arab business communities",
-              nl: "Nederlandse en Arabische zakenwerelden verbinden",
-              ar: "ربط مجتمعَي الأعمال الهولندي والعربي",
-            },
-            body: {
-              en: "A professional network of entrepreneurs, companies, investors, manufacturers, suppliers and buyers from the Netherlands and the Arab world.",
-              nl: "Een professioneel netwerk van ondernemers, bedrijven, investeerders, fabrikanten, leveranciers en kopers uit Nederland en de Arabische wereld.",
-              ar: "شبكة مهنية تجمع روّاد الأعمال والشركات والمستثمرين والمصنّعين والمورّدين والمشترين من هولندا والعالم العربي.",
-            },
-          },
-          {
-            title: { en: "Facilitating market entry", nl: "Markttoetreding vergemakkelijken", ar: "تسهيل دخول الأسواق" },
-            body: {
-              en: "Supporting European companies entering Arab markets, and Arab companies entering the Netherlands and Europe: structure, partner, first order.",
-              nl: "Europese bedrijven ondersteunen bij de stap naar Arabische markten, en Arabische bedrijven bij de stap naar Nederland en Europa: structuur, partner, eerste order.",
-              ar: "مساعدة الشركات الهولندية والأوروبية على دخول الأسواق العربية، والشركات العربية على دخول السوق الهولندية والأوروبية: الهيكل، والشريك، والطلبية الأولى.",
-            },
-          },
-          {
-            title: { en: "Creating commercial opportunities", nl: "Commerciële kansen creëren", ar: "خلق فرص تجارية حقيقية" },
-            body: {
-              en: "Practical opportunities in buying and selling, import and export, distribution, agencies, manufacturing, supply, investment, partnerships and joint ventures.",
-              nl: "Concrete kansen in in- en verkoop, import en export, distributie, agentschappen, productie, toelevering, investeringen, partnerschappen en joint ventures.",
-              ar: "التركيز على الفرص العملية: البيع والشراء، والاستيراد والتصدير، والتوزيع، والوكالات التجارية، والتصنيع، والتوريد، والاستثمار، والشراكات، والمشاريع المشتركة.",
-            },
-          },
-          {
-            title: { en: "Matchmaking on real needs", nl: "Koppelen op echte behoeften", ar: "مطابقة قائمة على احتياجات حقيقية" },
-            body: {
-              en: "Connecting companies on what they actually need: a company looking for a distributor, an importer for a factory, an investor for a project, a factory for a buyer.",
-              nl: "Bedrijven koppelen op wat zij werkelijk nodig hebben: een bedrijf dat een distributeur zoekt, een importeur een fabriek, een investeerder een project, een fabriek een koper.",
-              ar: "ربط الشركات بحسب ما تحتاج إليه فعلاً: شركة تبحث عن موزّع، ومستورد يبحث عن مصنع، ومستثمر يبحث عن مشروع، ومصنع يبحث عن مشترٍ.",
-            },
-          },
-          {
-            title: { en: "Building trust between parties", nl: "Vertrouwen tussen partijen opbouwen", ar: "بناء الثقة بين الأطراف" },
-            body: {
-              en: "Clear company profiles and practical verification, so that each side can assess the other before any cooperation begins.",
-              nl: "Heldere bedrijfsprofielen en praktische verificatie, zodat elke kant de andere kan beoordelen voordat een samenwerking begint.",
-              ar: "ملفات واضحة للشركات وتحقّقٌ عملي، كي يتمكّن كل طرف من تقييم الآخر قبل أن يبدأ أي تعاون.",
-            },
-          },
-          {
-            title: { en: "Showcasing products and opportunities", nl: "Producten en kansen tonen", ar: "عرض المنتجات والفرص" },
-            body: {
-              en: "DUKAAT Market: a professional marketplace for products, buyer requests and commercial opportunities, with specifications, quantities, quality certificates and private-label options.",
-              nl: "DUKAAT Market: een professionele marktplaats voor producten, inkoopaanvragen en commerciële kansen, met specificaties, hoeveelheden, kwaliteitscertificaten en huismerkmogelijkheden.",
-              ar: "سوق DUKAAT: سوقٌ احترافية للمنتجات وطلبات الشراء والفرص التجارية، مع المواصفات والكميات وشهادات الجودة وخيارات العلامة الخاصة (Private Label).",
-            },
-          },
-          {
-            title: { en: "Stocklots and liquidations", nl: "Partijen en liquidaties", ar: "دفعات المخزون والتصفيات" },
-            body: {
-              en: "A dedicated channel for surplus stock, overstock, factory and warehouse clearances, used machinery and industrial equipment.",
-              nl: "Een eigen kanaal voor restvoorraden, overtollige voorraad, fabrieks- en magazijnopruimingen, gebruikte machines en industriële uitrusting.",
-              ar: "قناة مخصّصة لفائض المخزون والبضائع الزائدة عن الحاجة، وتصفيات المصانع والمستودعات، والآلات المستعملة، والمعدات الصناعية.",
-            },
-          },
-          {
-            title: { en: "Supporting investment", nl: "Investeringen ondersteunen", ar: "دعم الاستثمار" },
-            body: {
-              en: "Presenting the projects of owners and developers to relevant investors in Europe and the Arab world. DUKAAT does not provide investment advice, does not arrange or broker investments, and does not offer securities. Opportunities are presented for information only. Independent legal, financial and technical due diligence remains essential before any investment decision.",
-              nl: "De projecten van eigenaren en ontwikkelaars presenteren aan relevante investeerders in Europa en de Arabische wereld. DUKAAT geeft geen beleggingsadvies, bemiddelt niet bij investeringen en biedt geen effecten aan. Kansen worden uitsluitend ter informatie gepresenteerd. Onafhankelijk juridisch, financieel en technisch onderzoek blijft essentieel vóór elke investeringsbeslissing.",
-              ar: "عرض مشاريع أصحابها ومطوّريها على المستثمرين المعنيين في أوروبا والعالم العربي. لا يقدّم DUKAAT استشارات استثمارية، ولا يرتّب الاستثمارات أو يتوسط فيها، ولا يعرض أوراقاً مالية. تُعرض الفرص للاطلاع فقط. ويبقى الفحص النافي للجهالة القانوني والمالي والفني المستقل ضرورياً قبل أي قرار استثماري.",
-            },
-          },
-          {
-            title: { en: "Building knowledge", nl: "Kennis opbouwen", ar: "بناء المعرفة" },
-            body: {
-              en: "Courses, seminars, workshops, masterclasses, market studies, economic reports and sessions with experts who know both sides.",
-              nl: "Cursussen, seminars, workshops, masterclasses, marktstudies, economische rapporten en sessies met experts die beide kanten kennen.",
-              ar: "دورات، وندوات، وورش عمل، وجلسات متقدّمة (Masterclasses)، ودراسات أسواق، وتقارير اقتصادية، وجلسات مع خبراء يعرفون الجانبين.",
-            },
-          },
-          {
-            title: { en: "Organising events and missions", nl: "Evenementen en missies organiseren", ar: "تنظيم الفعاليات والبعثات" },
-            body: {
-              en: "Not networking for its own sake: B2B meetings, business breakfasts, Executive Dinners, trade missions, exhibitions, conferences and sector meetings.",
-              nl: "Geen netwerken om het netwerken: B2B-bijeenkomsten, zakenontbijten, Executive Dinners, handelsmissies, beurzen, conferenties en sectorbijeenkomsten.",
-              ar: "ليس التعارف غايةً في ذاته: لقاءات B2B، ولقاءات فطور الأعمال، وExecutive Dinners، وبعثات تجارية، ومعارض، ومؤتمرات، ولقاءات قطاعية.",
-            },
-          },
-        ],
-      },
-      {
-        kind: "terms",
-        label: { en: "Who we serve", nl: "Voor wie", ar: "من نخدم" },
-        heading: { en: "Business on *both sides.*", nl: "Ondernemers aan *beide kanten.*", ar: "أصحاب الأعمال *على الضفتين.*" },
-        intro: {
-          en: "DUKAAT is meant for:",
-          nl: "DUKAAT is er voor:",
-          ar: "DUKAAT موجّه إلى:",
-        },
-        items: [
-          { en: "Business people", nl: "Zakenmensen", ar: "رجال وسيدات الأعمال" },
-          { en: "Company owners", nl: "Bedrijfseigenaren", ar: "أصحاب الشركات" },
-          { en: "Investors", nl: "Investeerders", ar: "المستثمرين" },
-          { en: "Manufacturers", nl: "Fabrikanten", ar: "المصنّعين" },
-          { en: "Importers", nl: "Importeurs", ar: "المستوردين" },
-          { en: "Exporters", nl: "Exporteurs", ar: "المصدّرين" },
-          { en: "Wholesalers", nl: "Groothandelaren", ar: "تجّار الجملة" },
-          { en: "Real-estate developers", nl: "Vastgoedontwikkelaars", ar: "المطوّرين العقاريين" },
-          { en: "Project owners", nl: "Projecteigenaren", ar: "أصحاب المشاريع" },
-          { en: "Entrepreneurs", nl: "Ondernemers", ar: "روّاد الأعمال" },
-          { en: "Start-ups", nl: "Start-ups", ar: "الشركات الناشئة" },
-          { en: "Professional service providers", nl: "Professionele dienstverleners", ar: "مقدّمي الخدمات المهنية" },
-          { en: "Experts and advisers", nl: "Experts en adviseurs", ar: "الخبراء والمستشارين" },
-          {
-            en: "European companies entering Arab markets",
-            nl: "Europese bedrijven richting Arabische markten",
-            ar: "الشركات الأوروبية الساعية إلى دخول الأسواق العربية",
-          },
-          { en: "Arab companies entering Europe", nl: "Arabische bedrijven richting Europa", ar: "الشركات العربية الساعية إلى دخول أوروبا" },
-        ],
-        note: {
-          en: "An activity requirement, not a size requirement — and every company is reviewed before admission.",
-          nl: "Een activiteitseis, geen omvangseis — en elk bedrijf wordt vóór toelating beoordeeld.",
-          ar: "شرط النشاط، لا شرط الحجم — وتخضع كل شركة للمراجعة قبل قبولها.",
-        },
-      },
-      {
-        kind: "next",
-        heading: { en: "Values are kept *by people.*", nl: "Waarden worden gedragen *door mensen.*", ar: "القيم يحملها *أشخاص.*" },
-        body: {
-          en: "Meet the two founders, and the two trades they bring to the table.",
-          nl: "Maak kennis met de twee oprichters, en de twee vakken die zij aan tafel brengen.",
-          ar: "تعرّف إلى المؤسسَين، وإلى المهنتين اللتين يحملانهما إلى الطاولة.",
-        },
-        links: [
-          { href: "about/founders", label: { en: "Behind DUKAAT", nl: "Achter DUKAAT", ar: "خلف DUKAAT" } },
-          {
-            href: "membership/who-for",
-            label: { en: "Who it is for — and who not", nl: "Voor wie — en voor wie niet", ar: "لمن العضوية — ولمن لا" },
-          },
-        ],
-      },
-    ],
-  },
-
+  /* Extra page kept by the owner: "about/founders" from commit 2336702. */
   "about/founders": {
     masthead: { variant: "band", photo: "founders-table" },
     blocks: [
@@ -711,11 +526,10 @@ export const about: PageSet = {
           ar: "أسّس DUKAAT شخصان تلتقي مهنتاهما على الطاولة نفسها: أحدهما ينقل البضائع بين العالم العربي وأوروبا، والآخر يحمل خبرته في القانون الضريبي إلى الهيكل الذي تقوم عليه الصفقة — العقد، والضرائب، والجمارك، والتحقق.",
         },
       },
-      { kind: "home", section: "behind" },
       {
-        kind: "quote",
+        kind: "prose",
         photo: "founders-store",
-        text: [
+        body: [
           {
             en: "DUKAAT did not start as a business plan. It started as a problem I kept running into myself. I run a contract-packing business in the Netherlands, working with legumes and nuts. I buy from suppliers in the Arab world and sell into the European market.",
             nl: "DUKAAT begon niet als businessplan. Het begon als een probleem waar ik zelf steeds tegenaan liep. Ik heb een loonverpakkingsbedrijf in Nederland, in peulvruchten en noten. Ik koop in bij leveranciers in de Arabische wereld en verkoop op de Europese markt.",
@@ -731,14 +545,17 @@ export const about: PageSet = {
             nl: "In de loop der jaren merkte ik dat ik die introducties informeel deed, omdat ik beide kanten kende en beide kanten mij vertrouwden. DUKAAT is wat er gebeurt wanneer dat geen vriendendienst meer is, maar werk dat wordt gedaan zoals het hoort. Ik ben geen consultant. Ik verscheep goederen. Ik heb te maken met douane, certificaten, vertragingen en kopers die van gedachten veranderen. Juist daarom weet ik wat onze leden werkelijk nodig hebben.",
             ar: "على مرّ السنين وجدت نفسي أقوم بتلك التعريفات بصورة غير رسمية، لأنني كنت أعرف الطرفين، وكان الطرفان يثقان بي. وDUKAAT هو ما يحدث حين تتوقف عن فعل ذلك مجاملةً وتبدأ بفعله كما ينبغي. لست مستشاراً؛ أنا أشحن البضائع. أتعامل مع الجمارك والشهادات والتأخير، ومع مشترين يغيّرون رأيهم. ولهذا بالتحديد أعرف ما يحتاج إليه أعضاؤنا فعلاً.",
           },
+          {
+            en: "— [Founder 1 — entrepreneur], Founder · Entrepreneur",
+            nl: "— [Oprichter 1 — ondernemer], Oprichter · Ondernemer",
+            ar: "— [المؤسس الأول — رائد الأعمال]، مؤسس · رائد أعمال",
+          },
         ],
-        by: { en: "[Founder 1 — trader]", nl: "[Oprichter 1 — handelaar]", ar: "[المؤسس الأول — التاجر]" },
-        role: { en: "Founder · Trader", nl: "Oprichter · Handelaar", ar: "مؤسس · تاجر" },
       },
       {
-        kind: "quote",
+        kind: "prose",
         photo: "founders-desk",
-        text: [
+        body: [
           {
             en: "A good introduction fails on the paperwork more often than on the people. Two companies can like each other, agree on a price and still lose the deal to a question nobody asked in time: which entity signs, under which law, and who carries the tax and customs cost when the goods cross the border.",
             nl: "Een goede introductie strandt vaker op het papierwerk dan op de mensen. Twee bedrijven kunnen elkaar mogen, het eens worden over de prijs en de deal toch verliezen op een vraag die niemand op tijd stelde: welke entiteit tekent, onder welk recht, en wie de belasting- en douanekosten draagt als de goederen de grens overgaan.",
@@ -754,12 +571,16 @@ export const about: PageSet = {
             nl: "Die ervaring helpt leden een deal helderder te zien. Het is advies, geen garantie, en het vervangt de eigen adviseurs van een lid niet — de beslissing en de verantwoordelijkheid blijven bij het lid. Wat het wel doet: een handdruk waarde geven.",
             ar: "تساعد هذه الخبرة الأعضاء على رؤية الصفقة بوضوح أكبر. إنها مشورة لا ضمان، ولا تغني العضو عن مستشاريه — فالقرار يبقى بيده، والمسؤولية على عاتقه. أما ما تفعله فهو أن تجعل للمصافحة قيمة.",
           },
+          {
+            en: "— [Founder 2 — fiscal law], Founder · Fiscal law",
+            nl: "— [Oprichter 2 — fiscaal recht], Oprichter · Fiscaal recht",
+            ar: "— [المؤسس الثاني — القانون الضريبي]، مؤسس · القانون الضريبي",
+          },
         ],
-        by: { en: "[Founder 2 — fiscal law]", nl: "[Oprichter 2 — fiscaal recht]", ar: "[المؤسس الثاني — القانون الضريبي]" },
-        role: { en: "Founder · Fiscal law", nl: "Oprichter · Fiscaal recht", ar: "مؤسس · القانون الضريبي" },
       },
       {
-        kind: "facts",
+        kind: "register",
+        cols: 2,
         label: { en: "Where we sit", nl: "Waar wij zitten", ar: "أين نحن" },
         heading: { en: "Next to *Rotterdam.*", nl: "Naast *Rotterdam.*", ar: "بجوار *روتردام.*" },
         intro: {
@@ -769,28 +590,28 @@ export const about: PageSet = {
         },
         items: [
           {
-            term: { en: "Region", nl: "Regio", ar: "المنطقة" },
-            value: {
+            title: { en: "Region", nl: "Regio", ar: "المنطقة" },
+            body: {
               en: "Rotterdam area, next to Europe’s largest port",
               nl: "Regio Rotterdam, naast de grootste haven van Europa",
               ar: "منطقة روتردام، بجوار أكبر موانئ أوروبا",
             },
           },
           {
-            term: { en: "Address", nl: "Adres", ar: "العنوان" },
-            value: { en: "[Address], the Netherlands", nl: "[Adres], Nederland", ar: "[العنوان]، هولندا" },
+            title: { en: "Address", nl: "Adres", ar: "العنوان" },
+            body: { en: "[Address], the Netherlands", nl: "[Adres], Nederland", ar: "[العنوان]، هولندا" },
           },
           {
-            term: { en: "Meetings", nl: "Gesprekken", ar: "اللقاءات" },
-            value: { en: "By appointment", nl: "Op afspraak", ar: "بموعد مسبق" },
+            title: { en: "Meetings", nl: "Gesprekken", ar: "اللقاءات" },
+            body: { en: "By appointment", nl: "Op afspraak", ar: "بموعد مسبق" },
           },
           {
-            term: { en: "Languages", nl: "Talen", ar: "اللغات" },
-            value: { en: "Arabic, Dutch, English", nl: "Arabisch, Nederlands, Engels", ar: "العربية، والهولندية، والإنجليزية" },
+            title: { en: "Languages", nl: "Talen", ar: "اللغات" },
+            body: { en: "Arabic, Dutch, English", nl: "Arabisch, Nederlands, Engels", ar: "العربية، والهولندية، والإنجليزية" },
           },
           {
-            term: { en: "Anno", nl: "Anno", ar: "منذ" },
-            value: {
+            title: { en: "Anno", nl: "Anno", ar: "منذ" },
+            body: {
               en: "2018 — Stichting Nederlands–Arabische Handelskamer",
               nl: "2018 — Stichting Nederlands–Arabische Handelskamer",
               ar: "2018 — Stichting Nederlands–Arabische Handelskamer",
@@ -799,7 +620,7 @@ export const about: PageSet = {
         ],
       },
       {
-        kind: "next",
+        kind: "actions",
         heading: { en: "Put your need *on the table.*", nl: "Leg uw behoefte *op tafel.*", ar: "ضع حاجتك *على الطاولة.*" },
         body: {
           en: "The intake asks for your commercial need: what you offer, what you look for, in which market. Membership is by nomination or invitation; applications are reviewed the same way.",
@@ -809,10 +630,9 @@ export const about: PageSet = {
         links: [
           { href: "contact", label: { en: "Contact", nl: "Contact", ar: "تواصل" } },
           {
-            href: "contact?intent=nominated#intake",
+            href: "contact?subject=nominated#contact-form",
             label: { en: "I have been nominated", nl: "Ik ben voorgedragen", ar: "تمّت تزكيتي" },
           },
-          { href: "how-we-work", label: { en: "How we work", nl: "Zo werken wij", ar: "كيف نعمل" } },
         ],
       },
     ],

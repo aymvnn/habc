@@ -26,10 +26,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const photo = m && m.variant !== "type" ? m.photo : undefined;
   const images = photo ? [{ url: `/photos/pages/${photo}.jpg`, alt: photos[photo]?.alt[locale] || r.title }] : undefined;
   return {
-    title: r.title,
+    title: r.seo ? { absolute: r.seo } : r.title,
     description: r.blurb,
     alternates: { canonical: `/${locale}/${path}`, ...alternatesFor(`/${path}`) },
-    ...(images ? { openGraph: { title: `${r.title} — DUKAAT`, description: r.blurb, images } } : {}),
+    ...(images ? { openGraph: { title: r.seo ?? `${r.title} — DUKAAT`, description: r.blurb, images } } : {}),
   };
 }
 
@@ -48,7 +48,7 @@ export default async function SitePage({ params }: Props) {
     <nav className="crumbs" aria-label="Breadcrumb">
       <Link href={`/${locale}`}>{d.site.ui.home}</Link>
       <i aria-hidden="true">/</i>
-      {isOverview ? (
+      {isOverview || !gi ? (
         <span aria-current="page">{title}</span>
       ) : (
         <>
@@ -66,23 +66,23 @@ export default async function SitePage({ params }: Props) {
         def={def}
         locale={locale}
         crumbs={crumbs}
-        label={isOverview ? d.site.ui.overview : d.site.groups[group.key].label}
+        label={d.site.groups[group.key].label}
         title={title}
         blurb={blurb}
       />
 
       {def && <Blocks def={def} locale={locale} d={d} group={group} path={path} />}
 
-      {!isOverview && (
+      {group.children.length > 0 && (
         <nav className="wrap sp-sib" aria-label={d.site.ui.inSection}>
-          <p className="label">{d.site.ui.inSection} · <Link href={hrefOf(locale, group)}>{d.site.groups[group.key].label}</Link></p>
+          <p className="label">{d.site.ui.inSection} · {gi ? <Link href={hrefOf(locale, group)}>{d.site.groups[group.key].label}</Link> : d.site.groups.legal.label}</p>
           <ul>
-            {group.children.map((c) => {
+            {[...(gi ? [{ path: group.path }] : []), ...group.children].map((c) => {
               const here = c.path === path;
               return (
                 <li key={c.path}>
-                  <Link href={hrefOf(locale, c)} aria-current={here ? "page" : undefined} className={c.href ? "is-key" : undefined}>
-                    {d.site.pages[c.path].title}
+                  <Link href={hrefOf(locale, c)} aria-current={here ? "page" : undefined}>
+                    {c.path === group.path ? d.site.groups[group.key].label : d.site.pages[c.path].title}
                   </Link>
                 </li>
               );

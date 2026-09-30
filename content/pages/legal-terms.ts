@@ -45,9 +45,9 @@ export const legalTerms: PageSet = {
                 ar: "العضو أو «أنت»: كل من أبرمنا معه اتفاقية عضوية، سواء أكان شركةً أم شخصاً يتصرّف في إطار نشاط تجاري أو مهني. وحيثما تشير هذه الشروط إلى الأعضاء، فإنها تشمل كذلك العميل الذي نقدّم له خدمات المشاريع دون أن يكون عضواً.",
               },
               {
-                en: "Membership agreement: the written agreement by which we admit a member, recording at least the level, the start date of the membership year and the subscription, and, for Founding 100 members, the founding number and the founding rate.",
-                nl: "Lidmaatschapsovereenkomst: de schriftelijke overeenkomst waarmee wij een lid toelaten, waarin ten minste het niveau, de ingangsdatum van het lidmaatschapsjaar en het abonnement zijn vastgelegd, en voor Founding 100-leden het oprichtersnummer en het oprichterstarief.",
-                ar: "اتفاقية العضوية: الاتفاقية المكتوبة التي نقبل بموجبها العضو، ويُثبَّت فيها، على الأقل، مستوى العضوية، وتاريخ بدء سنة العضوية، والاشتراك، وكذلك الرقم التأسيسي وسعر التأسيس بالنسبة إلى أعضاء Founding 100.",
+                en: "Membership agreement: the written agreement by which we admit a member, recording at least the level, the start date of the membership year and the subscription.",
+                nl: "Lidmaatschapsovereenkomst: de schriftelijke overeenkomst waarmee wij een lid toelaten, waarin ten minste het niveau, de ingangsdatum van het lidmaatschapsjaar en het abonnement zijn vastgelegd.",
+                ar: "اتفاقية العضوية: الاتفاقية المكتوبة التي نقبل بموجبها العضو، ويُثبَّت فيها، على الأقل، مستوى العضوية، وتاريخ بدء سنة العضوية، والاشتراك.",
               },
               {
                 en: "Membership year: the period of twelve months beginning on the start date recorded in the membership agreement, and each following period of twelve months.",
@@ -55,9 +55,9 @@ export const legalTerms: PageSet = {
                 ar: "سنة العضوية: مدة اثني عشر شهراً تبدأ من تاريخ البدء المثبت في اتفاقية العضوية، وكل مدة تالية من اثني عشر شهراً.",
               },
               {
-                en: "Level: Member, Professional or Executive. Founding 100 is a status held next to a level, not a level of its own.",
-                nl: "Niveau: Member, Professional of Executive. Founding 100 is een status naast een niveau, geen afzonderlijk niveau.",
-                ar: "المستوى: Member أو Professional أو Executive. أما Founding 100 فصفةٌ تقترن بالمستوى، وليست مستوىً قائماً بذاته.",
+                en: "Level: Member, Professional or Executive.",
+                nl: "Niveau: Member, Professional of Executive.",
+                ar: "المستوى: Member أو Professional أو Executive.",
               },
               {
                 en: "Project services: work outside the subscription, such as market entry, supplier search and representation, quoted per engagement in writing.",
@@ -135,14 +135,9 @@ export const legalTerms: PageSet = {
             title: { en: "Membership levels", nl: "Lidmaatschapsniveaus", ar: "مستويات العضوية" },
             body: [
               {
-                en: "Membership has three levels: Member, Professional and Executive. What a level includes, and the commitments attached to it, are set out in the level description that forms part of the membership agreement. Descriptions on this website are a summary; where they differ, the membership agreement prevails.",
-                nl: "Het lidmaatschap kent drie niveaus: Member, Professional en Executive. Wat een niveau omvat, en welke toezeggingen daaraan verbonden zijn, staat in de niveauomschrijving die deel uitmaakt van de lidmaatschapsovereenkomst. De omschrijvingen op deze website zijn een samenvatting; bij verschil gaat de lidmaatschapsovereenkomst voor.",
-                ar: "للعضوية ثلاثة مستويات: Member وProfessional وExecutive. ويرد ما يشمله كل مستوى، والالتزامات المرتبطة به، في وصف المستوى الذي يُعدّ جزءاً من اتفاقية العضوية. أما الأوصاف الواردة في هذا الموقع فهي ملخّص؛ وعند الاختلاف، فالعبرة باتفاقية العضوية.",
-              },
-              {
-                en: "Founding 100 is a status held next to a level, which DUKAAT grants by invitation. Its elements, including a permanent founding number that is never reissued and the founding rate, are recorded in the membership agreement.",
-                nl: "Founding 100 is een status naast een niveau, die DUKAAT op uitnodiging toekent. De onderdelen ervan, waaronder een vast oprichtersnummer dat nooit opnieuw wordt uitgegeven en het oprichterstarief, zijn vastgelegd in de lidmaatschapsovereenkomst.",
-                ar: "أما Founding 100 فصفةٌ تقترن بالمستوى، ويمنحها DUKAAT بالدعوة، وتُثبَّت عناصرها في اتفاقية العضوية، ومنها رقم تأسيسي دائم لا يُعاد إصداره أبداً، وسعر التأسيس.",
+                en: "Membership has three levels: Member, Professional and Executive. Descriptions on this website are a summary; where they differ, the membership agreement prevails.",
+                nl: "Het lidmaatschap kent drie niveaus: Member, Professional en Executive. De omschrijvingen op deze website zijn een samenvatting; bij verschil gaat de lidmaatschapsovereenkomst voor.",
+                ar: "للعضوية ثلاثة مستويات: Member وProfessional وExecutive. أما الأوصاف الواردة في هذا الموقع فهي ملخّص؛ وعند الاختلاف، فالعبرة باتفاقية العضوية.",
               },
               {
                 en: "We set the programme of events, trade missions, courses and reports: their content, their dates and, where relevant, their places. Where a level includes access, priority or a discount, it relates to the programmes we organise during the membership year, within the capacity of each programme.",
@@ -170,9 +165,9 @@ export const legalTerms: PageSet = {
                 ar: "تُبرم العضوية لسنة عضوية واحدة، وتتجدّد تلقائياً في كل مرة لسنة عضوية أخرى، ما لم يُخطر أحد الطرفين الآخرَ كتابةً بالإنهاء قبل [شهر واحد] على الأقل من نهاية سنة العضوية الجارية. أما الإخطار الذي يرد بعد هذا الموعد فيسري في نهاية سنة العضوية التالية.",
               },
               {
-                en: "During a membership year, membership can be ended early only as provided in articles 13, 16 and 17 or by law.",
-                nl: "Tussentijdse beëindiging tijdens een lidmaatschapsjaar is alleen mogelijk zoals bepaald in de artikelen 13, 16 en 17 of op grond van de wet.",
-                ar: "ولا يجوز إنهاء العضوية قبل انقضاء سنة العضوية إلا وفقاً لأحكام المواد 13 و16 و17 أو بموجب القانون.",
+                en: "During a membership year, membership can be ended early only as provided in articles 12, 15 and 16 or by law.",
+                nl: "Tussentijdse beëindiging tijdens een lidmaatschapsjaar is alleen mogelijk zoals bepaald in de artikelen 12, 15 en 16 of op grond van de wet.",
+                ar: "ولا يجوز إنهاء العضوية قبل انقضاء سنة العضوية إلا وفقاً لأحكام المواد 12 و15 و16 أو بموجب القانون.",
               },
               {
                 en: "A project engagement runs for the period and scope set out in the written quotation, and ends when the agreed work is completed, unless the quotation provides otherwise. The end of a membership does not end a running project engagement, nor the other way round.",
@@ -205,29 +200,9 @@ export const legalTerms: PageSet = {
                 ar: "تُسدَّد الفواتير خلال المهلة المبيّنة فيها. وفي حال التأخر في السداد، يجوز لنا بعد توجيه تذكير كتابي تعليق خدماتنا إلى حين سداد الفاتورة، ويتحمّل العضو حينئذٍ تكاليف التحصيل المعقولة.",
               },
               {
-                en: "We may change the subscription rate for a following membership year. We announce such a change in writing no later than [two months] before the end of the current membership year, so that the member can give notice in time. Members with Founding 100 status keep the founding rate, as recorded in their membership agreement, for as long as their membership continues without interruption.",
-                nl: "Wij kunnen het abonnementstarief voor een volgend lidmaatschapsjaar wijzigen. Een dergelijke wijziging maken wij uiterlijk [twee maanden] vóór het einde van het lopende lidmaatschapsjaar schriftelijk bekend, zodat het lid tijdig kan opzeggen. Leden met de status Founding 100 behouden het oprichterstarief, zoals vastgelegd in hun lidmaatschapsovereenkomst, zolang hun lidmaatschap onafgebroken voortduurt.",
-                ar: "يجوز لنا تعديل قيمة الاشتراك لسنة عضوية تالية، على أن نُعلن هذا التعديل كتابةً قبل [شهرين] على الأقل من نهاية سنة العضوية الجارية، ليتمكّن العضو من الإخطار بالإنهاء في الوقت المناسب. ويحتفظ الأعضاء الذين يحملون صفة Founding 100 بسعر التأسيس المثبت في اتفاقية عضويتهم، ما دامت عضويتهم مستمرة دون انقطاع.",
-              },
-            ],
-          },
-          {
-            title: { en: "Our written commitments", nl: "Onze schriftelijke toezeggingen", ar: "التزاماتنا المكتوبة" },
-            body: [
-              {
-                en: "Each level carries commitments that we put in writing in the membership agreement, such as how quickly we reply and, depending on the level, the number of introductions, supplier or distributor searches and advisory hours per membership year.",
-                nl: "Aan elk niveau zijn toezeggingen verbonden die wij in de lidmaatschapsovereenkomst vastleggen, zoals hoe snel wij antwoorden en, afhankelijk van het niveau, het aantal introducties, zoekopdrachten naar leveranciers of distributeurs en adviesuren per lidmaatschapsjaar.",
-                ar: "لكل مستوى التزامات نثبتها كتابةً في اتفاقية العضوية، كالمهلة التي نردّ خلالها، وعددِ التعريفات وعمليات البحث عن مورّدين أو موزّعين وساعات الاستشارة في كل سنة عضوية، بحسب المستوى.",
-              },
-              {
-                en: "These commitments concern our work, not its outcome. We commit to reply, to search and to introduce as described. We do not guarantee that an introduction or a search leads to an agreement, an order, an investment or any other commercial result.",
-                nl: "Deze toezeggingen betreffen ons werk, niet de uitkomst ervan. Wij verbinden ons om te antwoorden, te zoeken en te introduceren zoals omschreven. Wij garanderen niet dat een introductie of zoekopdracht leidt tot een overeenkomst, een order, een investering of enig ander commercieel resultaat.",
-                ar: "تتعلّق هذه الالتزامات بعملنا، لا بنتيجته. فنحن نلتزم بالرد والبحث والتعريف على النحو الموصوف، ولا نضمن أن يفضي تعريفٌ أو بحثٌ إلى اتفاق أو طلبية أو استثمار أو أي نتيجة تجارية أخرى.",
-              },
-              {
-                en: "Our commitments assume the member’s cooperation: complete and timely information, and availability for calls and meetings. Introductions, searches and advisory hours not used within a membership year do not carry over to the next.",
-                nl: "Onze toezeggingen veronderstellen de medewerking van het lid: volledige en tijdige informatie, en beschikbaarheid voor gesprekken en bijeenkomsten. Introducties, zoekopdrachten en adviesuren die binnen een lidmaatschapsjaar niet worden benut, schuiven niet door naar het volgende jaar.",
-                ar: "وتقوم التزاماتنا على تعاون العضو: تقديم معلومات كاملة في حينها، والاستعداد لإجراء المكالمات وحضور اللقاءات. ولا تُرحَّل التعريفات وعمليات البحث وساعات الاستشارة غير المستخدمة خلال سنة العضوية إلى السنة التالية.",
+                en: "We may change the subscription rate for a following membership year. We announce such a change in writing no later than [two months] before the end of the current membership year, so that the member can give notice in time.",
+                nl: "Wij kunnen het abonnementstarief voor een volgend lidmaatschapsjaar wijzigen. Een dergelijke wijziging maken wij uiterlijk [twee maanden] vóór het einde van het lopende lidmaatschapsjaar schriftelijk bekend, zodat het lid tijdig kan opzeggen.",
+                ar: "يجوز لنا تعديل قيمة الاشتراك لسنة عضوية تالية، على أن نُعلن هذا التعديل كتابةً قبل [شهرين] على الأقل من نهاية سنة العضوية الجارية، ليتمكّن العضو من الإخطار بالإنهاء في الوقت المناسب.",
               },
             ],
           },
@@ -430,9 +405,9 @@ export const legalTerms: PageSet = {
                 ar: "ولنا الحق نفسه إذا قدّم العضو معلومات غير صحيحة أو مضلِّلة؛ أو أصبح خاضعاً لعقوبات؛ أو تورّط في احتيال أو غسل أموال أو فساد أو جريمة جسيمة أخرى، أو قامت شبهة معقولة على تورّطه فيها؛ أو أُشهر إفلاسه أو حصل على تأجيل قضائي لسداد ديونه (surseance van betaling)؛ أو لم يسدّد فاتورة بعد تذكير كتابي؛ أو صدر عنه سلوك يضرّ بالنادي أو بأعضائه أو بسمعته.",
               },
               {
-                en: "Termination under this article gives no right to a refund of the subscription already paid and does not affect our right to payment for work already done. The membership number and access to the club end with the membership. A founding number is never reissued, and the founding rate does not revive on a later readmission.",
-                nl: "Beëindiging op grond van dit artikel geeft geen recht op terugbetaling van het reeds betaalde abonnement en laat ons recht op betaling voor reeds verricht werk onverlet. Het lidnummer en de toegang tot de club eindigen met het lidmaatschap. Een oprichtersnummer wordt nooit opnieuw uitgegeven, en het oprichterstarief herleeft niet bij een latere hernieuwde toelating.",
-                ar: "ولا يرتّب الإنهاء بموجب هذه المادة حقاً في استرداد الاشتراك المدفوع سلفاً، ولا يمسّ حقّنا في تقاضي مقابل العمل المنجز. وينتهي رقم العضوية والوصول إلى النادي بانتهاء العضوية. ولا يُعاد إصدار الرقم التأسيسي أبداً، ولا يُستعاد سعر التأسيس عند إعادة القبول لاحقاً.",
+                en: "Termination under this article gives no right to a refund of the subscription already paid and does not affect our right to payment for work already done. The membership number and access to the club end with the membership.",
+                nl: "Beëindiging op grond van dit artikel geeft geen recht op terugbetaling van het reeds betaalde abonnement en laat ons recht op betaling voor reeds verricht werk onverlet. Het lidnummer en de toegang tot de club eindigen met het lidmaatschap.",
+                ar: "ولا يرتّب الإنهاء بموجب هذه المادة حقاً في استرداد الاشتراك المدفوع سلفاً، ولا يمسّ حقّنا في تقاضي مقابل العمل المنجز. وينتهي رقم العضوية والوصول إلى النادي بانتهاء العضوية.",
               },
               {
                 en: "Each party keeps its statutory rights, including the right to dissolve the agreement if the other party fails seriously in its obligations. Provisions that by their nature continue — on confidentiality, intellectual property and liability — remain in force after the membership has ended.",
@@ -476,15 +451,6 @@ export const legalTerms: PageSet = {
               },
             ],
           },
-        ],
-      },
-      {
-        kind: "next",
-        heading: { en: "What belongs *with these terms.*", nl: "Wat hoort bij *deze voorwaarden.*", ar: "ما يُقرأ *مع هذه الشروط.*" },
-        links: [
-          { href: "legal/privacy", label: { en: "Privacy statement", nl: "Privacyverklaring", ar: "بيان الخصوصية" } },
-          { href: "legal/member-data", label: { en: "Publication of member data", nl: "Publicatie van ledengegevens", ar: "نشر بيانات الأعضاء" } },
-          { href: "how-we-work/fees", label: { en: "How we charge", nl: "Hoe wij factureren", ar: "كيف نحتسب أتعابنا" } },
         ],
       },
     ],
@@ -619,14 +585,6 @@ export const legalTerms: PageSet = {
               },
             ],
           },
-        ],
-      },
-      {
-        kind: "next",
-        heading: { en: "The same limits, *in practice.*", nl: "Dezelfde grenzen, *in de praktijk.*", ar: "الحدود نفسها، *في التطبيق.*" },
-        links: [
-          { href: "how-we-work/boundaries", label: { en: "What we do not do", nl: "Wat wij niet doen", ar: "ما لا نفعله" } },
-          { href: "legal/terms", label: { en: "Terms & conditions", nl: "Algemene voorwaarden", ar: "الشروط والأحكام" } },
         ],
       },
     ],
@@ -786,15 +744,6 @@ export const legalTerms: PageSet = {
               },
             ],
           },
-        ],
-      },
-      {
-        kind: "next",
-        heading: { en: "Where a profile *appears.*", nl: "Waar een profiel *verschijnt.*", ar: "حيث يظهر *الملف.*" },
-        links: [
-          { href: "network/directory", label: { en: "Member directory", nl: "Ledenregister", ar: "دليل الأعضاء" } },
-          { href: "network/stories", label: { en: "Stories", nl: "Verhalen", ar: "قصص" } },
-          { href: "legal/privacy", label: { en: "Privacy statement", nl: "Privacyverklaring", ar: "بيان الخصوصية" } },
         ],
       },
     ],
