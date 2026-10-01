@@ -220,6 +220,10 @@ html.lenis{ scroll-behavior:auto }
 .claim h3{ font-size:var(--t3); letter-spacing:-.03em; line-height:1.02 }
 [dir="rtl"] .claim h3{ line-height:1.35 }
 .claim p{ margin-top:var(--s-md); color:var(--ink-soft); max-width:52ch }
+/* the line that sums up a longer claim: set a step above the paragraph under it */
+.claim p.claim-sum{ font-family:var(--display); font-weight:600; font-size:var(--t0); line-height:1.35; color:var(--ink) }
+[dir="rtl"] .claim p.claim-sum{ font-family:var(--arabic); line-height:1.7 }
+.claim p.claim-sum + p{ margin-top:var(--s-sm) }
 #why .mechanism{ margin-top:var(--s-xl); color:var(--muted); font-size:.95rem; font-style:italic; max-width:60ch }
 [dir="rtl"] #why .mechanism{ font-style:normal }
 
@@ -266,9 +270,11 @@ html.lenis{ scroll-behavior:auto }
 .founder h3{ font-size:var(--t2); letter-spacing:-.02em }
 .founder .role{ margin-top:6px; font-family:var(--display); font-weight:600; font-size:var(--t-1); letter-spacing:.12em; text-transform:uppercase; color:var(--gold-deep) }
 [dir="rtl"] .founder .role{ font-family:var(--arabic); letter-spacing:0; font-size:.95rem }
+.founder .creds{ margin-top:var(--s-sm); font-size:.95rem; line-height:1.45; color:var(--ink-soft) }
 .founder blockquote{ margin:var(--s-lg) 0 0; color:var(--ink-soft); line-height:1.6 }
+.founder blockquote p + p{ margin-top:var(--s-md) }
 [dir="rtl"] .founder blockquote{ line-height:1.9 }
-.founder blockquote::before{ content:"\201C"; font-family:var(--display); font-weight:800; color:var(--bar); font-size:1.6em; line-height:0; margin-inline-end:4px }
+/* the quotation marks are part of the text itself (“ ” in English and Dutch, « » in Arabic) */
 
 /* ---------- closing ---------- */
 #correspondence{ padding-block:var(--section) calc(var(--section) * .6) }

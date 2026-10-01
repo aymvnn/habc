@@ -113,8 +113,8 @@ export const en: Dict = {
       "claims": [
         {
           "roman": "I",
-          "title": "We are *entrepreneurs,* not consultants.",
-          "body": "DUKAAT was founded by an entrepreneur who imports, packs and ships goods himself, and who knows trade between both sides from the inside."
+          "title": "We are *entrepreneurs and advisers.*",
+          "body": "We combine academic knowledge with practical experience.\n\nWe are a team of entrepreneurs and advisers who combine a university education with practical experience in business management and project development. Drawing on our studies and our experience in education, trade and services, we offer a deeper understanding of the challenges, and practical advice that helps companies and entrepreneurs make considered decisions, build partnerships and explore opportunities for growth between the Netherlands and the Arab world."
         },
         {
           "roman": "II",
@@ -138,18 +138,19 @@ export const en: Dict = {
     "behind": {
       "label": "Behind DUKAAT",
       "heading": "Two founders, *two trades.*",
-      "lede": "One imports, packs and ships. The other advises on structure, contracts and checks.",
+      "lede": "One is an entrepreneur in education, trade and services. The other advises on structure, contracts and checks.",
       "founders": [
         {
           "name": "[Founder 1 — entrepreneur]",
-          "role": "Founder · Entrepreneur",
-          "voice": "DUKAAT did not start as a business plan. It started as a problem I kept running into. I run a contract-packing business in the Netherlands, legumes and nuts; I buy in the Arab world and sell into Europe. Again and again: a factory that could deliver exactly what a buyer needed, and a buyer who would never find it. I made those introductions as a favour for years. DUKAAT is doing it properly.",
+          "role": "Founder and Entrepreneur",
+          "credentials": "MBA, specialising in Finance and Investment | Entrepreneur in education, trade and services",
+          "voice": "“The idea for DUKAAT grew out of my vision as an entrepreneur who combines academic knowledge with practical experience. Through my studies in business administration, specialising in finance and investment, and my experience in education, trade and services, I became convinced that business growth begins with clear knowledge, trusted relationships, and the ability to turn opportunities into practical steps.\n\nFrom that conviction came my vision of founding DUKAAT: a business community that connects companies and entrepreneurs between the Netherlands and the Arab world, and brings training, the exchange of experience, partnership-building and the development of commercial and investment opportunities together in one ecosystem.\n\nMy ambition is that everyone who joins DUKAAT finds knowledge that develops their abilities, a connection that widens their horizons, and a space in which to share their experience and create value for others.”",
           "portraitAlt": "The founding entrepreneur’s craft: a sampling probe in a sack of chickpeas"
         },
         {
           "name": "[Founder 2 — fiscal law]",
           "role": "Founder · Fiscal law",
-          "voice": "A good introduction fails on the paperwork more often than on the people. My background is fiscal law, and my role at DUKAAT is an advisory one: making sure the right questions are asked early — which entity signs, what the contract says, where the tax and customs questions lie, and whether the other party is who they say they are. That experience makes a deal clearer. It is not a guarantee; the decision stays with the member. It is what makes the handshake worth something.",
+          "voice": "“A good introduction fails on the paperwork more often than on the people. My background is fiscal law, and my role at DUKAAT is an advisory one: making sure the right questions are asked early — which entity signs, what the contract says, where the tax and customs questions lie, and whether the other party is who they say they are. That experience makes a deal clearer. It is not a guarantee; the decision stays with the member. It is what makes the handshake worth something.”",
           "portraitAlt": "The fiscal-law founder’s craft: a pen over a contract"
         }
       ]

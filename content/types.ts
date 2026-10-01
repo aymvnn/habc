@@ -85,7 +85,7 @@ export type Dict = {
     nominated: string;
     why: { label: string; heading: string; lede: string; claims: { roman: string; title: string; body: string }[]; mechanism: string };
     name: { label: string; heading: string; body: string; keystone: string };
-    behind: { label: string; heading: string; lede: string; founders: { name: string; role: string; voice: string; portraitAlt: string }[] };
+    behind: { label: string; heading: string; lede: string; founders: { name: string; role: string; credentials?: string; voice: string; portraitAlt: string }[] };
     correspondence: { heading: string; mailPending: string; mailPendingTitle: string; where: string; taglineEcho: string; sealText: string };
     colophon: string;
     legalLine: string;

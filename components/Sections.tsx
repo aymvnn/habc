@@ -42,6 +42,18 @@ function MoreLink({ more, className = "" }: { more?: MoreLinkT; className?: stri
   return <Link className={`more ${className}`} href={more.href}>{more.label} <span className="arrow" aria-hidden="true">→</span></Link>;
 }
 
+/** a claim's text: one paragraph, or several separated by a blank line, the first then being the line that sums them up */
+function ClaimBody({ text }: { text: string }) {
+  const paras = text.split("\n\n");
+  return (
+    <>
+      {paras.map((p, i) => (
+        <p key={i} className={paras.length > 1 && i === 0 ? "claim-sum" : undefined}>{p}</p>
+      ))}
+    </>
+  );
+}
+
 export function Why({ why, more }: { why: Dict["extra"]["why"]; more?: MoreLinkT }) {
   return (
     <section className="block" id="why" aria-labelledby="why-h">
@@ -58,7 +70,7 @@ export function Why({ why, more }: { why: Dict["extra"]["why"]; more?: MoreLinkT
               <span className="roman">{c.roman}</span>
               <div>
                 <h3><Rich text={c.title} /></h3>
-                <p>{c.body}</p>
+                <ClaimBody text={c.body} />
               </div>
               {WHY_PHOTOS[i] && (
                 <figure className="claim-photo" aria-hidden="true">
@@ -109,7 +121,9 @@ export function Behind({ behind, more }: { behind: Dict["extra"]["behind"]; more
               <div>
                 <h3><span className="pending-mark">{f.name}</span></h3>
                 <p className="role">{f.role}</p>
-                <blockquote>{f.voice}</blockquote>
+                {f.credentials && <p className="creds">{f.credentials}</p>}
+                {/* a voice may run over several paragraphs, separated by a blank line */}
+                <blockquote>{f.voice.split("\n\n").map((p, k) => <p key={k}>{p}</p>)}</blockquote>
               </div>
             </article>
           ))}

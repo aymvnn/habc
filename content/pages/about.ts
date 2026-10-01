@@ -488,7 +488,7 @@ export const about: PageSet = {
           },
         ],
       },
-      // the three claims of the homepage "Why DUKAAT" (extra x-8, kept by the owner; claim I reworded per the owner's note)
+      // the three claims of the homepage "Why DUKAAT" (extra x-8, kept by the owner; claim I reworded per the owner's note: entrepreneurs AND advisers, 1 Oct 2026)
       {
         kind: "register",
         label: { en: "Why DUKAAT", nl: "Waarom DUKAAT", ar: "لماذا DUKAAT" },
@@ -496,7 +496,7 @@ export const about: PageSet = {
         intro: { en: "A search engine gives you names. It does not build the relationship.", nl: "Een zoekmachine geeft u namen. Een relatie bouwt zij niet.", ar: "محرك البحث يعطيك أسماء. لكنه لا يبني العلاقة." },
         numbered: true,
         items: [
-          { title: { en: "We are *entrepreneurs,* not consultants.", nl: "Wij zijn *ondernemers,* geen consultants.", ar: "نحن *روّاد أعمال،* لا مستشارون." }, body: { en: "DUKAAT was founded by an entrepreneur who imports, packs and ships goods himself, and who knows trade between both sides from the inside.", nl: "DUKAAT is opgericht door een ondernemer die zelf importeert, verpakt en verscheept, en die de handel tussen beide kanten van binnenuit kent.", ar: "أسّس DUKAAT رائدُ أعمال يستورد ويعبّئ ويشحن البضائع بنفسه، ويعرف التجارة بين الضفتين من الداخل." } },
+          { title: { en: "We are *entrepreneurs and advisers.*", nl: "Wij zijn *ondernemers en adviseurs.*", ar: "نحن *روّاد أعمال ومستشارون.*" }, body: { en: "We combine academic knowledge with practical experience.\n\nWe are a team of entrepreneurs and advisers who combine a university education with practical experience in business management and project development. Drawing on our studies and our experience in education, trade and services, we offer a deeper understanding of the challenges, and practical advice that helps companies and entrepreneurs make considered decisions, build partnerships and explore opportunities for growth between the Netherlands and the Arab world.", nl: "Wij combineren academische kennis met praktijkervaring.\n\nWij zijn een team van ondernemers en adviseurs die een universitaire opleiding combineren met praktijkervaring in bedrijfsvoering en projectontwikkeling. Op basis van onze studie en onze ervaring in onderwijs, handel en diensten bieden wij een beter inzicht in de uitdagingen en praktisch advies waarmee bedrijven en ondernemers weloverwogen beslissingen nemen, partnerschappen opbouwen en groeikansen verkennen tussen Nederland en de Arabische wereld.", ar: "نجمع المعرفة الأكاديمية بالخبرة العملية.\n\nنحن فريق من روّاد الأعمال والمستشارين، نجمع بين التأهيل الجامعي والخبرة العملية في إدارة الأعمال وتطوير المشاريع. نستند إلى دراستنا وتجاربنا في قطاعات التعليم والتجارة والخدمات لنقدّم فهمًا أعمق للتحديات، واستشارات عملية تساعد الشركات وروّاد الأعمال على اتخاذ قرارات مدروسة، وبناء شراكات، واستكشاف فرص النمو بين هولندا والعالم العربي." } },
           { title: { en: "We sit next to *Rotterdam,* Europe’s largest port.", nl: "Wij zitten naast *Rotterdam,* de grootste haven van Europa.", ar: "نجلس بجوار *روتردام،* أكبر موانئ أوروبا." }, body: { en: "The gateway through which goods enter Europe is our neighbourhood, not a reference on a map. One hour from the market our members want to reach.", nl: "De toegangspoort waardoor goederen Europa binnenkomen is onze omgeving, geen stip op de kaart. Eén uur van de markt die onze leden willen bereiken.", ar: "البوابة التي تدخل منها البضائع إلى أوروبا هي حيّنا، لا نقطة على خريطة. على بُعد ساعة من السوق التي يريد أعضاؤنا الوصول إليها." } },
           { title: { en: "We are trusted on *both sides,* in both languages.", nl: "Wij worden aan *beide kanten* vertrouwd, in beide talen.", ar: "موثوقون على *الضفتين،* وباللغتين." }, body: { en: "Our network did not start with a database. It started with people who already knew us — in Arabic and in Dutch.", nl: "Ons netwerk begon niet met een database. Het begon met mensen die ons al kenden — in het Arabisch en in het Nederlands.", ar: "لم تبدأ شبكتنا بقاعدة بيانات. بدأت بأشخاص يعرفوننا أصلاً — بالعربية وبالهولندية." } },
         ],
@@ -521,9 +521,9 @@ export const about: PageSet = {
       {
         kind: "lead",
         text: {
-          en: "DUKAAT was founded by two people whose trades meet at the same table: one moves goods between the Arab world and Europe, the other brings experience in fiscal law to the structure beneath a deal — contract, tax, customs and verification.",
-          nl: "DUKAAT is opgericht door twee mensen wier vakken aan dezelfde tafel samenkomen: de een brengt goederen van de Arabische wereld naar Europa, de ander brengt ervaring in het fiscale recht mee voor de structuur onder een deal — contract, belasting, douane en verificatie.",
-          ar: "أسّس DUKAAT شخصان تلتقي مهنتاهما على الطاولة نفسها: أحدهما ينقل البضائع بين العالم العربي وأوروبا، والآخر يحمل خبرته في القانون الضريبي إلى الهيكل الذي تقوم عليه الصفقة — العقد، والضرائب، والجمارك، والتحقق.",
+          en: "DUKAAT was founded by two people whose trades meet at the same table: one is an entrepreneur in education, trade and services with a background in finance and investment, the other brings experience in fiscal law to the structure beneath a deal — contract, tax, customs and verification.",
+          nl: "DUKAAT is opgericht door twee mensen wier vakken aan dezelfde tafel samenkomen: de een is ondernemer in onderwijs, handel en diensten met een achtergrond in financiën en investeringen, de ander brengt ervaring in het fiscale recht mee voor de structuur onder een deal — contract, belasting, douane en verificatie.",
+          ar: "أسّس DUKAAT شخصان تلتقي مهنتاهما على الطاولة نفسها: أحدهما رائد أعمال في التعليم والتجارة والخدمات بخلفية في التمويل والاستثمار، والآخر يحمل خبرته في القانون الضريبي إلى الهيكل الذي تقوم عليه الصفقة — العقد، والضرائب، والجمارك، والتحقق.",
         },
       },
       {
@@ -531,24 +531,29 @@ export const about: PageSet = {
         photo: "founders-store",
         body: [
           {
-            en: "DUKAAT did not start as a business plan. It started as a problem I kept running into myself. I run a contract-packing business in the Netherlands, working with legumes and nuts. I buy from suppliers in the Arab world and sell into the European market.",
-            nl: "DUKAAT begon niet als businessplan. Het begon als een probleem waar ik zelf steeds tegenaan liep. Ik heb een loonverpakkingsbedrijf in Nederland, in peulvruchten en noten. Ik koop in bij leveranciers in de Arabische wereld en verkoop op de Europese markt.",
-            ar: "لم يبدأ DUKAAT خطةَ عمل، بل بدأ مشكلةً ظللتُ أصطدم بها بنفسي. أدير في هولندا شركة تعبئة تعاقدية للبقوليات والمكسرات؛ أشتري من مورّدين في العالم العربي، وأبيع في السوق الأوروبية.",
+            en: "“The idea for DUKAAT grew out of my vision as an entrepreneur who combines academic knowledge with practical experience. Through my studies in business administration, specialising in finance and investment, and my experience in education, trade and services, I became convinced that business growth begins with clear knowledge, trusted relationships, and the ability to turn opportunities into practical steps.",
+            nl: "“Het idee voor DUKAAT ontstond vanuit mijn visie als ondernemer die academische kennis en praktijkervaring combineert. Door mijn studie bedrijfskunde, met specialisatie in financiën en investeringen, en mijn ervaring in onderwijs, handel en diensten, raakte ik ervan overtuigd dat bedrijfsgroei begint met heldere kennis, betrouwbare relaties en het vermogen om kansen om te zetten in praktische stappen.",
+            ar: "«نشأت فكرة DUKAAT من رؤيتي كرائد أعمال يجمع بين المعرفة الأكاديمية والخبرة العملية. فمن خلال دراستي لإدارة الأعمال، بتخصص التمويل والاستثمار، وتجربتي في قطاعات التعليم والتجارة والخدمات، ترسّخت لديّ قناعة بأن نمو الأعمال يبدأ بمعرفة واضحة، وعلاقات موثوقة، وقدرة على تحويل الفرص إلى خطوات عملية.",
           },
           {
-            en: "And again and again I saw the same thing. On one side, a factory that could deliver exactly what a European buyer needed. On the other, a buyer who would never find it. Neither side lacked capability. They lacked a way to reach each other — and a reason to trust each other when they did.",
-            nl: "En keer op keer zag ik hetzelfde. Aan de ene kant een fabriek die precies kon leveren wat een Europese koper nodig had. Aan de andere kant een koper die haar nooit zou vinden. Het ontbrak geen van beide kanten aan kunnen. Het ontbrak hun aan een manier om elkaar te bereiken — en aan een reden om elkaar te vertrouwen als dat lukte.",
-            ar: "ومرةً بعد مرة كنت أرى الأمر نفسه: في جهةٍ مصنعٌ يستطيع أن يورّد بالضبط ما يحتاج إليه مشترٍ أوروبي، وفي الجهة الأخرى مشترٍ لن يجده أبداً. لم تكن القدرة تنقص أيّاً من الطرفين، بل كان ينقصهما طريقٌ يصل به أحدهما إلى الآخر — وسببٌ ليثق كلٌّ منهما بالآخر حين يلتقيان.",
+            en: "From that conviction came my vision of founding DUKAAT: a business community that connects companies and entrepreneurs between the Netherlands and the Arab world, and brings training, the exchange of experience, partnership-building and the development of commercial and investment opportunities together in one ecosystem.",
+            nl: "Vanuit die overtuiging ontstond mijn visie om DUKAAT op te richten: een zakelijke gemeenschap die bedrijven en ondernemers tussen Nederland en de Arabische wereld verbindt, en training, uitwisseling van ervaring, het bouwen van partnerschappen en de ontwikkeling van commerciële en investeringskansen samenbrengt in één ecosysteem.",
+            ar: "ومن هذه القناعة، انطلقت رؤيتي لتأسيس دوكات: مجتمع أعمال يصل الشركات وروّاد الأعمال بين هولندا والعالم العربي، ويجمع التدريب وتبادل الخبرات وبناء الشراكات وتطوير الفرص التجارية والاستثمارية في منظومة واحدة.",
           },
           {
-            en: "Over the years I found myself making those introductions informally, because I knew both sides and both sides trusted me. DUKAAT is what happens when you stop doing that as a favour and start doing it properly. I am not a consultant. I ship goods. I deal with customs, certificates, delays, and buyers who change their minds. That is exactly why I know what our members actually need.",
-            nl: "In de loop der jaren merkte ik dat ik die introducties informeel deed, omdat ik beide kanten kende en beide kanten mij vertrouwden. DUKAAT is wat er gebeurt wanneer dat geen vriendendienst meer is, maar werk dat wordt gedaan zoals het hoort. Ik ben geen consultant. Ik verscheep goederen. Ik heb te maken met douane, certificaten, vertragingen en kopers die van gedachten veranderen. Juist daarom weet ik wat onze leden werkelijk nodig hebben.",
-            ar: "على مرّ السنين وجدت نفسي أقوم بتلك التعريفات بصورة غير رسمية، لأنني كنت أعرف الطرفين، وكان الطرفان يثقان بي. وDUKAAT هو ما يحدث حين تتوقف عن فعل ذلك مجاملةً وتبدأ بفعله كما ينبغي. لست مستشاراً؛ أنا أشحن البضائع. أتعامل مع الجمارك والشهادات والتأخير، ومع مشترين يغيّرون رأيهم. ولهذا بالتحديد أعرف ما يحتاج إليه أعضاؤنا فعلاً.",
+            en: "My ambition is that everyone who joins DUKAAT finds knowledge that develops their abilities, a connection that widens their horizons, and a space in which to share their experience and create value for others.”",
+            nl: "Mijn ambitie is dat iedereen die zich bij DUKAAT aansluit kennis vindt die de eigen vaardigheden ontwikkelt, een verbinding die de horizon verbreedt, en een ruimte om ervaring te delen en waarde te creëren voor anderen.”",
+            ar: "طموحي أن يجد كل من ينضم إلى دوكات معرفةً تطوّر قدراته، وعلاقةً توسّع آفاقه، ومساحةً يشارك فيها خبرته ويصنع من خلالها قيمةً للآخرين.»",
           },
           {
-            en: "— [Founder 1 — entrepreneur], Founder · Entrepreneur",
-            nl: "— [Oprichter 1 — ondernemer], Oprichter · Ondernemer",
-            ar: "— [المؤسس الأول — رائد الأعمال]، مؤسس · رائد أعمال",
+            en: "— [Founder 1 — entrepreneur], Founder and Entrepreneur",
+            nl: "— [Oprichter 1 — ondernemer], Oprichter en ondernemer",
+            ar: "— [المؤسس الأول — رائد الأعمال]، المؤسس ورائد الأعمال",
+          },
+          {
+            en: "MBA, specialising in Finance and Investment | Entrepreneur in education, trade and services",
+            nl: "MBA, specialisatie Financiën en Investeringen | Ondernemer in onderwijs, handel en diensten",
+            ar: "ماجستير إدارة الأعمال، تخصص التمويل والاستثمار | رائد أعمال في التعليم والتجارة والخدمات",
           },
         ],
       },

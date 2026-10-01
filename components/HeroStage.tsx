@@ -129,30 +129,53 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
     return () => { ro.disconnect(); r?.removeEventListener("transitionend", settle); };
   }, [measure]);
 
-  /* ---------- fit: the name on the gold line always sits inside the first screen ----------
-     Taller scripts (Arabic) and low windows make the stage taller than the screen. Measure how far the
-     band runs past the bottom and take that height from the tulip (and a little from the gap above the band). */
+  /* ---------- fit: the whole hero, the name on the gold line included, always sits inside the first screen ----------
+     The two wings set the height of the stage (seven routes on one side wrap to two lines on a laptop). When the
+     hero is taller than the screen, --fit scales every gap, the title and the name down together and the type a
+     little more slowly (see hero.css) — as much as is needed, never more. The tulip then fills what is left of
+     its column: as tall as the wings beside it, and as wide as the column. */
   useEffect(() => {
-    const r = root.current, b = band.current;
-    if (!r || !b) return;
+    const r = root.current, c = crest.current;
+    if (!r || !c) return;
     let raf = 0;
+    const ASPECT = 859 / 998; // the tulip's viewBox: width / height
+    const FIT_MIN = 0.5, FIT_TIGHT = 0.35;
     const fit = () => {
       raf = 0;
-      r.style.setProperty("--squeeze", "0px");
-      r.style.setProperty("--squeeze2", "0px");
+      r.style.setProperty("--fit", "1");
+      r.style.removeProperty("--th-fill");
+      delete r.dataset.tight;
       if (window.matchMedia("(max-width: 900px)").matches) return; // phones: the hero is two screens by design
-      const over = () => b.getBoundingClientRect().bottom - r.getBoundingClientRect().top - innerHeight + 12;
-      let o = over();
-      if (o <= 0) return;
-      const s2 = Math.min(o, 36);
-      r.style.setProperty("--squeeze2", `${s2}px`);
-      let s = o - s2;
-      // two passes: the tulip only gives back height 1:1 while its column is the tallest in the stage
-      for (let i = 0; i < 2 && s > 0; i++) {
-        r.style.setProperty("--squeeze", `${Math.ceil(s)}px`);
-        o = over();
-        if (o <= 0) break;
-        s += o;
+      // while the size is being found the tulip stays small, so that only the wings and the fixed parts decide the height
+      r.style.setProperty("--th-fill", "130px");
+      const fits = () => r.getBoundingClientRect().height <= innerHeight + 0.5;
+      // the largest --fit (not below min) at which the hero fits the screen, or null when not even min does
+      const largest = (min: number) => {
+        r.style.setProperty("--fit", "1");
+        if (fits()) return 1;
+        r.style.setProperty("--fit", String(min));
+        if (!fits()) return null;
+        let lo = min, hi = 1;
+        for (let i = 0; i < 8; i++) {
+          const mid = (lo + hi) / 2;
+          r.style.setProperty("--fit", mid.toFixed(3));
+          if (fits()) lo = mid; else hi = mid;
+        }
+        return lo;
+      };
+      let f = largest(FIT_MIN);
+      if (f === null) {
+        // a very low window: the short descriptions under the routes give way (hero.css), the pages have them in full
+        r.dataset.tight = "";
+        f = largest(FIT_TIGHT) ?? FIT_TIGHT; // not even then: it does what it can
+      }
+      r.style.setProperty("--fit", f.toFixed(3));
+      const col = c.parentElement;
+      const wings = Array.from(r.querySelectorAll<HTMLElement>(".wing"), (w) => w.getBoundingClientRect().height);
+      if (col && wings.length) {
+        const room = Math.max(...wings) - (col.getBoundingClientRect().height - c.getBoundingClientRect().height) - 6;
+        const wide = col.getBoundingClientRect().width / ASPECT;
+        r.style.setProperty("--th-fill", `${Math.floor(Math.max(130, Math.min(room, wide, 520)))}px`);
       }
     };
     const schedule = () => { if (!raf) raf = requestAnimationFrame(fit); };

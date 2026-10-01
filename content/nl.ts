@@ -114,8 +114,8 @@ export const nl: Dict = {
       "claims": [
         {
           "roman": "I",
-          "title": "Wij zijn *ondernemers,* geen consultants.",
-          "body": "DUKAAT is opgericht door een ondernemer die zelf importeert, verpakt en verscheept, en die de handel tussen beide kanten van binnenuit kent."
+          "title": "Wij zijn *ondernemers en adviseurs.*",
+          "body": "Wij combineren academische kennis met praktijkervaring.\n\nWij zijn een team van ondernemers en adviseurs die een universitaire opleiding combineren met praktijkervaring in bedrijfsvoering en projectontwikkeling. Op basis van onze studie en onze ervaring in onderwijs, handel en diensten bieden wij een beter inzicht in de uitdagingen en praktisch advies waarmee bedrijven en ondernemers weloverwogen beslissingen nemen, partnerschappen opbouwen en groeikansen verkennen tussen Nederland en de Arabische wereld."
         },
         {
           "roman": "II",
@@ -139,18 +139,19 @@ export const nl: Dict = {
     "behind": {
       "label": "Achter DUKAAT",
       "heading": "Twee oprichters, *twee vakken.*",
-      "lede": "De een importeert, verpakt en verscheept. De ander adviseert over structuur, contracten en controles.",
+      "lede": "De een is ondernemer in onderwijs, handel en diensten. De ander adviseert over structuur, contracten en controles.",
       "founders": [
         {
           "name": "[Oprichter 1 — ondernemer]",
-          "role": "Oprichter · Ondernemer",
-          "voice": "DUKAAT begon niet als businessplan. Het begon als een probleem waar ik steeds tegenaan liep. Ik heb een loonverpakkingsbedrijf in Nederland, peulvruchten en noten; ik koop in de Arabische wereld en verkoop in Europa. Keer op keer: een fabriek die precies kon leveren wat een koper nodig had, en een koper die haar nooit zou vinden. Jarenlang deed ik die introducties als vriendendienst. DUKAAT doet het zoals het hoort.",
+          "role": "Oprichter en ondernemer",
+          "credentials": "MBA, specialisatie Financiën en Investeringen | Ondernemer in onderwijs, handel en diensten",
+          "voice": "“Het idee voor DUKAAT ontstond vanuit mijn visie als ondernemer die academische kennis en praktijkervaring combineert. Door mijn studie bedrijfskunde, met specialisatie in financiën en investeringen, en mijn ervaring in onderwijs, handel en diensten, raakte ik ervan overtuigd dat bedrijfsgroei begint met heldere kennis, betrouwbare relaties en het vermogen om kansen om te zetten in praktische stappen.\n\nVanuit die overtuiging ontstond mijn visie om DUKAAT op te richten: een zakelijke gemeenschap die bedrijven en ondernemers tussen Nederland en de Arabische wereld verbindt, en training, uitwisseling van ervaring, het bouwen van partnerschappen en de ontwikkeling van commerciële en investeringskansen samenbrengt in één ecosysteem.\n\nMijn ambitie is dat iedereen die zich bij DUKAAT aansluit kennis vindt die de eigen vaardigheden ontwikkelt, een verbinding die de horizon verbreedt, en een ruimte om ervaring te delen en waarde te creëren voor anderen.”",
           "portraitAlt": "Het vak van de oprichter-ondernemer: een graanprikker in een zak kikkererwten"
         },
         {
           "name": "[Oprichter 2 — fiscaal recht]",
           "role": "Oprichter · Fiscaal recht",
-          "voice": "Een goede introductie strandt vaker op het papierwerk dan op de mensen. Mijn achtergrond is het fiscale recht, en mijn rol bij DUKAAT is adviserend: zorgen dat de juiste vragen op tijd worden gesteld — welke entiteit tekent, wat er in het contract staat, waar de fiscale en douanevragen liggen, en of de tegenpartij is wie zij zegt te zijn. Die ervaring maakt een deal helderder. Het is geen garantie; de beslissing blijft bij het lid. Het is wat een handdruk waarde geeft.",
+          "voice": "“Een goede introductie strandt vaker op het papierwerk dan op de mensen. Mijn achtergrond is het fiscale recht, en mijn rol bij DUKAAT is adviserend: zorgen dat de juiste vragen op tijd worden gesteld — welke entiteit tekent, wat er in het contract staat, waar de fiscale en douanevragen liggen, en of de tegenpartij is wie zij zegt te zijn. Die ervaring maakt een deal helderder. Het is geen garantie; de beslissing blijft bij het lid. Het is wat een handdruk waarde geeft.”",
           "portraitAlt": "Het vak van de oprichter-fiscalist: een pen boven een contract"
         }
       ]

@@ -137,7 +137,11 @@ function Register({ b, c }: { b: Extract<Block, { kind: "register" }>; c: Ctx })
           {b.numbered && <span className="reg-n" aria-hidden="true">{pad(i)}</span>}
           <div>
             <h3><Rich text={it.title[c.l]} /></h3>
-            {it.body && <p><Rich text={it.body[c.l]} /></p>}
+            {it.body && (() => {
+              // a blank line splits the text into paragraphs; the first one then sums the rest up
+              const paras = it.body[c.l].split("\n\n");
+              return paras.map((p, k) => <p key={k} className={paras.length > 1 && k === 0 ? "reg-sum" : undefined}><Rich text={p} /></p>);
+            })()}
           </div>
         </li>
       ))}

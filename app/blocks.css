@@ -188,6 +188,9 @@ section.b p{ text-wrap:pretty }
 [dir="rtl"] .reg-i h3{ line-height:1.5 }
 .reg-i p{ margin-top:6px; color:var(--ink-soft); font-size:.98rem; line-height:1.55; max-width:58ch }
 [dir="rtl"] .reg-i p{ line-height:1.85 }
+.reg-i p.reg-sum{ font-family:var(--display); font-weight:600; font-size:1.05rem; line-height:1.4; color:var(--ink) }
+[dir="rtl"] .reg-i p.reg-sum{ font-family:var(--arabic); line-height:1.7 }
+.reg-i p.reg-sum + p{ margin-top:var(--s-sm) }
 /* spoken lines */
 .reg.quotes{ border-top:0 }
 .reg.quotes .reg-i{ border-bottom:0; padding-block:var(--s-md) }
