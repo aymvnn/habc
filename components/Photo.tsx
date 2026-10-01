@@ -31,7 +31,7 @@ export function Photo({
   const has = !!file && existsSync(path.join(process.cwd(), "public", file));
   const alt = decorative ? "" : (meta?.alt[locale] ?? "");
   return (
-    <figure className={`ph ${className}`} data-ratio={meta?.ratio}>
+    <figure className={`ph ${className}`} data-ratio={meta?.ratio} data-photo={id}>
       {has ? (
         <Image src={file} alt={alt} fill sizes={sizes} priority={priority} quality={80} />
       ) : (

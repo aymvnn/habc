@@ -69,6 +69,7 @@ export default async function SitePage({ params }: Props) {
         label={d.site.groups[group.key].label}
         title={title}
         blurb={blurb}
+        twin={resolve(getDict(locale === "ar" ? "en" : "ar"), path)?.title}
       />
 
       {def && <Blocks def={def} locale={locale} d={d} group={group} path={path} />}

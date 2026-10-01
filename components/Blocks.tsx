@@ -546,7 +546,12 @@ export function Blocks({ def, locale, d, group, path }: { def: PageDef; locale: 
   );
 }
 
-/** the top of an inner page: breadcrumb, title, one-line lede and the page's photograph */
+/**
+ * The top of every inner page, identical on all of them — "the crossing":
+ * the page's name and its twin in the other script (Arabic on the Dutch and English site, English on the Arabic one)
+ * rest on the logo's gold A-bar, which runs from edge to edge; under the bar the source's title line and introduction;
+ * then the page's photograph, which unrolls downward from under the bar. Value crossing borders, on every page.
+ */
 export function Masthead({
   def,
   locale,
@@ -554,6 +559,7 @@ export function Masthead({
   label,
   title,
   blurb,
+  twin,
 }: {
   def?: PageDef;
   locale: Locale;
@@ -561,29 +567,34 @@ export function Masthead({
   label: string;
   title: string;
   blurb: string;
+  twin?: string;
 }) {
   const m = def?.masthead ?? { variant: "type" as const };
   const photo = m.variant !== "type" ? m.photo : undefined;
+  const eyebrow = def?.eyebrow ? def.eyebrow[locale] : label;
+  const stand = def?.headline ? def.headline[locale] : blurb;
+  const lede = def?.lede?.[locale];
+  const twinLang = locale === "ar" ? "en" : "ar";
   return (
-    <header className={`mh mh-${m.variant}`}>
-      <div className="wrap">
+    <header className={`mh${photo ? " has-photo" : ""}`}>
+      <div className="wrap mh-top">
         {crumbs}
-        <div className="mh-grid">
-          <span className="label mh-label">{def?.eyebrow ? def.eyebrow[locale] : label}</span>
-          <h1 className="mh-title">{def?.headline ? def.headline[locale] : title}</h1>
-          {(def?.lede || (!def?.headline && blurb)) && <p className="lede mh-lede">{def?.lede ? def.lede[locale] : blurb}</p>}
-          {photo && m.variant !== "band" && (
-            <Photo
-              id={photo}
-              locale={locale}
-              className="mh-ph"
-              priority
-              sizes={m.variant === "portrait" ? "(max-width: 900px) 100vw, 30vw" : "(max-width: 900px) 80vw, 26vw"}
-            />
+        {eyebrow && eyebrow !== title && <span className="label mh-label">{eyebrow}</span>}
+        <div className="mh-row">
+          <h1 className="mh-title">{title}</h1>
+          {twin && twin !== title && (
+            <p className="mh-twin" lang={twinLang} dir={twinLang === "ar" ? "rtl" : "ltr"} aria-hidden="true">{twin}</p>
           )}
         </div>
       </div>
-      {photo && m.variant === "band" && <Photo id={photo} locale={locale} className="mh-bandph" priority sizes="100vw" />}
+      <span className="mh-bar" aria-hidden="true" />
+      {(stand || lede) && (
+        <div className={`wrap mh-sub${lede ? " has-lede" : ""}`}>
+          {stand && <p className="mh-stand">{stand}</p>}
+          {lede && <p className="mh-lede">{lede}</p>}
+        </div>
+      )}
+      {photo && <Photo id={photo} locale={locale} className="mh-band" priority sizes="100vw" />}
     </header>
   );
 }

@@ -24,6 +24,11 @@
   --t4:clamp(2.5rem,1.6rem + 3.6vw,4.6rem);
   --t5:clamp(3.2rem,1.8rem + 6vw,7rem);
   --t6:clamp(3.4rem,1rem + 7.6vw,8rem);
+  /* headings of the inner pages: the page's name, a section, an item */
+  --h1:clamp(2.5rem,1.6rem + 2.6vw,4.25rem);
+  --h2:clamp(1.75rem,1.3rem + 1.4vw,2.6rem);
+  --h3:clamp(1.15rem,1.05rem + .35vw,1.35rem);
+  --stand:clamp(1.25rem,1.02rem + .8vw,1.75rem);
 
   --s-xs:4px; --s-sm:8px; --s-md:16px; --s-lg:24px; --s-xl:40px; --s-2xl:64px; --s-3xl:96px;
   --section:clamp(88px,12vh,160px); --gutter:clamp(20px,4.2vw,72px); --max:1480px;
@@ -43,7 +48,7 @@ a{ color:inherit; text-decoration:none }
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{ outline:2px solid var(--wine); outline-offset:4px; border-radius:var(--radius) }
 img,video,svg{ display:block; max-width:100% }
 p{ margin:0; text-wrap:pretty }
-h1,h2,h3,h4{ margin:0; font-family:var(--display); font-weight:800; letter-spacing:-.025em; line-height:.98; text-wrap:balance }
+h1,h2,h3,h4{ margin:0; font-family:var(--display); font-weight:700; letter-spacing:-.025em; line-height:1.04; text-wrap:balance }
 h2 em,h3 em{ font-style:normal; color:var(--wine) }
 .ar{ font-family:var(--arabic); letter-spacing:0 }
 .pending-mark{ color:var(--muted); font-style:italic }

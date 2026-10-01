@@ -15,55 +15,103 @@
 .pending{ color:var(--muted); border-bottom:1px dashed var(--bar); white-space:nowrap }
 em .pending{ color:inherit }
 
-/* ---------- masthead ---------- */
-.mh{ position:relative }
-.mh-grid{
-  display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--s-lg); row-gap:var(--s-lg); align-items:end;
-  margin-top:var(--s-xl); padding-bottom:var(--s-2xl); border-bottom:1px solid var(--line-strong); position:relative;
+/* ---------- masthead: "the crossing" — one header for every inner page ----------
+   The page's name and its twin in the other script rest on the logo's gold A-bar, which runs from edge to edge
+   (the same bar that carries the name on the homepage). Under the bar: the source's title line and introduction.
+   Then the photograph, which unrolls downward from under the bar.
+   Motion follows Emil Kowalski's rules: strong custom curves, only transform / opacity / clip-path, played once per
+   page load (a rare moment, so it may take its time); reduced motion keeps only the fades. */
+.mh{ position:relative; --mh-out:cubic-bezier(0.23,1,0.32,1); --mh-io:cubic-bezier(0.77,0,0.175,1) }
+.mh-top{ padding-top:clamp(28px,3.2vw,48px) }
+.mh-label{ display:inline-flex; margin-top:clamp(28px,3vw,44px) }
+.mh-row{
+  display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end; column-gap:var(--s-xl);
+  margin-top:clamp(14px,1.4vw,22px); padding-bottom:clamp(14px,1.3vw,20px);
 }
-.mh-label{ grid-column:1 / -1 }
-.mh-title{ grid-column:1 / span 8; font-size:clamp(2.6rem, 1.4rem + 4vw, 5.6rem); letter-spacing:-.04em; line-height:.98; hyphens:auto }
-[dir="rtl"] .mh-title{ line-height:1.3; letter-spacing:0 }
-.mh-lede{ grid-column:9 / span 4; margin-bottom:.4em }
-
-/* band: the gold line from edge to edge, then the page's large photograph */
-.mh-band .mh-grid{ border-bottom:0; padding-bottom:var(--s-xl) }
-.mh-band > .ph{
-  width:100%; aspect-ratio:21/9; max-height:74svh; box-shadow:none;
-  border-top:3px solid transparent; border-image:var(--gold-gradient) 1;
+.mh-title{ font-size:var(--h1); font-weight:700; letter-spacing:-.038em; line-height:.98; max-width:19ch }
+.mh-twin{
+  font-family:var(--arabic); font-weight:700; font-size:clamp(1.35rem,.95rem + 1.3vw,2.25rem); line-height:1.2;
+  color:var(--gold-deep); white-space:nowrap; padding-bottom:.14em;
 }
+.mh-twin:lang(en){ font-family:var(--display); font-weight:600; letter-spacing:-.02em }
+.mh-bar{ display:block; position:relative; overflow:hidden; width:100%; height:3px; background:var(--gold-gradient); transform-origin:left center }
+[dir="rtl"] .mh-bar{ transform-origin:right center }
+.mh-bar::after{
+  content:""; position:absolute; inset-block:0; left:0; width:22%;
+  background:linear-gradient(90deg,transparent,rgba(255,243,210,.95),transparent); transform:translateX(-120%);
+}
+.mh-sub{
+  display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--s-lg); align-items:start;
+  padding-top:clamp(22px,2.2vw,34px);
+}
+.mh-stand{
+  grid-column:1 / span 7; font-family:var(--text); font-weight:400; font-size:var(--stand); line-height:1.34;
+  color:var(--ink-soft); max-width:38ch; text-wrap:balance;
+}
+.mh-lede{ grid-column:9 / -1; color:var(--muted); font-size:1rem; line-height:1.6; max-width:48ch; padding-top:.4em }
+.ph.mh-band{ width:100%; aspect-ratio:21/9; max-height:72svh; margin-top:clamp(40px,5vw,72px); box-shadow:none }
+/* where the subject of an upright photograph sits low in the frame */
+.mh-band:is([data-photo="sto-hero"],[data-photo="how-tea"]) img{ object-position:50% 78% }
+[dir="rtl"] .mh-title{ line-height:1.3; letter-spacing:0; font-weight:800 }
+[dir="rtl"] .mh-stand{ font-family:var(--arabic); font-size:clamp(1.15rem,.98rem + .6vw,1.5rem); line-height:1.8 }
 
-/* portrait: a tall photograph beside the title that rises above the line and drops below it */
-.mh-portrait .mh-label{ grid-column:1 / span 7 }
-.mh-portrait .mh-title{ grid-column:1 / span 7; grid-row:2 }
-.mh-portrait .mh-lede{ grid-column:1 / span 6; grid-row:3; margin:0 }
-.mh-portrait .mh-ph{ grid-column:9 / -1; grid-row:1 / span 3; align-self:start; margin-top:calc(-1 * var(--s-lg)); margin-bottom:calc(-1 * clamp(72px, 9vw, 128px)); z-index:1 }
-.mh-portrait + .b{ padding-top:clamp(120px, 12vw, 180px) }
-.mh-portrait + .b .b-lead-t{ grid-column:1 / span 7 }
+/* the crossing, once per page load: the name rises, the bar draws out from it, the twin arrives at the far end,
+   one glint runs along the gold, the photograph unrolls from under the bar and settles */
+@media (prefers-reduced-motion:no-preference){
+  .mh-label{ animation:mh-rise .8s var(--mh-out) both }
+  .mh-title{ animation:mh-rise .9s var(--mh-out) .06s both }
+  .mh-bar{ animation:mh-draw 1.15s var(--mh-io) .2s both }
+  .mh-bar::after{ animation:mh-glint 1.3s var(--mh-out) 1.3s both }
+  .mh-twin{ animation:mh-arrive .8s var(--mh-out) 1s both }
+  .mh-stand{ animation:mh-rise .8s var(--mh-out) .55s both }
+  .mh-lede{ animation:mh-rise .8s var(--mh-out) .63s both }
+  .ph.mh-band{ animation:mh-unroll 1.3s var(--mh-io) .45s both }
+  .ph.mh-band img{ animation:mh-settle 1.9s var(--mh-out) .45s both }
+  [dir="rtl"] .mh-bar::after{ animation-name:mh-glint-rtl }
+  [dir="rtl"] .mh-twin{ animation-name:mh-arrive-rtl }
+}
+@media (prefers-reduced-motion:reduce){
+  .mh-title,.mh-twin,.mh-stand,.mh-lede,.ph.mh-band{ animation:mh-fade .4s ease both }
+}
+@keyframes mh-rise{ from{ opacity:0; transform:translateY(14px); filter:blur(4px) } to{ opacity:1; transform:none; filter:blur(0) } }
+@keyframes mh-draw{ from{ transform:scaleX(0) } to{ transform:scaleX(1) } }
+@keyframes mh-glint{ from{ transform:translateX(-120%) } to{ transform:translateX(560%) } }
+@keyframes mh-glint-rtl{ from{ transform:translateX(560%) } to{ transform:translateX(-120%) } }
+@keyframes mh-arrive{ from{ opacity:0; transform:translateX(-18px) } to{ opacity:1; transform:none } }
+@keyframes mh-arrive-rtl{ from{ opacity:0; transform:translateX(18px) } to{ opacity:1; transform:none } }
+@keyframes mh-unroll{ from{ clip-path:inset(0 0 100% 0) } to{ clip-path:inset(0 0 0 0) } }
+@keyframes mh-settle{ from{ transform:scale(1.08) } to{ transform:scale(1) } }
+@keyframes mh-fade{ from{ opacity:0 } to{ opacity:1 } }
 
-/* plate: a small photograph above the lede */
-.mh-plate .mh-title{ grid-row:2 / span 2 }
-.mh-plate .mh-ph{ grid-column:10 / -1; grid-row:2; align-self:end; width:100% }
-.mh-plate .mh-lede{ grid-column:9 / -1; grid-row:3 }
+@media (max-width:1100px){
+  .mh-stand{ grid-column:1 / span 10 }
+  .mh-lede{ grid-column:1 / span 10; padding-top:var(--s-md) }
+}
+@media (max-width:900px){
+  .mh-row{ grid-template-columns:minmax(0,1fr) }
+  .mh-twin{ justify-self:end; margin-top:var(--s-sm); font-size:1.2rem }
+  .mh-stand,.mh-lede{ grid-column:1 / -1 }
+  .ph.mh-band{ aspect-ratio:3/2 }
+}
 
 /* ---------- blocks: rhythm ---------- */
 .b{ padding-block:clamp(56px, 7.5vw, 120px); position:relative }
 .b + .b{ padding-top:clamp(24px, 3.5vw, 56px) }
 .b-grid{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--s-lg); row-gap:var(--s-xl) }
-.b-head h2,.b-prose-head h2{ font-size:var(--t3); letter-spacing:-.03em; line-height:1.04; margin-top:var(--s-md) }
+.b-head h2,.b-prose-head h2{ font-size:var(--h2); letter-spacing:-.028em; line-height:1.1; margin-top:var(--s-md); max-width:24ch }
 .b-head .label + h2{ margin-top:var(--s-md) }
 .b-head > h2:first-child{ margin-top:0 }
 [dir="rtl"] :is(.b-head,.b-prose-head) h2{ line-height:1.35; letter-spacing:0 }
 .b-head .lede{ margin-top:var(--s-md) }
 .head.b-head{ margin-bottom:var(--s-xl) }
-.head.b-head h2{ font-size:var(--t4); margin-top:0 }
+.head.b-head h2{ font-size:var(--h2); margin-top:0 }
 .head.b-head .lede{ margin-top:0 }
 .b-note{ margin-top:var(--s-lg); color:var(--muted); font-size:.95rem; font-style:italic; max-width:68ch }
 [dir="rtl"] .b-note{ font-style:normal }
 section.b p{ text-wrap:pretty }
 
 /* ---------- lead ---------- */
-.b-lead-t{ grid-column:1 / span 9; font-family:var(--text); font-size:var(--t2); line-height:1.38; color:var(--ink); letter-spacing:-.005em }
+.b-lead-t{ grid-column:1 / span 9; font-family:var(--text); font-size:var(--t1); line-height:1.5; color:var(--ink); letter-spacing:-.005em }
 [dir="rtl"] .b-lead-t{ font-family:var(--arabic); line-height:1.75 }
 .b-lead-t::before{ content:""; display:block; width:48px; height:3px; background:var(--bar); margin-bottom:var(--s-lg) }
 .b-lead.has-photo .b-lead-t{ grid-column:1 / span 7 }
@@ -108,7 +156,7 @@ section.b p{ text-wrap:pretty }
 [dir="rtl"] .b-band-cap{ font-family:var(--arabic); letter-spacing:0; line-height:1.7 }
 @supports (animation-timeline: view()){
   @media (prefers-reduced-motion: no-preference){
-    :is(.b-band,.mh-band) .ph img{ animation:band-drift linear both; animation-timeline:view(); animation-range:entry 0% exit 100% }
+    .b-band .ph img{ animation:band-drift linear both; animation-timeline:view(); animation-range:entry 0% exit 100% }
   }
 }
 @keyframes band-drift{ from{ transform:scale(1.1) translateY(-2%) } to{ transform:scale(1.02) translateY(2%) } }
@@ -136,7 +184,7 @@ section.b p{ text-wrap:pretty }
 .reg-i{ display:grid; grid-template-columns:1fr; column-gap:var(--s-lg); padding:clamp(18px, 2vw, 28px) 0; border-bottom:1px solid var(--line) }
 .reg.numbered .reg-i{ grid-template-columns:3.2em 1fr }
 .reg-n{ font-family:var(--display); font-weight:600; font-size:var(--t-1); letter-spacing:.14em; color:var(--gold-deep); padding-top:.35em; font-variant-numeric:tabular-nums }
-.reg-i h3{ font-size:var(--t1); letter-spacing:-.015em; line-height:1.2 }
+.reg-i h3{ font-size:var(--h3); letter-spacing:-.015em; line-height:1.25 }
 [dir="rtl"] .reg-i h3{ line-height:1.5 }
 .reg-i p{ margin-top:6px; color:var(--ink-soft); font-size:.98rem; line-height:1.55; max-width:58ch }
 [dir="rtl"] .reg-i p{ line-height:1.85 }
@@ -172,7 +220,7 @@ section.b p{ text-wrap:pretty }
 .bstep{ position:relative; padding-top:var(--s-lg) }
 .bstep::before{ content:""; position:absolute; top:calc(-1 * var(--s-lg)); inset-inline-start:0; width:2px; height:18px; background:var(--bar) }
 .bstep-n{ font-family:var(--display); font-weight:800; font-size:var(--t4); letter-spacing:-.05em; line-height:.85; color:var(--wine); font-variant-numeric:tabular-nums }
-.bstep h3{ font-size:var(--t1); margin-top:var(--s-md); letter-spacing:-.015em; line-height:1.15 }
+.bstep h3{ font-size:var(--h3); margin-top:var(--s-md); letter-spacing:-.015em; line-height:1.25 }
 [dir="rtl"] .bstep h3{ line-height:1.5 }
 .bstep p{ margin-top:var(--s-sm); color:var(--ink-soft); font-size:.97rem; line-height:1.55 }
 [dir="rtl"] .bstep p{ line-height:1.85 }
@@ -301,13 +349,13 @@ section.b p{ text-wrap:pretty }
 /* ---------- chapter: a held heading, the items flowing past ---------- */
 .b-chapter .b-grid{ align-items:start }
 .ch-head{ grid-column:1 / span 4; position:sticky; top:120px }
-.ch-head .b-head h2{ font-size:var(--t3) }
+.ch-head .b-head h2{ font-size:var(--h2) }
 .ch-items{ grid-column:6 / -1 }
 .ch-i{ display:grid; grid-template-columns:3em 1fr; column-gap:var(--s-lg); padding:clamp(22px, 2.8vw, 40px) 0; border-top:1px solid var(--line-strong) }
 .ch-i:last-child{ border-bottom:1px solid var(--line-strong) }
 .ch-i.has-photo{ grid-template-columns:3em 1fr clamp(120px, 13vw, 200px) }
 .ch-n{ font-family:var(--display); font-weight:600; font-size:var(--t-1); letter-spacing:.16em; color:var(--gold-deep); padding-top:.5em; font-variant-numeric:tabular-nums }
-.ch-i h3{ font-size:var(--t2); letter-spacing:-.025em; line-height:1.08 }
+.ch-i h3{ font-size:var(--h3); letter-spacing:-.015em; line-height:1.2 }
 [dir="rtl"] .ch-i h3{ line-height:1.4 }
 .ch-i p{ margin-top:var(--s-sm); color:var(--ink-soft); line-height:1.6; max-width:54ch }
 [dir="rtl"] .ch-i p{ line-height:1.9 }
@@ -324,7 +372,7 @@ section.b p{ text-wrap:pretty }
 /* ---------- notice ---------- */
 .notice-box{ position:relative; max-width:920px; margin-inline:auto; padding:clamp(24px, 3vw, 44px); border:1px solid var(--line-strong); background:var(--paper-lift) }
 .notice-box::before{ content:""; position:absolute; top:-1px; inset-inline:-1px; height:3px; background:var(--gold-gradient) }
-.notice-box h2{ font-size:var(--t2); letter-spacing:-.02em; margin-top:var(--s-md) }
+.notice-box h2{ font-size:var(--h3); letter-spacing:-.015em; margin-top:var(--s-md) }
 .notice-box > .label + p{ margin-top:var(--s-md) }
 .notice-box p{ color:var(--ink-soft); line-height:1.6 }
 .notice-box h2 + p{ margin-top:var(--s-md) }
@@ -341,7 +389,7 @@ section.b p{ text-wrap:pretty }
 .dark-head{ grid-column:1 / span 7 }
 .dark-head .label{ color:var(--gold-light) }
 .dark-head .label::before{ background:var(--gold-light) }
-.dark-head h2{ font-size:var(--t4); color:var(--paper); margin-top:var(--s-md) }
+.dark-head h2{ font-size:var(--h2); color:var(--paper); margin-top:var(--s-md) }
 .dark-head h2 em{ color:var(--gold-light) }
 .dark-body{ grid-column:1 / span 6 }
 .dark-body p{ color:#E9DED3; font-size:var(--t1); line-height:1.5 }
@@ -413,14 +461,6 @@ section.b p{ text-wrap:pretty }
 
 /* ---------- tablets ---------- */
 @media (max-width:1100px){
-  .mh-title{ grid-column:1 / -1 }
-  .mh-lede{ grid-column:1 / span 9 }
-  .mh-portrait .mh-title{ grid-column:1 / span 7 }
-  .mh-portrait .mh-lede{ grid-column:1 / span 7 }
-  .mh-portrait .mh-ph{ grid-column:9 / -1 }
-  .mh-plate .mh-title{ grid-column:1 / span 8; grid-row:2 }
-  .mh-plate .mh-ph{ grid-column:9 / -1; grid-row:2 }
-  .mh-plate .mh-lede{ grid-column:1 / span 9; grid-row:3 }
   .b-lead-t,.b-lead.has-photo .b-lead-t{ grid-column:1 / span 10 }
   .b-lead-ph{ grid-column:7 / -1; margin-top:0 }
   .terms{ grid-template-columns:repeat(2,1fr) }
@@ -436,11 +476,6 @@ section.b p{ text-wrap:pretty }
 /* ---------- phones and small tablets: one column ---------- */
 @media (max-width:900px){
   .b-grid > *,.b-statement .wrap > *{ grid-column:1 / -1 !important; grid-row:auto !important }
-  .mh-grid > *{ grid-column:1 / -1 !important; grid-row:auto !important }
-  .mh-portrait .mh-ph{ margin:var(--s-md) 0 0; order:5; aspect-ratio:4/3 }
-  .mh-plate .mh-ph{ max-width:420px; order:5 }
-  .mh-portrait + .b{ padding-top:clamp(56px, 7.5vw, 120px) }
-  .mh-band > .ph{ aspect-ratio:16/10 }
   .b-band .ph{ aspect-ratio:4/3 }
   .b-prose.split .b-prose-head,.terms-head,.spec-head,.ch-head,.b-facts.has-media .facts-media,.lg-toc{ position:static }
   .b-prose.with-ph .b-prose-ph{ order:-1 }
@@ -544,3 +579,8 @@ section.b p{ text-wrap:pretty }
   .fm-head,.fm-body{ grid-column:1 / -1 }
   .fs-choices{ position:static }
 }
+
+/* every section heading of the inner pages on the same step of the scale (--h2) */
+:is(.b-listing,.b-formset) .head h2,.act-head h2,.fm-head h2{ font-size:var(--h2); letter-spacing:-.028em; line-height:1.1; max-width:24ch }
+.fs-title{ font-size:var(--h2); letter-spacing:-.028em; line-height:1.1 }
+[dir="rtl"] :is(.b-listing,.b-formset) .head h2,[dir="rtl"] :is(.act-head,.fm-head) h2,[dir="rtl"] .fs-title{ line-height:1.35; letter-spacing:0 }

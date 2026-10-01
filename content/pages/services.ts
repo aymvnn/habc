@@ -16,7 +16,7 @@ export const services: PageSet = {
 
   /* ------------------------------------------------------------------ 3 */
   "services/connect": {
-    masthead: { variant: "portrait", photo: "trade-supplier" },
+    masthead: { variant: "band", photo: "me-hero" },
     eyebrow: { en: "DUKAAT Connect", nl: "DUKAAT Connect", ar: "DUKAAT Connect" },
     headline: {
       en: "Finding the right party starts with understanding your needs",
