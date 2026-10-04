@@ -9,7 +9,7 @@ import { Rich } from "./Rich";
 import { TwinLine } from "./Twin";
 import { NameFilm } from "./NameFilm";
 import { Mash } from "./Licht";
-import { FooterGuilloche } from "./FooterGuilloche";
+import { FooterTulip } from "./FooterTulip";
 
 /* eslint-disable @next/next/no-img-element -- the brand SVGs are served as-is; next/image adds nothing to vector art */
 
@@ -226,7 +226,7 @@ export function Footer({ locale, d }: { locale: Locale; d: Dict }) {
      longer repeats "Stichting … · Anno 2018": the colophon sentence beside the copyright already says it in full. */
   return (
     <footer>
-      <FooterGuilloche />
+      <FooterTulip />
       <Mash />
       {/* Muntregister a5-4/a7-4: one still guilloche rosette from the hero, reused as it is (b3), very faint; decorative */}
       <img className="f-rosette" src="/ornament/guilloche-b.svg" alt="" aria-hidden="true" width={500} height={500} loading="lazy" decoding="async" />

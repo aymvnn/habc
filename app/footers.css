@@ -122,9 +122,8 @@ footer .f-links{ margin-top:clamp(16px,1.6vw,22px) }
 html[data-slot="licht"] .mash{ display:none }
 
 /* === owner, 4 Oct 2026 (2): the whole footer is dark, from its top line; the page's end above it stays light ===
-   The footer keeps its dark colours whatever the slot's variant; a 3px foil line opens it. In its background a
-   banknote guilloche runs across the width (public/ornament/guilloche-band.svg — woven gold lines, a different
-   figure from the hero's rosettes), very faint and fading to the edges. The corner rosette and the lattice give way. */
+   The footer keeps its dark colours whatever the slot's variant; a 3px foil line opens it. In its background lies
+   a large tulip engraved in guilloche (see .f-lat below). The corner rosette and the old mash give way. */
 html[data-slot="licht"] footer{
   --f-bg:var(--wine-night); --f-ink:var(--paper); --f-soft:var(--paper-soft); --f-mute:var(--paper-mute); --f-rule:rgba(237,234,225,.14);
   --f-field:rgba(237,234,225,.45); --f-err:#F2C9C9; --f-low:#C9A469; --f-focus:var(--gold-light); --f-hover:var(--gold-light); --f-send:var(--paper);
@@ -134,18 +133,25 @@ html[data-slot="licht"] footer .colophon .wm-paper{ display:block }
 html[data-slot="licht"] footer .colophon .wm-ink{ display:none }
 footer::before{ content:""; position:absolute; top:0; inset-inline:0; height:3px; background:var(--foil); z-index:1 }
 footer .f-rosette,footer .mash{ display:none !important }
-/* the living engraved ground (components/FooterGuilloche.tsx): two layers of fine lines, each drawn once, drifting
-   slowly in different directions — their crossing (the moiré) keeps changing everywhere; only transforms move */
-.f-guil{ position:absolute; left:-110px; top:-110px; z-index:-1; pointer-events:none; display:block; will-change:transform }
+/* the footer's ground (components/FooterTulip.tsx; owner, 5 Oct 2026: "the tulip, made of the luxury guilloche
+   patterns"): one large tulip at the right, masked from the emblem and filled with two layers of fine engraved rings
+   that turn slowly in opposite directions. Only transforms move. Reduced motion: still. */
+.f-lat{ position:absolute; inset:0; z-index:-1; pointer-events:none; overflow:hidden }
+.f-tulip{ position:absolute; right:1%; bottom:-30%; height:145%; aspect-ratio:859/998; overflow:hidden; display:block;
+  -webkit-mask:url("/logo/dukaat-beeldmerk.svg") center / contain no-repeat; mask:url("/logo/dukaat-beeldmerk.svg") center / contain no-repeat }
+.f-tulip canvas{ position:absolute; display:block; max-width:none }
+/* owner, 5 Oct 2026: "can it move, or vibrate?" — the layers turn visibly (80s / 110s, opposite ways) and breathe:
+   each swells a few per cent and back, out of step with the other, so the engraving ripples outward from the foot */
 @media (prefers-reduced-motion:no-preference){
-  .f-guil-a{ animation:f-guil-a 46s ease-in-out infinite alternate }
-  .f-guil-b{ animation:f-guil-b 63s ease-in-out infinite alternate }
+  .f-tulip-a{ animation:ft-turn 80s linear infinite, ft-breathe 6s ease-in-out infinite alternate }
+  .f-tulip-b{ animation:ft-turn 110s linear infinite reverse, ft-breathe 8.5s ease-in-out -4s infinite alternate }
 }
-@keyframes f-guil-a{ from{ transform:translate3d(-40px,-18px,0) } to{ transform:translate3d(70px,26px,0) } }
-@keyframes f-guil-b{ from{ transform:translate3d(60px,22px,0) } to{ transform:translate3d(-80px,-24px,0) } }
+@keyframes ft-turn{ to{ rotate:360deg } }
+@keyframes ft-breathe{ from{ scale:1 } to{ scale:1.045 } }
+@media (max-width:900px){ .f-tulip{ height:min(440px, 60%); bottom:-4%; right:-14% } }
 footer .f-base{ background:transparent; margin-top:clamp(14px,1.4vw,20px) }
 footer .f-base .bottom{ border-top:1px solid var(--f-rule) }
-@media print{ .f-guil{ display:none } }
+@media print{ .f-lat{ display:none } }
 
 /* the emblem beside the name, as in the browser tab (owner, 4 Oct 2026) */
 footer .f-brand{ display:flex; align-items:center; gap:12px; margin-bottom:12px }

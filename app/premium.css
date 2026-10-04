@@ -5,20 +5,20 @@
    ============================================================ */
 
 /* ---------- UI-01: the hero's girih lattice, faintly at both sides of every page, down to the footer ----------
-   The same pattern as .h3::before (hero.css), static, at 16 %, visible only in the outer edges and fading towards the
+   The same pattern as .h3::before (hero.css), static, at 26 % (owner, 4 Oct: a touch brighter than the first 16 %), visible only in the outer edges and fading towards the
    middle; photographs and coloured bands cover it. On the homepage it starts under the hero (the hero keeps its own),
    on a phone it is a narrow edge. <main> is a stacking context (signaturen.css): the gold thread lies at -1, this at -2. */
 main::before{
   content:""; position:absolute; inset:0; z-index:-2; pointer-events:none;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23B39455' stroke-width='.6'%3E%3Cpath d='M28 28h40v40H28z'/%3E%3Cpath d='M48 19.7 76.3 48 48 76.3 19.7 48z'/%3E%3Cpath d='M48 0v19.7M48 76.3V96M0 48h19.7M76.3 48H96M0 0l28 28M96 0 68 28M0 96l28-28M96 96 68 68'/%3E%3C/g%3E%3C/svg%3E") center top / 96px 96px;
-  opacity:.16;
-  -webkit-mask-image:linear-gradient(90deg, #000 0%, rgba(0,0,0,.55) 7%, transparent 17%, transparent 83%, rgba(0,0,0,.55) 93%, #000 100%);
-          mask-image:linear-gradient(90deg, #000 0%, rgba(0,0,0,.55) 7%, transparent 17%, transparent 83%, rgba(0,0,0,.55) 93%, #000 100%);
+  opacity:.26;
+  -webkit-mask-image:linear-gradient(90deg, #000 0%, rgba(0,0,0,.7) 7%, transparent 17%, transparent 83%, rgba(0,0,0,.7) 93%, #000 100%);
+          mask-image:linear-gradient(90deg, #000 0%, rgba(0,0,0,.7) 7%, transparent 17%, transparent 83%, rgba(0,0,0,.7) 93%, #000 100%);
 }
 main:has(> .h3)::before{ top:100svh }
 @media (max-width:900px){
   main::before{
-    opacity:.12;
+    opacity:.2;
     -webkit-mask-image:linear-gradient(90deg, #000 0%, transparent 9%, transparent 91%, #000 100%);
             mask-image:linear-gradient(90deg, #000 0%, transparent 9%, transparent 91%, #000 100%);
   }
@@ -190,3 +190,23 @@ html[data-kbd] h2.rv:has(.w) .wi{ transition:none }
 @media (prefers-reduced-motion:reduce){ .wi{ transition:none !important; animation:none !important; transform:none !important } }
 /* on a phone the standfirst stands right above the line: it keeps clear of the coin's half that rises over it */
 @media (max-width:900px){ .nf404 .mh-stand{ padding-inline-end:calc(var(--coin-s) * .6) } }
+
+/* ---------- Masthead: the name first, the standfirst after the line (owner, 5 Oct 2026) ----------
+   "Titles always as high on the page as possible": the name takes the whole row on the gold line (a long standfirst
+   beside it used to push it down); the standfirst follows the line — under the photograph where there is one —
+   as the opening sentence of the page. Blocks.tsx renders it in .mh-after. */
+.mh .mh-row > .mh-name:only-child{ grid-column:1 / -1 } /* the 404 keeps its short numeral and text side by side */
+.mh .mh-after{ padding-top:clamp(28px, 3.2vw, 52px) }
+.mh .mh-after .mh-sub{ display:block; grid-column:auto; padding:0; margin:0 }
+.mh .mh-after .mh-stand{ max-width:40ch }
+.mh .mh-after .mh-lede{ margin-top:var(--s-md) }
+
+/* ---------- Masthead: a smaller, lower legend line (owner, 5 Oct 2026) ----------
+   "HOME / TITLE" and the twin name at the far end set a step smaller, with less air around them, so the name below
+   moves further up. */
+html:not(#ty):not([dir="rtl"]) .mh .crumbs{ font-size:.875rem }
+html:not(#ty) .mh .mh-twin{ font-size:clamp(.95rem, .88rem + .25vw, 1.125rem) }
+html:not(#ty) .mh .mh-twin:lang(en){ font-size:.875rem }
+html:not(#ty) .sp .mh-top{ padding-top:clamp(2px, .5vw, 8px) }
+html:not(#ty) .mh .mh-meta{ padding-bottom:clamp(7px, .6vw, 10px) }
+html:not(#ty) .mh .mh-row{ padding-top:clamp(14px, 1.6vw, 26px) }

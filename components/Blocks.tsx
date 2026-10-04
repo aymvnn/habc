@@ -867,16 +867,20 @@ export function Masthead({
             {eyebrow && eyebrow !== title && <span className="label mh-label">{eyebrow}</span>}
             <h1 className="mh-title"><Rich text={title} words /></h1>
           </div>
-          {(stand || lede) && (
-            <div className={`mh-sub${lede ? " has-lede" : ""}`}>
-              {stand && <p className="mh-stand">{stand}</p>}
-              {lede && <p className="mh-lede">{lede}</p>}
-            </div>
-          )}
         </div>
       </div>
       <span className="mh-bar" aria-hidden="true" />
       {photo && <Photo id={photo} locale={locale} className="mh-band" preload sizes="100vw" />}
+      {/* owner, 5 Oct 2026: "titles always as high on the page as possible" — the standfirst no longer stands beside
+          the name (a long one pushed the name down); it follows the line (and the photograph), where it opens the page */}
+      {(stand || lede) && (
+        <div className="wrap mh-after">
+          <div className={`mh-sub${lede ? " has-lede" : ""}`}>
+            {stand && <p className="mh-stand">{stand}</p>}
+            {lede && <p className="mh-lede">{lede}</p>}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
