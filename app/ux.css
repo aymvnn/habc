@@ -1,0 +1,312 @@
+/* ============================================================
+   UX ASSESSMENT — the owner's choices of 4 Oct 2026
+   (report https://claude.ai/artifact/2yXZnyx32TzQFtL3NbA7qe, db collection "ux"). Loaded last.
+   Each part names the item it carries out. No words live here; the protected hero keeps its tulip, background,
+   wordmark, bar and docking — only its timing and its keys change (UX-20, UX-21, approved).
+   ============================================================ */
+
+/* ---------- UX-07: one colour for mistakes, apart from the brand's bordeaux ---------- */
+:root{ --err:#B42318; --err-bg:#FBEDEA }
+
+/* ---------- UX-08: form labels as words, not captions (sentence case, 16px, 600) ----------
+   (the interface caps of muntregister.css reach every .field label through :root:not([dir="rtl"]); this rule is one
+   step stronger on the letter forms only — the footer's newsletter keeps its caps) */
+.fm.is-letter .field > label,:root:not([dir="rtl"]) .fm.is-letter .field > label{
+  font-family:var(--display); font-weight:600; font-size:1rem; line-height:1.35; letter-spacing:0; text-transform:none;
+  color:var(--ink);
+}
+[dir="rtl"] .fm.is-letter .field > label{ font-family:var(--arabic); font-weight:700; font-size:1.05rem; line-height:1.6 }
+.fm.is-letter .field:focus-within > label{ color:var(--wine) }
+.fm.is-letter .field .req{ color:var(--wine) }
+
+/* ---------- UX-07: errors in their own colour, with a mark; the list of what to correct above the form ---------- */
+.fm.is-letter .err{ display:flex; align-items:flex-start; gap:7px; color:var(--err); font-size:.92rem }
+.fm.is-letter .err::before{
+  content:"!"; flex:none; width:16px; height:16px; margin-top:.15em; border-radius:50%; background:var(--err); color:#fff;
+  font:700 11px/16px var(--display); text-align:center;
+}
+.fm.is-letter .field [aria-invalid="true"]:not(.dz-in){ border-bottom-color:var(--err) }
+.fm.is-letter .fm-check input[aria-invalid="true"]{ border-color:var(--err) }
+.fm.is-letter .dz:has(.dz-in[aria-invalid="true"]){ border-color:var(--err) }
+.fm.is-letter .fm-check-w .err{ padding-inline-start:32px }
+.fm-sum{ display:grid; gap:8px; padding:14px 18px; border-inline-start:3px solid var(--err); background:var(--err-bg) }
+.fm-sum-t{ margin:0; font-family:var(--display); font-weight:700; font-size:.95rem; color:var(--err) }
+.fm-sum ul{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:4px 18px }
+.fm-sum button{
+  font:inherit; font-family:var(--display); font-weight:600; font-size:.95rem; color:var(--ink); background:none; border:0;
+  padding:4px 0; min-height:32px; cursor:pointer; text-align:start;
+  text-decoration:underline; text-decoration-color:var(--err); text-underline-offset:3px;
+}
+.fm-sum button:hover{ color:var(--err) }
+[dir="rtl"] :is(.fm-sum-t,.fm-sum button){ font-family:var(--arabic) }
+/* the source's failure line, with the direct channels under it */
+.fm.is-letter .notice.err{ display:grid; gap:12px; border-color:var(--err); border-inline-start-width:3px; background:var(--err-bg); color:var(--ink) }
+.fm.is-letter .notice.err > p{ margin:0; color:var(--err); font-weight:600 }
+.fm-direct{ display:grid; gap:6px }
+.fm-direct-t{ margin:0; font-family:var(--display); font-weight:700; font-size:.95rem; color:var(--ink) }
+.fm-direct dl{ margin:0; display:grid; gap:4px }
+.fm-direct dl > div{ display:grid; grid-template-columns:minmax(8em,34%) 1fr; gap:12px }
+.fm-direct dt{ color:var(--ink-soft); font-family:var(--display); font-weight:600; font-size:.92rem }
+.fm-direct dd{ margin:0; font-family:var(--display); font-weight:700 }
+[dir="rtl"] :is(.fm-direct-t,.fm-direct dt,.fm-direct dd){ font-family:var(--arabic) }
+
+/* ---------- UX-09: where the visitor came from ---------- */
+.fm-ctx{
+  display:flex; align-items:center; gap:10px; margin:0; padding:10px 14px; border:1px solid var(--line); background:var(--paper);
+  font-family:var(--display); font-weight:600; font-size:.95rem; line-height:1.4; color:var(--ink-soft);
+}
+.fm-ctx::before{ content:""; flex:none; width:7px; height:7px; background:var(--bar); transform:rotate(45deg) }
+[dir="rtl"] .fm-ctx{ font-family:var(--arabic) }
+
+/* ---------- UX-04 / R1: the optional fields behind one button ---------- */
+.fm-more{ border-block:1px dashed var(--line-strong) }
+.fm-more > summary{
+  list-style:none; cursor:pointer; display:flex; align-items:center; gap:12px; min-height:52px; padding-block:6px;
+  font-family:var(--display); font-weight:700; font-size:1rem; color:var(--wine);
+}
+.fm-more > summary::-webkit-details-marker{ display:none }
+.fm-more > summary::before{
+  content:""; flex:none; width:22px; height:22px; border:1.5px solid currentColor; border-radius:50%;
+  background:
+    linear-gradient(currentColor,currentColor) center / 10px 1.5px no-repeat,
+    linear-gradient(currentColor,currentColor) center / 1.5px 10px no-repeat;
+  transition:background-size var(--d-ui) var(--ease-arrive);
+}
+.fm-more[open] > summary::before{
+  background:
+    linear-gradient(currentColor,currentColor) center / 10px 1.5px no-repeat,
+    linear-gradient(currentColor,currentColor) center / 1.5px 0 no-repeat;
+}
+.fm-more > summary:hover{ color:var(--wine-deep) }
+.fm-more > .fm-grid{ padding-block:10px 26px }
+[dir="rtl"] .fm-more > summary{ font-family:var(--arabic) }
+
+/* ---------- R1: the newsletter consent after sending ---------- */
+.fm-optin{ display:grid; gap:10px; justify-items:start; margin-top:var(--s-md); padding-top:var(--s-md); border-top:1px solid var(--line) }
+.fm-optin-ok{ margin-top:var(--s-md); color:var(--ink-soft); font-size:.95rem }
+
+/* ---------- UX-03: the compact masthead of a task page ---------- */
+.page.is-task{ padding-top:calc(clamp(100px,13.5vh,130px) + var(--util-h, 0px)) }
+.mh.is-compact .mh-row{ padding-top:clamp(12px,1.4vw,22px) }
+.mh.is-compact .mh-title{ font-size:clamp(2.4rem,1.4rem + 2.7vw,3.8rem) }
+.mh.is-compact .mh-sub{ padding-bottom:clamp(10px,1vw,16px) }
+.mh.is-compact + .b,.mh.is-compact ~ .b:first-of-type{ --gap:clamp(22px,2.4vw,36px) }
+
+/* ---------- R1: the contact form at a desk — form, introduction, direct channels, what happens next ---------- */
+.b-form.is-desk{ --gap:clamp(22px,2.4vw,36px) }
+.desk{
+  display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); grid-template-areas:"form lead" "form aside";
+  column-gap:clamp(32px,4.6vw,84px); row-gap:var(--s-xl); align-items:start;
+}
+.desk-form{ grid-area:form; min-width:0 }
+.desk-lead{
+  grid-area:lead; margin:0; max-width:44ch; font-family:var(--text); font-size:clamp(1.08rem,1rem + .3vw,1.25rem); line-height:1.55;
+  color:var(--ink);
+}
+.desk-lead::before{ content:""; display:block; width:48px; height:3px; background:var(--foil); margin-bottom:var(--s-md) }
+[dir="rtl"] .desk-lead{ font-family:var(--arabic); line-height:1.8 }
+.desk-aside{ grid-area:aside; display:grid; gap:var(--s-xl); align-content:start; min-width:0 }
+.desk-h{ margin:0 0 var(--s-md); font-size:var(--h3); letter-spacing:-.015em; line-height:1.25 }
+[dir="rtl"] .desk-h{ letter-spacing:0; line-height:1.5 }
+.desk-card .card-row{ padding-block:12px }
+.desk-card .card-close{ font-size:1.05rem }
+.desk-steps{ list-style:none; margin:0; padding:0; display:grid; gap:12px; counter-reset:none }
+.desk-steps li{ display:grid; grid-template-columns:28px minmax(0,1fr); gap:12px; align-items:start; font-size:var(--read); line-height:1.5; color:var(--ink-soft) }
+.desk-n{
+  width:26px; height:26px; border-radius:50%; border:1.5px solid var(--gold-deep); color:var(--gold-deep);
+  display:grid; place-items:center; font:700 .8rem/1 var(--font-display),sans-serif;
+}
+.desk-seal{ justify-self:start }
+.desk-seal .seal-wrap{ width:96px; height:96px }
+/* the letter at the desk is a little tighter, so the whole form fits the first screen on a laptop */
+.is-desk .fm.is-letter{ gap:18px; padding:clamp(22px,2.2vw,34px) clamp(20px,2.4vw,36px) clamp(22px,2.2vw,32px) }
+.is-desk .fm.is-letter .fm-grid{ gap:18px var(--s-lg) }
+.is-desk .field textarea:not(.dz-in){ min-height:calc(1.75em * 3 + 22px) }
+.is-desk .lt-head{ margin-bottom:0 }
+@media (max-width:900px){
+  .desk{ grid-template-columns:minmax(0,1fr); grid-template-areas:"lead" "form" "aside"; row-gap:var(--s-lg) }
+  .desk-aside{ margin-top:var(--s-lg) }
+}
+
+/* ---------- UX-18: the questions in themes ---------- */
+.faq-themes ul{ list-style:none; margin:0 0 var(--s-xl); padding:0; display:flex; flex-wrap:wrap; gap:8px }
+.faq-themes a{
+  display:inline-flex; align-items:center; min-height:40px; padding:8px 16px; border:1px solid var(--line-strong); border-radius:var(--radius);
+  font-family:var(--display); font-weight:600; font-size:.95rem; color:var(--ink); transition:border-color var(--d-hover) ease, color var(--d-hover) ease;
+}
+.faq-themes a:hover,.faq-themes a:focus-visible{ border-color:var(--wine); color:var(--wine) }
+[dir="rtl"] .faq-themes a{ font-family:var(--arabic) }
+.faq-group{ scroll-margin-top:calc(var(--nav-h, 72px) + 24px) }
+.faq-group + .faq-group{ margin-top:var(--s-2xl) }
+.faq-theme{ margin:0 0 var(--s-sm); font-size:var(--h3); letter-spacing:-.015em; line-height:1.25; color:var(--gold-deep) }
+[dir="rtl"] .faq-theme{ letter-spacing:0; line-height:1.5 }
+
+/* ---------- UX-24: the section index of a long page ----------
+   UI-09 (owner, 4 Oct 2026): a numbered register row in the homepage index's language — one box per section, its
+   number in the serif above the heading, the site's gold hover line under the pointed box; on a phone a row to swipe. */
+.sec-index .wrap{ padding-block:clamp(18px,2vw,28px) }
+.sec-index .label{ margin:0 0 14px }
+.sec-index ol{
+  list-style:none; margin:0; padding:0; counter-reset:si;
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); border-top:1px solid var(--line-strong);
+}
+.sec-index li{ counter-increment:si; min-width:0; border-bottom:1px solid var(--line) }
+.sec-index li + li{ border-inline-start:1px solid var(--line) }
+.sec-index a{
+  position:relative; display:block; height:100%; padding:14px 18px 16px;
+  font-family:var(--display); font-weight:600; line-height:1.3; color:var(--ink); text-decoration:none;
+}
+.sec-index a::before{
+  content:counter(si, decimal-leading-zero); display:block; margin-bottom:6px;
+  font-family:var(--text); font-weight:400; font-size:.8125rem; color:var(--gold-deep); font-variant-numeric:lining-nums tabular-nums;
+}
+.sec-index a::after{
+  content:""; position:absolute; inset-inline:0; bottom:-1px; height:2px; background:var(--bar);
+  transform:scaleX(0); transform-origin:left center; transition:transform var(--d-press) var(--ease-arrive); pointer-events:none;
+}
+[dir="rtl"] .sec-index a::after{ transform-origin:right center }
+@media (hover:hover) and (pointer:fine){
+  .sec-index a:hover{ color:var(--wine) }
+  .sec-index a:hover::after{ transform:scaleX(1); transition-duration:var(--d-hover) }
+}
+.sec-index a:focus-visible::after{ transform:scaleX(1); transition:none }
+[dir="rtl"] .sec-index a{ font-family:var(--arabic) }
+@media (max-width:900px){
+  .sec-index ol{
+    display:flex; overflow-x:auto; scroll-snap-type:x proximity; scrollbar-width:none; overscroll-behavior-x:contain;
+    margin-inline:calc(-1 * var(--gutter)); padding-inline:var(--gutter); scroll-padding-inline:var(--gutter);
+  }
+  .sec-index ol::-webkit-scrollbar{ display:none }
+  .sec-index li{ flex:0 0 auto; width:min(62vw, 220px); scroll-snap-align:start }
+}
+.sec-anchor{ display:block; height:0; scroll-margin-top:calc(var(--nav-h, 72px) + 28px) }
+
+/* ---------- UX-23: running text no wider than 68 characters ---------- */
+.sp :is(.b-prose-body,.reg-i,.ch-i,.notice-box,.dark-body,.duo-t,.lg-body,.lg-art) p,.sp .fs-intro,.sp .b .lede{ max-width:68ch }
+
+/* ---------- UX-14: the services menu in three parts, without numbers ---------- */
+.mp-parts{ grid-column:5 / -1; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); column-gap:clamp(18px,2vw,32px); align-content:start; min-width:0 }
+.mp-part{ min-width:0 }
+.mp-part-t{
+  margin:0 0 6px; padding-bottom:8px; border-bottom:2px solid var(--bar);
+  font-family:var(--display); font-weight:700; font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-deep);
+}
+[dir="rtl"] .mp-part-t{ font-family:var(--arabic); letter-spacing:0; text-transform:none; font-size:.95rem }
+.mega .mp-parts .mp-list.is-part{ display:grid; grid-template-columns:minmax(0,1fr) }
+.mega .mp-list.is-part a{ grid-template-columns:minmax(0,1fr) }
+.mega .mp-list.is-part a::before{ content:none }
+.mega .mp-list.is-part a > *{ grid-column:1 }
+.vg-part{ display:grid; padding-top:10px }
+.vg-part-t{ margin:6px 0 2px; font-family:var(--display); font-weight:700; font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-deep) }
+[dir="rtl"] .vg-part-t{ font-family:var(--arabic); letter-spacing:0; text-transform:none; font-size:.9rem }
+
+/* ---------- UX-29: targets of at least 24px, 44px on touch ---------- */
+.ni-t{ width:24px; height:32px }
+@media (max-width:1360px){ .ni-t{ width:22px } }
+@media (max-width:1200px){ .tb-main .brand{ min-height:44px } }
+
+/* ---------- UX-29: decorative motion rests after the first seconds (components/Calm.tsx) ---------- */
+html[data-calm] :is(.g-a,.g-b,.h3 .crest .tulip),html[data-calm] .h3-cue::after{ animation-play-state:paused }
+
+/* ---------- UX-26: the gold thread takes its full size before it is measured (no shift in RTL) ---------- */
+.draad{ width:100%; height:100% }
+
+/* ---------- UX-22 / UX-24: the bar at the bottom of a long page on a phone ---------- */
+.pbar{
+  position:fixed; inset-inline:0; bottom:0; z-index:38; display:none; gap:10px;
+  padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom, 0px));
+  /* the prefixed one first: the production minifier keeps only the LAST of the two, and Chrome reads only the plain one */
+  background:color-mix(in srgb, var(--paper) 94%, transparent); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  border-top:1px solid var(--line); transform:translateY(110%); transition:transform var(--d-ui) var(--ease-arrive);
+}
+@media (max-width:900px){ .pbar{ display:flex } }
+.pbar.on{ transform:none }
+.pbar > *{
+  flex:1; min-height:44px; display:inline-flex; align-items:center; justify-content:center; gap:8px; border-radius:var(--radius);
+  font-family:var(--display); font-weight:700; font-size:.92rem; cursor:pointer;
+}
+.pbar-top{ border:1px solid var(--line-strong); background:var(--paper-lift); color:var(--ink) }
+.pbar-contact{ border:1px solid var(--wine); background:var(--wine); color:var(--paper) }
+[dir="rtl"] .pbar > *{ font-family:var(--arabic) }
+@media (prefers-reduced-motion:reduce){ .pbar{ transition:none } }
+
+/* ---------- UX-20: the hero's words stand at once; the ducat and the bloom play over them ---------- */
+@media (scripting: enabled){
+  .h3:not(.in) :is(.h3-top,.wing,.h3-keys,.h3-key,.caption,.h3-desc){ opacity:1; transform:none }
+}
+.h3.in :is(.h3-top,.wing,.h3-keys,.h3-key){ transition-delay:0s }
+.h3 .caption,.h3 .h3-desc{ transition-delay:0s }
+/* the intro takes at most 1.2 s (owner): the ducat falls in 450 ms (HeroStage), and everything the strike sets off —
+   bar, name, tulip, threads, ground — settles within the 750 ms after it. Same movements as before, only faster. */
+.tulip :is(.t-petal,.t-band,.t-flame){ transition-duration:.5s, .4s, .35s }
+.h3.in .t-petal{ transition-delay:.08s }
+.h3.in .t-band-a{ transition-delay:.12s }
+.h3.in .t-band-c{ transition-delay:.15s }
+.h3.in .t-band-b{ transition-delay:.18s }
+.h3.in .t-flame{ transition-delay:.22s }
+.wm-half img{ transition-duration:.6s; transition-delay:.05s }
+.bar{ transition-duration:.65s; transition-delay:0s }
+.bar-aa{ transition-duration:.3s; transition-delay:.42s }
+.band-t,.band-b{ transition-duration:.4s; transition-delay:.25s }
+.t-foil{ transition-duration:.4s; transition-delay:.3s }
+.th-base{ transition-duration:.55s, .4s, .4s; transition-delay:calc(var(--i, 0) * 15ms), 0s, 0s }
+.th.stem .th-base{ transition-delay:.15s, 0s, 0s }
+.guilloche{ transition-duration:.6s, .7s; transition-delay:.05s }
+.halo{ transition-duration:.5s, .65s }
+.h3::before{ transition-duration:.7s; transition-delay:.05s }
+
+/* ---------- UX-21: two keys under the tulip — the nomination, and contact for every visitor ---------- */
+.h3-keys{
+  align-self:center; display:flex; flex-wrap:wrap; justify-content:center; gap:10px 14px;
+  margin-top:calc(clamp(10px, 2svh, 22px) * var(--fit));
+}
+.h3-keys .h3-key{ margin-top:0; align-self:auto }
+.h3-key.is-contact{ background:var(--wine); border-color:var(--wine); color:var(--paper); padding-inline:20px }
+.h3-key.is-contact .arrow{ color:var(--gold-light) }
+.h3-key.is-contact:hover,.h3-key.is-contact:focus-visible{ background:var(--wine-deep); border-color:var(--wine-deep) }
+@media (max-width:900px){
+  .h3-keys{ order:10; align-self:stretch; display:grid; gap:10px; margin:18px var(--gutter) 0 }
+  .h3-keys .h3-key{ margin:0; justify-content:center; padding:12px 16px }
+  .h3-keys .h3-key:not(.is-contact){ border-top:1px solid var(--line) }
+  .h3-key.is-contact{ border:1px solid var(--wine) }
+}
+
+/* ---------- UX-21: the homepage's close leads to the contact form ---------- */
+#correspondence .corr-go{ margin-top:var(--s-md) }
+
+/* ---------- UX-22: a shorter homepage on a phone ---------- */
+@media (max-width:900px){
+  .h3{ --mth:clamp(118px, 21svh, 188px) }
+  .crest-col{ display:contents }
+  .crest{ order:2; margin-top:var(--cm) }
+  .h3 .caption{
+    display:grid; order:4; width:auto; max-width:34ch; margin:clamp(12px, 2.2svh, 20px) auto 0; padding-inline:var(--gutter);
+    font-size:1rem; line-height:1.5; text-align:center;
+  }
+  [dir="rtl"] .h3 .caption{ width:auto; max-width:34ch; line-height:1.75 }
+  .h3-cue{ display:none }
+  .h3-q{ margin-top:clamp(26px, 5svh, 48px) }
+  /* the long sections show their first lines; "Read more" leads to the full page */
+  #why .claim .claim-sum ~ p{ display:none }
+  #behind .founder blockquote p:nth-of-type(n+2){ display:none }
+  #name .story .big{ display:-webkit-box; -webkit-line-clamp:7; line-clamp:7; -webkit-box-orient:vertical; overflow:hidden }
+}
+
+/* ---------- UX-12: the house 404 for every unknown address, in three languages (app/global-not-found.tsx) ---------- */
+.gnf-top{ display:flex; justify-content:center; padding:22px var(--gutter); border-bottom:3px solid transparent; border-image:var(--foil) 1 }
+.gnf-top .brand{ display:flex; align-items:center; gap:10px; direction:ltr }
+.gnf-top .brand .mark{ height:32px; width:auto }
+.gnf-top .brand .wordmark{ height:22px; width:auto }
+/* UI-03: the same composition as the 404 inside the site (premium.css, .nf404); the three languages side by side */
+.gnf .page{ padding-top:clamp(40px,7vh,88px); padding-bottom:clamp(56px,9vh,112px) }
+.gnf-langs{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(24px,3vw,48px); padding-top:max(clamp(48px,7vw,96px), calc(var(--coin-s, 184px) / 2 + 28px)) }
+.gnf-l{ display:grid; align-content:start; gap:var(--s-lg); padding-top:var(--s-md); border-top:1px solid var(--line-strong) }
+.gnf-l :is(.nf-text,.nf-links){ grid-column:auto; align-self:auto }
+.gnf-l .nf-text{ margin:0; font-family:var(--text); font-size:var(--ty-h3, 1.375rem); line-height:1.45; color:var(--ink) }
+.gnf-l .nf-links{ display:flex; flex-wrap:wrap; gap:12px; margin:0 }
+.gnf-l[dir="rtl"] .nf-text{ font-family:var(--arabic); line-height:1.8 }
+.gnf-l[dir="rtl"] :is(.btn,.act-a){ font-family:var(--arabic); letter-spacing:0 }
+@media (max-width:900px){ .gnf-langs{ grid-template-columns:minmax(0,1fr) } }
+
+/* ---------- UX-04: in a request form the questions about the request and the questions about the sender are apart ---------- */
+.fm-grid > .fm-split{ grid-column:1 / -1; height:0; border-top:1px dashed var(--line-strong); margin-block:2px }

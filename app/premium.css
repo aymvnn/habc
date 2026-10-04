@@ -1,0 +1,192 @@
+/* ============================================================
+   PREMIUM — the UI assessment, the owner's choices (4 Oct 2026, report WZkgDuxzHx5fska3qjnKmy, db collection `ui`).
+   Loaded after ux.css (app/site-styles.ts). Approved: UI-01–12, 15–17. Later: UI-13. UI-14 "anders", waiting for a note.
+   The hero stays protected: only its two keys change (UI-02 hover, UI-05 arrow). No word of copy changes here.
+   ============================================================ */
+
+/* ---------- UI-01: the hero's girih lattice, faintly at both sides of every page, down to the footer ----------
+   The same pattern as .h3::before (hero.css), static, at 16 %, visible only in the outer edges and fading towards the
+   middle; photographs and coloured bands cover it. On the homepage it starts under the hero (the hero keeps its own),
+   on a phone it is a narrow edge. <main> is a stacking context (signaturen.css): the gold thread lies at -1, this at -2. */
+main::before{
+  content:""; position:absolute; inset:0; z-index:-2; pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23B39455' stroke-width='.6'%3E%3Cpath d='M28 28h40v40H28z'/%3E%3Cpath d='M48 19.7 76.3 48 48 76.3 19.7 48z'/%3E%3Cpath d='M48 0v19.7M48 76.3V96M0 48h19.7M76.3 48H96M0 0l28 28M96 0 68 28M0 96l28-28M96 96 68 68'/%3E%3C/g%3E%3C/svg%3E") center top / 96px 96px;
+  opacity:.16;
+  -webkit-mask-image:linear-gradient(90deg, #000 0%, rgba(0,0,0,.55) 7%, transparent 17%, transparent 83%, rgba(0,0,0,.55) 93%, #000 100%);
+          mask-image:linear-gradient(90deg, #000 0%, rgba(0,0,0,.55) 7%, transparent 17%, transparent 83%, rgba(0,0,0,.55) 93%, #000 100%);
+}
+main:has(> .h3)::before{ top:100svh }
+@media (max-width:900px){
+  main::before{
+    opacity:.12;
+    -webkit-mask-image:linear-gradient(90deg, #000 0%, transparent 9%, transparent 91%, #000 100%);
+            mask-image:linear-gradient(90deg, #000 0%, transparent 9%, transparent 91%, #000 100%);
+  }
+}
+@media print{ main::before{ display:none } }
+
+/* ---------- UI-05: one button family ----------
+   Every button takes the hero keys' letter: sentence case, 15.2px, 700 (muntregister.css no longer sets buttons in
+   interface caps). Two sizes stay: 52px and the compact 40px. Arabic keeps Almarai 15px. The steps that were long
+   capital text links (membership, academy, the homepage's close, the newsletter) are line buttons now (.act-a). */
+:root:not([dir="rtl"]) :is(.btn,.act-a){ font-family:var(--display); font-weight:700; font-size:.95rem; letter-spacing:-.005em; text-transform:none }
+.act-a{ line-height:1.25; text-align:start }
+/* a line button in a list or under a column sits at its own width */
+:is(.tier-go,.ls-links .act-a,.corr-go).act-a{ justify-self:start; align-self:start; width:auto }
+/* the tiers' three buttons: the white above them is margin now (it was the link's own top padding) */
+.tier .act-a.tier-go{ margin-top:var(--s-lg); padding-block:0 }
+.ls-links:has(.act-a){ gap:12px 14px }
+
+/* ---------- UI-02: the sliding fill on every button ----------
+   The menu's contact link, .btn and .act-a already have it (muntregister.css a4-2): a deeper bordeaux sweeps in from
+   the start side for a mouse, 240ms in, 160ms back. Now also the hero's two keys, the FAQ's theme buttons (in a light
+   tint) and the newsletter button on the dark footer (in paper). Touch screens keep the short press. */
+.h3-key{ position:relative; isolation:isolate; overflow:hidden }
+.h3-key::before,.faq-themes a::before,footer .f-news .btn::before{
+  content:""; position:absolute; inset:-1px; z-index:-1; border-radius:inherit; background:var(--wine-deep);
+  clip-path:inset(0 100% 0 0); transition:clip-path 160ms var(--ease-arrive); pointer-events:none;
+}
+[dir="rtl"] :is(.h3-key,.faq-themes a,footer .f-news .btn)::before{ clip-path:inset(0 0 0 100%) }
+/* the hero keys: their colours change with the fill, not before it */
+.h3 .h3-key{ transition-duration:1s, 1s, 160ms, 160ms, 160ms }
+.h3-key .arw{ color:var(--gold-deep); transition:translate var(--d-ui) var(--ease-arrive), color 160ms ease }
+.h3-key img{ transition:filter 160ms ease }
+@media (hover:hover) and (pointer:fine){
+  :is(.h3-key,.faq-themes a,footer .f-news .btn:not(:disabled)):hover::before{ clip-path:inset(0); transition:clip-path var(--d-ui) var(--ease-arrive) }
+  .h3 .h3-key:hover{ background:var(--paper-lift); border-color:var(--wine-deep); color:var(--paper) }
+  .h3 .h3-key.is-contact:hover{ background:var(--wine) }
+  .h3-key:hover .arw{ color:var(--gold-light) }
+  /* the little tulip turns light as the bordeaux passes over it, so it stays visible */
+  .h3-key:hover img{ filter:brightness(0) invert(1) }
+}
+.h3 .h3-key:focus-visible{ background:var(--wine-deep); border-color:var(--wine-deep); color:var(--paper) }
+.h3-key:focus-visible .arw{ color:var(--gold-light) }
+.h3-key:focus-visible img{ filter:brightness(0) invert(1) }
+/* the FAQ's theme buttons: a light bordeaux tint, the words turn bordeaux */
+.faq-themes a{ position:relative; isolation:isolate; overflow:hidden }
+.faq-themes a::before{ background:color-mix(in srgb, var(--wine) 10%, var(--paper-lift)) }
+@media (hover:hover) and (pointer:fine){ .faq-themes a:hover{ border-color:var(--wine); color:var(--wine) } }
+
+/* ---------- UI-17: the newsletter in the forms' own language ----------
+   The label as a plain sentence (as on every form since UX-08); the send word becomes a compact line button in paper
+   on the dark footer, with the same sliding fill: paper sweeps in, the words turn wine-night. */
+:root:not([dir="rtl"]) footer .f-news .fm.is-inline .field > label{ font-family:var(--display); font-weight:600; font-size:.9375rem; letter-spacing:0; text-transform:none }
+footer .f-news .btn,footer .f-news .btn:is(:hover,:disabled){
+  position:relative; isolation:isolate; overflow:hidden; min-height:40px; padding-inline:18px 16px;
+  border:1px solid var(--f-field); border-radius:var(--radius); background:transparent; color:var(--f-ink);
+}
+footer .f-news .btn::before{ display:block; background:var(--f-ink) }
+@media (hover:hover) and (pointer:fine){
+  footer .f-news .btn:not(:disabled):hover{ color:var(--wine-night); border-color:var(--f-ink); transition:color var(--d-press) ease, border-color var(--d-press) ease }
+}
+
+/* ---------- UI-16: the scrollbar and the selection in the house colours ---------- */
+@media (hover:hover) and (pointer:fine){
+  html{ scrollbar-width:thin; scrollbar-color:#B9A27A var(--paper) }
+}
+/* one soft gold under selected text, the same on paper and on the dark footer (opaque, so ink stays legible on both) */
+html[data-slot] ::selection,
+html[data-slot] :is(.page,main,footer,.veil,.mega,.b-dark,.pe,.h3) ::selection,
+html[data-slot] :is(.page,main,footer,.veil,.mega,.b-dark,.pe,.h3)::selection{ background:#E8D5AC; color:var(--ink) }
+
+/* ---------- UI-06 + UI-08: one type scale — eight sizes ----------
+   Measured before: 35 combinations of size and weight. Now every text outside the hero takes one of these:
+     Display    ≈76px  sans 700   page titles, the homepage's chapter headings
+     H1         ≈46px  sans 700   section headings; the serif statements
+     Inleiding  ≈36px  serif 400  the opening paragraph (UI-08: same width, larger letter, about 70 characters a line)
+     H2         ≈30px  sans 700   the homepage's register rows, legal articles, the page end's heading
+     H3         ≈22px  sans 700   items, questions, box headings — and, in the serif, intros and standfirsts
+     Text        17px  serif 400  running text (--read)
+     Small       15px             secondary lines, notes, labels of fields, the footer; nothing smaller but its last line
+     Label       12px  caps       the small-caps legends (unchanged)
+   (sizes on the owner's 1442px screen; every token is fluid). Running text is 400; semibold is for headings and buttons.
+   html:not(#ty) carries one id's weight, so the scale wins over every earlier size rule without !important; change a
+   size through its token. Line heights are set for the Latin pages only (Arabic keeps its own, taller lines). The
+   masthead title keeps its line height: its baseline is measured onto the gold line. The tier cards' names are card
+   artwork and keep theirs. */
+:root{
+  --ty-display:clamp(2.5rem, 1.35rem + 3.75vw, 4.8rem);
+  --ty-h1:clamp(1.9rem, 1.1rem + 2vw, 3rem);
+  --ty-lead:clamp(1.5rem, 1.05rem + 1.35vw, 2.2rem);
+  --ty-h2:clamp(1.45rem, 1.08rem + .91vw, 2.1rem);
+  --ty-h3:clamp(1.2rem, 1.08rem + .32vw, 1.4rem);
+  --read:clamp(1rem, .9rem + .45vw, 1.0625rem);
+  --read-s:.9375rem;
+}
+/* Display */
+html:not(#ty) :is(.mh:not(.is-compact) .mh-title,#why .twinline h2,#behind .twinline h2){ font-size:var(--ty-display) }
+html:not(#ty):not([dir="rtl"]) :is(#why .twinline h2,#behind .twinline h2){ letter-spacing:-.035em; line-height:1 }
+/* H1 */
+html:not(#ty) :is(.mh.is-compact .mh-title,#name .twinline h2,.claims .claim h3,#correspondence .close h2,.b-head h2,.b-prose-head h2,.duo-t h2,.fm-head h2,.stmt:not(.is-long),.ch-n){ font-size:var(--ty-h1) }
+html:not(#ty):not([dir="rtl"]) :is(#name .twinline h2,.claims .claim h3,#correspondence .close h2,.b-head h2,.b-prose-head h2,.duo-t h2,.fm-head h2){ letter-spacing:-.03em; line-height:1.05 }
+/* H2 */
+html:not(#ty) :is(.mx-row a,.lg-art h2,.pe-head h2){ font-size:var(--ty-h2) }
+html:not(#ty):not([dir="rtl"]) :is(.mx-row a,.lg-art h2,.pe-head h2){ letter-spacing:-.022em; line-height:1.12 }
+/* Inleiding: the opening paragraph, the long statements and the keystone sentence */
+html:not(#ty) :is(.b-lead .b-lead-t,.stmt.is-long,#name .keystone){ font-size:var(--ty-lead) }
+html:not(#ty) :is(.spec-reg dd,.claim .roman){ font-size:var(--ty-h2) }
+html:not(#ty):not([dir="rtl"]) .b-lead .b-lead-t{ line-height:1.3; letter-spacing:-.02em }
+/* H3 */
+html:not(#ty) :is(.idx-t,.ch-i h2,.ch-i h3,.reg-i h2,.reg-i h3,.bstep h3,.desk-h,.faq-theme,.faq summary,.pe-t,.pe .signoff .tag,footer .f-news-t,.notice-box h2,.terms li){ font-size:var(--ty-h3) }
+html:not(#ty):not([dir="rtl"]) :is(.idx-t,.ch-i h2,.ch-i h3,.reg-i h2,.reg-i h3,.bstep h3,.desk-h,.faq-theme,.faq summary,.pe-t,.pe .signoff .tag,footer .f-news-t,.notice-box h2,.terms li){ font-weight:700; letter-spacing:-.012em; line-height:1.25 }
+/* Intro: the serif on the H3 step (the bold summary lines under the claims become intros: running text is never bold) */
+html:not(#ty) :is(.lede,.mh-stand,.b-band-cap,#name .story p.big,.desk-lead,.claim-sum,.reg-sum){ font-size:var(--ty-h3) }
+html:not(#ty):not([dir="rtl"]) :is(.lede,.b-band-cap,.desk-lead,.claim-sum,.reg-sum){ line-height:1.45; letter-spacing:-.005em }
+html:not(#ty):not([dir="rtl"]) :is(.claim-sum,.reg-sum){ font-family:var(--text); font-weight:400; color:var(--ink) }
+/* Text */
+html:not(#ty) :is(.founder blockquote p,.pe-body,.card-close){ font-size:var(--read) }
+/* Small, never under 15px (the footer's last line is the one exception) */
+html:not(#ty) :is(.fm-note,.fm-check span,.close .where,.claims .mechanism,.b-note,footer .f-about,footer .f-news-text,footer .values,footer .f-news-note,footer .slogan,footer .f-links a,.lg-toc a,.tier-items li,.sec-index a,.fm .field > label){ font-size:var(--read-s) }
+html:not(#ty):not([dir="rtl"]) .tier-items li{ font-family:var(--text); font-weight:400 }
+/* Label: the breadcrumbs take the labels' one small-caps size */
+html:not(#ty):not([dir="rtl"]) .crumbs{ font-size:1.0625rem }
+/* the rest of the inventory: two more section headings, the legal intro, the founders' names and the closing address
+   on their steps; choices, chips and the "more details" control take the button letter */
+html:not(#ty) :is(section.b .head h2,.fs-title){ font-size:var(--ty-h1) }
+html:not(#ty):not([dir="rtl"]) :is(section.b .head h2,.fs-title){ letter-spacing:-.03em; line-height:1.05 }
+html:not(#ty) .lg-intro{ font-size:var(--ty-h3) }
+html:not(#ty):not([dir="rtl"]) .lg-intro{ line-height:1.45 }
+html:not(#ty) :is(.founder-id h3,.close .mail){ font-size:var(--ty-h3) }
+html:not(#ty) .card-dl dd{ font-size:var(--read) }
+html:not(#ty):not([dir="rtl"]) :is(.fs-choices button,.fm-more > summary,.faq-themes a){ font-size:.95rem; font-weight:700; letter-spacing:-.005em }
+
+/* ---------- UI-12: both founders' names on one line ----------
+   The name, role and credentials hang from the top of the picture (they stood on its bottom edge, so the founder with
+   the longer credentials had his name higher). The "|" between the credentials is a gold separator (Sections.tsx). */
+@media (min-width:901px){ #behind .founder > .founder-id{ align-self:start; padding-top:10px; padding-bottom:0 } }
+.creds-sep{ color:var(--gold); margin-inline:.15em }
+
+/* ---------- UI-03: the 404 as a page of the house (components/NotFoundPage.tsx; app/global-not-found.tsx) ----------
+   The masthead of every inner page; its name "404" is set as a numeral graphic, larger than the other names (the
+   composition the owner approved). The existing coin (Muntregister a7-6) lies on the gold line at the end of the row
+   and turns over once; then the two buttons and the site's sections as the homepage's register. */
+/* two ids' weight: the Display rule above counts #why inside its :is() */
+html:not(#ty):not(#nf) .nf404 .mh .mh-title{ font-size:clamp(6.5rem, 3.6rem + 9vw, 12.5rem); letter-spacing:-.06em; line-height:.8 }
+.nf404{ --coin-s:clamp(116px, 6rem + 6vw, 184px) }
+.nf404-coin{ position:relative; height:0 }
+.nf404-coin .nf-coin{ position:absolute; inset-inline-end:0; top:0; z-index:2; width:var(--coin-s); height:var(--coin-s); transform:translateY(-50%) }
+.nf404-coin .nf-code.nf-rev{ font-size:calc(var(--coin-s) * .26) }
+.nf404-acts{ display:flex; flex-wrap:wrap; gap:14px; padding-top:max(clamp(56px, 7vw, 104px), calc(var(--coin-s) / 2 + 24px)) }
+.nf404-idx{ padding-block:clamp(56px, 7vw, 96px) }
+
+/* ---------- UI-07: headings come up from behind an edge, line by line ----------
+   Section headings and page titles are set word by word (Rich words): each word has its own mask (.w, clipped with a
+   little room for accents and descenders; clip-path changes no layout, so the masthead title stays on its gold line)
+   and rises inside it in full colour. A section heading rises when it enters the screen, its lines 60ms apart
+   (Reveal.tsx numbers them, --l); a page title rises with its masthead entrance, word after word (--w). Once per
+   visit, like every reveal; under reduced motion or for the keyboard everything simply stands. */
+.w{ display:inline-block; clip-path:inset(-.3em -.15em -.32em -.15em) }
+.wi{ display:inline-block }
+@media (scripting:enabled) and (prefers-reduced-motion:no-preference){
+  h2.rv:has(.w):not(:is(.h3,.mh) *){ opacity:1; transform:none; transition:none }
+  h2.rv:has(.w) .wi{ transition:transform var(--d-reveal) var(--ease-arrive) calc(var(--l, 0) * 60ms) }
+  h2.rv:has(.w):not(.in) .wi{ transform:translateY(118%) }
+  .mh .mh-title:has(.w){ animation:none }
+  .mh .mh-title .wi{ animation:mh-wordup var(--d-reveal) var(--mh-out, var(--ease-arrive)) both; animation-delay:calc(.06s + var(--w, 0) * 45ms) }
+  html[data-mh="seen"] .mh .mh-title .wi{ animation-duration:var(--d-reveal); animation-delay:calc(.03s + var(--w, 0) * 30ms) }
+}
+@keyframes mh-wordup{ from{ transform:translateY(118%) } to{ transform:none } }
+html[data-kbd] h2.rv:has(.w) .wi{ transition:none }
+@media (prefers-reduced-motion:reduce){ .wi{ transition:none !important; animation:none !important; transform:none !important } }
+/* on a phone the standfirst stands right above the line: it keeps clear of the coin's half that rises over it */
+@media (max-width:900px){ .nf404 .mh-stand{ padding-inline-end:calc(var(--coin-s) * .6) } }

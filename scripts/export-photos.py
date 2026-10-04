@@ -87,6 +87,23 @@ def auto_trim(im):
     return im.crop((l + (m if l else 0), t + (m if t else 0), r - (m if r < w else 0), b - (m if b < h else 0)))
 
 
+# the house grade (owner's choice, 1 Oct 2026: grade only, no grain): highlights never brighter than the paper
+# (#F4F1E9-ish), blacks lifted to a warm near-black, a gentle midtone curve so nothing goes flat, saturation x0.92.
+# It makes the separate generations read as one series. Not for the hero's route photos (the hero stays as it is).
+GRADE_BLACK = (28, 20, 21)
+GRADE_WHITE = (244, 240, 232)
+
+
+def grade(im):
+    import numpy as np
+    from PIL import ImageEnhance
+    a = np.asarray(im.convert("RGB"), float) / 255.0
+    a = np.clip(a + 0.24 * np.sin(2 * np.pi * (a - 0.5)) * a * (1 - a), 0, 1)
+    lo, hi = np.array(GRADE_BLACK, float), np.array(GRADE_WHITE, float)
+    out = Image.fromarray(np.clip(lo + (hi - lo) * a, 0, 255).astype("uint8"))
+    return ImageEnhance.Color(out).enhance(0.92)
+
+
 def fit(im, w, h):
     """centre-crop to the target ratio, then resize"""
     src = im.width / im.height
@@ -123,6 +140,8 @@ def main():
             im = im.crop((round(W * t.get("left", 0)), round(H * t.get("top", 0)), W - round(W * t.get("right", 0)), H - round(H * t.get("bottom", 0))))
         im = auto_trim(im)
         im = fit(im, w, h)
+        if not pid.startswith("route-"):
+            im = grade(im)
         path = os.path.join(ROOT, out)
         os.makedirs(os.path.dirname(path), exist_ok=True)
         im.save(path, "JPEG", quality=q, optimize=True, progressive=True)

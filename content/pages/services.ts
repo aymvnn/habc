@@ -166,7 +166,7 @@ export const services: PageSet = {
 
   /* ------------------------------------------------------------------ 12 */
   "services/matchmaking": {
-    masthead: { variant: "plate", photo: "how-tea" },
+    masthead: { variant: "plate", photo: "how-tea-band" },
     eyebrow: { en: "DUKAAT Connect", nl: "DUKAAT Connect", ar: "DUKAAT Connect" },
     headline: {
       en: "What do you offer? And what do you need?",
@@ -237,7 +237,7 @@ export const services: PageSet = {
 
   /* ------------------------------------------------------------------ 6 */
   "services/advisory": {
-    masthead: { variant: "band", photo: "adv-hero" },
+    masthead: { variant: "band", photo: "adv-hero-band" },
     eyebrow: { en: "DUKAAT Advisory", nl: "DUKAAT Advisory", ar: "DUKAAT Advisory" },
     headline: {
       en: "Greater clarity for the next step in your business",
@@ -457,7 +457,7 @@ export const services: PageSet = {
 
   /* ------------------------------------------------------------------ extra: documents, customs & logistics (commit 2336702, services.ts) */
   "services/documents": {
-    masthead: { variant: "portrait", photo: "docs-desk" },
+    masthead: { variant: "portrait", photo: "docs-desk-band" },
     blocks: [
       {
         kind: "lead",

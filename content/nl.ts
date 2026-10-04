@@ -168,5 +168,19 @@ export const nl: Dict = {
     "legalLine": "Wij nemen geen gelden van leden in bewaring, wij treden niet op als bank of betaaldienstverlener, en wij garanderen geen enkele transactie tussen leden.",
     "foundation": "Stichting Nederlands–Arabische Handelskamer"
   },
+  /** interface words approved on 4 Oct 2026 (UX assessment, see content/types.ts) — not in the source */
+  ux: {
+    moreDetails: "Meer details toevoegen (optioneel)",
+    moreInfo: "Meer gegevens (optioneel)",
+    respondingTo: "U reageert op: {ref}",
+    checkFields: "Controleer deze velden:",
+    direct: "Liever direct contact?",
+    after: "Na verzenden",
+    afterSteps: ["U ontvangt direct een kopie per e-mail.", "Wij bekijken uw vraag.", "Wij stellen het passende traject voor."],
+    copyHeading: "Kopie van uw aanvraag",
+    onThisPage: "Op deze pagina",
+    backToTop: "Terug naar boven",
+    serviceGroups: ["Begeleiding", "Markt en netwerk", "Goed om te weten"],
+  },
   site: siteNl,
 };

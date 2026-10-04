@@ -167,5 +167,19 @@ export const en: Dict = {
     "legalLine": "We do not take custody of members’ funds, we do not act as a bank or payment provider, and we do not guarantee any transaction between members.",
     "foundation": "Stichting Nederlands–Arabische Handelskamer"
   },
+  /** interface words approved on 4 Oct 2026 (UX assessment, see content/types.ts) — not in the source */
+  ux: {
+    moreDetails: "Add more details (optional)",
+    moreInfo: "More details (optional)",
+    respondingTo: "You are responding to: {ref}",
+    checkFields: "Please check these fields:",
+    direct: "Prefer direct contact?",
+    after: "After you send",
+    afterSteps: ["You receive a copy by email straight away.", "We review your request.", "We propose the right path."],
+    copyHeading: "Copy of your request",
+    onThisPage: "On this page",
+    backToTop: "Back to top",
+    serviceGroups: ["Guidance", "Market and network", "Good to know"],
+  },
   site: siteEn,
 };

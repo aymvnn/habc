@@ -166,5 +166,19 @@ export const ar: Dict = {
     "legalLine": "نحن لا نحتفظ بأموال الأعضاء، ولا نعمل كمصرف أو مزوّد خدمات دفع، ولا نضمن أي معاملة بين الأعضاء.",
     "foundation": "Stichting Nederlands–Arabische Handelskamer"
   },
+  /** interface words approved on 4 Oct 2026 (UX assessment, see content/types.ts) — not in the source */
+  ux: {
+    moreDetails: "أضف تفاصيل أخرى (اختياري)",
+    moreInfo: "بيانات إضافية (اختياري)",
+    respondingTo: "بخصوص: {ref}",
+    checkFields: "يرجى مراجعة هذه الحقول:",
+    direct: "تفضّل التواصل المباشر؟",
+    after: "بعد الإرسال",
+    afterSteps: ["تصلك نسخة من طلبك عبر البريد الإلكتروني فورًا.", "نراجع طلبك.", "نقترح عليك المسار المناسب."],
+    copyHeading: "نسخة من طلبك",
+    onThisPage: "في هذه الصفحة",
+    backToTop: "العودة إلى الأعلى",
+    serviceGroups: ["الإرشاد", "السوق والشبكة", "معلومات مفيدة"],
+  },
   site: siteAr,
 };

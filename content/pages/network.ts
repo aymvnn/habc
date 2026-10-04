@@ -145,10 +145,12 @@ export const network: PageSet = {
             nl: "Dien uw bedrijfsprofiel in",
             ar: "قدّم ملف شركتك",
           },
+          omit: ["company", "country"], // UX-05: the profile asks them itself (companyName, location)
           fields: [
             /* the profile fields */
             {
               name: "companyName",
+              core: true, // UX-04
               label: {
                 en: "Company name",
                 nl: "Bedrijfsnaam",
@@ -166,6 +168,8 @@ export const network: PageSet = {
             },
             {
               name: "location",
+              core: true, // UX-04
+              required: true, // UX-05: stands in for the shared country question
               label: {
                 en: "Country and city",
                 nl: "Land en stad",
@@ -174,6 +178,7 @@ export const network: PageSet = {
             },
             {
               name: "sector",
+              core: true, // UX-04
               label: {
                 en: "Sector",
                 nl: "Sector",
@@ -567,6 +572,7 @@ export const network: PageSet = {
           fields: [
             {
               name: "sector",
+              core: true, // UX-04
               type: "select",
               label: {
                 en: "Sector",
@@ -586,6 +592,7 @@ export const network: PageSet = {
             },
             {
               name: "specialisation",
+              core: true, // UX-04
               label: {
                 en: "Specialisation",
                 nl: "Specialisatie",
@@ -604,6 +611,7 @@ export const network: PageSet = {
             },
             {
               name: "learn",
+              core: true, // UX-04
               type: "textarea",
               wide: true,
               label: {
@@ -626,7 +634,7 @@ export const network: PageSet = {
 
   /* ------------------------------------------------------------------ 17. Success stories */
   "membership/stories": {
-    masthead: { variant: "plate", photo: "sto-hero" },
+    masthead: { variant: "plate", photo: "sto-hero-band" },
     eyebrow: {
       en: "DUKAAT Stories",
       nl: "DUKAAT Stories",
@@ -770,7 +778,7 @@ export const network: PageSet = {
 
   /* ------------------------------------------------------------------ 18. Partnerships and sponsorship */
   partnerships: {
-    masthead: { variant: "portrait", photo: "par-hero" },
+    masthead: { variant: "portrait", photo: "par-hero", compact: true }, // UX-03
     headline: {
       en: "Let us build broader value together",
       nl: "Laten we samen bredere waarde opbouwen",
@@ -914,6 +922,7 @@ export const network: PageSet = {
             },
             {
               name: "collaborationType",
+              core: true, // UX-04
               label: {
                 en: "Type of collaboration",
                 nl: "Type samenwerking",
@@ -922,6 +931,7 @@ export const network: PageSet = {
             },
             {
               name: "idea",
+              core: true, // UX-04
               type: "textarea",
               wide: true,
               label: {

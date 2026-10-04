@@ -1,0 +1,177 @@
+/* ============================================================
+   DUKAAT — short endings (owner, 4 Oct 2026): "alle footers zijn nu veel te lang, moet echt veel korter en kleiner;
+   niet alle footers hoeven links te bevatten, onnodig dubbel".
+   - The page's end (.pe) holds only the page's own closing actions, compact. Its link lists are gone
+     (components/PageEnd.tsx); a page without closing actions goes straight to the footer.
+   - The footer is one compact band: who we are · the signature · the newsletter, then the source's links on one line,
+     then one closing line. Loaded last.
+   ============================================================ */
+
+/* === the page's end: compact === */
+.pe{ padding-block:clamp(64px,5.6vw,88px) clamp(40px,3.6vw,56px) }
+.pe-grid{ grid-template-columns:repeat(12,minmax(0,1fr)); row-gap:var(--s-lg); align-items:end }
+.pe-head{ grid-column:1 / span 6 }
+.pe-links{ grid-column:8 / -1 }
+.pe-grid > .pe-links:only-child{ grid-column:1 / -1; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); column-gap:var(--s-xl) }
+.pe-head h2{ font-size:clamp(1.55rem,1.15rem + 1.1vw,2.25rem); line-height:1.12; max-width:24ch }
+.pe-body{ margin-top:var(--s-sm); font-size:1rem; line-height:1.55; max-width:52ch }
+.pe-head + .pe-links{ margin-top:0 }
+.pe-a{ padding-block:12px; column-gap:var(--s-md); grid-template-columns:minmax(0,1fr) 36px }
+.pe-t{ font-size:clamp(1.05rem,.92rem + .45vw,1.35rem); letter-spacing:-.018em; line-height:1.2 }
+.pe-go{ width:36px; height:36px }
+.pe-go .arw{ width:15px; height:8px }
+/* the seal on the boundary, a size smaller */
+.pe-seal{ width:84px; height:84px }
+.pe-seal .seal-wrap{ width:64px; height:64px }
+.pe-seal .seal-wrap .tulip{ width:22px }
+@media (max-width:900px){
+  .pe-head,.pe-links{ grid-column:1 / -1 }
+}
+
+/* the homepage's close: the same, a little less paper around it */
+#correspondence{ padding-block:clamp(72px,6.4vw,104px) clamp(36px,3.4vw,52px) }
+#correspondence .close{ row-gap:var(--s-lg) }
+#correspondence .signoff{ margin-top:var(--s-xl); padding-top:var(--s-md) }
+
+/* === the footer: one compact band === */
+footer{ padding:clamp(30px,3vw,44px) 0 clamp(14px,1.4vw,20px) }
+footer .f-top{
+  display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); column-gap:clamp(28px,4vw,72px);
+  row-gap:10px; align-items:start;
+}
+footer .colophon{ grid-column:1; grid-row:1; min-width:0 }
+footer .colophon .wordmark{ height:20px; margin-bottom:10px }
+footer .colophon .f-about,footer .colophon > p:first-of-type{ font-size:.9rem; line-height:1.5; max-width:54ch; margin:0 }
+/* the signature under who we are: the values as a legend, the slogan in the serif's italic, on one line */
+footer .f-sig{ grid-column:1; grid-row:2; min-width:0; display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 14px }
+footer .f-sig p{ margin:0 }
+footer .f-sig .values{ font-size:.82rem }
+footer .f-sig .slogan{ font-family:var(--text); font-style:italic; font-size:1rem; line-height:1.35; color:var(--f-ink) }
+[dir="rtl"] footer .f-sig .slogan{ font-family:var(--arabic); font-style:normal }
+/* the newsletter beside it: title and text on the start side, the field and its note on the far side */
+footer .f-news{
+  grid-column:2; grid-row:1 / span 2; min-width:0;
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); column-gap:clamp(20px,2.4vw,40px); align-items:end;
+}
+footer .f-news-t{ grid-column:1; grid-row:1; font-size:1rem; line-height:1.3; margin:0; align-self:start }
+footer .f-news-text{ grid-column:1; grid-row:2; margin-top:4px; font-size:.84rem; line-height:1.5; color:var(--f-soft); max-width:46ch; align-self:start }
+footer .f-news > .fm{ grid-column:2; grid-row:1 / span 2; align-self:end }
+footer .f-news .fm-ok{ grid-column:2; grid-row:1 / span 3 }
+footer .f-news-note{ grid-column:2; grid-row:3; margin-top:6px; font-size:.74rem; line-height:1.45 }
+footer .f-news .fm.is-inline{ margin-top:0; row-gap:0 }
+footer .f-news .fm.is-inline .field{ gap:2px }
+footer .f-news .fm.is-inline .field > label{ font-size:.68rem; letter-spacing:.12em }
+footer .f-news .fm.is-inline .field :is(input){ min-height:38px; padding:6px 0 6px; font-size:1rem }
+footer .f-news .fm.is-inline .btn{ min-height:38px; padding-block:0 }
+
+/* the source's links on one line: the six groups, a short gold rule, the legal pages */
+footer .f-links{
+  display:flex; flex-wrap:wrap; align-items:center; gap:4px 22px; columns:auto; column-rule:0;
+  margin-top:clamp(18px,1.8vw,24px); padding-top:10px; border-top:1px solid var(--f-rule);
+}
+footer .f-links a{ display:inline-block; padding:4px 0; font-size:.82rem; line-height:1.3; font-weight:600 }
+footer .f-links .f-sep{ width:18px; height:1px; background:var(--bar); opacity:.7 }
+[dir="rtl"] footer .f-links a{ font-size:.92rem }
+
+/* one closing line: copyright · the colophon · the disclaimer */
+footer .bottom{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 18px; justify-content:flex-start;
+  margin-top:10px; padding-top:10px; border-top:1px solid var(--f-rule);
+}
+:root:not([dir="rtl"]) footer .bottom.bottom:not(:is(.h3,.hero) *){ font-size:.8rem }
+footer .bottom .legal{ font-family:var(--text); font-style:italic; text-transform:none; letter-spacing:0; font-variant-caps:normal; color:var(--f-mute) }
+footer .bottom .f-colophon{ color:var(--f-low) }
+[dir="rtl"] footer .bottom .legal{ font-family:var(--arabic); font-style:normal }
+
+/* the rosette stays, smaller, in the far corner */
+.f-rosette{ width:min(420px,46vw); inset-inline-end:-6%; bottom:-58%; opacity:.09 }
+
+@media (max-width:1100px){
+  footer .f-top{ grid-template-columns:minmax(0,1fr) }
+  footer .f-news{ grid-column:1; grid-row:3; margin-top:var(--s-md) }
+}
+@media (max-width:640px){
+  footer .f-news{ grid-template-columns:minmax(0,1fr) }
+  footer .f-news > *{ grid-column:1 !important; grid-row:auto !important }
+  footer .f-news > .fm{ margin-top:10px }
+}
+@media (max-width:640px){
+  footer .f-top{ grid-template-columns:minmax(0,1fr) }
+  footer .f-links{ columns:auto; gap:2px 18px }
+  footer .f-links a{ padding:10px 0; border-top:0 }
+  footer .bottom{ flex-direction:column; gap:4px }
+}
+
+/* on the dark reverse, an emphasised word in a heading takes the gold, as "schrijf." does on the homepage's close
+   (Bordeaux on Bordeaux was unreadable) */
+.pe h2 em{ color:var(--gold-light) }
+html[data-slot="licht"] .pe h2 em{ color:var(--wine) }
+
+/* === 4 Oct 2026 (owner): everything light, only the closing line dark ===
+   The page's end and the footer are on paper (html[data-slot="licht"] is now the default); the closing line under the
+   last rule is the one dark band, edge to edge, in --wine-night with paper text. */
+footer{ padding-bottom:0 }
+html[data-slot="licht"] footer{ background:var(--paper-deep) }
+footer .f-base{ margin-top:clamp(18px,1.8vw,24px); background:var(--wine-night) }
+footer .f-base .bottom{ margin-top:0; padding-block:14px calc(14px + env(safe-area-inset-bottom)); border-top:0 }
+footer .f-base .bottom,footer .f-base .bottom .f-colophon{ color:#CDB9AE }
+footer .f-base .bottom .legal{ color:#B8A39A }
+footer .f-links{ margin-top:clamp(16px,1.6vw,22px) }
+
+/* "gewoon licht": no lattice pattern on the light parts */
+html[data-slot="licht"] .mash{ display:none }
+
+/* === owner, 4 Oct 2026 (2): the whole footer is dark, from its top line; the page's end above it stays light ===
+   The footer keeps its dark colours whatever the slot's variant; a 3px foil line opens it. In its background a
+   banknote guilloche runs across the width (public/ornament/guilloche-band.svg — woven gold lines, a different
+   figure from the hero's rosettes), very faint and fading to the edges. The corner rosette and the lattice give way. */
+html[data-slot="licht"] footer{
+  --f-bg:var(--wine-night); --f-ink:var(--paper); --f-soft:var(--paper-soft); --f-mute:var(--paper-mute); --f-rule:rgba(237,234,225,.14);
+  --f-field:rgba(237,234,225,.45); --f-err:#F2C9C9; --f-low:#C9A469; --f-focus:var(--gold-light); --f-hover:var(--gold-light); --f-send:var(--paper);
+  background:var(--wine-night); border-top:0;
+}
+html[data-slot="licht"] footer .colophon .wm-paper{ display:block }
+html[data-slot="licht"] footer .colophon .wm-ink{ display:none }
+footer::before{ content:""; position:absolute; top:0; inset-inline:0; height:3px; background:var(--foil); z-index:1 }
+footer .f-rosette,footer .mash{ display:none !important }
+/* the living engraved ground (components/FooterGuilloche.tsx): two layers of fine lines, each drawn once, drifting
+   slowly in different directions — their crossing (the moiré) keeps changing everywhere; only transforms move */
+.f-guil{ position:absolute; left:-110px; top:-110px; z-index:-1; pointer-events:none; display:block; will-change:transform }
+@media (prefers-reduced-motion:no-preference){
+  .f-guil-a{ animation:f-guil-a 46s ease-in-out infinite alternate }
+  .f-guil-b{ animation:f-guil-b 63s ease-in-out infinite alternate }
+}
+@keyframes f-guil-a{ from{ transform:translate3d(-40px,-18px,0) } to{ transform:translate3d(70px,26px,0) } }
+@keyframes f-guil-b{ from{ transform:translate3d(60px,22px,0) } to{ transform:translate3d(-80px,-24px,0) } }
+footer .f-base{ background:transparent; margin-top:clamp(14px,1.4vw,20px) }
+footer .f-base .bottom{ border-top:1px solid var(--f-rule) }
+@media print{ .f-guil{ display:none } }
+
+/* the emblem beside the name, as in the browser tab (owner, 4 Oct 2026) */
+footer .f-brand{ display:flex; align-items:center; gap:12px; margin-bottom:12px }
+footer .f-brand .f-emblem{ width:34px; height:34px; flex:none }
+footer .f-brand .wordmark{ margin:0 }
+
+/* === The compact menu panel (owner, 4 Oct 2026: never more than half the screen) ===
+   Titles only, in three columns with their number; a page's one line shows on the left, in place of the group's text,
+   for the page under the pointer or focus (components/TopBar.tsx, "peek"). The panel never grows past half the screen:
+   more pages make more columns, not more height. The page behind stays visible under a light veil. */
+@media (min-width:1201px){
+  .mega .mp{ max-height:50svh; overflow:hidden }
+  .mega .mp-grid{ padding-block:clamp(22px,2.4vw,32px) clamp(24px,2.6vw,36px); align-items:start }
+  .mega .mp-list{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-auto-flow:row; column-gap:clamp(18px,2vw,32px); row-gap:0 }
+  .mega .mp-list:not(:has(> li:nth-child(4))){ grid-template-columns:repeat(2,minmax(0,1fr)) }
+  .mega .mp-list a{ padding:10px 0 11px }
+  .mega .mp-list .mp-b{ position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap }
+  .mega .mp-list .mp-t{ font-size:1rem; line-height:1.3 }
+  .mega .mp-title{ font-size:clamp(1.35rem,1.1rem + .6vw,1.75rem) }
+  .mega .mp-lede{ font-size:.95rem; line-height:1.5; max-width:38ch }
+  .mega .mp-intro{ position:relative }
+  .mega .mp-intro.is-peek .mp-lede{ visibility:hidden }
+  .mp-peek{ position:absolute; inset-inline:0; top:calc(clamp(1.35rem,1.1rem + .6vw,1.75rem) * 1.25 + 10px) }
+  .mp-peek-t{ font-family:var(--display); font-weight:700; font-size:1rem; color:var(--wine); margin:0 }
+  .mp-peek-b{ margin-top:4px; font-size:.95rem; line-height:1.5; color:var(--ink-soft); max-width:38ch }
+  @media (prefers-reduced-motion:no-preference){ .mp-peek{ animation:mp-peek var(--d-press) var(--ease-arrive) both } }
+  .mega-scrim.on{ background:rgba(36,20,24,.12) }
+}
+@keyframes mp-peek{ from{ opacity:0; transform:translateY(4px) } }

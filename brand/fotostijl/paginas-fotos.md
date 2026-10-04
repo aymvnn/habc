@@ -1039,3 +1039,126 @@ Create a photorealistic editorial photograph. A quiet corner view at seated eye 
 **Alt EN:** A round oak table with two chairs by a tall canal-house window, set with a water carafe and two tumblers.
 **Alt NL:** Een ronde eiken tafel met twee stoelen bij een hoog raam in een grachtenpand, met een karaf water en twee glazen.
 **Alt AR:** طاولة مستديرة من البلوط بكرسيين بجانب نافذة طويلة في منزل على القناة، وعليها إبريق ماء وكوبان.
+
+---
+
+## Brede banden voor de masthead (1 oktober 2026)
+
+Dezelfde taferelen als hun staande of liggende origineel, opnieuw gecomponeerd voor de 21:9-band bovenaan de pagina (onderwerp in de onderste middenstrook, de bovenkant rustig onder de gouden lijn). De alt-tekst is die van het origineel, omdat het hetzelfde tafereel is.
+
+### story-tulip-band
+
+**Formaat:** 21:9 · **Licht:** Koopmanslicht (raam rechts) · **Wereld:** Beide · **Komt op:** `public/photos/pages/story-tulip-band.jpg`
+
+```
+Create a photorealistic editorial photograph. A still life at table height with a 50mm lens: a single deep garnet tulip leans from a plain white earthenware jug on the left third of a pale ash table set close to the window. Beside the jug a single hand-painted tile with a cobalt and deep red tulip motif, patterned with flowers only, stands propped against the plastered wall, and the table edge runs as one calm horizontal line across the frame. Composed as a slim panorama: the subject sits in the lower middle band of the frame and the table or floor runs calmly across the full width, while the upper part of the frame stays quiet, open and uncluttered. Soft daylight from a single tall window at the right falls across the scene at a low side angle, warm and still, modelling every material with a long, gentle falloff into deep, warm, transparent shadow, the background receding into a calm, darker tone. Natural, rich colour with a restrained grade: softly lifted blacks, warm honey midtones, highlights held at a soft warm white, very fine grain, every colour coming from the real materials and the light. Any writing stays soft and unreadable, and every object is unbranded. Calm editorial composition with generous negative space and a natural, gently shallow depth of field. Photorealistic, shot on a medium-format camera, with the honest look of a real photograph. Aspect ratio 21:9
+```
+
+**Alt EN:** A single deep red tulip in a white earthenware jug beside a hand-painted tulip tile on a pale ash table.
+**Alt NL:** Eén donkerrode tulp in een witte aardewerken kan naast een beschilderde tulpentegel op een lichte essenhouten tafel.
+**Alt AR:** زهرة توليب واحدة حمراء داكنة في إبريق فخاري أبيض بجانب بلاطة مرسومة يدويًا بزخرفة التوليب على طاولة فاتحة من خشب الدردار.
+
+
+### values-value-band
+
+**Formaat:** 21:9 · **Licht:** Koopmanslicht (raam rechts) · **Wereld:** Nederland · **Komt op:** `public/photos/pages/values-value-band.jpg`
+
+```
+Create a photorealistic editorial photograph. A wide still life at worktable height with a 50mm lens: a precision-milled steel part with clean bores and bright machined edges rests on a folded linen cloth on the left third of a table of honed charcoal stone. Beside it lie a slim steel caliper, its fine scale soft beyond the plane of focus, and a small aged brass oil can with a long thin spout, the rest of the stone bare. Composed as a slim panorama: the subject sits in the lower middle band of the frame and the table or floor runs calmly across the full width, while the upper part of the frame stays quiet, open and uncluttered. Soft daylight from a single tall window at the right falls across the scene at a low side angle, warm and still, modelling every material with a long, gentle falloff into deep, warm, transparent shadow, the background receding into a calm, darker tone. Natural, rich colour with a restrained grade: softly lifted blacks, warm honey midtones, highlights held at a soft warm white, very fine grain, every colour coming from the real materials and the light. Any writing stays soft and unreadable, and every object is unbranded. Calm editorial composition with generous negative space and a natural, gently shallow depth of field. Photorealistic, shot on a medium-format camera, with the honest look of a real photograph. Aspect ratio 21:9
+```
+
+**Alt EN:** A milled steel part on a folded linen cloth, with a steel caliper and a small brass oil can.
+**Alt NL:** Een gefreesd stalen onderdeel op een gevouwen linnen doek, met een schuifmaat en een klein messing oliekannetje.
+**Alt AR:** قطعة فولاذية مصنّعة بدقة على قطعة كتان مطوية، مع قدمة قياس فولاذية وعلبة زيت نحاسية صغيرة.
+
+
+### why-hero-band
+
+**Formaat:** 21:9 · **Licht:** Koopmanslicht (raam links) · **Wereld:** Beide · **Komt op:** `public/photos/pages/why-hero-band.jpg`
+
+```
+Create a photorealistic editorial photograph. A view at seated eye level with a 50mm lens of a round oak table set for two, with two small stemless tulip-shaped tea glasses with thin gold rims, each on its own saucer with a small spoon, the tea light and clear, facing each other on white linen, a carafe of water between them. Two oak chairs stand on either side, one pulled back slightly. The two sides mirror each other across the frame. Composed as a slim panorama: the subject sits in the lower middle band of the frame and the table or floor runs calmly across the full width, while the upper part of the frame stays quiet, open and uncluttered. Soft daylight from a single tall window at the left falls across the scene at a low side angle, warm and still, modelling every material with a long, gentle falloff into deep, warm, transparent shadow, the background receding into a calm, darker tone. Natural, rich colour with a restrained grade: softly lifted blacks, warm honey midtones, highlights held at a soft warm white, very fine grain, every colour coming from the real materials and the light. Any writing stays soft and unreadable, and every object is unbranded. Calm editorial composition with generous negative space and a natural, gently shallow depth of field. Photorealistic, shot on a medium-format camera, with the honest look of a real photograph. Aspect ratio 21:9
+```
+
+**Alt EN:** Two tea glasses on saucers face each other on a small round oak table, with a carafe of water between.
+**Alt NL:** Twee theeglaasjes op schoteltjes tegenover elkaar op een kleine ronde eiken tafel, met een karaf water ertussen.
+**Alt AR:** كأسا شاي متقابلتان على صحنيهما فوق طاولة مستديرة من خشب البلوط، وبينهما إبريق ماء زجاجي.
+
+
+### sto-hero-band
+
+**Formaat:** 21:9 · **Licht:** Koopmanslicht (raam links) · **Wereld:** Libië · **Komt op:** `public/photos/pages/sto-hero-band.jpg`
+
+```
+Create a photorealistic editorial photograph. An interior at seated eye level with a 50mm lens: in a whitewashed oasis room with red geometric motifs painted on the walls, a low walnut table on the right third holds strong tea with a thick pale foam in small glasses, served from a polished stainless-steel tea set, with a small dish of roasted almonds. A low bench along the wall carries one cushion in oxblood wool, the rest of the room bare. Composed as a slim panorama: the subject sits in the lower middle band of the frame and the table or floor runs calmly across the full width, while the upper part of the frame stays quiet, open and uncluttered. Soft daylight from a single tall window at the left falls across the scene at a low side angle, warm and still, modelling every material with a long, gentle falloff into deep, warm, transparent shadow, the background receding into a calm, darker tone. Natural, rich colour with a restrained grade: softly lifted blacks, warm honey midtones, highlights held at a soft warm white, very fine grain, every colour coming from the real materials and the light. Any writing stays soft and unreadable, and every object is unbranded. Calm editorial composition with generous negative space and a natural, gently shallow depth of field. Photorealistic, shot on a medium-format camera, with the honest look of a real photograph. Aspect ratio 21:9
+```
+
+**Alt EN:** Foamed tea in small glasses, a steel tea set and roasted almonds on a low table in a whitewashed room.
+**Alt NL:** Thee met een dikke schuimkraag in kleine glaasjes, een rvs-theeservies en geroosterde amandelen op een lage tafel in een witgekalkte kamer.
+**Alt AR:** شاي برغوة كثيفة في كؤوس صغيرة مع طقم شاي من الفولاذ ولوز محمص على طاولة منخفضة في غرفة مطلية بالجير الأبيض.
+
+
+### how-tea-band
+
+**Formaat:** 21:9 · **Licht:** Koopmanslicht (raam links) · **Wereld:** Algerije · **Komt op:** `public/photos/pages/how-tea-band.jpg`
+
+```
+Create a photorealistic editorial photograph. A wide still life at low-table height with a 50mm lens: a low table of pale ash in a white-walled room holds, on its right third, pale green mint tea in small decorated glasses beside a polished nickel-silver teapot, with a sprig of fresh mint on a small white earthenware saucer. The tall window at the left has pale blue wooden shutters folded half open. Composed as a slim panorama: the subject sits in the lower middle band of the frame and the table or floor runs calmly across the full width, while the upper part of the frame stays quiet, open and uncluttered. Soft daylight from a single tall window at the left falls across the scene at a low side angle, warm and still, modelling every material with a long, gentle falloff into deep, warm, transparent shadow, the background receding into a calm, darker tone. Natural, rich colour with a restrained grade: softly lifted blacks, warm honey midtones, highlights held at a soft warm white, very fine grain, every colour coming from the real materials and the light. Any writing stays soft and unreadable, and every object is unbranded. Calm editorial composition with generous negative space and a natural, gently shallow depth of field. Photorealistic, shot on a medium-format camera, with the honest look of a real photograph. Aspect ratio 21:9
+```
+
+**Alt EN:** Mint tea in small decorated glasses beside a polished teapot on a low table, by a window with blue shutters.
+**Alt NL:** Muntthee in kleine versierde glaasjes naast een glanzende theepot op een lage tafel, bij een raam met blauwe luiken.
+**Alt AR:** شاي بالنعناع في كؤوس صغيرة مزخرفة بجانب إبريق لامع على طاولة منخفضة، قرب نافذة بمصاريع زرقاء.
+
+
+### adv-hero-band
+
+**Formaat:** 21:9 · **Licht:** Koopmanslicht (raam rechts) · **Wereld:** Nederland · **Komt op:** `public/photos/pages/adv-hero-band.jpg`
+
+```
+Create a photorealistic editorial photograph. A still life at table height with a 50mm lens: a closed linen-bound notebook rests squared on a closed laptop in matte grey aluminium on the left third of a table of honed charcoal stone, a capped fountain pen laid parallel beside them and a plain tumbler of water behind. The table edge runs as one calm horizontal line across the frame, the rest of the stone bare. Composed as a slim panorama: the subject sits in the lower middle band of the frame and the table or floor runs calmly across the full width, while the upper part of the frame stays quiet, open and uncluttered. Soft daylight from a single tall window at the right falls across the scene at a low side angle, warm and still, modelling every material with a long, gentle falloff into deep, warm, transparent shadow, the background receding into a calm, darker tone. Natural, rich colour with a restrained grade: softly lifted blacks, warm honey midtones, highlights held at a soft warm white, very fine grain, every colour coming from the real materials and the light. Any writing stays soft and unreadable, and every object is unbranded. Calm editorial composition with generous negative space and a natural, gently shallow depth of field. Photorealistic, shot on a medium-format camera, with the honest look of a real photograph. Aspect ratio 21:9
+```
+
+**Alt EN:** A closed laptop, a linen-bound notebook and a fountain pen on a dark stone table.
+**Alt NL:** Een dichtgeklapte laptop, een linnen notitieboek en een vulpen op een donkere stenen tafel.
+**Alt AR:** حاسوب محمول مغلق ودفتر بغلاف من الكتان وقلم حبر على طاولة من الحجر الداكن.
+
+
+### stk-hero-band
+
+**Formaat:** 21:9 · **Licht:** Helder hedendaags (binnen) · **Wereld:** Libië · **Komt op:** `public/photos/pages/stk-hero-band.jpg`
+
+```
+Create a photorealistic editorial photograph. A calm warehouse interior at standing eye level with a 35mm lens: tall rolls of plain white and kraft paper stand on end on the left third beside pallets wrapped in clear shrink film, between whitewashed walls. Through a high open door at the far end, palm groves lie in bright haze, and the clean concrete floor catches the daylight. Composed as a slim panorama: the subject sits in the lower middle band of the frame and the table or floor runs calmly across the full width, while the upper part of the frame stays quiet, open and uncluttered. Bright, soft, diffused daylight from large clear windows fills the space evenly, with clean whites, gentle short shadows and a sense of open, orderly calm. Natural, rich colour with a restrained grade: softly lifted blacks, warm honey midtones, highlights held at a soft warm white, very fine grain, every colour coming from the real materials and the light. Any writing stays soft and unreadable, and every object is unbranded. Calm editorial composition with generous negative space and a natural, gently shallow depth of field. Photorealistic, shot on a medium-format camera, with the honest look of a real photograph. Aspect ratio 21:9
+```
+
+**Alt EN:** Tall rolls of paper and shrink-wrapped pallets in a whitewashed warehouse, with palm groves beyond an open door.
+**Alt NL:** Hoge papierrollen en pallets in krimpfolie in een witgekalkt magazijn, met palmbossen achter een open deur.
+**Alt AR:** لفائف ورق طويلة ومنصّات مغلّفة في مستودع مطليّ بالجير، وخلف باب مفتوح بساتين نخيل.
+
+
+### ver-hero-band
+
+**Formaat:** 21:9 · **Licht:** Koopmanslicht (raam rechts) · **Wereld:** Nederland · **Komt op:** `public/photos/pages/ver-hero-band.jpg`
+
+```
+Create a photorealistic editorial photograph. A wide detail at table height with a 50mm lens: a hand turns a page in a company file bound in oxblood leather on the left third of a dark oak table, the page at a low, oblique angle, its lines of type softened into pale grey bands by the shallow focus. A pair of folded reading glasses and a brass-rimmed loupe rest beside it. Only one hand and its shirt cuff are in frame. Composed as a slim panorama: the subject sits in the lower middle band of the frame and the table or floor runs calmly across the full width, while the upper part of the frame stays quiet, open and uncluttered. Soft daylight from a single tall window at the right falls across the scene at a low side angle, warm and still, modelling every material with a long, gentle falloff into deep, warm, transparent shadow, the background receding into a calm, darker tone. Natural, rich colour with a restrained grade: softly lifted blacks, warm honey midtones, highlights held at a soft warm white, very fine grain, every colour coming from the real materials and the light. Any writing stays soft and unreadable, and every object is unbranded. Calm editorial composition with generous negative space and a natural, gently shallow depth of field. Photorealistic, shot on a medium-format camera, with the honest look of a real photograph. Aspect ratio 21:9
+```
+
+**Alt EN:** One hand turns a page in an oxblood leather company file, with reading glasses and a brass loupe beside it.
+**Alt NL:** Eén hand slaat een pagina om in een oxblood leren bedrijfsdossier, met een leesbril en een messing loep ernaast.
+**Alt AR:** يد واحدة تقلّب صفحة في ملف شركة بغلاف جلدي عنابي، وبجانبه نظارة قراءة وعدسة مكبّرة نحاسية.
+
+
+### docs-desk-band
+
+**Formaat:** 21:9 · **Licht:** Koopmanslicht (raam links) · **Wereld:** Nederland · **Komt op:** `public/photos/pages/docs-desk-band.jpg`
+
+```
+Create a photorealistic editorial photograph. A wide still life at table height with a 50mm lens: a neat stack of shipping documents squared at the edges lies at a low, oblique angle on the right third of a pale honed travertine table, its lines of type softened into pale grey bands by the shallow focus, the signature lines still bare. A capped fountain pen lies beside a pair of folded reading glasses and a small plain brass paperweight. Composed as a slim panorama: the subject sits in the lower middle band of the frame and the table or floor runs calmly across the full width, while the upper part of the frame stays quiet, open and uncluttered. Soft daylight from a single tall window at the left falls across the scene at a low side angle, warm and still, modelling every material with a long, gentle falloff into deep, warm, transparent shadow, the background receding into a calm, darker tone. Natural, rich colour with a restrained grade: softly lifted blacks, warm honey midtones, highlights held at a soft warm white, very fine grain, every colour coming from the real materials and the light. Any writing stays soft and unreadable, and every object is unbranded. Calm editorial composition with generous negative space and a natural, gently shallow depth of field. Photorealistic, shot on a medium-format camera, with the honest look of a real photograph. Aspect ratio 21:9
+```
+
+**Alt EN:** A squared stack of shipping documents beside a fountain pen, reading glasses and a brass paperweight on travertine.
+**Alt NL:** Een nette stapel verzenddocumenten naast een vulpen, een leesbril en een messing presse-papier op travertin.
+**Alt AR:** رزمة مرتّبة من مستندات الشحن بجانب قلم حبر ونظارة قراءة وثقّالة ورق نحاسية على طاولة من الترافرتين.
+

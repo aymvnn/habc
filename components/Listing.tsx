@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { LocalField } from "@/lib/forms";
+import { Arrow } from "./Arrow";
 
 /**
  * The search of a listing (the company directory, the published requests). Nothing is published yet, so a search
@@ -23,18 +24,21 @@ export function ListingSearch({ id, fields, label, empty, choose }: { id: string
           {fields.map((f) => (
             <div className="field" key={f.name}>
               <label htmlFor={`${id}-${f.name}`}>{f.label}</label>
-              {f.type === "select" ? (
-                <select id={`${id}-${f.name}`} name={f.name} defaultValue="">
-                  <option value="">{choose}</option>
-                  {(f.options ?? []).map((o, i) => <option key={i}>{o}</option>)}
-                </select>
-              ) : (
-                <input id={`${id}-${f.name}`} name={f.name} type="search" />
-              )}
+              {/* Muntregister a4-5: the same lined field and bordeaux focus line as the forms */}
+              <span className={f.type === "select" ? "ctl is-select" : "ctl"}>
+                {f.type === "select" ? (
+                  <select id={`${id}-${f.name}`} name={f.name} defaultValue="">
+                    <option value="">{choose}</option>
+                    {(f.options ?? []).map((o, i) => <option key={i}>{o}</option>)}
+                  </select>
+                ) : (
+                  <input id={`${id}-${f.name}`} name={f.name} type="search" enterKeyHint="search" />
+                )}
+              </span>
             </div>
           ))}
         </div>
-        <button className="btn" type="submit">{label} <span className="arrow" aria-hidden="true">→</span></button>
+        <button className="btn" type="submit">{label} <Arrow /></button>
       </form>
       <p className={`ls-empty${searched ? " on" : ""}`} role="status" hidden={!searched}>{empty}</p>
     </>

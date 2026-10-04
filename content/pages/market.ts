@@ -117,10 +117,11 @@ export const market: PageSet = {
           id: "product",
           title: { en: "Submit your product or service", nl: "Dien uw product of dienst in", ar: "قدّم منتجك أو خدمتك" },
           fields: [
-            { name: "offerName", label: { en: "Name", nl: "Naam", ar: "الاسم" } },
+            { name: "offerName", core: true /* UX-04 */, label: { en: "Name", nl: "Naam", ar: "الاسم" } },
             { name: "sector", label: { en: "Sector", nl: "Sector", ar: "القطاع" } },
             {
               name: "description",
+              core: true, // UX-04
               label: { en: "Description of the offering", nl: "Omschrijving van het aanbod", ar: "وصف العرض" },
               type: "textarea",
             },
@@ -133,7 +134,7 @@ export const market: PageSet = {
             { name: "specs", label: { en: "Specifications", nl: "Specificaties", ar: "المواصفات" }, type: "textarea" },
             { name: "origin", label: { en: "Country of origin", nl: "Land van oorsprong", ar: "بلد المنشأ" } },
             { name: "location", label: { en: "Location of the goods", nl: "Locatie van de goederen", ar: "موقع البضاعة" } },
-            { name: "quantity", label: { en: "Available quantity", nl: "Beschikbare hoeveelheid", ar: "الكمية المتاحة" } },
+            { name: "quantity", core: true /* UX-04 */, label: { en: "Available quantity", nl: "Beschikbare hoeveelheid", ar: "الكمية المتاحة" } },
             { name: "minOrder", label: { en: "Minimum order", nl: "Minimumbestelling", ar: "الحد الأدنى للطلب" } },
             { name: "packaging", label: { en: "Packaging", nl: "Verpakking", ar: "التعبئة" } },
             { name: "capacity", label: { en: "Production capacity", nl: "Productiecapaciteit", ar: "القدرة الإنتاجية" } },
@@ -241,12 +242,12 @@ export const market: PageSet = {
           id: "purchase-request",
           title: { en: "Submit a purchase request", nl: "Dien een inkoopaanvraag in", ar: "قدّم طلب شراء" },
           fields: [
-            { name: "title", label: { en: "Request title", nl: "Titel van de aanvraag", ar: "عنوان الطلب" } },
+            { name: "title", core: true /* UX-04 */, label: { en: "Request title", nl: "Titel van de aanvraag", ar: "عنوان الطلب" } },
             { name: "sector", label: { en: "Sector", nl: "Sector", ar: "القطاع" } },
-            { name: "product", label: { en: "Product description", nl: "Productomschrijving", ar: "وصف المنتج" }, type: "textarea" },
+            { name: "product", core: true /* UX-04 */, label: { en: "Product description", nl: "Productomschrijving", ar: "وصف المنتج" }, type: "textarea" },
             { name: "specs", label: { en: "Specifications", nl: "Specificaties", ar: "المواصفات" }, type: "textarea" },
             { name: "quantity", label: { en: "Quantity", nl: "Hoeveelheid", ar: "الكمية" } },
-            { name: "deliveryCountry", label: { en: "Country of delivery", nl: "Land van levering", ar: "بلد التسليم" } },
+            { name: "deliveryCountry", core: true /* UX-04 */, label: { en: "Country of delivery", nl: "Land van levering", ar: "بلد التسليم" } },
             { name: "date", label: { en: "Date", nl: "Datum", ar: "الموعد" }, type: "date" },
             {
               name: "deliveryTerms",
@@ -298,7 +299,7 @@ export const market: PageSet = {
   },
 
   "services/stocklots-machinery": {
-    masthead: { variant: "band", photo: "stk-hero" },
+    masthead: { variant: "band", photo: "stk-hero-band" },
     headline: {
       en: "Trade opportunities that call for clear information and considered speed",
       nl: "Commerciële kansen die om duidelijke informatie en weloverwogen snelheid vragen",
@@ -396,11 +397,12 @@ export const market: PageSet = {
             fields: [
               {
                 name: "goods",
+                core: true, // UX-04
                 label: { en: "Description of the goods", nl: "Omschrijving van de goederen", ar: "وصف البضاعة" },
                 type: "textarea",
               },
-              { name: "quantity", label: { en: "Quantity", nl: "Hoeveelheid", ar: "الكمية" } },
-              { name: "location", label: { en: "Location", nl: "Locatie", ar: "الموقع" } },
+              { name: "quantity", core: true /* UX-04 */, label: { en: "Quantity", nl: "Hoeveelheid", ar: "الكمية" } },
+              { name: "location", core: true /* UX-04 */, label: { en: "Location", nl: "Locatie", ar: "الموقع" } },
               { name: "condition", label: { en: "Condition", nl: "Staat", ar: "الحالة" } },
               {
                 name: "reason",
@@ -440,10 +442,10 @@ export const market: PageSet = {
               ar: "الماكينات والمعدات المستعملة — DUKAAT Machinery",
             },
             fields: [
-              { name: "manufacturer", label: { en: "Manufacturer", nl: "Fabrikant", ar: "الشركة المصنّعة" } },
-              { name: "model", label: { en: "Model", nl: "Model", ar: "الموديل" } },
+              { name: "manufacturer", core: true /* UX-04 */, label: { en: "Manufacturer", nl: "Fabrikant", ar: "الشركة المصنّعة" } },
+              { name: "model", core: true /* UX-04 */, label: { en: "Model", nl: "Model", ar: "الموديل" } },
               { name: "year", label: { en: "Year of manufacture", nl: "Bouwjaar", ar: "سنة الصنع" }, type: "number" },
-              { name: "location", label: { en: "Location", nl: "Locatie", ar: "الموقع" } },
+              { name: "location", core: true /* UX-04 */, label: { en: "Location", nl: "Locatie", ar: "الموقع" } },
               { name: "condition", label: { en: "Operating condition", nl: "Operationele staat", ar: "حالة التشغيل" } },
               {
                 name: "hours",
@@ -491,10 +493,11 @@ export const market: PageSet = {
             ar: "حدّد القطاع والدولة ونوع البضاعة أو المعدات التي تبحث عنها، لنفهم اهتماماتك عند توفر فرص ذات صلة.",
           },
           fields: [
-            { name: "sector", label: { en: "The sector", nl: "De sector", ar: "القطاع" } },
-            { name: "targetCountry", label: { en: "The country", nl: "Het land", ar: "الدولة" } },
+            { name: "sector", core: true /* UX-04 */, label: { en: "The sector", nl: "De sector", ar: "القطاع" } },
+            { name: "targetCountry", core: true /* UX-04 */, label: { en: "The country", nl: "Het land", ar: "الدولة" } },
             {
               name: "goods",
+              core: true, // UX-04
               label: {
                 en: "The type of goods or equipment",
                 nl: "Het type goederen of apparatuur",

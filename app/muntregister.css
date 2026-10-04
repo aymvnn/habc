@@ -1,0 +1,1613 @@
+/* ============================================================
+   HET MUNTREGISTER — the redesign below the hero (October 2026)
+   Loaded last (after blocks.css), so equal selectors here win. One block per approved item, each under its own
+   header "=== Muntregister: <feature> (<item>) ===", so any item can be taken out by deleting its block.
+   Nothing here may match inside the hero (.h3 / #routes) or the dock (.dock, the docked name, the gold nav edge).
+   Review switches on <html> (development panel, components/ReviewPanel.tsx; absent = the default):
+     data-beweging = rustig | extra   ·   data-slot = donker | licht   ·   data-overgang = uit | aan
+   ============================================================ */
+
+/* === Muntregister: serif optical sizes (a1-1) ===
+   The self-hosted serif carries the opsz axis: small text gets the sturdy text cut, large text the sharp display cut.
+   The hero and the dock keep the font's default size (opsz 20), so they look as before. */
+body{ font-optical-sizing:auto }
+:is(.h3,.dock){ font-optical-sizing:none }
+
+/* === Muntregister: reveals, once (g4 repair) ===
+   Default ("rustig"): labels and h2 (.rv) rise 10px once, photographs (.rv-ph) fade in once, when they first enter
+   the viewport (components/Reveal.tsx; never reversed, never tied to the scroll position). Running text, lists,
+   forms, FAQ, notices and listings carry no reveal: they are simply there. Never inside the hero or the masthead.
+   Stagger at most three steps: 60 / 120 / 180 ms. The typed reveals (photo unroll, lines that draw, the seal's press)
+   belong under html[data-beweging="extra"] (extra-motion slice). */
+@media (scripting:enabled) and (prefers-reduced-motion:no-preference){
+  .rv:not(:is(.h3,.mh) *){ transition:opacity var(--d-reveal) var(--ease-arrive), transform var(--d-reveal) var(--ease-arrive) }
+  .rv:not(.in):not(:is(.h3,.mh) *){ opacity:0; transform:translateY(10px) }
+  .rv-ph:not(:is(.h3,.mh) *){ transition:opacity 900ms var(--ease-arrive) }
+  .rv-ph:not(.in):not(:is(.h3,.mh) *){ opacity:0 }
+  :is(.rv,.rv-ph).lag1{ transition-delay:60ms }
+  :is(.rv,.rv-ph).lag2{ transition-delay:120ms }
+  :is(.rv,.rv-ph).lag3{ transition-delay:180ms }
+}
+
+/* === Muntregister: masthead entrance once per session (a6-3) ===
+   The first inner page of a visit plays the full crossing (blocks.css). After it, <html data-mh="seen"> (set before
+   paint, see layout.tsx and Reveal.tsx) plays a short version of about 0.8 s: the bar is already there, one glint
+   runs along it, the photograph unrolls quicker. The masthead looks the same; only the pace changes. */
+@media (prefers-reduced-motion:no-preference){
+  html[data-mh="seen"] .mh-label{ animation:mh-rise var(--d-ui) var(--mh-out) both }
+  html[data-mh="seen"] .mh-title{ animation:mh-rise var(--d-reveal) var(--mh-out) .03s both }
+  html[data-mh="seen"] .mh-bar{ animation:none }
+  html[data-mh="seen"] .mh-bar::after{ animation:mh-glint var(--d-reveal) var(--mh-out) .12s both }
+  html[data-mh="seen"][dir="rtl"] .mh-bar::after{ animation-name:mh-glint-rtl }
+  html[data-mh="seen"] .mh-twin{ animation:mh-fade var(--d-ui) ease .12s both }
+  html[data-mh="seen"] :is(.mh-stand,.mh-lede){ animation:mh-fade var(--d-ui) ease .12s both }
+  html[data-mh="seen"] .ph.mh-band{ animation:mh-unroll var(--d-reveal) var(--mh-io) .1s both }
+  html[data-mh="seen"] .ph.mh-band img{ animation:mh-settle var(--d-draw) var(--mh-out) .1s both }
+}
+
+/* === Muntregister: reduced motion, the shared block (a6-6) ===
+   Every new motion class shows its end state at once. (The masthead keeps its own short fade in blocks.css.) Each later
+   feature that moves keeps its own small reduced-motion block beside it (slices 3, 4, 5, 6 and 9), so it can be taken
+   out with its feature; under (prefers-reduced-motion:reduce) nothing in this file travels. */
+@media (prefers-reduced-motion:reduce){
+  :is(.rv,.rv-ph,.rv-rule,.stmt-mark path,.bsteps *,.seal-wrap *){
+    transition:none !important; animation:none !important; opacity:1; transform:none; filter:none; clip-path:none; stroke-dashoffset:0;
+  }
+  .mp,.mp::before,.btn::before{ transition:none !important; animation:none !important } /* the phone menu: slice 6 (a5-2) */
+}
+
+/* === Muntregister: the keyboard never animates (a6-6) ===
+   While the visitor works with the keyboard (<html data-kbd>, set by Reveal.tsx, cleared by the first pointer
+   press) every transition outside the hero is instant: focus states, a group panel or the menu opened from the
+   keyboard, FAQ, the form tabs, reveals reached by tabbing. The topbar itself, the docked name and the gold nav
+   edge are not touched. */
+html[data-kbd] :is(main,footer,.mega,.veil,.tb-nav,.tb-util) *:not(.h3,.h3 *),
+html[data-kbd] :is(main,footer,.mega,.veil,.tb-nav,.tb-util) *:not(.h3,.h3 *)::before,
+html[data-kbd] :is(main,footer,.mega,.veil,.tb-nav,.tb-util) *:not(.h3,.h3 *)::after,
+html[data-kbd] .veil{ transition:none !important }
+
+/* === Muntregister: interaction rules (a4-1) ===
+   Hover transforms only for a mouse (nav.css / blocks.css now wrap theirs in the hover query); colour hovers 200 ms
+   on plain ease; compact buttons give a little under the finger (scale .97, 140 ms), wide rows let only their arrow
+   give (.94) and darken their title; a 2px bordeaux focus ring that keeps the element's own corners (gold-light on
+   the bordeaux blocks). Gold is never the only sign of focus or state. */
+:where(a,button,summary,label):not(.h3 *){ -webkit-tap-highlight-color:transparent; touch-action:manipulation }
+
+:is(a,button,input,select,textarea,summary):focus-visible:not(.h3 *):not(.brand){ outline:2px solid var(--wine); outline-offset:3px }
+.b-dark :is(a,button,input,select,textarea,summary):focus-visible{ outline-color:var(--gold-light) }
+
+:is(.btn,.act-a,.ni-contact > a,.sp-sib ul a,.fs-choices button,.burger,.lang-m a,.lang a){
+  transition:background-color var(--d-hover) ease, border-color var(--d-hover) ease, color var(--d-hover) ease, scale var(--d-press) var(--ease-arrive);
+}
+:is(.btn,.act-a,.ni-contact > a,.sp-sib ul a,.fs-choices button,.burger,.lang-m a,.lang a):not(:disabled):active{ scale:.97 }
+.btn:active{ transform:none } /* the old .98 press now lives in scale */
+
+.mp-list a:active .mp-t,.mx-row a:active{ color:var(--wine-deep) }
+
+/* the "read more" underline grows on hover; on touch screens it stays short (the hero keeps its own) */
+@media (hover:none),(pointer:coarse){
+  .more:not(.h3 *):hover::after{ transform:scaleX(.28) }
+}
+
+/* === Muntregister: one reading size in darker ink (a1-2) ===
+   Running text on the inner pages: one size (--read), one leading, --ink-soft, a fixed measure. Secondary lines at
+   least 16px (--read-s); --muted stays for metadata only (breadcrumbs, notes, pending values). Arabic keeps its own
+   leading (the [dir=rtl] rules are more specific). */
+:is(.reg-i p,.bstep p,.ch-i p,.duo-t p,.notice-box p,.tier-tag,.founder blockquote,.mh-lede,.lg-art p,.b-prose-body p,.faq-list details p,.ls-empty,.fs-intro){
+  font-size:var(--read); line-height:var(--read-lh); color:var(--ink-soft); max-width:64ch;
+}
+:is(.idx-b,.tier-items li,.tier-for,.founder .creds,.mp-b){ font-size:var(--read-s); line-height:var(--read-s-lh); max-width:46ch }
+:is(.mp-b,.tier-for){ color:var(--ink-soft) }
+
+/* === Muntregister: heading ladder (a1-3) ===
+   Inner pages and the nav: the h1 as it is, sections on --h2/700, items on --h3/600. What was 800 goes to 700, the
+   quote's author to 600. The homepage sections and the hero are not touched. */
+:is(.mp-title,.idx-t){ font-weight:700 }
+:is(.reg-i,.bstep,.ch-i) h3{ font-weight:600 }
+.tier-name{ font-size:clamp(1.6rem,1.2rem + 1vw,2.1rem); font-weight:700; line-height:1.05 }
+@media (min-width:641px){
+  .terms li{ font-size:var(--h3) }
+}
+
+/* === Muntregister: one metal (a7-1) ===
+   Every gold edge of 3px or more carries the hero's foil (--foil, globals.css); short marks stay flat --bar.
+   Budget: at most three gold elements or series per screen at rest, the nav edge not counted. */
+.mh-bar{ background:var(--foil) }
+.notice-box::before,.b-dark::before{ background:var(--foil) }
+
+/* === Muntregister: masthead, less empty paper, same shape (a2-9) ===
+   The space above the name shrinks so the 21:9 band starts inside the first screen at 1442×796. The two scripts share
+   one real baseline (last baseline instead of the .14em nudge); the twin is lighter (400, half the h1). The docking,
+   the .topbar padding and the gold nav edge are untouched; --nav-h is measured (nav.css). */
+.page.sp{ padding-top:calc(var(--nav-h) + var(--util-h, 0px) + clamp(12px,1.4vw,24px)) }
+.mh-top{ padding-top:clamp(16px,1.8vw,28px) }
+.mh-label{ margin-top:clamp(14px,1.4vw,22px) }
+.ph.mh-band{ margin-top:clamp(32px,3.6vw,56px) }
+.mh-row{ align-items:end; align-items:last baseline }
+.mh-twin{ font-weight:400; font-size:calc(var(--h1) * .5); padding-bottom:0 }
+@media (max-width:900px){
+  .mh-title{ letter-spacing:-.028em; line-height:1.02 }
+  .mh-twin{ font-size:1.2rem }
+}
+
+/* ============================================================
+   SLICE 2 — TYPOGRAPHY VOICE (g3: a1-4, a1-5, a1-6, a1-7, a8-2, b4)
+   The grotesk names (headings, nav, buttons, index titles, .claim-sum/.reg-sum); the serif speaks (statements, the
+   keystone, band captions, legends, numbers). Rules that change the letter itself (family, weight, small caps,
+   tracking, italic) are scoped to left-to-right pages with :root:not([dir="rtl"]): Arabic stays Almarai, never gets
+   small caps, italic or tracking; on /ar only size, colour and leading change. Nothing here reaches .h3 / .dock.
+   ============================================================ */
+
+/* === Muntregister: two voices — the serif speaks (a1-4) ===
+   Statements, the keystone of the Name story and the band captions in the serif's display cut (opsz follows the size),
+   weight 400, emphasis in bordeaux italic. In Arabic: Almarai 400, emphasis by colour only. No h2 gets serif italic. */
+:root{ --say:clamp(2rem,1.3rem + 2.2vw,3.25rem) }
+.stmt{ font-weight:400; font-size:var(--say); line-height:1.12; color:var(--ink) }
+.stmt.is-long{ font-size:clamp(1.6rem,1.2rem + 1.4vw,2.4rem); line-height:1.18 }
+.stmt em{ color:var(--wine) }
+:root:not([dir="rtl"]) .stmt{ font-family:var(--text); letter-spacing:-.012em }
+:root:not([dir="rtl"]) .stmt em{ font-style:italic }
+@media (max-width:900px){
+  .b-statement .stmt{ font-size:var(--say) }
+  .b-statement .stmt.is-long{ font-size:clamp(1.6rem,1.2rem + 1.4vw,2.4rem) }
+}
+@media (max-width:600px){
+  .b-statement .stmt{ font-size:clamp(1.6rem,6.4vw,2.2rem) }
+  .b-statement .stmt.is-long{ font-size:clamp(1.3rem,5.3vw,1.7rem) } /* adapted: at 390px the long ones stay within four lines */
+}
+#name .keystone{ font-weight:400; line-height:1.25 }
+:root:not([dir="rtl"]) #name .keystone{ font-family:var(--text); font-style:italic; letter-spacing:-.005em }
+.b-band-cap{ font-weight:400; line-height:1.4 }
+:root:not([dir="rtl"]) .b-band-cap{ font-family:var(--text); letter-spacing:0 }
+
+/* === Muntregister: labels as coin legends (a1-5) ===
+   Editorial labels become serif small caps (the font's real smcp/c2sc; nothing synthesised) without the gold dash: the
+   gold is in the letters now. Each keeps its own colour (gold-deep on paper, gold-light on bordeaux; breadcrumbs stay
+   muted). Interface caps — buttons, "read more", field labels, the menu's "all" link — share one grotesk style.
+   Arabic labels are unchanged (Almarai, no tracking); only the dash goes, in both directions. */
+.label:not(:is(.h3,.hero) *)::before{ display:none }
+.label:not(:is(.h3,.hero) *){ gap:0 }
+:root:not([dir="rtl"]) :is(.label,.founder .role,.tier-sub,.tier-il,.lg-updated,.portrait span,.crumbs,.util-l,footer .colophon .values,.card-row dt,.spec-row dt,footer .bottom):not(:is(.h3,.hero) *){
+  font-family:var(--text); font-weight:500; font-size:1.0625rem; text-transform:none; letter-spacing:.08em;
+  font-variant-caps:all-small-caps; font-synthesis-small-caps:none; font-variant-numeric:lining-nums;
+}
+:root:not([dir="rtl"]) .portrait span{ font-size:1rem; letter-spacing:.06em } /* on the paper pill over the stand-in portrait */
+/* UI-05 (owner, 4 Oct 2026): buttons (.btn, .act-a) left this list; they take the hero keys' letter (premium.css) */
+:root:not([dir="rtl"]) :is(.field label,.more,.vg-list .vg-all):not(.h3 *){
+  font-family:var(--display); font-weight:var(--caps-w); font-size:var(--caps-size); letter-spacing:var(--caps-track); text-transform:uppercase;
+}
+
+/* === Muntregister: one numeral system (a1-6, a8-2) ===
+   Oldstyle figures only in serif prose (1586, 3,494 and 983/1000 run with the line; never set as a fraction). Never on
+   body, so the hero and the dock keep theirs; the grotesk has no oldstyle figures, so headings stay lining.
+   Roman ranks in the serif, gold-deep. Index and article numbers in the serif, 500, tabular, ink-soft (not gold).
+   Steps in serif italic. Every number the code generates is tabular, lining and bidi-isolated; on /ar the numbers keep
+   one font (the grotesk) and only their size and colour change. */
+.sp :is(p,li,dd,blockquote),:is(#why,#name,#behind,#correspondence) :is(p,blockquote),footer .colophon p{
+  font-variant-numeric:oldstyle-nums proportional-nums;
+}
+:is(.reg-n,.ch-n,.idx-n,.bstep-n,.tier-n,.claim .roman,.lg-n,.lg-toc a span){ font-variant-numeric:lining-nums tabular-nums; unicode-bidi:isolate }
+:is(.tier-n,.claim .roman){ font-size:clamp(1.6rem,1.2rem + 1vw,2.25rem); line-height:1; letter-spacing:.06em; color:var(--gold-deep) }
+.claim .roman{ padding-top:.08em; min-width:1.6em }
+:root:not([dir="rtl"]) :is(.tier-n,.claim .roman){ font-family:var(--text); font-weight:400 }
+:is(.reg-n,.ch-n,.idx-n,.lg-n,.lg-toc a span){ font-size:.9375rem; color:var(--ink-soft); text-transform:none }
+:root:not([dir="rtl"]) :is(.reg-n,.ch-n,.idx-n,.lg-n,.lg-toc a span){ font-family:var(--text); font-weight:500; letter-spacing:.02em }
+[dir="rtl"] :is(.reg-n,.ch-n,.idx-n,.lg-toc a span){ font-family:var(--display); letter-spacing:.02em }
+:root:not([dir="rtl"]) .bstep-n{ font-family:var(--text); font-style:italic; font-weight:400; letter-spacing:-.01em }
+
+/* === Muntregister: the lead's measure and the one initial (a1-7) ===
+   The opening paragraph of every inner page sets at 46 characters. Only the Name story gets a real initial: three
+   lines tall, resting on the third baseline (adapted from "3 2": a raised cap would touch the heading above). Browsers
+   without initial-letter keep a floated serif capital. Arabic has no initial (its letters join). */
+.b-lead-t{ max-width:46ch; font-size:clamp(1.3rem,1.1rem + .7vw,1.6rem); line-height:1.45 }
+#name .story p.big::first-letter{ font-family:var(--text); font-weight:500; color:var(--wine) }
+@supports (initial-letter:3) or (-webkit-initial-letter:3){
+  #name .story p.big::first-letter{
+    -webkit-initial-letter:3; initial-letter:3; float:none; font-size:inherit; line-height:inherit; padding:0; margin-inline-end:.08em;
+  }
+}
+@supports not ((initial-letter:3) or (-webkit-initial-letter:3)){
+  #name .story p.big::first-letter{ font-size:3.3em; line-height:.8; padding-right:.08em; margin-top:.04em }
+}
+[dir="rtl"] #name .story p.big::first-letter{ -webkit-initial-letter:normal; initial-letter:normal; float:none; font-size:1em; padding:0; margin:0; color:inherit; font-family:inherit; font-weight:inherit; line-height:inherit }
+
+/* === Muntregister: Arabic, calm (a8-2, b4) ===
+   The Arabic page name on 700 like the other languages. Running text on one calmer leading (it ranged from 1.85 to
+   1.95), secondary lines a step tighter. Almarai everywhere; the body's own leading (which the hero inherits) is kept. */
+[dir="rtl"] .mh-title{ font-weight:700 }
+[dir="rtl"] :is(.b-prose-body p,.reg-i p,.bstep p,.ch-i p,.duo-t p,.notice-box p,.tier-tag,.lg-art p,.lg-intro,.founder blockquote,.faq-list details p,.ls-empty,.fs-intro,.mh-lede,.claim p,.dark-body p){ line-height:1.8 }
+[dir="rtl"] :is(.idx-b,.mp-b,.tier-items li,.tier-for,.founder .creds){ line-height:1.75 }
+
+/* ============================================================
+   SLICE 3 — BLOCKS AND PAGE COMPOSITION (g7, g6, g1, a2-1, a2-2, a2-3, a2-5, a2-7, a2-8, a3-2, a3-3, a7-2, a7-3)
+   Markup: components/Blocks.tsx (data-pace, the split register, the card, the spec certificate, the index register).
+   Held columns share one measure everywhere: the head 1 / span 4, the content 6 / -1. Phones (≤900px) keep the
+   one-column stack of blocks.css; nothing is held (sticky) there.
+   ============================================================ */
+
+/* === Muntregister: three paces (a2-2) ===
+   Blocks() writes data-pace on every block: the space ABOVE it. tight = a dense run (register→register,
+   lead→register, register→notice, chapter→register, a register's own photo plate); breath = to or from a statement
+   or a band; pace = the rest. No block has space below it except the last one before the page's end. */
+.b{ --gap:var(--pace); padding-block:var(--gap) 0 }
+.b[data-pace="tight"]{ --gap:var(--pace-tight) }
+.b[data-pace="breath"]{ --gap:var(--pace-breath) }
+.b + .b{ padding-top:var(--gap) } /* neutralises the single fixed step of blocks.css */
+.b[data-last]{ padding-bottom:var(--pace) }
+.b.b-dark{ margin-block:var(--gap) 0; padding-block:var(--pace) }
+.b.b-dark[data-last]{ margin-bottom:var(--pace) }
+
+/* === Muntregister: held columns, one measure (a2-1, g7) ===
+   Every register is a split: the head held in columns 1–4, the list in 6–12 (a register without a head keeps the
+   list on column 6 too, so all lists start on one line). The prose split moves to the same measure. */
+.b-register.is-split .b-grid{ align-items:start }
+.b-register.is-split .reg-head .b-head h2{ max-width:18ch }
+@media (min-width:901px){
+  .b-register.is-split .reg-head{ grid-column:1 / span 4; position:sticky; top:120px }
+  .b-register.is-split .reg-body{ grid-column:6 / -1 }
+  .b-prose.split .b-prose-head{ grid-column:1 / span 4 }
+  .b-prose.split .b-prose-body{ grid-column:6 / -1 }
+}
+/* a register of titles only: the two-column specimen of the terms block, with a 14×1px ink tick (not gold) */
+.b-register.is-terms .reg{ display:grid; grid-template-columns:1fr 1fr; column-gap:var(--s-2xl) }
+.b-register.is-terms .reg-i{ padding-block:18px }
+.b-register.is-terms .reg:not(.numbered) .reg-i :is(h2,h3)::before{ content:""; display:block; width:14px; height:1px; background:var(--ink-soft); margin-bottom:12px }
+@media (max-width:640px){ .b-register.is-terms .reg{ grid-template-columns:1fr } }
+
+/* === Muntregister: statements breathe (a2-3) ===
+   One sentence alone in the white, centred in its own height; capped so a 796px-high screen never turns empty. */
+.b-statement{ min-height:min(56svh,520px); display:grid; align-content:center }
+
+/* === Muntregister: membership tiers as aligned certificates (a2-5, g6) ===
+   Subgrid: name, sub-label, tagline, for whom, items label, items and action share one line across the three tiers
+   (the min-height patch is gone). Each tier is a certificate with a neutral double edge; the roman numeral is its
+   only gold (sub-label, items label and the link's underline go to ink). No featured tier, no hover lift, no reveal. */
+.tier-tag{ min-height:0 }
+.tier-items{ border-top:0 }
+.tier-items li{
+  position:relative; padding-block:7px; padding-inline-start:28px; border-bottom:0;
+  font-family:var(--display); font-weight:600; font-size:var(--t0); line-height:1.4; color:var(--ink);
+}
+.tier-items li::before{ content:""; position:absolute; inset-inline-start:0; top:calc(7px + .7em); width:14px; height:1px; background:var(--ink-soft) }
+[dir="rtl"] .tier-items li{ font-family:var(--arabic) }
+.tier :is(.tier-sub,.tier-il){ color:var(--ink-soft) }
+.tier .more::after{ background:currentColor }
+.tiers,.tier,.tier:first-child,.tier:last-child{ border-top:0 }
+.tiers{ column-gap:var(--s-lg); row-gap:var(--s-lg) }
+.tier,.tier:first-child,.tier:last-child{
+  background:var(--paper-lift); border:1px solid var(--line-strong);
+  outline:1px solid rgba(36,20,24,.12); outline-offset:-7px;
+  padding:clamp(30px,2.8vw,44px) clamp(24px,2.4vw,40px);
+}
+@supports (grid-template-rows:subgrid){
+  @media (min-width:1101px){
+    .tiers{ grid-template-rows:repeat(8,auto); row-gap:0 }
+    .tier,.tier:first-child,.tier:last-child{ grid-row:span 8; display:grid; grid-template-rows:subgrid; row-gap:0; align-content:start }
+    .tier-go{ align-self:start; justify-self:start; margin-top:0 } /* the three actions start on one line */
+  }
+}
+@media (max-width:1100px){
+  .tiers{ grid-template-columns:1fr }
+  .tier,.tier:first-child,.tier:last-child{ border:1px solid var(--line-strong); padding:clamp(26px,5vw,40px) clamp(20px,5vw,36px) }
+}
+
+/* === Muntregister: pending values stay in the composition (a2-7) ===
+   A value still to come ([…]) keeps one quiet treatment: the serif italic at the size of its place, muted, never
+   bigger or bolder than the real value will be; upright Almarai in Arabic; lighter on bordeaux. Its dashed underline
+   goes from gold to the neutral line (gold is for marks, not for gaps). Stand-in portraits stay at most 400px tall. */
+:is(.pending,.pending-mark):not(.h3 *){
+  font-family:var(--text); font-style:italic; font-weight:400; font-size:inherit; color:var(--muted);
+  letter-spacing:0; text-transform:none; font-variant-caps:normal;
+}
+.pending:not(.h3 *){ border-bottom-color:var(--line-strong) }
+[dir="rtl"] :is(.pending,.pending-mark):not(.h3 *){ font-family:var(--arabic); font-style:normal }
+.b-dark :is(.pending,.pending-mark){ color:var(--paper-mute) }
+.portrait{ max-height:400px }
+
+/* === Muntregister: the business card (a2-8, b9) ===
+   The contact details as a <dl> on the club's letterhead: legend and value per row, hairlines between, the loose
+   line about Rotterdam as the card's closing line in the serif italic. The seal (132px, static, aria-hidden) stands
+   in columns 1–4 beside it, hanging from the card's top line; it is the only seal on the contact page. */
+.is-card .b-grid{ align-items:start }
+.is-card .card-seal{ justify-self:start }
+@media (min-width:901px){
+  .is-card .card-seal{ grid-column:1 / span 4 }
+  .is-card .card{ grid-column:6 / -1 }
+}
+.is-card .card .b-head{ margin-bottom:var(--s-xl) }
+.card-dl{ margin:0; border-top:1px solid var(--line-strong) }
+.card-row{ display:grid; grid-template-columns:minmax(9em,32%) 1fr; column-gap:var(--s-lg); align-items:baseline; padding-block:16px; border-bottom:1px solid var(--line) }
+.card-row dt{ color:var(--ink-soft); font-family:var(--display); font-weight:600; font-size:.95rem; line-height:1.4 }
+/* (left to right the legend is slice 2's one recipe, a1-5) */
+[dir="rtl"] .card-row dt{ font-family:var(--arabic) }
+.card-row dd{ margin:0; min-height:1.4em; font-family:var(--display); font-weight:700; font-size:1.08rem; line-height:1.4; letter-spacing:-.005em; color:var(--ink) }
+[dir="rtl"] .card-row dd{ font-family:var(--arabic); letter-spacing:0; line-height:1.75 }
+.card-row dd .pending{ white-space:normal }
+.card-close{ margin-top:var(--s-lg); font-family:var(--text); font-style:italic; font-weight:400; font-size:var(--t1); line-height:1.45; color:var(--ink); max-width:46ch }
+[dir="rtl"] .card-close{ font-family:var(--arabic); font-style:normal; line-height:1.8 }
+@media (max-width:600px){ .card-row{ grid-template-columns:1fr; row-gap:2px } }
+
+/* === Muntregister: photographs — two alignments, a true diptych, never a narrow photo beside a heading (a3-2) ===
+   HANG: a photo's top meets the top of the label beside it. The duo is a diptych of equal height (columns 1–7 and
+   9–12), the text under the large one. The plate is four columns, 4:5. The mosaic has one offset (children 2 and 4).
+   Phones: the duo stacks without overlap. */
+.b-prose.with-ph .b-grid{ align-items:start }
+.b-prose.with-ph .b-prose-head{ align-self:start }
+.b-lead-ph{ margin-top:0 }
+@media (min-width:901px){
+  /* the photo's height goes to an empty third row, so the text under the heading follows it at once */
+  .b-prose.with-ph .b-grid{ grid-template-rows:auto auto 1fr }
+  .b-prose.with-ph .b-grid > .b-prose-ph.ph{ grid-row:1 / span 3 }
+  .b-prose.ph-tall .b-prose-ph{ aspect-ratio:4/5 }
+  .b-prose.ph-plate.side-end :is(.b-prose-head,.b-prose-body){ grid-column:1 / span 7 }
+  .b-prose.ph-plate.side-end .b-prose-ph{ grid-column:9 / -1; margin-top:0; aspect-ratio:4/5 }
+  .b-prose.ph-plate.side-start :is(.b-prose-head,.b-prose-body){ grid-column:6 / -1 }
+  .b-prose.ph-plate.side-start .b-prose-ph{ grid-column:1 / span 4; margin-top:0; aspect-ratio:4/5 }
+  .duo-a{ grid-column:1 / span 7; grid-row:1; aspect-ratio:3/2 }
+  .duo-b{ grid-column:9 / -1; grid-row:1; aspect-ratio:auto; height:auto; align-self:stretch; margin-top:0 }
+  .duo-t{ grid-column:1 / span 7; grid-row:2; padding-top:32px }
+}
+@media (max-width:900px){
+  .duo-b{ margin-top:0; aspect-ratio:4/5; z-index:auto }
+}
+.b-mosaic{ --stag:clamp(40px,5vw,72px) }
+.mosaic-ph:nth-child(n){ margin-top:0 }
+.mosaic-ph:nth-child(2n){ margin-top:var(--stag) }
+/* a register's one photograph, now its own plate after the list (g1): four columns, hanging from the list's column */
+.b-plate .plate-ph{ grid-column:6 / span 4; aspect-ratio:4/5 }
+@media (max-width:900px){ .b-plate .plate-ph{ max-width:400px } }
+
+/* === Muntregister: photographs run to the screen's edge (a3-3) ===
+   In prose with a half photo, the photo runs on its own side to the edge of the screen (the distance from the
+   column to the edge is the gutter, or half the space beside the 1480px column on wide screens). No extra gold. */
+@media (min-width:901px){
+  .b-prose.ph-half .b-prose-ph{ aspect-ratio:3/2 }
+  .b-prose.ph-half.side-end .b-prose-ph{ margin-inline-end:calc(-1 * max(var(--gutter), (100vw - var(--max)) / 2)) }
+  .b-prose.ph-half.side-start .b-prose-ph{ margin-inline-start:calc(-1 * max(var(--gutter), (100vw - var(--max)) / 2)) }
+}
+
+/* === Muntregister: the coin certificate (a7-3) ===
+   The facts of the ducat set as a certificate of assay: two columns (one under 760px), the legend in small caps,
+   the value in the serif. 983/1000 stays a plain number, never a fraction; nothing counts up. */
+.spec-reg{ margin:0; display:grid; grid-template-columns:1fr 1fr; column-gap:var(--s-2xl); border-bottom:1px solid var(--line-strong) }
+.spec-row{ padding-block:28px; border-top:1px solid var(--line-strong) }
+.spec-row dt{ color:var(--ink-soft); font-family:var(--arabic); font-weight:600; font-size:.95rem; line-height:1.5 }
+:root:not([dir="rtl"]) .spec-row dt{ line-height:1.3 } /* the legend itself: slice 2's one recipe (a1-5) */
+.spec-row dd{
+  margin:10px 0 0; font-family:var(--text); font-weight:400; font-size:clamp(1.45rem,1.2rem + .9vw,2rem); line-height:1.2;
+  letter-spacing:-.005em; color:var(--ink); max-width:22ch; text-wrap:balance;
+}
+[dir="rtl"] .spec-row dd{ font-family:var(--arabic); font-size:clamp(1.3rem,1.1rem + .6vw,1.7rem); line-height:1.6; letter-spacing:0 }
+@media (max-width:760px){ .spec-reg{ grid-template-columns:1fr } }
+
+/* === Muntregister: the index as one text register (g1) ===
+   The services overview: twelve equal rows — number, title, the page's line, the round arrow coin (b2: the only
+   round control). No photographs. On hover the bar crosses and the arrow steps (a mouse only); the coin fills and
+   gives on press, and is filled on keyboard focus. */
+.idx-reg{ list-style:none; margin:0; padding:0; border-top:1px solid var(--line-strong) }
+.idx-reg a{
+  display:grid; grid-template-columns:3em minmax(0,5fr) minmax(0,6fr) 44px; column-gap:var(--s-lg); align-items:baseline;
+  padding-block:clamp(18px,2vw,26px); border-bottom:1px solid var(--line); color:var(--ink);
+}
+.idx-reg .idx-n{ grid-column:1; grid-row:1 }
+.idx-reg .idx-t{ grid-column:2; grid-row:1; display:block }
+.idx-reg .idx-b{ grid-column:3; grid-row:1; font-family:var(--text); color:var(--ink-soft); max-width:52ch }
+[dir="rtl"] .idx-reg .idx-b{ font-family:var(--arabic) }
+.idx-go{
+  grid-column:4; grid-row:1; align-self:center; width:44px; height:44px; border:1px solid var(--line-strong); border-radius:50%;
+  display:grid; place-items:center; color:var(--ink-soft); line-height:1;
+  transition:background-color var(--d-hover) ease, border-color var(--d-hover) ease, color var(--d-hover) ease, scale var(--d-press) var(--ease-arrive);
+}
+/* hover: only the bar crosses (a4-4) and the arrow steps; the coin fills on press and on keyboard focus */
+.idx-reg a:is(:active,:focus-visible) .idx-go{ background-color:var(--wine); border-color:var(--wine); color:var(--paper) }
+.idx-reg a:active .idx-t{ color:var(--wine-deep) }
+.idx-reg a:active .idx-go{ scale:.94 }
+@media (max-width:900px){
+  .idx-reg a{ grid-template-columns:2.4em minmax(0,1fr) 44px; row-gap:6px }
+  .idx-reg .idx-b{ grid-column:2; grid-row:2 }
+  .idx-go{ grid-column:3; grid-row:1 / span 2 }
+}
+@media (prefers-reduced-motion:reduce){ .idx-go{ transition:none } }
+
+/* === Muntregister: struck coins in the admission steps (g6, a7-2) ===
+   Default: the gold ticks on the line become small struck coins (14px), one gold series together; the numeral is
+   the serif italic in bordeaux (slice 2), on a tight leading. Everything is static. */
+.bstep::before{
+  width:14px; height:14px; border-radius:50%; top:calc(-1 * var(--s-lg) - 6.5px);
+  background:var(--coin);
+  box-shadow:inset 0 0 0 1px rgba(122,90,42,.6);
+}
+.bstep-n{ display:block; width:max-content; line-height:.8; padding-top:.06em; transform-origin:left center }
+[dir="rtl"] .bstep-n{ transform-origin:right center; line-height:1.1 }
+
+/* EXTRA (html[data-beweging="extra"], review switch; ≤6 steps): when the steps first come into view on one row,
+   the line draws itself in gold and settles back to the hairline; each coin is struck (from 1.4× and transparent,
+   with a ring that spreads), then its numeral lands out of a soft blur. Per step +220ms (+180ms for 5–6 steps),
+   all within 1.8s. Below 1101px (two rows or one column) each step only fades in. Reduced motion: nothing moves. */
+@media (scripting:enabled) and (prefers-reduced-motion:no-preference){
+  html[data-beweging="extra"] .bsteps.is-struck{ --step:220ms }
+  html[data-beweging="extra"] .bsteps.is-struck:is([data-n="5"],[data-n="6"]){ --step:180ms }
+  @media (min-width:1101px){
+    html[data-beweging="extra"] .bsteps.is-struck::after{
+      content:""; position:absolute; top:0; inset-inline:0; height:1px; background:var(--bar);
+      transform:scaleX(0); transform-origin:left center; pointer-events:none;
+      animation:steps-draw var(--d-draw) var(--ease-draw) both, steps-settle var(--d-reveal) ease 1300ms forwards;
+    }
+    html[data-beweging="extra"][dir="rtl"] .bsteps.is-struck::after{ transform-origin:right center }
+    html[data-beweging="extra"] .bsteps.is-struck .bstep::after{
+      content:""; position:absolute; top:calc(-1 * var(--s-lg) - 6.5px); inset-inline-start:0; width:14px; height:14px;
+      border-radius:50%; box-shadow:0 0 0 1px var(--bar); opacity:0; pointer-events:none;
+      animation:coin-ring var(--d-reveal) var(--ease-arrive) calc(var(--i) * var(--step) + 150ms) both;
+    }
+    html[data-beweging="extra"] .bsteps.is-struck .bstep::before{ animation:coin-strike var(--d-ui) var(--ease-arrive) calc(var(--i) * var(--step) + 150ms) both }
+    html[data-beweging="extra"] .bsteps.is-struck .bstep-n{ animation:numeral-strike var(--d-ui) var(--ease-arrive) calc(var(--i) * var(--step) + 330ms) both }
+    html[data-beweging="extra"] .bsteps.is-struck:not(.in)::after,
+    html[data-beweging="extra"] .bsteps.is-struck:not(.in) .bstep::before,
+    html[data-beweging="extra"] .bsteps.is-struck:not(.in) .bstep::after,
+    html[data-beweging="extra"] .bsteps.is-struck:not(.in) .bstep-n{ animation-play-state:paused }
+  }
+  @media (max-width:1100px){
+    html[data-beweging="extra"] .bsteps.is-struck .bstep{ animation:mh-fade var(--d-reveal) var(--ease-arrive) calc(var(--i) * 90ms) both }
+    html[data-beweging="extra"] .bsteps.is-struck:not(.in) .bstep{ animation-play-state:paused }
+  }
+}
+@keyframes steps-draw{ from{ transform:scaleX(0) } to{ transform:scaleX(1) } }
+@keyframes steps-settle{ to{ opacity:0 } }
+@keyframes coin-strike{ from{ opacity:0; transform:scale(1.4) } to{ opacity:1; transform:none } }
+@keyframes coin-ring{ 0%{ opacity:.85; transform:scale(1) } 100%{ opacity:0; transform:scale(2.4) } }
+@keyframes numeral-strike{ from{ opacity:0; transform:scale(1.08); filter:blur(3px) } to{ opacity:1; transform:none; filter:blur(0) } }
+
+/* EXTRA: the statement's cross-mark draws itself once (the second stroke 200ms later). The sentence never waits for it
+   (g4: no reveal on running text); it is simply there. Default: the mark simply stands. */
+@media (scripting:enabled) and (prefers-reduced-motion:no-preference){
+  html[data-beweging="extra"] .stmt-mark path{ stroke-dasharray:240; stroke-dashoffset:0; transition:stroke-dashoffset var(--d-draw) var(--ease-draw) }
+  html[data-beweging="extra"] .stmt-mark path + path{ transition-delay:200ms }
+  html[data-beweging="extra"] .stmt-mark:not(.in) path{ stroke-dashoffset:240 }
+}
+
+/* ============================================================
+   SLICE 4 — EVERYTHING YOU TOUCH (g8: a4-2, a4-3, a4-4, a4-5, a4-6, a4-7, a4-8, a4-9, a4-10)
+   Markup: components/Arrow.tsx (the one arrow), components/Form.tsx (fields, drop zone, errors, the button, the
+   choice of forms). Hover transforms only for a mouse; nothing moves for the keyboard (html[data-kbd], slice 1);
+   colours change in 200ms on plain ease; panels 180–260ms in, 140–160ms out; never ease-in, never scale(0).
+   Nothing here reaches the hero (.h3) or the dock: the hero keeps its own glyph arrow (.arrow); this slice draws .arw.
+   ============================================================ */
+
+/* === Muntregister: one drawn arrow (a4-3) ===
+   components/Arrow.tsx: a hairline shaft with an open head in the text colour (no system-font glyph, so the same in
+   every language). Mirrored on right-to-left pages through --dir; for a mouse it steps 4px ahead on hover (220ms in,
+   140ms back); on keyboard focus it stands ahead at once. Arrows are ink, never gold. */
+[dir="rtl"]{ --dir:-1 }
+[dir="ltr"]{ --dir:1 }
+.arw{
+  display:inline-block; flex:none; width:1.1em; height:.5em; vertical-align:.12em; overflow:visible;
+  scale:var(--dir,1) 1; translate:0 0;
+  transition:translate var(--d-press) var(--ease-arrive), opacity var(--d-hover) ease, scale var(--d-press) var(--ease-arrive);
+}
+@media (hover:hover) and (pointer:fine){
+  :is(a,button):hover .arw{ translate:calc(var(--dir,1) * 4px) 0; transition-duration:var(--d-hover), var(--d-hover), var(--d-press) }
+}
+:is(a,button):focus-visible .arw{ translate:calc(var(--dir,1) * 4px) 0; transition:none }
+/* wide rows give only their arrow under the finger (a4-1), the mirror kept */
+:is(.mx-row a,.mp-list a,.idx-reg a):active .arw{ scale:calc(var(--dir,1) * .94) .94 }
+:is(.mx-row a,.mp-t) .arw{ color:var(--ink-soft) }
+:is(.mx-row a:hover,.mp-list a:hover .mp-t) .arw{ color:currentColor }
+.idx-go .arw{ width:18px; height:9px; vertical-align:0 }
+/* the menu's rows show their arrow only when pointed at, focused or current (as the glyph did) */
+.mp-t .arw{ opacity:0 }
+.mp-list a:is(:hover,:focus-visible,.is-key) .mp-t .arw{ opacity:1 }
+/* the same arrow for drawn pseudo-elements (the choice of forms): one mask, the same path */
+:root{ --arw-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 10'%3E%3Cpath d='M0 5H20M15.5 1 20 5l-4.5 4' fill='none' stroke='%23000' stroke-width='1.25'/%3E%3C/svg%3E") }
+
+/* === Muntregister: rectangular buttons, the bordeaux fill crosses like the bar (a4-2, b2) ===
+   One button: solid (bordeaux) or line (bordeaux edge); rectangles with the site's 2px corner — the 44px arrow coin
+   is the only round control. For a mouse, a deeper bordeaux sweeps in from the start side like the hero's bar
+   (clip-path, 240ms in, 160ms back); the line variant takes the paper colour with it (160ms, no delay). Pressed: .97
+   (slice 1). Arabic: Almarai 15px, no capitals, no tracking. */
+.btn,.act-a{
+  position:relative; isolation:isolate; border-radius:var(--radius); min-height:52px;
+  padding-block:0; padding-inline:28px 22px; display:inline-flex; align-items:center; justify-content:center; gap:12px;
+}
+.btn::before,.act-a::before,.ni-contact > a::before{
+  content:""; position:absolute; inset:-1px; z-index:-1; border-radius:inherit; background:var(--wine-deep);
+  clip-path:inset(0 100% 0 0); transition:clip-path var(--d-press) var(--ease-arrive); pointer-events:none;
+}
+[dir="rtl"] :is(.btn,.act-a,.ni-contact > a)::before{ clip-path:inset(0 0 0 100%) }
+@media (hover:hover) and (pointer:fine){
+  :is(.btn:not(:disabled),.act-a,.ni-contact > a):hover::before{ clip-path:inset(0); transition:clip-path var(--d-ui) var(--ease-arrive) }
+}
+/* the fill does the hover now: the face itself stays put */
+.btn:hover,.btn:disabled{ background:var(--wine); border-color:var(--wine) }
+.btn:disabled{ opacity:1; cursor:progress }
+.act-a{ border-color:var(--wine); color:var(--wine); background:transparent }
+.act-a.is-first{ background:var(--wine); color:var(--paper) }
+.act-a:hover{ background:transparent; border-color:var(--wine); color:var(--wine) }
+.act-a.is-first:hover{ background:var(--wine); color:var(--paper) }
+/* the line variant for any button that needs it, and the compact one (40px) for tight places */
+.btn.line,.btn.line:hover{ background:transparent; color:var(--wine) }
+.btn.compact{ min-height:40px; padding-inline:18px 14px }
+/* the nav's contact link: the same rectangle and fill; its size (and so the bar's height) is not touched */
+.ni-contact > a{ position:relative; isolation:isolate; border-radius:var(--radius) }
+@media (hover:hover) and (pointer:fine){
+  /* a line button turns paper with the fill (160ms, no delay); on touch screens it keeps its colours */
+  :is(.act-a,.btn.line):hover{ color:var(--paper); transition:color var(--d-press) ease, scale var(--d-press) var(--ease-arrive) }
+  .ni-contact > a:hover{ background:transparent }
+}
+/* the letter: slice 2's one interface-caps style (--caps-*: 700, 12.5px, .14em capitals) */
+[dir="rtl"] :is(.btn,.act-a){ font-family:var(--arabic); font-size:15px; letter-spacing:0; text-transform:none }
+
+/* === Muntregister: the hover signature — the bar crosses (a4-4) ===
+   Under every clickable row or card (the index, "elsewhere", the pages of this section, the menu, the home rows) a
+   2px line in the bar's gold draws from the start side for a mouse (220ms, back in 140ms); on keyboard focus it is
+   simply there. At rest there is no gold. This replaces the slow photo zoom; it is the site's one hover line.
+   "Read more" keeps its own short underline, on the same timing. */
+/* (a9-8: .sp-sib has no markup any more, but it stays in these :is() lists, and in a4-1's, because it sets their weight) */
+:is(.idx-reg a,.mx-row a,.mp-list a,.sp-sib ul a){ position:relative }
+:is(.idx-reg a,.mx-row a,.mp-list a,.sp-sib ul a)::after{
+  content:""; position:absolute; inset-inline:0; bottom:-1px; height:2px; background:var(--bar);
+  transform:scaleX(0); transform-origin:left center; transition:transform var(--d-press) var(--ease-arrive); pointer-events:none;
+}
+[dir="rtl"] :is(.idx-reg a,.mx-row a,.mp-list a,.sp-sib ul a)::after{ transform-origin:right center }
+@media (hover:hover) and (pointer:fine){
+  :is(.idx-reg a,.mx-row a,.mp-list a,.sp-sib ul a):hover::after{ transform:scaleX(1); transition:transform var(--d-hover) var(--ease-arrive) }
+  .more:not(.h3 *):hover::after{ transition:transform 220ms var(--ease-arrive) }
+}
+:is(.idx-reg a,.mx-row a,.mp-list a,.sp-sib ul a):focus-visible::after{ transform:scaleX(1); transition:none }
+.more:not(.h3 *)::after{ transition:transform 140ms var(--ease-arrive) }
+.more:not(.h3 *):focus-visible::after{ transform:scaleX(1); transition:none }
+/* the pages of this section: the current one keeps its bordeaux face; no gold edge on a chip at rest or on hover */
+
+/* === Muntregister: fields as lined letter paper (a4-5) ===
+   One rule under each field (#8A7F6A, 3.28:1 on paper), the serif to write in; on focus a 2px bordeaux line draws
+   from the start side (240ms) and the label turns bordeaux. The comment box is ruled paper. Select and date carry a
+   drawn chevron / calendar in ink-soft at the end side (left on /ar); the date follows the page's language (<html
+   lang>). The checkbox is a 20px square that takes a bordeaux diamond. Labels always stay above their field. */
+.fm .field{ gap:6px }
+.ctl{ position:relative; display:block; min-width:0 }
+.ctl::after{
+  content:""; position:absolute; inset-inline:0; bottom:0; height:2px; background:var(--wine);
+  transform:scaleX(0); transform-origin:left center; transition:transform var(--d-ui) var(--ease-arrive); pointer-events:none;
+}
+[dir="rtl"] .ctl::after{ transform-origin:right center }
+.ctl:focus-within::after{ transform:scaleX(1) }
+.field :is(input,select,textarea):not(.dz-in){
+  background-color:transparent; border:0; border-bottom:1px solid var(--rule-field); border-radius:0; padding:12px 0 10px; min-height:52px;
+  font:400 1.0625rem/1.4 var(--text); color:var(--ink); width:100%; scroll-margin-top:calc(var(--nav-h, 80px) + 72px);
+  transition:border-color var(--d-hover) ease;
+}
+[dir="rtl"] .field :is(input,select,textarea):not(.dz-in){ font-family:var(--arabic); font-size:1.125rem; line-height:1.5 }
+.field :is(input,select,textarea):not(.dz-in):hover{ border-color:var(--ink-soft) }
+.field .ctl :is(input,select,textarea):focus-visible{ outline:none }
+.field [aria-invalid="true"]:not(.dz-in){ border-bottom-color:var(--wine) }
+.field ::placeholder{ color:var(--muted); opacity:1 }
+.field > label{ transition:color var(--d-hover) ease }
+.field:focus-within > label{ color:var(--wine) }
+/* addresses, numbers and links run left to right; on /ar they still start at the right edge (a4-6) */
+[dir="rtl"] .field input[dir="ltr"]{ text-align:right }
+/* the comment box: ruled paper that scrolls with the writing */
+.field textarea:not(.dz-in){
+  line-height:1.75; min-height:calc(1.75em * 5 + 22px); resize:vertical;
+  background-image:linear-gradient(transparent calc(1.75em - 1px), var(--line) 0); background-size:100% 1.75em;
+  background-origin:content-box; background-attachment:local;
+}
+[dir="rtl"] .field textarea:not(.dz-in){ line-height:1.9; background-image:linear-gradient(transparent calc(1.9em - 1px), var(--line) 0); background-size:100% 1.9em }
+/* the select's own chevron, drawn (10×6, ink-soft), at the end side */
+.field select:not(.dz-in){
+  -webkit-appearance:none; appearance:none; cursor:pointer; padding-inline-end:28px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M.5.5 5 5 9.5.5' fill='none' stroke='%234B3A3E' stroke-width='1.25'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-size:10px 6px; background-position:right 2px center;
+}
+[dir="rtl"] .field select{ background-position:left 2px center }
+/* the date's calendar, drawn in ink-soft (the browser puts it at the end side, also on /ar) */
+.field input[type="date"]::-webkit-calendar-picker-indicator{
+  cursor:pointer; opacity:.75; width:16px; height:16px; padding:4px; margin-inline-start:8px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cg fill='none' stroke='%234B3A3E' stroke-width='1.1'%3E%3Crect x='1.5' y='3' width='13' height='11.5'/%3E%3Cpath d='M1.5 6.5h13M5 1v3.5M11 1v3.5'/%3E%3C/g%3E%3C/svg%3E") center/16px 16px no-repeat;
+}
+.field input[type="date"]::-webkit-calendar-picker-indicator:hover{ opacity:1 }
+/* the checkbox: a 20px square on paper; checked, a bordeaux diamond grows in (160ms); pressed it gives (.94) */
+.fm-check input{
+  -webkit-appearance:none; appearance:none; flex:none; width:20px; height:20px; margin:2px 0 0; border:1px solid var(--rule-field);
+  border-radius:0; background:var(--paper-lift); display:grid; place-items:center; cursor:pointer;
+  transition:border-color var(--d-hover) ease, scale var(--d-press) var(--ease-arrive);
+}
+.fm-check input::before{
+  content:""; width:9px; height:9px; background:var(--wine); opacity:0; transform:rotate(45deg) scale(.4);
+  transition:transform var(--d-press) var(--ease-arrive), opacity var(--d-press) ease;
+}
+.fm-check input:checked{ border-color:var(--wine) }
+.fm-check input:checked::before{ opacity:1; transform:rotate(45deg) scale(1) }
+.fm-check input:active{ scale:.94 }
+.fm-check input[aria-invalid="true"]{ border-color:var(--wine) }
+.fm-check-w{ display:grid; gap:6px }
+.fm-check-w .err{ padding-inline-start:32px }
+
+/* === Muntregister: errors under the field, in the source's words (a4-6, b11) ===
+   No browser bubble: the message (21: required, invalid e-mail; for an attachment that is too large the source's
+   failure line) stands under the field in bordeaux, tied to it with aria-describedby; one polite live region. */
+.fm .err{ display:block; font-family:var(--display); font-weight:500; font-size:13.5px; line-height:1.45; color:var(--wine) }
+[dir="rtl"] .fm .err{ font-family:var(--arabic); font-size:.9rem; line-height:1.7 }
+.fm-live{ position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap }
+
+/* === Muntregister: the attachment as a drop zone (a4-6) ===
+   A dashed frame with the brand mark, the source's hint and, once chosen, the file's name and size. The real file
+   field lies invisibly over it (a click or a drop reaches it; the keyboard focuses it and the frame shows the ring).
+   Dragging a file over it: a bordeaux edge on lifted paper (150ms). */
+.dz{
+  position:relative; display:grid; grid-template-columns:40px minmax(0,1fr); column-gap:16px; align-items:center;
+  min-height:88px; padding:20px 24px; border:1px dashed var(--rule-field); border-radius:var(--radius);
+  transition:border-color var(--d-press) ease, background-color var(--d-press) ease;
+}
+.dz:hover{ border-color:var(--ink-soft) }
+.dz.is-over{ border-color:var(--wine); border-style:solid; background-color:var(--paper-lift) }
+.dz.has-file{ border-style:solid; border-color:var(--line-strong); background-color:var(--paper-lift) }
+.dz:has(.dz-in[aria-invalid="true"]){ border-color:var(--wine) }
+.dz:has(.dz-in:focus-visible){ outline:2px solid var(--wine); outline-offset:3px }
+.dz-mark{ width:26px; height:auto; justify-self:center; opacity:.9 }
+.dz-t{ display:grid; gap:6px; min-width:0 }
+.field .dz .hint{ color:var(--ink-soft); font-size:var(--read-s); line-height:1.5 }
+.dz-file{ display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 12px; font-family:var(--display); font-weight:600; font-size:.95rem; color:var(--ink) }
+[dir="rtl"] .dz-file{ font-family:var(--arabic) }
+.dz-name{ overflow-wrap:anywhere }
+.dz-size{ color:var(--muted); font-weight:500; font-variant-numeric:tabular-nums lining-nums }
+.field .dz-in{ position:absolute; inset:0; width:100%; height:100%; margin:0; padding:0; border:0; opacity:0; cursor:pointer; font-size:16px }
+.field .dz-in:focus-visible{ outline:none }
+@media (max-width:600px){ .dz{ padding:16px 18px; column-gap:14px } }
+
+/* === Muntregister: the select's own panel, without a library (a4-7) ===
+   Where the browser offers the customisable select (appearance:base-select) its list opens as a panel of the house:
+   paper, a hairline edge, a 2px bordeaux top edge, 44px rows; it arrives in 180ms (opacity and .97 → 1 from its top).
+   Keyboard, typing to find and screen readers stay the browser's own. Other browsers keep the native list with the
+   drawn chevron above. */
+@supports (appearance:base-select){
+  .field select,.field select::picker(select){ appearance:base-select }
+  .field select{ display:flex; align-items:center }
+  .field select::picker-icon{ display:none }
+  .field select::picker(select){
+    background:var(--paper); color:var(--ink); border:1px solid var(--line-strong); border-top:2px solid var(--wine);
+    border-radius:var(--radius); margin-top:6px; padding:6px 0; box-shadow:0 18px 40px -18px rgba(36,20,24,.28);
+    transform-origin:top center; opacity:1; transform:none;
+    transition:opacity var(--d-hover) var(--ease-arrive), transform var(--d-hover) var(--ease-arrive), overlay var(--d-hover) allow-discrete, display var(--d-hover) allow-discrete;
+  }
+  .field select:not(:open)::picker(select){ opacity:0; transform:scale(.97) }
+  @starting-style{ .field select:open::picker(select){ opacity:0; transform:scale(.97) } }
+  .field select option{ min-block-size:44px; padding-inline:16px; display:flex; align-items:center; gap:10px; font:inherit; cursor:pointer }
+  .field select option::checkmark{ display:none }
+  .field select option:checked{ color:var(--wine) }
+  .field select option:is(:hover,:focus-visible){ background:var(--paper-deep); outline:none }
+  .field select option:disabled{ color:var(--muted) }
+}
+
+/* === Muntregister: sending — a button that keeps its width, and the seal on success (a4-8) ===
+   The button keeps its words; only its arrow turns into a small ring (14px, 600ms a turn) while the source's
+   "sending" line stands beside it. On success the confirmation settles in (opacity and 8px, 380ms) and takes the
+   focus. Beside it: the seal where no other seal is on the page (88px), the bare tulip in the footer, nothing on the
+   contact page (b9). The press of the seal and the drawing of the gold edge belong to the extra motion. */
+.fm-send{ display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px }
+.btn-i{ display:inline-grid; place-items:center; flex:none }
+.btn-i > *{ grid-area:1 / 1; transition:opacity var(--d-hover) ease }
+.btn-i .spin{ width:14px; height:14px; border-radius:50%; border:1.5px solid currentColor; border-inline-end-color:transparent; opacity:0 }
+.btn-i.is-busy .arw{ opacity:0 }
+.btn-i.is-busy .spin{ opacity:1; animation:fm-turn 600ms linear infinite }
+@keyframes fm-turn{ to{ rotate:360deg } }
+.fm-sending{ font-family:var(--text); font-style:italic; font-size:var(--read-s); line-height:1.5; color:var(--ink-soft) }
+[dir="rtl"] .fm-sending{ font-family:var(--arabic); font-style:normal }
+.fm-sending:empty{ display:none }
+.fm-ok{
+  position:relative; display:grid; grid-template-columns:minmax(0,1fr); align-items:center; column-gap:24px;
+  border-inline-start:0; padding:var(--s-lg); padding-inline-start:calc(var(--s-lg) + 3px);
+}
+/* the gold edge: the foil (slice 1), turned upright */
+.fm-ok::before{ content:""; position:absolute; inset-block:0; inset-inline-start:0; width:3px; background:var(--foil-v); transform-origin:top center }
+.fm-ok.has-mark{ grid-template-columns:auto minmax(0,1fr) }
+.fm-ok:focus{ outline:none }
+.fm-ok-t{ display:grid; gap:var(--s-sm) }
+.fm-ok-t .fm-ok-note{ margin-top:0 }
+.fm-mark{ display:grid; place-items:center }
+.fm-mark .seal-wrap{ width:88px; height:88px }
+.fm-mark .seal-wrap .tulip{ width:30px }
+.fm-mark > .tulip{ width:30px; height:auto }
+@media (prefers-reduced-motion:no-preference){
+  .fm-ok{ transition:opacity var(--d-ui) var(--ease-arrive), transform var(--d-ui) var(--ease-arrive) }
+  @starting-style{ .fm-ok{ opacity:0; transform:translateY(8px) } }
+  /* EXTRA: the gold edge draws down (500ms) and the seal is pressed in once (420ms), then lies still */
+  html[data-beweging="extra"] .fm-ok::before{ transition:transform var(--d-reveal) var(--ease-draw) 80ms }
+  @starting-style{ html[data-beweging="extra"] .fm-ok::before{ transform:scaleY(0) } }
+  html[data-beweging="extra"] .fm-mark{ transition:opacity var(--d-ui) var(--ease-arrive) 120ms, transform var(--d-ui) var(--ease-arrive) 120ms }
+  @starting-style{ html[data-beweging="extra"] .fm-mark{ opacity:0; transform:scale(1.12) rotate(-8deg) } }
+}
+@media (prefers-reduced-motion:reduce){
+  .fm-ok{ transition:opacity var(--d-hover) ease }
+  @starting-style{ .fm-ok{ opacity:0 } }
+  .btn-i.is-busy .spin{ animation-duration:var(--d-draw) }
+}
+@media (max-width:600px){
+  .fm-ok.has-mark{ grid-template-columns:minmax(0,1fr); row-gap:var(--s-md) }
+  .fm-mark{ place-items:start }
+}
+
+/* the footer's newsletter: its one field and its button on one line (the only inline form) */
+.fm.is-inline{ grid-template-columns:minmax(0,1fr) auto; column-gap:16px; align-items:end }
+.fm.is-inline > *{ grid-column:1 / -1 }
+.fm.is-inline > .fm-grid{ grid-column:1; grid-row:1 }
+.fm.is-inline > .fm-send{ display:contents }
+.fm.is-inline .btn{ grid-column:2; grid-row:1; align-self:end }
+.fm.is-inline .fm-sending{ grid-column:1 / -1 }
+@media (max-width:420px){
+  .fm.is-inline{ grid-template-columns:minmax(0,1fr) }
+  .fm.is-inline .btn{ grid-column:1; grid-row:auto; justify-self:start }
+}
+
+/* === Muntregister: "What are you looking for?" — the marker glides (a4-9) ===
+   A 2px bordeaux marker slides to the chosen line (measured per button, so lines of two rows fit; 260ms on the
+   drawing curve). A choice made with the arrow keys or through the address (#…) changes at once (data-instant); a
+   click lets the marker glide and the new form settle in (opacity and 6px, 220ms, 40ms apart). Below 900px the
+   choices become a two-column grid of compact rectangles, the chosen one edged in bordeaux. */
+.fs-choices button{ position:relative; padding-inline-start:18px; transition:color var(--d-hover) ease, scale var(--d-press) var(--ease-arrive) }
+.fs-choices button::after,[dir="rtl"] .fs-choices button::after{
+  content:""; flex:none; align-self:center; width:1.1em; height:.5em; background:currentColor;
+  -webkit-mask:var(--arw-mask) center/contain no-repeat; mask:var(--arw-mask) center/contain no-repeat;
+  scale:var(--dir,1) 1; opacity:0; transition:opacity var(--d-hover) ease;
+}
+.fs-choices button.on::after{ opacity:1 }
+@media (hover:hover) and (pointer:fine){ .fs-choices button:not(.on):hover{ color:var(--ink) } }
+.fs-ind{
+  position:absolute; top:0; inset-inline-start:0; z-index:1; width:2px; height:1px; background:var(--wine); pointer-events:none;
+  transform-origin:top; transform:translateY(var(--y)) scaleY(var(--h)); transition:transform var(--d-ui) var(--ease-draw); /* --h is unitless (Form.tsx): only transform moves */
+}
+.fs-choices[data-instant] .fs-ind{ transition:none }
+@media (prefers-reduced-motion:reduce){ .fs-ind{ transition:none } }
+@media (prefers-reduced-motion:no-preference){
+  .fs-panel > *{ transition:opacity var(--d-hover) var(--ease-arrive), transform var(--d-hover) var(--ease-arrive) }
+  .fs-panel > :nth-child(2){ transition-delay:40ms }
+  .fs-panel > :nth-child(3){ transition-delay:80ms }
+  @starting-style{ .fs-panel:not([data-instant]) > *{ opacity:0; transform:translateY(6px) } }
+}
+@media (max-width:900px){
+  .fs-choices{ grid-template-columns:1fr 1fr; gap:8px; border-top:0 }
+  .fs-choices button{
+    align-items:center; min-height:52px; padding:12px 14px; border:1px solid var(--line-strong); border-radius:var(--radius);
+    font-size:.95rem; line-height:1.3; transition:color var(--d-hover) ease, border-color var(--d-hover) ease, scale var(--d-press) var(--ease-arrive);
+  }
+  .fs-choices button.on{ border-color:var(--wine); box-shadow:inset 0 0 0 1px var(--wine) }
+  .fs-choices button::after,.fs-ind{ display:none }
+}
+
+/* === Muntregister: questions and menu groups open with weight (a4-10) ===
+   Height and opacity move together, without script: the details' content grows to its own height (240ms) and the
+   answer fades in (200ms, 40ms later). The plus is two drawn ink strokes; the upright one folds away on opening; an
+   open question turns bordeaux. Browsers without ::details-content keep the plain open/close; reduced motion and the
+   keyboard open at once. */
+.faq summary{ transition:color var(--d-hover) ease }
+.faq summary::before,.faq summary::after{
+  content:""; grid-area:1 / 2; justify-self:center; align-self:center; background:var(--ink-soft); font-size:inherit; transform:none;
+}
+.faq summary::after{ width:12px; height:1.5px; transition:none }
+.faq summary::before{ width:1.5px; height:12px; transition:transform var(--d-hover) var(--ease-arrive) }
+.faq details[open] summary{ color:var(--wine) }
+.faq details[open] summary::before{ transform:scaleY(0) }
+.faq details[open] summary::after{ transform:none; background:var(--wine) }
+@media (hover:hover) and (pointer:fine){ .faq summary:hover{ color:var(--wine) } }
+@media (prefers-reduced-motion:no-preference){
+  :is(.faq details,.vg){ interpolate-size:allow-keywords }
+  :is(.faq details,.vg)::details-content{
+    block-size:0; overflow:clip;
+    transition:block-size var(--d-ui) var(--ease-arrive), content-visibility var(--d-ui) allow-discrete;
+  }
+  :is(.faq details,.vg)[open]::details-content{ block-size:auto }
+  .faq details[open] > :not(summary){ animation:faq-in var(--d-hover) ease 40ms both }
+}
+@keyframes faq-in{ from{ opacity:0 } }
+html[data-kbd] :is(.faq details,.vg)::details-content{ transition:none }
+html[data-kbd] .faq details[open] > :not(summary){ animation:none }
+
+/* === Muntregister: slice 4 under reduced motion (a6-6) ===
+   The touch layer keeps its states but nothing travels: the fill, the hover line, the focus line, the arrow's step,
+   the diamond and the plus change at once. (Questions, the marker and the panel only move under no-preference.) */
+@media (prefers-reduced-motion:reduce){
+  :is(.btn,.act-a,.ni-contact > a)::before,.arw,.ctl::after,.fm-check input::before,.faq summary::before,
+  :is(.idx-reg a,.mx-row a,.mp-list a,.sp-sib ul a)::after,.more:not(.h3 *)::after{ transition:none !important }
+}
+
+/* ============================================================
+   SLICE 5 — THE PAGE'S END (g2: a5-3, a5-4, a7-4, a7-6, a8-6)
+   Markup: components/PageEnd.tsx (+ PageEndToc.tsx), components/SiteMap.tsx (OtherGroups), the Footer in
+   components/Sections.tsx, app/[locale]/not-found.tsx. Every inner page ends on the reverse of the coin: a slot that
+   runs on into the footer. Dark by default (b1); html[data-slot="licht"] (review switch) shows the same structure on
+   paper. Colours live in custom properties (--pe-*, --f-*), so the light variant only swaps those. Text on the dark:
+   paper, --paper-soft and --paper-mute (9.07:1 on --wine-deep, 10:1 on --wine-night); gold only as the foil edge, the
+   current page's coin and the seal (the first link is marked by a filled paper coin, never by gold). Nothing here can reach the hero (.h3) or the dock.
+   ============================================================ */
+
+/* === Muntregister: the reverse of the coin — the page's end (g2, a5-3) === */
+.pe{
+  --pe-bg:var(--wine-deep); --pe-ink:var(--paper); --pe-soft:var(--paper-soft); --pe-mute:var(--paper-mute); --pe-rule:rgba(237,234,225,.18);
+  --pe-first:var(--gold-light); --pe-focus:var(--gold-light);
+  position:relative; background:var(--pe-bg); color:var(--pe-ink);
+  padding-block:clamp(96px,10vw,160px) clamp(56px,6vw,88px);
+}
+html[data-slot="licht"] .pe{
+  --pe-bg:var(--paper-deep); --pe-ink:var(--ink); --pe-soft:var(--ink-soft); --pe-mute:var(--muted); --pe-rule:var(--line-strong);
+  --pe-first:var(--wine); --pe-focus:var(--wine);
+}
+/* the foil edge: the bar that closes the page as it opened it (no crossing line in the slot) */
+.pe::before{ content:""; position:absolute; top:0; inset-inline:0; height:3px; background:var(--foil); z-index:1 }
+.pe :is(a,button,summary):focus-visible{ outline-color:var(--pe-focus) }
+/* never a dark block straight above the dark slot: paper breathes between them (the other blocks keep --pace) */
+.sp .b.b-dark[data-last]{ margin-bottom:var(--pace-breath) }
+
+.pe-grid{ display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--s-lg); row-gap:var(--s-2xl); align-items:start }
+.pe-lead{ grid-column:1 / span 7 }
+.pe-toc{ grid-column:9 / -1 }
+.pe:not(.has-lead) .pe-toc{ grid-column:1 / span 6 }
+/* the legends of the slot: the serif small caps of slice 2, in a quiet neutral (no gold on the dark) */
+.pe .pe-h{ color:var(--pe-mute) }
+
+/* columns 1–7: the last actions block, unchanged in words, in the paper's colour */
+.pe-head h2{ font-size:var(--h2); letter-spacing:-.028em; line-height:1.1; max-width:22ch; color:var(--pe-ink) }
+.pe-body{ margin-top:var(--s-md); font-size:var(--t1); line-height:1.5; color:var(--pe-soft); max-width:52ch }
+.pe-head + .pe-links{ margin-top:var(--s-xl) }
+.pe-links{ list-style:none; margin:0; padding:0; border-top:1px solid var(--pe-rule) }
+.pe-a{
+  position:relative; display:grid; grid-template-columns:minmax(0,1fr) 44px; align-items:center; column-gap:var(--s-lg);
+  padding-block:clamp(16px,1.8vw,24px); border-bottom:1px solid var(--pe-rule); color:var(--pe-ink);
+}
+.pe-t{ font-family:var(--display); font-weight:700; font-size:var(--t3); letter-spacing:-.03em; line-height:1.05; text-wrap:balance }
+/* the arrow coin (44px, the one round control): an outline in the link's colour; filled on hover, it gives on press */
+.pe-go{
+  width:44px; height:44px; border-radius:50%; display:grid; place-items:center; color:inherit;
+  border:1px solid color-mix(in srgb, currentColor 45%, transparent);
+  transition:background-color var(--d-hover) ease, border-color var(--d-hover) ease, scale var(--d-press) var(--ease-arrive);
+}
+.pe-go .arw{ width:18px; height:9px; vertical-align:0; transition:translate var(--d-press) var(--ease-arrive), color var(--d-hover) ease }
+.pe-a:active .pe-go{ scale:.94 }
+/* the first link: a filled paper coin, at rest and on hover or focus (its own colour, so the currentColor fill below cannot darken it) */
+.pe-a.is-first .pe-go,.pe-a.is-first:is(:hover,:focus-visible) .pe-go{ background-color:var(--pe-ink); border-color:var(--pe-ink); color:var(--pe-bg) }
+@media (hover:hover) and (pointer:fine){
+  .pe-a:hover .pe-go{ background-color:currentColor; border-color:currentColor }
+  .pe-a:hover .pe-go .arw{ color:var(--pe-bg) }
+}
+.pe-a:focus-visible .pe-go{ background-color:currentColor; border-color:currentColor; transition:none }
+.pe-a:focus-visible .pe-go .arw{ color:var(--pe-bg) }
+[dir="rtl"] :is(.pe-t,.pe-head h2){ font-family:var(--arabic); letter-spacing:0; line-height:1.4 }
+
+/* columns 9–12: "In this section" as a table of contents. The numbers are drawn by CSS (the page's text is unchanged;
+   the alt text "" keeps them out of the accessible name); the current page carries a struck 9px coin and aria-current. */
+.pe-fold > summary{ display:flex; align-items:center; justify-content:space-between; gap:var(--s-md); list-style:none; min-height:44px }
+.pe-fold > summary::-webkit-details-marker{ display:none }
+.pe-sib{ list-style:none; margin:var(--s-sm) 0 0; padding:0; counter-reset:pe }
+.pe-sib li{ counter-increment:pe }
+.pe-sib a{
+  position:relative; display:grid; grid-template-columns:2.4em minmax(0,1fr); align-items:baseline; padding:12px 0;
+  border-top:1px solid var(--pe-rule); font-family:var(--display); font-weight:600; font-size:var(--t0); line-height:1.35;
+  color:var(--pe-mute); transition:color var(--d-hover) ease;
+}
+.pe-sib li:last-child a{ border-bottom:1px solid var(--pe-rule) }
+.pe-sib a::before{
+  content:counter(pe, decimal-leading-zero); content:counter(pe, decimal-leading-zero) / "";
+  font-family:var(--text); font-style:italic; font-weight:400; font-size:.9375rem; color:var(--pe-mute);
+  font-variant-numeric:lining-nums tabular-nums;
+}
+.pe-sib a[aria-current]{ color:var(--pe-ink) }
+.pe-sib a[aria-current]::before{
+  content:""; content:"" / ""; align-self:center; width:9px; height:9px; border-radius:50%;
+  background:var(--coin);
+  box-shadow:inset 0 0 0 .5px rgba(122,90,42,.6);
+}
+@media (hover:hover) and (pointer:fine){ .pe-sib a:hover{ color:var(--pe-ink) } }
+[dir="rtl"] .pe-sib a{ font-family:var(--arabic); line-height:1.6 }
+[dir="rtl"] .pe-sib a::before{ font-family:var(--display); font-style:normal; font-weight:500 } /* one font for numbers on /ar (slice 2) */
+
+/* below: "Elsewhere on the site" in one row, names and their line, without frames or arrows */
+.pe-more{ display:block }
+.pe-grid + .pe-more{ margin-top:clamp(64px,7vw,112px) }
+.pe-more ul{
+  list-style:none; margin:var(--s-sm) 0 0; padding:0; display:grid; grid-template-columns:repeat(var(--n,5),minmax(0,1fr));
+  column-gap:var(--s-lg); border-top:1px solid var(--pe-rule);
+}
+.pe-more a{ position:relative; display:block; padding-block:18px 6px; min-height:44px; color:var(--pe-ink) }
+.pe-mt{ display:block; font-family:var(--display); font-weight:700; font-size:var(--t1); letter-spacing:-.015em; line-height:1.15; color:var(--pe-ink) }
+.pe-mb{ display:block; margin-top:8px; font-size:var(--read-s); line-height:var(--read-s-lh); color:var(--pe-mute); max-width:34ch }
+[dir="rtl"] .pe-mt{ font-family:var(--arabic); letter-spacing:0; line-height:1.4 }
+[dir="rtl"] .pe-mb{ line-height:1.75 }
+
+/* the site's one hover line (a4-4), here too: the bar crosses for a mouse; on keyboard focus it is simply there */
+:is(.pe-a,.pe-sib a,.pe-more a,footer .f-links a)::after{
+  content:""; position:absolute; inset-inline:0; bottom:-1px; height:2px; background:var(--bar);
+  transform:scaleX(0); transform-origin:left center; transition:transform var(--d-press) var(--ease-arrive); pointer-events:none;
+}
+.pe-more a::after{ top:-1px; bottom:auto } /* along the row's top rule */
+[dir="rtl"] :is(.pe-a,.pe-sib a,.pe-more a,footer .f-links a)::after{ transform-origin:right center }
+@media (hover:hover) and (pointer:fine){
+  :is(.pe-a,.pe-sib a,.pe-more a,footer .f-links a):hover::after{ transform:scaleX(1); transition:transform var(--d-hover) var(--ease-arrive) }
+}
+:is(.pe-a,.pe-sib a,.pe-more a,footer .f-links a):focus-visible::after{ transform:scaleX(1); transition:none }
+
+/* the seal on the boundary: the existing seal (88px) on a paper disc, lying still. Not on contact or form pages (b9). */
+.pe-seal{
+  position:absolute; top:0; inset-inline-end:max(var(--gutter), (100% - var(--max)) / 2); translate:0 -50%; z-index:2;
+  width:116px; height:116px; border-radius:50%; background:var(--paper); display:grid; place-items:center;
+  box-shadow:0 0 0 1px var(--line-strong);
+}
+.pe-seal .seal-wrap{ width:88px; height:88px }
+.pe-seal .seal-wrap .tulip{ width:30px }
+
+/* EXTRA (html[data-beweging="extra"]): once per visit the seal presses itself in when it comes into view — the ring
+   turns from -40deg to rest (1600ms), the tulip settles from 1.1 and a 3px blur (450ms); then it lies still. Once it
+   has played, <html data-seal="seen"> (sessionStorage, as the masthead) keeps it still. Reduced motion: still. */
+@media (scripting:enabled) and (prefers-reduced-motion:no-preference){
+  html[data-beweging="extra"]:not([data-seal="seen"]) .pe-seal .ring{ transition:rotate var(--d-draw) var(--ease-arrive) }
+  html[data-beweging="extra"]:not([data-seal="seen"]) .pe-seal .tulip{ transition:scale 450ms var(--ease-arrive), filter 450ms var(--ease-arrive) }
+  html[data-beweging="extra"]:not([data-seal="seen"]) .pe-seal .seal-wrap:not(.in) .ring{ rotate:-40deg }
+  html[data-beweging="extra"]:not([data-seal="seen"]) .pe-seal .seal-wrap:not(.in) .tulip{ scale:1.1; filter:blur(3px) }
+}
+
+/* === Muntregister: the page's end on a phone (a8-6, a5-3) ===
+   One column. "In this section" folds into its native <details> (closed; the summary opens it, 44px high, a drawn plus
+   that turns to a cross); above 900px the list simply stands (PageEndToc opens it; ::details-content shows it without
+   script) and the summary is a plain legend. "Elsewhere" steps down to three, two, one column. */
+.pe-fold > summary::after{
+  content:""; flex:none; width:12px; height:12px; color:var(--pe-mute);
+  background:linear-gradient(currentColor,currentColor) center / 12px 1.5px no-repeat, linear-gradient(currentColor,currentColor) center / 1.5px 12px no-repeat;
+  transition:rotate var(--d-hover) var(--ease-arrive);
+}
+.pe-fold[open] > summary::after{ rotate:45deg }
+@media (min-width:901px){
+  .pe-fold > summary{ pointer-events:none; cursor:default; min-height:0 }
+  .pe-fold > summary::after{ display:none }
+  .pe-fold::details-content{ content-visibility:visible; block-size:auto }
+}
+@media (max-width:900px) and (prefers-reduced-motion:no-preference){
+  .pe-fold{ interpolate-size:allow-keywords }
+  .pe-fold::details-content{ block-size:0; overflow:clip; transition:block-size var(--d-ui) var(--ease-arrive), content-visibility var(--d-ui) allow-discrete }
+  .pe-fold[open]::details-content{ block-size:auto }
+  html[data-kbd] .pe-fold::details-content{ transition:none }
+}
+@media (max-width:1100px){
+  .pe-more ul{ grid-template-columns:repeat(3,minmax(0,1fr)); row-gap:var(--s-md) }
+}
+@media (max-width:900px){
+  .pe-lead,.pe-toc,.pe:not(.has-lead) .pe-toc{ grid-column:1 / -1 }
+  .pe-grid{ row-gap:var(--s-xl) }
+  .pe-fold > summary{ cursor:pointer; border-top:1px solid var(--pe-rule) }
+  .pe-fold:not([open]) > summary{ border-bottom:1px solid var(--pe-rule) }
+  .pe-sib{ margin-top:0 }
+  .pe-more ul{ grid-template-columns:repeat(2,minmax(0,1fr)) }
+  .pe-seal{ width:96px; height:96px }
+  .pe-seal .seal-wrap{ width:76px; height:76px }
+  .pe-seal .seal-wrap .tulip{ width:26px }
+}
+@media (max-width:600px){
+  .pe-more ul{ grid-template-columns:minmax(0,1fr); row-gap:0; border-top:0 }
+  .pe-more li{ border-top:1px solid var(--pe-rule) }
+  .pe-more a{ padding-block:14px }
+}
+
+/* === Muntregister: the footer as the reverse of the coin (a5-4, b1) ===
+   Dark, running on from the slot (on the homepage and the 404, which have no slot, the foil edge opens it). A paper
+   wordmark of 28px (its own file, the gold bar unchanged); the about text in the serif; the links as a column register
+   in the source's order; the newsletter on one ruled line; the bottom line as a gold legend (serif small caps). Its own notice and
+   error colours. The light variant (html[data-slot="licht"]) is the paper footer with the same structure. */
+footer{
+  --f-bg:var(--wine-night); --f-ink:var(--paper); --f-soft:var(--paper-soft); --f-mute:var(--paper-mute); --f-rule:rgba(237,234,225,.14);
+  --f-field:rgba(237,234,225,.45); --f-err:#F2C9C9; --f-low:#C9A469; --f-focus:var(--gold-light); --f-hover:var(--gold-light); --f-send:var(--paper);
+  position:relative; overflow:hidden; isolation:isolate; background:var(--f-bg); color:var(--f-soft); border-top:0;
+  padding:clamp(56px,6vw,88px) 0 var(--s-xl);
+}
+html[data-slot="licht"] footer{
+  --f-bg:var(--paper); --f-ink:var(--ink); --f-soft:var(--ink-soft); --f-mute:var(--muted); --f-rule:var(--line);
+  --f-field:var(--rule-field); --f-err:var(--wine); --f-low:var(--gold-deep); --f-focus:var(--wine); --f-hover:var(--wine-deep); --f-send:var(--wine);
+  border-top:1px solid var(--line-strong);
+}
+main:not(:has(.pe)) + footer::before{ content:""; position:absolute; top:0; inset-inline:0; height:3px; background:var(--foil); z-index:1 }
+footer :is(a,button,input,select,textarea,summary):focus-visible{ outline-color:var(--f-focus) }
+
+footer .colophon .wordmark{ height:28px; width:auto; margin-bottom:var(--s-lg) }
+footer .colophon .wm-ink{ display:none }
+html[data-slot="licht"] footer .colophon .wm-paper{ display:none }
+html[data-slot="licht"] footer .colophon .wm-ink{ display:block }
+footer .colophon p{ color:var(--f-soft) }
+footer .colophon > p:first-of-type{ font-size:1.02rem; line-height:1.55 }
+footer .colophon .values{ color:var(--f-mute) }
+footer .colophon .slogan{ color:var(--f-ink) }
+footer .colophon .legal{ color:var(--f-mute) }
+
+footer .f-news-t{ color:var(--f-ink) }
+footer .f-news > p{ color:var(--f-soft) }
+footer .f-news-note{ color:var(--f-mute) }
+/* the one field on its ruled line, the send word beside it on the same rule (a8-6) */
+footer .field > label{ color:var(--f-mute) }
+footer .field:focus-within > label{ color:var(--f-ink) }
+footer .field :is(input,select,textarea):not(.dz-in){ color:var(--f-ink); border-bottom-color:var(--f-field); caret-color:var(--f-ink) }
+footer .field :is(input,select,textarea):not(.dz-in):hover{ border-color:var(--f-ink) }
+footer .field ::placeholder{ color:var(--f-mute) }
+footer .ctl::after{ background:var(--f-focus) }
+footer .fm .err,footer .notice.err{ color:var(--f-err) }
+footer .notice.err{ background:transparent; border-color:var(--f-err) }
+footer .fm-sending,footer .fm-ok-note{ color:var(--f-mute) }
+footer .fm-ok{ color:var(--f-ink) }
+footer .f-news .btn,footer .f-news .btn:is(:hover,:disabled){
+  background:transparent; color:var(--f-send); border:0; border-bottom:1px solid var(--f-field); border-radius:0;
+  min-height:52px; padding-inline:4px 0;
+}
+footer .f-news .btn::before{ display:none }
+@media (hover:hover) and (pointer:fine){ footer .f-news .btn:not(:disabled):hover{ color:var(--f-hover) } }
+@media (max-width:420px){
+  footer .fm.is-inline{ grid-template-columns:minmax(0,1fr) auto }
+  footer .fm.is-inline .btn{ grid-column:2; grid-row:1; justify-self:auto }
+}
+@media (max-width:360px){
+  footer .fm.is-inline{ grid-template-columns:minmax(0,1fr) }
+  footer .fm.is-inline .btn{ grid-column:1; grid-row:auto; justify-self:start }
+}
+
+/* the links as a column register, in the source's order */
+footer .f-links{
+  display:block; columns:3 200px; column-gap:40px; column-rule:1px solid var(--f-rule);
+  margin-top:var(--s-2xl); padding-top:var(--s-lg); border-top:1px solid var(--f-rule);
+}
+footer .f-links a{ position:relative; display:block; padding:8px 0; break-inside:avoid; font:600 15px/1.4 var(--display); color:var(--f-mute); transition:color var(--d-hover) ease }
+[dir="rtl"] footer .f-links a{ font-family:var(--arabic); font-size:1rem; line-height:1.6 }
+@media (hover:hover) and (pointer:fine){
+  footer .f-links a:hover{ color:var(--f-ink) } /* and the bar crosses, as in the page end (a4-4) */
+}
+footer .bottom{ border-top-color:var(--f-rule); color:var(--f-low); line-height:1.6 }
+/* the bottom line is a legend (slice 2's one recipe, a1-5), a step smaller; the doubled class outranks that list */
+:root:not([dir="rtl"]) footer .bottom.bottom:not(:is(.h3,.hero) *){ font-size:.9375rem }
+[dir="rtl"] footer .bottom{ font-family:var(--arabic); font-size:.85rem; letter-spacing:0; text-transform:none }
+@media (max-width:640px){
+  footer .f-links{ columns:2; column-gap:24px; column-rule:0; padding-top:0; border-top:0 }
+  footer .f-links a{ padding:13px 0; border-top:1px solid var(--f-rule) }
+}
+
+/* === Muntregister: one still guilloche rosette on the footer (a7-4, b3) ===
+   The hero's guilloche-b.svg reused as it is (never edited): one rosette in the lower end corner, 10% and masked to a
+   soft round edge; no rotation, no blend. Only on the dark footer; nowhere else (not in the dark block, not on the 404). */
+.f-rosette{
+  position:absolute; z-index:-1; width:min(64vw,760px); height:auto; max-width:none; inset-inline-end:-28%; bottom:-38%;
+  opacity:.10; pointer-events:none; user-select:none;
+  -webkit-mask-image:radial-gradient(closest-side,#000 35%,transparent 100%); mask-image:radial-gradient(closest-side,#000 35%,transparent 100%);
+}
+html[data-slot="licht"] .f-rosette{ display:none }
+
+/* === Muntregister: a 404 that is a coin (a7-6) ===
+   The hero's ducat recipe copied here (radial gold, the inset rims, the stamped mark; no guilloche) — hero.css is not
+   touched. 168px; it turns over once (1.2s on --ease-draw, after 300ms) and shows "404" on its reverse. No flip on
+   hover. Reduced motion: the reverse, still. From 901px the coin holds columns 1–4, the sentence and links 6–12. */
+.nf-in{ align-items:center }
+.nf-coin{ width:168px; height:168px; perspective:900px }
+.nf-turn{ position:relative; width:100%; height:100%; transform-style:preserve-3d; transform:rotateY(180deg) }
+.nf-face{
+  position:absolute; inset:0; border-radius:50%; overflow:hidden; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  background:var(--coin);
+  box-shadow:inset 0 0 0 2px rgba(122,90,42,.6), inset 0 0 0 5px rgba(247,230,190,.55), inset 0 -6px 14px rgba(90,60,20,.35), 0 12px 24px rgba(36,20,24,.28);
+}
+.nf-mark{
+  position:absolute; inset:23% 25% 25%; background:#7A5A2A;
+  -webkit-mask:url(/logo/dukaat-beeldmerk.svg) center / contain no-repeat; mask:url(/logo/dukaat-beeldmerk.svg) center / contain no-repeat;
+  filter:drop-shadow(0 1px 0 rgba(255,244,214,.75));
+}
+.nf-code.nf-rev{
+  margin:0; display:grid; place-items:center; transform:rotateY(180deg);
+  font-family:var(--display); font-weight:700; font-size:44px; line-height:1; letter-spacing:-.02em; color:#7A5A2A;
+  text-shadow:0 1px 0 rgba(255,244,214,.75); font-variant-numeric:lining-nums tabular-nums;
+}
+@media (prefers-reduced-motion:no-preference){
+  .nf-turn{ animation:nf-turn var(--d-draw) var(--ease-draw) 300ms both }
+}
+@keyframes nf-turn{ from{ transform:rotateY(0deg) } to{ transform:rotateY(180deg) } }
+@media (min-width:901px){
+  .nf-in{ grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--s-lg); row-gap:var(--s-lg) }
+  .nf-coin{ grid-column:1 / span 4; grid-row:1 / span 2; justify-self:start }
+  .nf-text,.nf-links{ grid-column:6 / -1 }
+  .nf-text{ align-self:end }
+  .nf-links{ align-self:start }
+}
+
+/* === Muntregister: slice 5 under reduced motion (a6-6) ===
+   The hover lines, the arrow coin and the fold change at once; the seal and the 404 coin lie still. */
+@media (prefers-reduced-motion:reduce){
+  :is(.pe-a,.pe-sib a,.pe-more a,footer .f-links a)::after,.pe-go,.pe-go .arw,.pe-fold > summary::after,footer .f-links a{ transition:none !important }
+  .nf-turn{ animation:none !important }
+}
+
+/* ============================================================
+   SLICE 6 — NAVIGATION (a5-1, a5-2, a5-5, a5-6)
+   Markup: components/TopBar.tsx (the panel's switch state, the scrim, the phone menu's inert page and focus return)
+   and the breadcrumb in app/[locale]/[...slug]/page.tsx (unchanged). Nothing here touches the dock: not data-dock,
+   .dock, .is-home, the centred docked name (.brand), the 3px gold nav edge (.topbar::after) or the .topbar padding.
+   ============================================================ */
+
+/* === Muntregister: the group panel as a catalogue (a5-1, g1) ===
+   The panel reads as a numbered catalogue: the group's name and line in columns 1–3, its pages from column 5, each
+   with its number (serif, tabular, ink-soft; drawn by CSS, so the menu's text is unchanged) and the current page
+   marked with the 9px coin of the page end. No hover photograph (g1). It opens short (opacity 200ms, an 8px drop on
+   240ms) and closes faster (opacity 140ms); moving from one open group to the next swaps at once (.mega.swap from
+   TopBar.tsx), so two site maps never shine through each other. Columns arrive together, no stagger. The hover-intent
+   timers (110ms open, 220ms close) are unchanged; opened from the keyboard nothing moves (data-kbd, slice 1). The 3px
+   foil edge stays still. Behind it the page dims a little (.mega-scrim, 14% ink, 200ms; a click closes). */
+.mp-grid{
+  grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--s-lg); padding-block:clamp(24px,3.2vh,40px) clamp(28px,3.6vh,44px);
+}
+.mp-intro{ grid-column:1 / span 3 }
+.mp-list{ grid-column:5 / -1; counter-reset:mp }
+.mp-list li{ counter-increment:mp }
+.mp-list a{ display:grid; grid-template-columns:2.4em minmax(0,1fr); align-items:baseline; padding-block:12px 14px }
+.mp-list .mp-b{ max-width:none }
+.mp-list a > *{ grid-column:2 }
+.mp-list a::before{
+  content:counter(mp, decimal-leading-zero); content:counter(mp, decimal-leading-zero) / "";
+  grid-column:1; grid-row:1; font-family:var(--text); font-weight:500; font-size:.9375rem; line-height:1; letter-spacing:.02em;
+  color:var(--ink-soft); font-variant-numeric:lining-nums tabular-nums;
+}
+[dir="rtl"] .mp-list a::before{ font-family:var(--font-display),sans-serif } /* the grotesk itself: inside the topbar --display is Almarai on /ar */
+.mp-list a[aria-current]::before{
+  content:""; content:"" / ""; align-self:center; width:9px; height:9px; border-radius:50%;
+  background:var(--coin);
+  box-shadow:inset 0 0 0 .5px rgba(122,90,42,.6);
+}
+/* a long group (Services, twelve pages) never runs below the screen: the panel scrolls on its own (natively; Lenis
+   leaves .mp alone) */
+.mp{ max-height:calc(100svh - var(--util-h, 0px) - var(--nav-h) - 4px); overflow-y:auto; overscroll-behavior:contain; scrollbar-width:thin }
+.topbar.scrolled .mp{ max-height:calc(100svh - var(--nav-h) + 8px) } /* scrolled, the utility line has folded and the row is 12px lower */
+/* motion: open short, close faster, switch at once */
+.mega .mp{ transform:translateY(-8px); transition:opacity var(--d-press) ease, transform 0s 140ms, visibility 0s 140ms }
+.mega.on .mp.on{ opacity:1; visibility:visible; transform:none; transition:opacity var(--d-hover) ease, transform var(--d-ui) var(--ease-arrive) }
+.mega.on .mp:not(.on){ opacity:0; visibility:hidden; transition:none }
+.mega.swap .mp.on{ transition:none }
+/* the page behind dims a little; under the header (z 40), so the bar, the docked name and the gold edge stay clear */
+.mega-scrim{
+  position:fixed; inset:0; z-index:39; background:rgba(36,20,24,.14); opacity:0; visibility:hidden; pointer-events:none;
+  transition:opacity var(--d-press) ease, visibility 0s 140ms;
+}
+.mega-scrim.on{ opacity:1; visibility:visible; pointer-events:auto; transition:opacity var(--d-hover) ease }
+@media (max-width:1200px){ .mega-scrim{ display:none } }
+html[data-kbd] .mega-scrim{ transition:none }
+
+/* === Muntregister: the phone menu as a sheet from under the gold line (a5-2) ===
+   Paper, no blur. The sheet unrolls downward from the top edge, under the header (clip-path 260ms on the drawer curve),
+   and rolls back up faster (160ms). Its first six rows settle in shortly after one another (200ms each, 20ms apart, from
+   40ms; rows seven and on keep the sixth row's start, so everything rests within about 340ms), only when opening. The burger is
+   two ink lines that cross by transform alone (240ms). Lenis leaves the sheet alone (data-lenis-prevent), the page
+   under it is inert, Escape returns the focus to the burger (TopBar.tsx). Every row at least 44px; safe areas kept.
+   Reduced motion: the sheet fades in 200ms; nothing travels. */
+.veil{
+  background:var(--paper); -webkit-backdrop-filter:none; backdrop-filter:none; opacity:1;
+  clip-path:inset(0 0 100% 0); visibility:hidden; transition:clip-path var(--d-press) var(--ease-arrive), visibility 0s 160ms;
+}
+.veil.open{ clip-path:inset(0); visibility:visible; transition:clip-path var(--d-ui) var(--ease-arrive) }
+@media (prefers-reduced-motion:no-preference){
+  .veil-in > *{ opacity:0; translate:0 8px; transition:opacity 0s 160ms, translate 0s 160ms }
+  .veil.open .veil-in > *{
+    opacity:1; translate:0 0;
+    transition:opacity var(--d-hover) var(--ease-arrive) calc(40ms + var(--i,5) * 20ms), translate var(--d-hover) var(--ease-arrive) calc(40ms + var(--i,5) * 20ms);
+  }
+  .veil-in > :nth-child(1){ --i:0 } .veil-in > :nth-child(2){ --i:1 } .veil-in > :nth-child(3){ --i:2 }
+  .veil-in > :nth-child(4){ --i:3 } .veil-in > :nth-child(5){ --i:4 }
+}
+@media (prefers-reduced-motion:reduce){
+  .veil{ clip-path:none; opacity:0; transition:opacity var(--d-hover) ease, visibility 0s 200ms }
+  .veil.open{ opacity:1; transition:opacity var(--d-hover) ease }
+  .burger span{ transition:none }
+}
+.veil-in{
+  padding:calc(84px + env(safe-area-inset-top)) max(var(--gutter), env(safe-area-inset-right))
+    calc(40px + env(safe-area-inset-bottom)) max(var(--gutter), env(safe-area-inset-left));
+}
+.vg summary,.vg-solo{ min-height:60px; padding-block:12px }
+.vg summary svg{ stroke:var(--ink-soft); transition:transform var(--d-ui) var(--ease-arrive) } /* chevrons are never gold */
+.vg-list a{ padding-block:12px }
+.veil-foot :is(.util-key,.lang-row a){ min-height:44px; display:inline-flex; align-items:center }
+/* the burger: no ring, two ink lines; open, each moves 4px to the middle and turns (transform only) */
+.burger{ border:0; border-radius:var(--radius) }
+.burger span{ background:var(--ink); transition:transform var(--d-ui) var(--ease-draw) }
+.burger[aria-expanded="true"] span:nth-child(1){ top:17px; transform:translateY(4px) rotate(45deg) }
+.burger[aria-expanded="true"] span:nth-child(2){ top:25px; transform:translateY(-4px) rotate(-45deg) }
+html[data-kbd] .burger span{ transition:none } /* opened from the keyboard, the cross is simply there */
+
+/* === Muntregister: the utility line and the language choice, finished (a5-5) ===
+   The descriptor line is a legend (serif small caps, .9375rem; Arabic unchanged). The language links are rectangles
+   at least 44px wide; in the utility line they are as tall as the line itself (34px: its height belongs to the
+   protected bar), on phones 44×44. They give under the finger (.97, 140ms, slice 1); the colour hover is for a mouse
+   only; the current language is marked by a 1px ink underline, not by colour or gold. */
+:root:not([dir="rtl"]) .topbar .tb-util p.util-l{ font-size:.9375rem }
+.lang a{ display:inline-grid; place-items:center; min-width:44px; min-height:var(--util-h, 34px); padding:0 6px; border-radius:var(--radius) }
+.lang a[aria-current="page"]{ color:var(--ink); text-decoration:underline 1px var(--ink); text-underline-offset:.3em }
+@media (hover:none),(pointer:coarse){
+  .lang a:not([aria-current]):hover{ color:var(--muted) }
+}
+@media (max-width:1200px){
+  .lang-m a{ min-width:44px; height:44px; border-radius:var(--radius) }
+}
+
+/* === Muntregister: the breadcrumb as a legend, one line on phones (a5-6) ===
+   Serif small caps at .9375rem (slice 2 made it a legend; this sets its size). Links get a 44px tap height without
+   moving the masthead (12px padding, -12px margin). On phones it stays on one line: when it does not fit, the middle
+   segment (the group) gives way first with an ellipsis, then the current page; "Home" never shrinks. The full text
+   stays in the page (only the visible width is cut), so nothing is lost. */
+:root:not([dir="rtl"]) .sp nav.crumbs.crumbs{ font-size:.9375rem }
+.crumbs a{ padding-block:12px; margin-block:-12px }
+@media (max-width:640px){
+  .crumbs{ flex-wrap:nowrap; white-space:nowrap; min-width:0 }
+  .crumbs > *{ flex:none }
+  .crumbs > a:nth-of-type(2){ flex:0 8 auto; min-width:2.5em; overflow:hidden; text-overflow:ellipsis }
+  .crumbs > [aria-current]{ flex:0 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis }
+}
+
+/* ============================================================
+   SLICE 7 — THE HOMEPAGE BELOW THE HERO (a2-6, a6-5, b8, g1)
+   Markup: components/Sections.tsx (More, Why, Name, Behind, Correspondence) and components/NameFilm.tsx.
+   A tempo after the hero instead of five equal paper sections: an index, the argument, a wide breath (the Name band),
+   the people, and the finale in the same system as every inner page's end. Order and text are unchanged.
+   Everything here is scoped to the homepage's own sections (.more-sx, #why, #name, #behind, #correspondence); none of
+   these names occurs in the hero (.h3) or the dock.
+   ============================================================ */
+
+/* === Muntregister: the homepage index — a modest register (a2-6, g1) ===
+   The label held in columns 1–3; the source's two rows of four become two columns of four rows in 5–12 (each <ul> one
+   column, so the reading order is the source's). Titles in the grotesk 700 at --t2; numbers 01–08 drawn by CSS in the
+   serif, 500, ink-soft (the alt text "" keeps them out of the link's name; the page's text is unchanged). The site's
+   one hover line (a4-4) and the drawn arrow (a4-3) stay as they are. The two columns share their four row lines
+   (subgrid), so a title that runs to two lines moves the rule on both sides. */
+.mx-cols{ counter-reset:mx; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:repeat(4,auto); column-gap:var(--s-lg) }
+.more-sx .mx-row{ grid-template-columns:minmax(0,1fr); grid-row:1 / span 4; grid-template-rows:subgrid; border-top:1px solid var(--line-strong) }
+.more-sx .mx-row a{ height:100% }
+.more-sx .mx-row li{ counter-increment:mx }
+.more-sx .mx-row a{
+  display:grid; grid-template-columns:2.6rem minmax(0,1fr) auto; column-gap:var(--s-md); align-items:baseline;
+  min-height:44px; padding:clamp(16px,1.6vw,22px) 0; font-family:var(--display); font-weight:700; font-size:var(--t2);
+  letter-spacing:-.02em; line-height:1.12; text-wrap:balance;
+}
+.more-sx .mx-row a::before{
+  content:counter(mx, decimal-leading-zero); content:counter(mx, decimal-leading-zero) / "";
+  font-family:var(--text); font-weight:500; font-size:.9375rem; letter-spacing:.02em; color:var(--ink-soft);
+  font-variant-numeric:lining-nums tabular-nums;
+}
+.more-sx .mx-row .arw{ width:18px; height:9px; align-self:center }
+[dir="rtl"] .more-sx .mx-row a{ font-family:var(--arabic); letter-spacing:0; line-height:1.4 }
+[dir="rtl"] .more-sx .mx-row a::before{ font-family:var(--display) } /* one font for numbers on /ar (slice 2) */
+@media (min-width:901px){
+  .mx-grid{ display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--s-lg); align-items:start }
+  .mx-grid > .label{ grid-column:1 / span 3; position:sticky; top:120px; margin:0; padding-top:clamp(16px,1.6vw,22px) }
+  .mx-cols{ grid-column:5 / -1 }
+}
+@media (max-width:600px){
+  .mx-cols{ grid-template-columns:minmax(0,1fr); grid-template-rows:none }
+  .more-sx .mx-row{ grid-row:auto; grid-template-rows:none }
+  .more-sx .mx-row + .mx-row{ border-top:0 } /* one continuous register of eight */
+  .more-sx .mx-row a{ font-size:var(--t1) }
+}
+
+/* === Muntregister: why DUKAAT — a calm split without thumbnails (a2-6, g1) ===
+   The intro held in columns 1–4 (globals.css), the three claims in 6–12 with their roman ranks in the serif, gold-deep
+   (slice 2). The per-claim photographs are gone (markup and pages.css); no section photo replaces them: the Name band
+   that follows is the next image, and another photograph here would only crowd the argument. */
+#why .claim{ grid-template-columns:auto minmax(0,1fr) }
+@media (max-width:640px){ #why .claim{ grid-template-columns:minmax(0,1fr) } }
+
+/* === Muntregister: the Name as a wide band, the film edge to edge (a2-6, a6-5, b8) ===
+   A full-width band on --paper-deep with breath above and below. The film holds columns 1–7 and runs on to the start
+   edge of the screen (both edges below 1100px). It is blended with darken: its paper (#EDEAE1, lighter than the band
+   in every channel) gives way to the band, while the drawn name keeps its full tone — no pale box, no soft mask, no
+   re-render. No reveal fade on the film (it draws itself; NameFilm.tsx decides when). The band isolates its own
+   blending, so nothing outside it is touched. */
+#name{ background:var(--paper-deep); padding-block:var(--pace-breath); isolation:isolate; overflow:clip }
+#name .film{
+  background:transparent; aspect-ratio:16/9;
+  margin-inline-start:calc(-1 * max(var(--gutter), (100vw - var(--max)) / 2));
+}
+#name .film video{ background:transparent; mix-blend-mode:darken }
+@media (min-width:1101px){ #name .story{ grid-column:8 / -1 } }
+@media (max-width:1100px){
+  #name .film{ grid-column:1 / -1; margin-inline:calc(-1 * var(--gutter)) }
+}
+
+/* === Muntregister: behind DUKAAT — two founders side by side (a2-6, a2-7) ===
+   Columns 1–5 and 8–12 (1–6 / 7–12 between 901 and 1100px), each a portrait above its words, the two portraits on one
+   line. The stand-ins stay at their own 220px width (4:5, so 275px high, under the 400px cap): placeholders are never
+   enlarged. The name at --t3; a name still to come ([…]) stays small and quiet (serif italic, --t1, muted). The role
+   as a legend (slice 2). The voice in the serif at --t1 with a 2px bordeaux rule at its start. */
+#behind .founder{ grid-template-columns:minmax(0,1fr); row-gap:var(--s-lg) }
+#behind .portrait{ width:min(220px,100%); max-width:220px; max-height:400px }
+#behind .founder h3{ font-size:var(--t3); letter-spacing:-.03em; line-height:1.02 }
+#behind .founder h3.is-pending{ font-size:var(--t1); line-height:1.3; letter-spacing:0 }
+[dir="rtl"] #behind .founder h3{ letter-spacing:0; line-height:1.35 }
+#behind .founder .role{ margin-top:10px }
+#behind .founder blockquote{
+  margin:var(--s-lg) 0 0; padding-inline-start:var(--s-lg); border-inline-start:2px solid var(--wine);
+  font-size:var(--t1); line-height:1.5; color:var(--ink-soft); max-width:46ch;
+}
+[dir="rtl"] #behind .founder blockquote{ line-height:1.8 }
+@media (min-width:901px){
+  #behind .founder:nth-child(1){ grid-column:1 / span 6 }
+  #behind .founder:nth-child(2){ grid-column:7 / span 6 }
+}
+@media (min-width:1101px){
+  #behind .founder:nth-child(1){ grid-column:1 / span 5 }
+  #behind .founder:nth-child(2){ grid-column:8 / span 5 }
+}
+@media (max-width:600px){
+  #behind .founder blockquote{ padding-inline-start:var(--s-md) }
+}
+
+/* === Muntregister: the homepage's finale, the reverse of the coin (a2-6, b1, g2) ===
+   The correspondence section carries the page end's own class (.pe, slice 5): its colours (dark --wine-deep by
+   default, light --paper-deep under html[data-slot="licht"]), the 3px foil edge and the seal on that boundary on a paper
+   disc, lying still (its one press per visit only under html[data-beweging="extra"]). Because the homepage now ends on
+   a .pe, the footer runs on from it without its own foil edge, as on every inner page. The heading in columns 1–8, the
+   letter photograph 3:2 in 9–12 (no 520px cap), the slogan in both languages on the ruled sign-off line. Gold on this
+   screen: the foil edge, the seal and the heading's emphasis (the echo of the slogan is the soft paper, not gold). */
+#correspondence.pe{ padding-block:clamp(96px,10vw,160px) clamp(56px,6vw,88px) }
+#correspondence .close{ align-items:start; row-gap:var(--s-xl) }
+#correspondence h2{ color:var(--pe-ink); font-size:var(--t4); letter-spacing:-.035em; line-height:1 }
+#correspondence h2 em{ color:var(--pe-first) }
+#correspondence .contact{ grid-column:9 / -1 }
+#correspondence .close-photo{ max-width:none; margin:0 0 var(--s-sm); box-shadow:0 0 0 1px var(--pe-rule); background:var(--pe-bg) }
+#correspondence .mail.pending{ color:var(--pe-mute); border-bottom-color:var(--pe-rule); font-size:var(--t1) }
+#correspondence .where{ color:var(--pe-soft) }
+#correspondence .signoff{ border-top-color:var(--pe-rule); justify-content:flex-start }
+#correspondence .signoff .tag{ color:var(--pe-ink) }
+#correspondence .signoff .tag .echo{ color:var(--pe-soft) }
+@media (max-width:1100px){
+  #correspondence .contact{ grid-column:1 / -1 }
+  #correspondence .close-photo{ max-width:520px }
+}
+
+/* ============================================================
+   SLICE 8 — ARABIC, PHONES AND TECHNICAL CRAFT (a8-3, a8-4, a8-5, a9-1, a9-5, a9-6, a7-5, a3-4)
+   Nothing here reaches the hero (.h3) or the dock: the safe-area gutter is set on the inner page, the homepage
+   sections below the hero and the footer only (the hero and the .topbar read --gutter from :root, unchanged).
+   ============================================================ */
+
+/* === Muntregister: real touch finishing (a8-3) ===
+   Tap highlight and touch-action are already handled outside the hero (a4-1). On a touch screen a row takes a quiet
+   tint the moment the thumb lands (no transition in) and lets it go in 200ms: ink at 5% on paper, paper at 8% on the
+   bordeaux page end and footer, never gold. Colour hovers that are not behind the hover query are reset for touch, so
+   nothing stays coloured after a tap and Back. Tap targets: the legal contents and "read more" reach 44px without
+   moving the layout. */
+:is(.page,main,.veil){ --row-press:rgba(36,20,24,.05) }
+:is(.pe,footer){ --row-press:rgba(237,234,225,.08) }
+html[data-slot="licht"] :is(.pe,footer){ --row-press:rgba(36,20,24,.05) }
+@media (hover:none),(pointer:coarse){
+  :is(.idx-reg a,.vg summary,.vg-list a){ transition:background-color var(--d-hover) ease }
+  :is(.mx-row a,.pe-sib a,footer .f-links a,.lg-toc a){ transition:color var(--d-hover) ease, background-color var(--d-hover) ease }
+  :is(.idx-reg a,.mx-row a,.vg summary,.vg-solo,.vg-list a,.pe-sib a,footer .f-links a,.lg-toc a):active{
+    background-color:var(--row-press); transition-duration:0ms;
+  }
+  /* hovers outside the hover query would stick after a tap: back to their resting colours */
+  .mx-row a:hover{ color:var(--ink) }
+  .crumbs a:hover{ color:var(--ink-soft); border-color:transparent }
+  .lg-toc a:hover{ color:var(--ink-soft) }
+  footer .f-links a:hover{ color:var(--f-mute) } /* globals.css still says wine here, which stuck on the dark footer */
+  /* 44px targets */
+  .lg-toc a{ padding-block:max(7px, calc((44px - 1.35em) / 2)) }
+  .more:not(.h3 *)::before{ content:""; position:absolute; inset:-6px 0 } /* the hit area grows, the line stays */
+}
+/* the footer links on a touch tablet (phones already have 13px, a8-6) */
+@media (min-width:641px) and (pointer:coarse){ footer .f-links a{ padding-block:12px } }
+
+/* === Muntregister: the phone masthead starts under the nav, notch-safe (a8-4) ===
+   On a phone the name, the bar, the title line and the top of the photograph share the first screen. The side
+   margins step aside for a notch in landscape; the footer's last line clears the home indicator. The .topbar, its
+   padding and the dock are not touched (they keep reading the :root --gutter). */
+:is(.page.sp,main > .block:not(.h3),footer){
+  --gutter:max(clamp(20px,4.2vw,72px), env(safe-area-inset-left), env(safe-area-inset-right));
+}
+footer{ padding-bottom:calc(var(--s-xl) + env(safe-area-inset-bottom)) }
+@media (max-width:640px){
+  .page.sp{ padding-top:calc(var(--nav-h) + env(safe-area-inset-top) + 4px) }
+  .mh-top{ padding-top:12px }
+  .mh-label{ margin-top:18px }
+  .mh-sub{ padding-top:16px }
+  .ph.mh-band{ margin-top:28px }
+}
+
+/* === Muntregister: long lists on a phone — hanging folios (a8-5) ===
+   The numbers of chapters and numbered registers become a calm folio in a narrow hanging column that stays in view
+   while its item scrolls past. Ink-soft, never gold (bordeaux stays for the admission steps). The index numbers grow a
+   little but do not stick. On /ar the numbers keep the grotesk (slice 2); only size and place change. */
+@media (max-width:640px){
+  .ch-i,.reg.numbered .reg-i{ grid-template-columns:2.6rem minmax(0,1fr); column-gap:14px }
+  :root :is(.ch-i > .ch-n,.reg.numbered .reg-i > .reg-n){
+    position:sticky; top:calc(var(--nav-h) + 10px); align-self:start;
+    font-size:1.5rem; line-height:1; padding-top:.06em; color:var(--ink-soft); font-variant-numeric:tabular-nums lining-nums;
+  }
+  .b-chapter .ch-i p{ font-size:1.0625rem; line-height:1.6; color:var(--ink) } /* outranks the a1-2 :is() list (0,1,2); /ar keeps 1.8 */
+  .idx-reg .idx-n{ font-size:1.1rem }
+}
+
+/* === Muntregister: inline links, selection, caret and accent (a9-5) ===
+   Links inside running text get a drawn underline in bordeaux at 40% (no gold); the selection is a neutral paper tone
+   (--line: --paper-deep itself is too close to the page to be seen), light on the bordeaux surfaces; the text cursor
+   and the native checks and radios are bordeaux. Scoped to the inner pages, the homepage below the hero, the menus and
+   the footer; the hero keeps the site's old selection. (No inline links exist in the copy yet; the rule is ready.) */
+:is(.page,main > .block:not(.h3),footer,.veil,.mega){ accent-color:var(--wine); caret-color:var(--wine) }
+:is(.page,main > .block:not(.h3),footer,.veil,.mega)::selection,
+:is(.page,main > .block:not(.h3),footer,.veil,.mega) ::selection{ background:var(--line); color:var(--ink) }
+:is(.b-dark,.pe,footer)::selection,
+:is(.b-dark,.pe,footer) ::selection{ background:rgba(237,234,225,.25); color:#fff }
+html[data-slot="licht"] :is(.pe,footer)::selection,
+html[data-slot="licht"] :is(.pe,footer) ::selection{ background:var(--line-strong); color:var(--ink) }
+:is(.b-prose-body,.lg-art,.reg-i,.ch-i,.notice-box,.card-dl) p a:not(.more,.btn,.act-a){
+  text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.24em; text-decoration-color:rgba(111,10,37,.4);
+  transition:color var(--d-hover) ease, text-decoration-color var(--d-hover) ease;
+}
+@media (hover:hover) and (pointer:fine){
+  :is(.b-prose-body,.lg-art,.reg-i,.ch-i,.notice-box,.card-dl) p a:not(.more,.btn,.act-a):hover{ color:var(--wine); text-decoration-color:currentColor }
+}
+
+/* === Muntregister: twin labels NL | AR (a7-5, b10) ===
+   On three pages first (about, membership, academy; TWIN_PAGES in components/Blocks.tsx) a section label is answered
+   by the source's own label in the other script: Arabic beside Dutch and English, English beside Arabic. Small,
+   ink-soft, after a hairline; never on a phone; nothing when the source has no label for that section. */
+.label-twin{
+  display:inline-block; margin-inline-start:2px; padding-inline-start:14px; border-inline-start:1px solid var(--line-strong);
+  font-family:var(--arabic); font-weight:700; font-size:.95rem; line-height:1.2; letter-spacing:0; text-transform:none;
+  font-variant-caps:normal; color:var(--ink-soft); opacity:.85; unicode-bidi:isolate;
+}
+/* on /ar the twin is Dutch or English: the same legend as every label (serif small caps, a1-5), not a second style */
+[dir="rtl"] .label-twin{
+  font-family:var(--text); font-weight:500; font-size:1rem; letter-spacing:.08em; text-transform:none;
+  font-variant-caps:all-small-caps; font-synthesis-small-caps:none;
+}
+:is(.b-dark,.pe) .label-twin{ color:var(--paper-mute); border-color:rgba(237,234,225,.25) }
+@media (max-width:640px){ .label-twin{ display:none } }
+
+/* === Muntregister: frames per role, prepared (a3-4) ===
+   Until the house grading is done every photograph keeps its 1px hairline (--photo-line). The frames per role are
+   ready behind html[data-kader="rol"] (review panel "Fotokader"): large photographs without an edge, in-page bands
+   hanging from one gold top line like the masthead, specimens (the 4:5 plates) in a passe-partout. While a file
+   loads, every frame shows its registry tone (blocks.css, a3-1), the masthead band included. */
+html[data-kader="rol"] .ph:not(:is(.h3,.mh) *){ box-shadow:none }
+html[data-kader="rol"] .b-band .ph::after{
+  content:""; position:absolute; inset:0 0 auto; height:1px; z-index:1; background:rgba(179,148,85,.9); pointer-events:none;
+}
+html[data-kader="rol"] .b-plate .ph{ outline:1px solid rgba(179,148,85,.55); outline-offset:6px }
+@media (max-width:640px){ html[data-kader="rol"] .b-plate .ph{ outline-offset:4px } }
+
+/* === Muntregister: print as letter paper (a9-6) ===
+   Membership, fees and the legal pages print as clean A4 letter paper: no bar, menus, page end, photographs, films or
+   forms; black text; the gold bar under the name and the twin in the other script stay. The footer keeps only its
+   colophon. External links print their address. (The .topbar is hidden in print only; on screen nothing changes.) */
+@media print{
+  @page{ size:A4; margin:18mm 16mm 20mm }
+  html,body{ background:#fff !important; color:#000 }
+  body{ font-size:10.5pt; line-height:1.5 }
+  .topbar,.tb-main,.tb-util,.tb-nav,.burger,.mega,.mega-scrim,.veil,.skiplink,.pe,.f-news,.f-links,.f-rosette,
+  .ph,.mh-band,video,.film,.b-form,.b-formset,.fm,.ls,.seal-wrap,.card-seal,.rvw,nextjs-portal{ display:none !important }
+  .page.sp{ padding-top:0 !important }
+  :is(.rv,.rv-ph,.mh-title,.mh-twin,.mh-bar,.mh-label,.mh-stand,.mh-lede){
+    opacity:1 !important; transform:none !important; animation:none !important; filter:none !important; clip-path:none !important;
+  }
+  .mh-bar{ print-color-adjust:exact; -webkit-print-color-adjust:exact; height:2pt }
+  .page :is(h1,h2,h3,p,li,dt,dd,span,a){ color:#000 !important }
+  .page .mh-twin{ color:#7A5A2A !important; print-color-adjust:exact; -webkit-print-color-adjust:exact }
+  .b-dark{ background:none !important; color:#000 }
+  .b-dark::before{ display:none }
+  .b{ padding-block:12pt !important }
+  .tier,.lg-art,.reg-i,.ch-i,.spec-row,.card-row,.bstep{ break-inside:avoid }
+  h2,h3{ break-after:avoid }
+  footer{ background:none !important; color:#000; padding:12pt 0 0 !important; border-top:.5pt solid #999 }
+  footer::before{ display:none }
+  footer :is(p,span){ color:#000 !important }
+  footer .colophon .wm-paper{ display:none !important }
+  footer .colophon .wm-ink{ display:block !important }
+  main a[href^="http"]:not([href*="localhost"])::after{ content:" (" attr(href) ")"; font-size:.85em; word-break:break-all }
+}
+
+/* ============================================================
+   SLICE 9 — THE EXTRA MOTION LAYER (g4 extra, a6-1, a6-2, a6-7, b12; owner feedback 1 Oct: the living gold line)
+   Everything here moves only under html[data-beweging="extra"] (layout.tsx writes the default from DEFAULT_BEWEGING in
+   components/motion.ts; the review panel overrides it per browser). Without it the page looks exactly as before: the
+   photographs fade (g4 repair), the lines stand, the crossing line is not there. One family, taken from the hero:
+   lines DRAW on --ease-draw, photographs UNROLL from under the line like the masthead band, coins are STRUCK, and every
+   gold line of the page's chrome catches the hero's one LIGHT and its outward GLINT (components/FoilLight.tsx).
+   Everything plays once (IntersectionObserver in Reveal.tsx, never reversed, never tied to the scroll position).
+   Reduced motion: every rule that moves sits inside (prefers-reduced-motion:no-preference), so the end state simply
+   stands. Keyboard: html[data-kbd] already makes transitions instant; the keyframe strikes stop as well (below).
+   The struck steps (slice 3), the statement's cross-mark (slice 3), the seal's press once per visit (slice 5) and the
+   success seal (slice 4) were already built under the same switch and are unchanged; this slice completes the set.
+   Page transitions (a6-7) are a separate switch, html[data-overgang="aan"] (components/PageTransition.tsx).
+   ============================================================ */
+
+/* === Muntregister: photographs unroll from under the line (a6-1) ===
+   Instead of the default fade: the frame opens downward (clip-path, 1100ms --ease-draw) while the picture settles from
+   1.06 (1600ms --ease-arrive), the same verbs as the masthead band. Never on the masthead band (it has its own
+   entrance) and never in the hero. The clip rests a few pixels outside the frame, so the hairline and the
+   passe-partout of the "rol" frames (outline-offset 6px) are never cut off. Text keeps the default reveal: labels
+   and h2 rise 10px in 700ms (slice 1), which already is the typed TEXT reveal. Stagger 60/120/180ms, at most three. */
+@media (scripting:enabled) and (prefers-reduced-motion:no-preference){
+  html[data-beweging="extra"] .rv-ph:not(:is(.h3,.mh) *){
+    opacity:1; clip-path:inset(-8px); transition:clip-path var(--d-draw) var(--ease-draw);
+  }
+  html[data-beweging="extra"] .rv-ph:not(.in):not(:is(.h3,.mh) *){ clip-path:inset(-8px -8px calc(100% + 8px) -8px) }
+  html[data-beweging="extra"] .rv-ph:not(:is(.h3,.mh) *) img{ transition:transform 1600ms var(--ease-arrive) }
+  html[data-beweging="extra"] .rv-ph:not(.in):not(:is(.h3,.mh) *) img{ transform:scale(1.06) }
+  html[data-beweging="extra"] :is(.rv-ph.lag1,.rv-ph.lag1 img){ transition-delay:60ms }
+  html[data-beweging="extra"] :is(.rv-ph.lag2,.rv-ph.lag2 img){ transition-delay:120ms }
+  html[data-beweging="extra"] :is(.rv-ph.lag3,.rv-ph.lag3 img){ transition-delay:180ms }
+}
+
+/* === Muntregister: a few gold lines draw themselves (a6-2) ===
+   .rv-rule marks a line that draws once from the start side (scaleX 0 to 1 on --ease-draw; mirrored in Arabic):
+   the lead's bar (900ms), the band caption's rule (700ms), the page end's foil edge (1100ms, the homepage finale too)
+   and the crossing line (1100ms). The tiers lost their top rule in slice 3 (they are framed certificates now), so the
+   crossing line before them takes that place. Labels have no dash any more, so they do not take part. */
+[dir="rtl"] .rv-rule{ --ox:right }
+/* the band caption's rule becomes a pseudo-element so it can draw (same 2px, same gold, same place) */
+html[data-beweging="extra"] .b-band-cap{ position:relative; border-top-color:transparent }
+html[data-beweging="extra"] .b-band-cap::before{ content:""; position:absolute; top:-2px; inset-inline:0; height:2px; background:var(--bar); pointer-events:none }
+@media (scripting:enabled) and (prefers-reduced-motion:no-preference){
+  html[data-beweging="extra"] .rv-rule::before{ transform-origin:var(--ox,left) center; transition:transform var(--d-reveal) var(--ease-draw) }
+  html[data-beweging="extra"] .rv-rule:not(.in)::before{ transform:scaleX(0) }
+  html[data-beweging="extra"] .b-band-cap.rv-rule::before{ transition-duration:var(--d-reveal) }
+  html[data-beweging="extra"] .pe.rv-rule::before,
+  html[data-beweging="extra"] .pe > .pe-edge{ transform-origin:var(--ox,left) center; transition:transform var(--d-draw) var(--ease-draw) }
+  html[data-beweging="extra"] .pe:not(.in) > .pe-edge{ transform:scaleX(0) }
+}
+
+/* === Muntregister: the one crossing line (a6-2, g7) ===
+   components/Blocks.tsx (XRule): at most one per page, only before the tiers or the dark block, never in the page's
+   end. A 1px neutral rule across the full width; on it a 3px piece of foil from the page's edge to 120px into the
+   column, which draws in (1100ms) and then glints. It sits in the middle of the space that was already there, so
+   nothing below it moves. Only under the extra motion; otherwise display:none. */
+.x-rule{ display:none }
+html[data-beweging="extra"] .x-rule{
+  display:block; position:relative; height:1px; background:var(--line-strong); pointer-events:none;
+  margin-top:calc(var(--gap, var(--pace)) * -.5); margin-bottom:calc(var(--gap, var(--pace)) * .5 - 1px);
+}
+html[data-beweging="extra"] .x-rule.is-before{ margin-top:calc(var(--pace) * .5); margin-bottom:calc(var(--pace) * -.5 - 1px) }
+html[data-beweging="extra"] .x-rule > span{
+  position:absolute; top:-1px; inset-inline-start:0; height:3px; overflow:hidden; background:var(--foil);
+  width:calc(max(var(--gutter), (100% - var(--max)) / 2) + 120px);
+}
+@media (scripting:enabled) and (prefers-reduced-motion:no-preference){
+  html[data-beweging="extra"] .x-rule > span{ transform-origin:var(--ox,left) center; transition:transform var(--d-draw) var(--ease-draw) }
+  html[data-beweging="extra"] .x-rule:not(.in) > span{ transform:scaleX(0) }
+}
+@media print{ .x-rule{ display:none !important } }
+
+/* === Muntregister: the living gold line (a6-2, owner feedback 1 Oct) ===
+   The masthead's bar, the page end's foil edge and the crossing line wear the hero's foil light: the recipe of
+   .bar::after in app/hero.css (copied, not imported), a soft highlight at --lx with strength --fl (.3 + nearness x .7)
+   on mix-blend-mode:screen, plus its glint: two lights at --g1/--g2 that run outward from the middle (strength --ga).
+   components/FoilLight.tsx moves them. Without it (reduced motion, no script) the line keeps a still, soft sheen in its
+   middle. On the masthead this replaces the default single glint of its ::after. The page end's light is its own empty
+   leaf, .pe-edge (PageEnd.tsx, Sections.tsx), so the custom properties written every frame never restyle the section. */
+.pe-edge{ display:none }
+html[data-beweging="extra"] .mh .mh-bar::after,
+html[data-beweging="extra"] .x-rule > span::after,
+html[data-beweging="extra"] .pe > .pe-edge{
+  content:""; position:absolute; pointer-events:none; mix-blend-mode:screen; opacity:1; animation:none; transform:none;
+  background:
+    radial-gradient(12vw 320% at var(--g1,-9999px) 50%, rgba(255,249,236,var(--ga,0)), rgba(255,249,236,0) 70%),
+    radial-gradient(12vw 320% at var(--g2,-9999px) 50%, rgba(255,249,236,var(--ga,0)), rgba(255,249,236,0) 70%),
+    radial-gradient(190px 300% at var(--lx,50%) 50%, rgba(255,250,236,var(--fl,.3)), rgba(255,242,210,calc(var(--fl,.3) * .45)) 34%, rgba(255,242,210,0) 70%);
+}
+html[data-beweging="extra"] .mh .mh-bar::after,
+html[data-beweging="extra"] .x-rule > span::after{ inset:0; width:auto }
+html[data-beweging="extra"] .pe > .pe-edge{ display:block; inset:0 0 auto; height:3px; z-index:1 } /* over the foil edge (.pe::before), under the seal */
+
+/* === Muntregister: the keyboard never animates, the strikes too (a6-6) ===
+   html[data-kbd] already makes every transition instant; the struck steps are keyframes, so they stop as well and
+   show their end state (coins and numerals there, the gold run line and the rings gone). */
+html[data-kbd] .bsteps.is-struck :is(.bstep,.bstep-n),
+html[data-kbd] .bsteps.is-struck::after,
+html[data-kbd] .bsteps.is-struck .bstep::before,
+html[data-kbd] .bsteps.is-struck .bstep::after{ animation:none !important }
+
+/* === Muntregister: page transitions, a prototype (a6-7, b12) ===
+   components/PageTransition.tsx, only under html[data-overgang="aan"] and only from one inner page to another. While
+   it runs, <html data-vt="inner"> names the header on its own, so it is captured apart and stands still (the docking
+   exists only on the homepage, which never takes part). The old page fades out in 160ms; the new one arrives in
+   280ms from 8px lower, 60ms later. Nothing morphs between title and photograph. Reduced motion: never started. */
+html[data-vt="inner"] header.topbar{ view-transition-name:dukaat-chrome }
+html[data-vt="inner"]::view-transition-group(dukaat-chrome),
+html[data-vt="inner"]::view-transition-new(dukaat-chrome){ animation:none }
+html[data-vt="inner"]::view-transition-old(dukaat-chrome){ display:none }
+html[data-vt="inner"]::view-transition-old(root){ animation:vt-page-out var(--d-press) var(--ease-arrive) both }
+html[data-vt="inner"]::view-transition-new(root){ animation:vt-page-in var(--d-ui) var(--ease-arrive) 60ms both }
+@keyframes vt-page-out{ to{ opacity:0 } }
+@keyframes vt-page-in{ from{ opacity:0; transform:translateY(8px) } }
+@media (prefers-reduced-motion:reduce){
+  html::view-transition-group(*),html::view-transition-old(*),html::view-transition-new(*){ animation:none !important }
+}

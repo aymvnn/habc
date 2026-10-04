@@ -9,7 +9,7 @@ import type { PageSet } from "./types";
  */
 export const contact: PageSet = {
   contact: {
-    masthead: { variant: "plate", photo: "contact-hero" },
+    masthead: { variant: "plate", photo: "contact-hero", compact: true }, // UX-03: a task page, the form in the first screen
     headline: {
       en: "What do you want to achieve?",
       nl: "Wat wilt u bereiken?",
@@ -29,6 +29,7 @@ export const contact: PageSet = {
         form: {
           id: "contact-form",
           common: "none",
+          layout: "desk", // R1: beside the introduction and the business card, in the first screen
           fields: [
             {
               name: "name",
@@ -126,6 +127,7 @@ export const contact: PageSet = {
       {
         kind: "register",
         cols: 2,
+        layout: "card", // Muntregister a2-8: the business card (design flag, no text change)
         items: [
           {
             title: { en: "Email", nl: "E-mail", ar: "البريد الإلكتروني" },
@@ -163,7 +165,7 @@ export const contact: PageSet = {
   },
 
   "looking-for": {
-    masthead: { variant: "portrait", photo: "docs-desk" },
+    masthead: { variant: "portrait", photo: "docs-desk-band", compact: true }, // UX-03
     headline: {
       en: "What are you looking for?",
       nl: "Wat zoekt u?",
@@ -195,6 +197,7 @@ export const contact: PageSet = {
             fields: [
               {
                 name: "product",
+                core: true, // UX-04
                 label: { en: "Requested product or service", nl: "Gevraagd product of gevraagde dienst", ar: "المنتج أو الخدمة المطلوبة" },
                 type: "text",
               },
@@ -205,6 +208,7 @@ export const contact: PageSet = {
               },
               {
                 name: "quantity",
+                core: true, // UX-04
                 label: { en: "Quantity", nl: "Hoeveelheid", ar: "الكمية" },
                 type: "text",
               },
@@ -219,6 +223,7 @@ export const contact: PageSet = {
               },
               {
                 name: "delivery-country",
+                core: true, // UX-04
                 label: { en: "Country of delivery", nl: "Land van aflevering", ar: "بلد التسليم" },
                 type: "text",
               },
@@ -266,6 +271,7 @@ export const contact: PageSet = {
             fields: [
               {
                 name: "product",
+                core: true, // UX-04
                 label: { en: "Product or service", nl: "Product of dienst", ar: "المنتج أو الخدمة" },
                 type: "text",
               },
@@ -276,6 +282,7 @@ export const contact: PageSet = {
               },
               {
                 name: "capacity",
+                core: true, // UX-04
                 label: {
                   en: "Production capacity or quantity",
                   nl: "Productiecapaciteit of hoeveelheid",
@@ -290,6 +297,7 @@ export const contact: PageSet = {
               },
               {
                 name: "target-market",
+                core: true, // UX-04
                 label: { en: "Target market", nl: "Doelmarkt", ar: "السوق المستهدف" },
                 type: "text",
               },
@@ -333,16 +341,19 @@ export const contact: PageSet = {
             fields: [
               {
                 name: "brand",
+                core: true, // UX-04
                 label: { en: "Brand and product", nl: "Merk en product", ar: "العلامة والمنتج" },
                 type: "text",
               },
               {
                 name: "region",
+                core: true, // UX-04
                 label: { en: "Country or region", nl: "Land of regio", ar: "الدولة أو المنطقة" },
                 type: "text",
               },
               {
                 name: "channels",
+                core: true, // UX-04
                 label: { en: "Desired sales channels", nl: "Gewenste verkoopkanalen", ar: "قنوات البيع المطلوبة" },
                 type: "text",
               },
@@ -400,16 +411,19 @@ export const contact: PageSet = {
             fields: [
               {
                 name: "idea",
+                core: true, // UX-04
                 label: { en: "Collaboration idea", nl: "Samenwerkingsidee", ar: "فكرة التعاون" },
                 type: "textarea",
               },
               {
                 name: "partner-type",
+                core: true, // UX-04
                 label: { en: "Type of partner", nl: "Type partner", ar: "نوع الشريك" },
                 type: "text",
               },
               {
                 name: "sector-country",
+                core: true, // UX-04
                 label: { en: "Sector and country", nl: "Sector en land", ar: "القطاع والدولة" },
                 type: "text",
               },
@@ -461,16 +475,19 @@ export const contact: PageSet = {
             fields: [
               {
                 name: "sector",
+                core: true, // UX-04
                 label: { en: "Sector", nl: "Sector", ar: "القطاع" },
                 type: "text",
               },
               {
                 name: "invest-country",
+                core: true, // UX-04
                 label: { en: "Country", nl: "Land", ar: "الدولة" },
                 type: "text",
               },
               {
                 name: "participation",
+                core: true, // UX-04
                 label: { en: "Type of participation", nl: "Type deelname", ar: "نوع المشاركة" },
                 type: "text",
               },
@@ -531,11 +548,13 @@ export const contact: PageSet = {
               },
               {
                 name: "products",
+                core: true, // UX-04
                 label: { en: "Products or services", nl: "Producten of diensten", ar: "المنتجات أو الخدمات" },
                 type: "text",
               },
               {
                 name: "target-country",
+                core: true, // UX-04
                 label: { en: "Target country", nl: "Doelland", ar: "الدولة المستهدفة" },
                 type: "text",
               },
@@ -551,6 +570,7 @@ export const contact: PageSet = {
               },
               {
                 name: "support",
+                core: true, // UX-04
                 label: { en: "Type of support", nl: "Type ondersteuning", ar: "نوع الدعم" },
                 type: "text",
               },
@@ -579,6 +599,7 @@ export const contact: PageSet = {
         kind: "faq",
         items: [
           {
+            theme: "about", // UX-18
             q: {
               en: "Is DUKAAT only for companies?",
               nl: "Is DUKAAT alleen bedoeld voor bedrijven?",
@@ -591,6 +612,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "events", // UX-18
             q: {
               en: "Can I take part without membership?",
               nl: "Kan ik deelnemen zonder lidmaatschap?",
@@ -603,6 +625,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "membership", // UX-18
             q: {
               en: "Does membership include all courses and services?",
               nl: "Omvat het lidmaatschap alle cursussen en diensten?",
@@ -615,6 +638,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "services", // UX-18
             q: {
               en: "How does DUKAAT help me find a partner or supplier?",
               nl: "Hoe helpt DUKAAT mij bij het vinden van een partner of leverancier?",
@@ -627,6 +651,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "services", // UX-18
             q: {
               en: "Does DUKAAT guarantee that deals are completed?",
               nl: "Garandeert DUKAAT dat deals worden gesloten?",
@@ -639,6 +664,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "academy", // UX-18
             q: {
               en: "Are all courses free?",
               nl: "Zijn alle cursussen gratis?",
@@ -651,6 +677,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "academy", // UX-18
             q: {
               en: "Does a participant receive a certificate?",
               nl: "Ontvangt een deelnemer een certificaat?",
@@ -663,6 +690,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "services", // UX-18
             q: {
               en: "How do I list a product or a purchase request?",
               nl: "Hoe plaats ik een product of een inkoopaanvraag?",
@@ -675,6 +703,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "about", // UX-18
             q: {
               en: "What languages are the website and programmes in?",
               nl: "In welke talen zijn de website en de programma’s beschikbaar?",
@@ -687,6 +716,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "about", // UX-18
             q: {
               en: "Is DUKAAT an official chamber of commerce?",
               nl: "Is DUKAAT een officiële kamer van koophandel?",
@@ -699,6 +729,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "services", // UX-18
             q: {
               en: "Do you guarantee the companies listed?",
               nl: "Staat u garant voor de vermelde bedrijven?",
@@ -711,6 +742,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "about", // UX-18
             q: {
               en: "How are you different from a platform like Alibaba?",
               nl: "Wat is het verschil met een platform als Alibaba?",
@@ -723,6 +755,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "membership", // UX-18
             q: {
               en: "I am a small company. Is DUKAAT for me?",
               nl: "Ik heb een klein bedrijf. Is DUKAAT iets voor mij?",
@@ -735,6 +768,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "membership", // UX-18
             q: {
               en: "What happens after the intake, or after I have been nominated?",
               nl: "Wat gebeurt er na de intake, of nadat ik ben voorgedragen?",
@@ -747,6 +781,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "membership", // UX-18
             q: {
               en: "Do you take a commission on deals?",
               nl: "Rekent u commissie op deals?",
@@ -759,6 +794,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "membership", // UX-18
             q: {
               en: "Is my company’s data protected?",
               nl: "Zijn de gegevens van mijn bedrijf beschermd?",
@@ -771,6 +807,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "about", // UX-18
             q: {
               en: "Which markets do you cover?",
               nl: "Welke markten bestrijkt u?",
@@ -783,6 +820,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "membership", // UX-18
             q: {
               en: "How does admission work?",
               nl: "Hoe werkt de toelating?",
@@ -795,6 +833,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "membership", // UX-18
             q: {
               en: "What does a nomination involve?",
               nl: "Wat houdt een voordracht in?",
@@ -807,6 +846,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "membership", // UX-18
             q: {
               en: "Can a member nominate someone?",
               nl: "Kan een lid iemand voordragen?",
@@ -819,6 +859,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "services", // UX-18
             q: {
               en: "Can you represent my company on the other side?",
               nl: "Kunt u mijn bedrijf aan de andere kant vertegenwoordigen?",
@@ -831,6 +872,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "events", // UX-18
             q: {
               en: "Do you organise trade missions and events?",
               nl: "Organiseert u handelsmissies en evenementen?",
@@ -843,6 +885,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "membership", // UX-18
             q: {
               en: "What does DUKAAT charge?",
               nl: "Wat brengt DUKAAT in rekening?",
@@ -855,6 +898,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "services", // UX-18
             q: {
               en: "Do you handle payments?",
               nl: "Lopen betalingen via DUKAAT?",
@@ -867,6 +911,7 @@ export const contact: PageSet = {
             },
           },
           {
+            theme: "contact", // UX-18
             q: {
               en: "Is my request published?",
               nl: "Wordt mijn verzoek gepubliceerd?",
@@ -879,6 +924,12 @@ export const contact: PageSet = {
             },
           },
         ],
+      },
+      /* UX-14 (owner, 4 Oct 2026): "What we do not do" left the services menu; the questions link to it instead.
+         The label is the page's own title (content/site.*.ts). */
+      {
+        kind: "actions",
+        links: [{ href: "services/boundaries", label: { en: "What we do not do", nl: "Wat wij niet doen", ar: "ما لا نفعله" } }],
       },
     ],
   },

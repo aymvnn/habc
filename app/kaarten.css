@@ -1,0 +1,114 @@
+/* === Signature 9: the three cards (owner approved 4 Oct 2026) ===
+   components/Blocks.tsx (Tiers) + components/TierLight.tsx. The certificate frames give way to three real membership
+   cards lying on the table in the window light (ID-1 proportion, 1.586:1). Member: paper with the tulip blind-
+   embossed. Professional: Bordeaux leather with a stitched edge and the tulip pressed in. Executive: almost black with
+   a gold-foil edge and the tulip in foil. The text of each tier stays below its card, on the page. With a mouse the
+   light follows the hand over the cards; going over a card lifts it 6px, as if you pick it up. No gradient text. */
+.tier,.tier:first-child,.tier:last-child{ background:transparent; border:0; outline:0; padding:0 }
+@supports (grid-template-rows:subgrid){
+  @media (min-width:1101px){
+    .tiers{ grid-template-rows:repeat(7,auto); column-gap:clamp(28px,3vw,52px) }
+    .tier,.tier:first-child,.tier:last-child{ grid-row:span 7 }
+  }
+}
+.tier-card{
+  --mx:22%; --my:12%;
+  position:relative; isolation:isolate; overflow:hidden; aspect-ratio:1.586; width:100%; max-width:440px;
+  display:grid; grid-template-rows:auto 1fr auto; padding:clamp(16px,1.5vw,22px) clamp(18px,1.7vw,24px);
+  margin-bottom:clamp(20px,2vw,30px); border-radius:12px;
+  box-shadow:0 1px 1px rgba(36,20,24,.08), 0 22px 34px -22px rgba(36,20,24,.5), 0 8px 12px -10px rgba(36,20,24,.3);
+  transition:translate var(--d-hover) var(--ease-arrive), box-shadow var(--d-hover) var(--ease-arrive);
+}
+.tier-card .tier-n{ grid-row:1; justify-self:start; position:relative; z-index:2 }
+.tier-card .tier-name{
+  grid-row:3; position:relative; z-index:2; margin:0;
+  font-size:clamp(1.25rem,.95rem + .75vw,1.65rem); letter-spacing:-.02em; line-height:1.05;
+}
+/* the tulip on the card: a face, with a shadow and a highlight that make it a print in the material */
+.tc-mark{
+  position:absolute; z-index:1; top:clamp(14px,1.4vw,20px); inset-inline-end:clamp(16px,1.6vw,22px); width:24%; aspect-ratio:859/998;
+  -webkit-mask:url("/logo/dukaat-beeldmerk.svg") center / contain no-repeat;
+  mask:url("/logo/dukaat-beeldmerk.svg") center / contain no-repeat;
+}
+/* the window's light lies on every card from the top left; the hand's light follows the pointer */
+.tier-card::after{
+  content:""; position:absolute; inset:0; z-index:3; pointer-events:none; border-radius:inherit;
+  background:
+    radial-gradient(260px 190px at var(--mx) var(--my), rgba(255,250,236,.34), rgba(255,250,236,0) 70%),
+    linear-gradient(128deg, rgba(255,255,255,.2) 0%, rgba(255,255,255,0) 38%);
+  mix-blend-mode:soft-light;
+}
+@media (hover:hover) and (pointer:fine){
+  .tier:hover .tier-card{
+    translate:0 -6px;
+    box-shadow:0 1px 1px rgba(36,20,24,.08), 0 34px 44px -26px rgba(36,20,24,.55), 0 14px 18px -12px rgba(36,20,24,.3);
+  }
+}
+
+/* I — paper, the tulip blind-embossed (a raised print: light on the top left edge, shade on the bottom right) */
+.tier-card[data-tier="1"]{
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix values=%220 0 0 0 .3 0 0 0 0 .25 0 0 0 0 .2 0 0 0 .07 0%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E"),
+    linear-gradient(160deg, #F8F5EC, #EFEADF);
+  box-shadow:inset 0 0 0 1px rgba(191,182,162,.8), 0 1px 1px rgba(36,20,24,.08), 0 22px 34px -22px rgba(36,20,24,.45), 0 8px 12px -10px rgba(36,20,24,.25);
+}
+.tier-card[data-tier="1"] .tier-n{ color:var(--gold-deep) }
+.tier-card[data-tier="1"] .tier-name{ color:var(--ink) }
+.tier-card[data-tier="1"] .tc-mark{
+  background:#F3EFE5;
+  filter:drop-shadow(-1px -1px 0 rgba(255,255,255,.95)) drop-shadow(1px 1.5px 0 rgba(36,20,24,.16));
+}
+
+/* II — Bordeaux leather, stitched, the tulip pressed in */
+.tier-card[data-tier="2"]{
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%221.6%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix values=%220 0 0 0 .05 0 0 0 0 0 0 0 0 0 .02 0 0 0 .38 0%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E"),
+    radial-gradient(120% 90% at 18% 0%, #8E1534 0%, #6F0A25 45%, #4C0619 100%);
+}
+.tier-card[data-tier="2"]::before{
+  content:""; position:absolute; inset:8px; border-radius:7px; border:1px dashed rgba(220,177,122,.45); pointer-events:none; z-index:1;
+}
+.tier-card[data-tier="2"] .tier-n{ color:var(--gold-light) }
+.tier-card[data-tier="2"] .tier-name{ color:var(--paper) }
+.tier-card[data-tier="2"] .tc-mark{
+  background:#4E081B;
+  filter:drop-shadow(1px 1.5px 0 rgba(255,190,200,.26)) drop-shadow(-1px -1px 0 rgba(20,0,6,.5));
+}
+.tier-card[data-tier="2"]::after{
+  mix-blend-mode:screen;
+  background:
+    radial-gradient(240px 170px at var(--mx) var(--my), rgba(255,220,220,.16), rgba(255,220,220,0) 70%),
+    linear-gradient(128deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,0) 40%);
+}
+
+/* III — almost black, a gold-foil edge, the tulip in foil that catches the light */
+.tier-card[data-tier="3"]{
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.8%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix values=%220 0 0 0 1 0 0 0 0 .9 0 0 0 0 .8 0 0 0 .035 0%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E"),
+    radial-gradient(120% 90% at 18% 0%, #2E0812 0%, #1F050B 55%, #150307 100%);
+}
+.tier-card[data-tier="3"]::before{
+  content:""; position:absolute; inset:9px; border-radius:6px; padding:1.5px; z-index:1; pointer-events:none;
+  background:linear-gradient(120deg, #9E7946 0%, #DCB17A 30%, #F6E2B8 46%, #B39455 62%, #9E7946 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.tier-card[data-tier="3"] .tier-n{ color:var(--gold-light) }
+.tier-card[data-tier="3"] .tier-name{ color:var(--paper) }
+.tier-card[data-tier="3"] .tc-mark{
+  background:
+    radial-gradient(120px 140px at calc(var(--mx) - 75%) calc(var(--my) - 10%), rgba(255,246,222,.95), rgba(255,246,222,0) 70%),
+    linear-gradient(140deg, #9E7946, #DCB17A 40%, #F2DDB0 52%, #B39455 70%, #8A6634);
+}
+.tier-card[data-tier="3"]::after{
+  mix-blend-mode:screen;
+  background:
+    radial-gradient(240px 170px at var(--mx) var(--my), rgba(255,236,200,.14), rgba(255,236,200,0) 70%),
+    linear-gradient(128deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 40%);
+}
+
+[dir="rtl"] .tier-card .tier-name{ letter-spacing:0 }
+@media (max-width:1100px){ .tier-card{ max-width:420px } }
+@media (prefers-reduced-motion:reduce){ .tier-card{ transition:none } }
+@media print{ .tier-card{ box-shadow:none; print-color-adjust:exact; -webkit-print-color-adjust:exact } }

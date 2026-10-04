@@ -65,7 +65,7 @@ export const about: PageSet = {
   },
 
   "about/name": {
-    masthead: { variant: "portrait", photo: "story-tulip" },
+    masthead: { variant: "portrait", photo: "story-tulip-band" },
     headline: {
       en: "From value that crosses markets to relationships that cross borders",
       nl: "Van waarde die markten oversteekt naar relaties die grenzen oversteken",
@@ -134,6 +134,7 @@ export const about: PageSet = {
       {
         kind: "register",
         cols: 2,
+        variant: "spec", // Muntregister a7-3: the coin certificate (design flag, no text change)
         label: { en: "The coin", nl: "De munt", ar: "العملة" },
         heading: { en: "A known *weight.*", nl: "Een bekend *gewicht.*", ar: "وزنٌ *معروف.*" },
         items: [
@@ -319,7 +320,7 @@ export const about: PageSet = {
 
   /* 2.5 has no title line: the masthead shows the page title and blurb from content/site.*.ts */
   "about/goals": {
-    masthead: { variant: "plate", photo: "values-value" },
+    masthead: { variant: "plate", photo: "values-value-band" },
     blocks: [
       {
         kind: "register",
@@ -413,7 +414,7 @@ export const about: PageSet = {
 
   /* Extra page kept by the owner: "about/why" from commit 2336702. */
   "about/why": {
-    masthead: { variant: "plate", photo: "why-hero" },
+    masthead: { variant: "plate", photo: "why-hero-band" },
     blocks: [
       {
         kind: "lead",

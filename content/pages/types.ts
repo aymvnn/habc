@@ -1,4 +1,4 @@
-import type { Locale } from "../types";
+import type { GroupKey, Locale } from "../types";
 
 /**
  * The inner pages are built from blocks. Every word on them comes from the compagnon's text
@@ -33,6 +33,12 @@ export type Field = {
   placeholder?: T;
   /** span both columns */
   wide?: boolean;
+  /**
+   * UX-04 (owner, 4 Oct 2026): one of the few questions the form shows at once. Every other optional field waits behind
+   * one "add more details" button. Without any core flag in a request form, its first three own fields are core.
+   * Required fields are always shown. A design flag, no text.
+   */
+  core?: boolean;
 };
 
 /**
@@ -50,6 +56,13 @@ export type FormDef = {
   intro?: T;
   fields: Field[];
   common: "request" | "none";
+  /** UX-05: shared fields left out because the form already asks the same question itself (e.g. "company", "country") */
+  omit?: string[];
+  /**
+   * R1 (owner, 4 Oct 2026): "desk" sets the form beside its page's introduction and business card — the lead block
+   * before it and the card register after it join the form in one section, the form in the first screen. Design flag.
+   */
+  layout?: "desk";
   submit: T;
   /** a consent line the source gives for this form (e.g. the publication option of a purchase request) */
   option?: T;
@@ -69,8 +82,13 @@ export type Block =
   | { kind: "duo"; photos: [Photo, Photo]; label?: T; heading?: T; body?: T[] }
   /** four small photographs in a staggered row */
   | { kind: "mosaic"; photos: [Photo, Photo, Photo, Photo]; caption?: T }
-  /** a ledger of items. cols 1 or 2; numbered 01, 02… only when the source numbers them; photo = sticky portrait beside */
-  | { kind: "register"; label?: T; heading?: T; intro?: T; items: Item[]; cols?: 1 | 2; numbered?: boolean; photo?: Photo }
+  /**
+   * a ledger of items. cols 1 or 2; numbered 01, 02… only when the source numbers them; photo = the register's one
+   * photograph, set as its own plate after the list (never beside it).
+   * Design flags only (no text): layout "card" = the contact details as a business card (takes the bare line of prose
+   * that follows it as its closing line, with the seal beside it); variant "spec" = the coin certificate (title over value).
+   */
+  | { kind: "register"; label?: T; heading?: T; intro?: T; items: Item[]; cols?: 1 | 2; numbered?: boolean; photo?: Photo; layout?: "card"; variant?: "spec" }
   /** a compact list of short terms (sectors, topics) set in columns */
   | { kind: "terms"; label?: T; heading?: T; intro?: T; items: T[]; note?: T }
   /** a numbered process (the source numbers it) */
@@ -79,17 +97,17 @@ export type Block =
   | { kind: "statement"; text: T; note?: T }
   /** the membership levels side by side */
   | { kind: "tiers"; label?: T; heading?: T; intro?: T; tiers: { name: string; subtitle: T; tagline: T; forWhom: T; itemsLabel: T; items: T[]; action: Link }[]; note?: T }
-  /** sticky heading on one side, items flowing on the other; items may carry a small photo plate */
+  /** sticky heading on one side, items flowing on the other (an item's photo is kept in the content but not shown: no photographs in lists) */
   | { kind: "chapter"; label?: T; heading?: T; intro?: T; items: PhotoItem[] }
-  /** questions and answers */
-  | { kind: "faq"; label?: T; heading?: T; items: { q: T; a: T }[] }
+  /** questions and answers; theme (UX-18): the menu group a question belongs to — the groups' own labels become its headings */
+  | { kind: "faq"; label?: T; heading?: T; items: { q: T; a: T; theme?: GroupKey }[] }
   /** a framed notice: the source's clarifications ("Toelichting") */
   | { kind: "notice"; label?: T; heading?: T; body: T[] }
   /** the one dark bordeaux block of a page */
   | { kind: "dark"; label?: T; heading: T; body: T[]; items?: T[]; photo?: Photo }
   /** long-form legal text: numbered articles with a table of contents */
   | { kind: "legal"; updated: T; intro?: T[]; articles: { title: T; body: T[] }[] }
-  /** overview pages only: every page in the group as an editorial index, with the pages' own photographs */
+  /** overview pages only: every page in the group as one text register 01, 02… */
   | { kind: "index"; label?: T; heading?: T }
   /** the source's buttons, in the source's order */
   | { kind: "actions"; heading?: T; body?: T; links: Link[] }
@@ -100,13 +118,17 @@ export type Block =
   /** several forms behind one choice (the six "What are you looking for?" forms) */
   | { kind: "formset"; id: string; heading?: T; intro?: T; forms: FormDef[] };
 
+/**
+ * compact (UX-03, owner 4 Oct 2026): a task page (contact, "What are you looking for?", partnerships) shows its masthead
+ * without the photograph band, so the form starts in the first screen; the photo stays the page's share image.
+ */
 export type Masthead =
   /** a wide photograph under the title (the big one) */
-  | { variant: "band"; photo: Photo }
+  | { variant: "band"; photo: Photo; compact?: boolean }
   /** a tall photograph beside the title */
-  | { variant: "portrait"; photo: Photo }
+  | { variant: "portrait"; photo: Photo; compact?: boolean }
   /** a small photograph beside the lede */
-  | { variant: "plate"; photo: Photo }
+  | { variant: "plate"; photo: Photo; compact?: boolean }
   /** type only (legal texts) */
   | { variant: "type" };
 

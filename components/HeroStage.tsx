@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import type { Dict, Locale } from "@/content/types";
 import { homeKnow, homeNetwork, hrefOf } from "@/lib/site";
 import { Tulip } from "./Tulip";
+import { Arrow } from "./Arrow"; // UI-05 (owner, 4 Oct 2026): the site's one drawn arrow, also in the hero keys
 
 /* eslint-disable @next/next/no-img-element -- brand SVGs are served as-is */
 
@@ -16,12 +17,74 @@ type Props = {
   hero: Dict["hero"];
   /** extras the owner kept: "Anno 2018", "By nomination" and the nomination key under the tulip */
   extra: Dict["extra"];
+  /** UX-21 (owner, 4 Oct 2026): the menu's own "Contact us" beside the nomination key, a way in for every visitor */
+  contact: string;
 };
 
 /** the photograph that opens beside each line on hover: the masthead photo of the page it leads to */
 const PHOTOS = ["about-room", "values-court", "why-hero", "values-value", "trade-samples", "aca-hero", "cal-hero", "adv-hero", "market-hero", "inv-hero", "membership-hero"];
 
 type Anchor = { x: number; y: number; side: 1 | -1 };
+
+/* ---------- fit: the whole hero, the name on the gold line included, always sits inside the first screen ----------
+   The two wings set the height of the stage (seven routes on one side wrap to two lines on a laptop). When the
+   hero is taller than the screen, --fit scales every gap, the title and the name down together and the type a
+   little more slowly (see hero.css) — as much as is needed, never more. The tulip then fills what is left of
+   its column: as tall as the wings beside it, and as wide as the column.
+   UX-26 (owner, 4 Oct 2026): the words stand at once now (UX-20), so the hero must not change size after the first
+   paint. This function therefore also runs as a small script right after the hero's markup (FIT_NOW), before the
+   browser paints. It is self-contained for that reason: no outside names. */
+function fitHero(r: HTMLElement) {
+  const c = r.querySelector<HTMLElement>(".crest");
+  if (!c) return;
+  const ASPECT = 859 / 998; // the tulip's viewBox: width / height
+  const FIT_MIN = 0.5, FIT_TIGHT = 0.35;
+  r.style.setProperty("--fit", "1");
+  r.style.removeProperty("--th-fill");
+  delete r.dataset.tight;
+  if (window.matchMedia("(max-width: 900px)").matches) return; // phones: the hero is two screens by design
+  // while the size is being found the tulip stays small, so that only the wings and the fixed parts decide the height
+  r.style.setProperty("--th-fill", "130px");
+  const fits = () => r.getBoundingClientRect().height <= innerHeight + 0.5;
+  // the largest --fit (not below min) at which the hero fits the screen, or null when not even min does
+  const largest = (min: number) => {
+    r.style.setProperty("--fit", "1");
+    if (fits()) return 1;
+    r.style.setProperty("--fit", String(min));
+    if (!fits()) return null;
+    let lo = min, hi = 1;
+    for (let i = 0; i < 8; i++) {
+      const mid = (lo + hi) / 2;
+      r.style.setProperty("--fit", mid.toFixed(3));
+      if (fits()) lo = mid; else hi = mid;
+    }
+    return lo;
+  };
+  let f = largest(FIT_MIN);
+  if (f === null) {
+    // a very low window: the short descriptions under the routes give way (hero.css), the pages have them in full
+    r.dataset.tight = "";
+    f = largest(FIT_TIGHT);
+    if (f === null) f = FIT_TIGHT; // not even then: it does what it can
+  }
+  r.style.setProperty("--fit", f.toFixed(3));
+  const col = c.parentElement;
+  const wings = Array.from(r.querySelectorAll<HTMLElement>(".wing"), (w) => w.getBoundingClientRect().height);
+  if (col && wings.length) {
+    const room = Math.max.apply(null, wings) - (col.getBoundingClientRect().height - c.getBoundingClientRect().height) - 6;
+    const wide = col.getBoundingClientRect().width / ASPECT;
+    r.style.setProperty("--th-fill", Math.floor(Math.max(130, Math.min(room, wide, 520))) + "px");
+  }
+}
+/** the pre-paint run: placed as the hero's last child, so the browser has parsed the hero but not yet painted it;
+    again as soon as the fonts are in (their lines can wrap differently from the stand-in font's) */
+const FIT_NOW = `try{var f=(${fitHero.toString()}),r=document.getElementById("routes");f(r);document.fonts&&document.fonts.ready.then(function(){f(r)})}catch(e){}`;
+const noSubscribe = () => () => {};
+const sameAnchors = (a: (Anchor | null)[], b: (Anchor | null)[]) =>
+  a.length === b.length && a.every((p, i) => { const q = b[i]; return p === q || (!!p && !!q && p.x === q.x && p.y === q.y && p.side === q.side); });
+
+/** UX-31: a page photograph at a small width, through Next's image optimiser (widths and quality allowed by next.config) */
+const small = (id: string, w: 128 | 384) => `/_next/image?url=${encodeURIComponent(`/photos/pages/${id}.jpg`)}&w=${w}&q=75`;
 
 /**
  * The hero is the logo, taken apart and used as architecture, with the source's homepage around it (1.2–1.4):
@@ -30,17 +93,17 @@ type Anchor = { x: number; y: number; side: 1 | -1 };
  * is a gold thread into the tulip that runs down its stem to the bar. A pulse travels line → tulip → stem → bar, and
  * the bar glints outward in both directions: value crossing the border.
  */
-export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
+export function HeroStage({ locale, title, descriptor, hero, extra, contact }: Props) {
   const root = useRef<HTMLElement>(null);
   const crest = useRef<HTMLDivElement>(null);
-  const key = useRef<HTMLAnchorElement>(null);
+  const key = useRef<HTMLDivElement>(null);
   const cap = useRef<HTMLDivElement>(null);
   const band = useRef<HTMLDivElement>(null);
   const bar = useRef<HTMLSpanElement>(null);
   const wm = useRef<HTMLDivElement>(null);
   const dock = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
-  const [photosReady, setPhotosReady] = useState(false);
+  const [photosReady, setPhotosReady] = useState(false); // UX-31: set by the first hover or focus on a hover device
   const shineAt = useRef(-1);
   const introDelay = useRef(0);
   const rows = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -53,6 +116,9 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
   const [active, setActive] = useState<number | null>(null);
   const [anchors, setAnchors] = useState<(Anchor | null)[]>([]);
   const [tab, setTab] = useState<"a" | "b">("a"); // phones: one side at a time
+  // true in the server's HTML and while the browser hydrates it, false for a hero mounted later (a client navigation):
+  // only the page load carries the pre-paint script; React never creates a script element in the browser
+  const pageLoad = useSyncExternalStore(noSubscribe, () => false, () => true);
 
   const rowsTotal = homeKnow.length + homeNetwork.length;
   // the line below the title (1.2) rides the two ends of the gold bar: "Relationships – Knowledge" | "Trade – Investment"
@@ -60,21 +126,23 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
   const half = Math.ceil(pillars.length / 2);
 
   /* ---------- geometry: threads from each route into the tulip base, stem down to the bar ---------- */
+  // UX-33 (owner, 4 Oct 2026): a measurement that finds nothing new changes no state, so the hero is not drawn again
   const measure = useCallback(() => {
     const r = root.current, c = crest.current, b = band.current;
     if (!r || !c || !b) return;
     const R = r.getBoundingClientRect();
-    setBox({ w: R.width, h: R.height });
-    r.style.setProperty("--bw", `${R.width}px`);
+    setBox((o) => (o.w === R.width && o.h === R.height ? o : { w: R.width, h: R.height }));
+    if (r.style.getPropertyValue("--bw") !== `${R.width}px`) r.style.setProperty("--bw", `${R.width}px`);
     if (window.matchMedia("(max-width: 900px)").matches) {
       // one register, no threads: the photo opens at the end of the row, inside it
       const rtl = getComputedStyle(r).direction === "rtl";
-      setAnchors(rows.current.map((el) => {
+      const A = rows.current.map((el): Anchor | null => {
         if (!el) return null;
         const E = el.getBoundingClientRect();
         return { x: (rtl ? E.left : E.right) - R.left, y: E.top + E.height / 2 - R.top, side: rtl ? 1 : -1 };
-      }));
-      setThreads([]); setStem(""); return;
+      });
+      setAnchors((o) => (sameAnchors(o, A) ? o : A));
+      setThreads((o) => (o.length ? [] : o)); setStem(""); return;
     }
     const C = c.getBoundingClientRect();
     const tx = C.left + C.width / 2 - R.left;
@@ -87,9 +155,8 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
       const fromLeft = E.left + E.width / 2 < C.left + C.width / 2;
       return { x: (fromLeft ? E.right + 12 : E.left - 12) - R.left, y: label.top + label.height / 2 - R.top, side: fromLeft ? 1 : -1 };
     });
-    setAnchors(A);
-    setThreads(
-      rows.current.map((el) => {
+    setAnchors((o) => (sameAnchors(o, A) ? o : A));
+    const T = rows.current.map((el) => {
         if (!el) return "";
         const E = el.getBoundingClientRect();
         const label = el.querySelector(".rt-label")?.getBoundingClientRect() ?? E;
@@ -102,8 +169,8 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
         const c2x = tx + side * Math.min(110, Math.abs(tx - ax) * 0.45);
         const c2y = ty + 16;
         return `M${ax.toFixed(1)},${ay.toFixed(1)} C${c1x.toFixed(1)},${ay.toFixed(1)} ${c2x.toFixed(1)},${c2y.toFixed(1)} ${tx.toFixed(1)},${(ty + 4).toFixed(1)}`;
-      }),
-    );
+    });
+    setThreads((o) => (o.length === T.length && o.every((p, i) => p === T[i]) ? o : T));
     const B = b.getBoundingClientRect();
     const P = cap.current?.getBoundingClientRect();
     const lineTop = B.top + B.height - B.height * 0.0 - (b.querySelector(".wm")?.getBoundingClientRect().height ?? 0) * 0.426 - R.top;
@@ -118,66 +185,27 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
 
   useEffect(() => {
     measure();
-    const ro = new ResizeObserver(() => measure());
+    // UX-33: everything that asks for a new measurement in one frame gets one measurement
+    let raf = 0;
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; measure(); }); };
+    const ro = new ResizeObserver(schedule);
     if (root.current) ro.observe(root.current);
     root.current?.querySelectorAll(".wing, .crest").forEach((el) => ro.observe(el));
-    document.fonts?.ready.then(() => measure());
+    document.fonts?.ready.then(schedule);
     // the wings slide in on entrance; measure again once they have landed, or every thread starts short
-    const settle = (e: TransitionEvent) => { if (e.propertyName === "transform" && (e.target as Element).classList.contains("wing")) measure(); };
+    const settle = (e: TransitionEvent) => { if (e.propertyName === "transform" && (e.target as Element).classList.contains("wing")) schedule(); };
     const r = root.current;
     r?.addEventListener("transitionend", settle);
-    return () => { ro.disconnect(); r?.removeEventListener("transitionend", settle); };
+    return () => { cancelAnimationFrame(raf); ro.disconnect(); r?.removeEventListener("transitionend", settle); };
   }, [measure]);
 
-  /* ---------- fit: the whole hero, the name on the gold line included, always sits inside the first screen ----------
-     The two wings set the height of the stage (seven routes on one side wrap to two lines on a laptop). When the
-     hero is taller than the screen, --fit scales every gap, the title and the name down together and the type a
-     little more slowly (see hero.css) — as much as is needed, never more. The tulip then fills what is left of
-     its column: as tall as the wings beside it, and as wide as the column. */
-  useEffect(() => {
-    const r = root.current, c = crest.current;
-    if (!r || !c) return;
+  /* ---------- fit (see fitHero below): before the first paint on a page load (FIT_NOW), before the paint on a later
+     mount (a layout effect), and again once the fonts are in and on every resize ---------- */
+  useLayoutEffect(() => {
+    const r = root.current;
+    if (!r) return;
     let raf = 0;
-    const ASPECT = 859 / 998; // the tulip's viewBox: width / height
-    const FIT_MIN = 0.5, FIT_TIGHT = 0.35;
-    const fit = () => {
-      raf = 0;
-      r.style.setProperty("--fit", "1");
-      r.style.removeProperty("--th-fill");
-      delete r.dataset.tight;
-      if (window.matchMedia("(max-width: 900px)").matches) return; // phones: the hero is two screens by design
-      // while the size is being found the tulip stays small, so that only the wings and the fixed parts decide the height
-      r.style.setProperty("--th-fill", "130px");
-      const fits = () => r.getBoundingClientRect().height <= innerHeight + 0.5;
-      // the largest --fit (not below min) at which the hero fits the screen, or null when not even min does
-      const largest = (min: number) => {
-        r.style.setProperty("--fit", "1");
-        if (fits()) return 1;
-        r.style.setProperty("--fit", String(min));
-        if (!fits()) return null;
-        let lo = min, hi = 1;
-        for (let i = 0; i < 8; i++) {
-          const mid = (lo + hi) / 2;
-          r.style.setProperty("--fit", mid.toFixed(3));
-          if (fits()) lo = mid; else hi = mid;
-        }
-        return lo;
-      };
-      let f = largest(FIT_MIN);
-      if (f === null) {
-        // a very low window: the short descriptions under the routes give way (hero.css), the pages have them in full
-        r.dataset.tight = "";
-        f = largest(FIT_TIGHT) ?? FIT_TIGHT; // not even then: it does what it can
-      }
-      r.style.setProperty("--fit", f.toFixed(3));
-      const col = c.parentElement;
-      const wings = Array.from(r.querySelectorAll<HTMLElement>(".wing"), (w) => w.getBoundingClientRect().height);
-      if (col && wings.length) {
-        const room = Math.max(...wings) - (col.getBoundingClientRect().height - c.getBoundingClientRect().height) - 6;
-        const wide = col.getBoundingClientRect().width / ASPECT;
-        r.style.setProperty("--th-fill", `${Math.floor(Math.max(130, Math.min(room, wide, 520)))}px`);
-      }
-    };
+    const fit = () => { raf = 0; fitHero(r); };
     const schedule = () => { if (!raf) raf = requestAnimationFrame(fit); };
     fit();
     document.fonts?.ready.then(schedule);
@@ -196,7 +224,8 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
       const raf = requestAnimationFrame(() => el.classList.add("in"));
       return () => cancelAnimationFrame(raf);
     }
-    introDelay.current = 620;
+    // UX-20 (owner, 4 Oct 2026): the whole intro takes at most 1.2 s — a 450 ms fall, then 750 ms for the strike to settle
+    introDelay.current = 450;
     el.classList.add("intro");
     const coin = el.querySelector<HTMLElement>(".coin")!, ring = el.querySelector<HTMLElement>(".coin-ring")!;
     const anims: Animation[] = [];
@@ -229,7 +258,7 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
     const at = (y: number, extra = "") => `translate(${x}px, ${y}px) perspective(700px) ${extra}`;
     const fall = coin.animate(
       [{ transform: at(-R.top - size * 1.8, "rotateY(0deg)") }, { transform: at(yStrike, "rotateY(1080deg)") }],
-      { duration: 620, easing: "cubic-bezier(.55,0,.85,.4)", fill: "forwards" },
+      { duration: introDelay.current, easing: "cubic-bezier(.55,0,.85,.4)", fill: "forwards" },
     );
     anims.push(fall);
     fall.finished.then(() => {
@@ -237,7 +266,7 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
       anims.push(
         ring.animate(
           [{ transform: `translate(${x}px, ${yStrike}px) scale(.55)`, opacity: 0.95 }, { transform: `translate(${x}px, ${yStrike}px) scale(5.5)`, opacity: 0 }],
-          { duration: 950, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" },
+          { duration: 600, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" },
         ),
         coin.animate(
           [
@@ -246,13 +275,14 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
             { transform: at(yStrike, "rotateY(1080deg) scale(1)"), opacity: 1, offset: 0.3 },
             { transform: at(yCrest, `rotateY(1080deg) scale(${grow.toFixed(2)})`), opacity: 0 },
           ],
-          { duration: 1350, easing: "cubic-bezier(.65,0,.35,1)", fill: "forwards" },
+          { duration: 700, easing: "cubic-bezier(.65,0,.35,1)", fill: "forwards" },
         ),
       );
-      timers2.push(window.setTimeout(() => { end(); off(); }, 1500));
+      timers2.push(window.setTimeout(() => { end(); off(); }, 750));
     }).catch(() => {});
     };
-    Promise.race([document.fonts?.ready ?? Promise.resolve(), new Promise((r) => setTimeout(r, 900))])
+    // UX-20 (owner, 4 Oct 2026): the slogan and the wings already stand; the ducat waits at most 250 ms for the fonts
+    Promise.race([document.fonts?.ready ?? Promise.resolve(), new Promise((r) => setTimeout(r, 250))])
       .then(() => requestAnimationFrame(start));
     return () => { cancelled = true; timers2.forEach(clearTimeout); off(); end(); };
   }, []);
@@ -288,7 +318,8 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
     let last = -1;
     const first = window.setTimeout(() => fire(0), 3000 + introDelay.current);
     const loop = window.setInterval(() => {
-      if (hovering.current || document.hidden || !threads.length) return;
+      // UX-29 (owner, 4 Oct 2026): once the page is calm (components/Calm.tsx) the pulse waits for a hover
+      if (hovering.current || document.hidden || !threads.length || document.documentElement.dataset.calm !== undefined) return;
       const R = root.current?.getBoundingClientRect();
       if (!R || R.bottom < 0 || R.top > window.innerHeight) return;
       let i = Math.floor(Math.random() * rowsTotal);
@@ -300,12 +331,16 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
   }, [fire, threads.length, rowsTotal]);
 
   useEffect(() => setMounted(true), []);
-  useEffect(() => { const t = window.setTimeout(() => setPhotosReady(true), 2600); return () => clearTimeout(t); }, []);
+  /* UX-31 (owner, 4 Oct 2026): the hover photographs were the masthead originals (up to 2560px, 2.8 MB in all), loaded
+     on every device 2.6 s after arrival. Now they come small (384px through the image optimiser, ±25 KB each) and only
+     on a device that can hover, at the first hover or focus on a line. Phones keep their own small thumbnails. */
 
   /* ---------- foil: one light source, following the pointer or drifting on its own ---------- */
   useEffect(() => {
     const r = root.current;
     if (!r || !mounted || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // UX-33 (owner, 4 Oct 2026): on a touch screen there is no hand to follow — no light loop (phones' first seconds stay free)
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const svg = r.querySelector<SVGSVGElement>("svg.tulip");
     const sheen = svg?.querySelector("radialGradient.t-sheen");
     const foils = [bar.current, r.querySelector<HTMLElement>(".bar-aa"), dock.current?.querySelector<HTMLElement>(".bar-aa")].filter(Boolean) as HTMLElement[];
@@ -315,7 +350,7 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
       raf = 0;
       if (!visible || document.hidden) return;
       let lx = px, ly = py;
-      if (t - lastMove > 2500 || px < 0) {
+      if ((t - lastMove > 2500 || px < 0) && document.documentElement.dataset.calm === undefined) {
         const s = t / 1000; // idle: a slow figure-eight across the hero, like light moving over foil
         lx = innerWidth * (0.5 + 0.4 * Math.sin(s * 0.21));
         ly = innerHeight * (0.42 + 0.3 * Math.sin(s * 0.29 + 1.2));
@@ -436,12 +471,15 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
     return () => { cancelAnimationFrame(raf); window.removeEventListener("scroll", onScroll); };
   }, []);
 
-  const enter = (i: number) => { hovering.current = true; measure(); setActive(i); fire(i); };
+  const enter = (i: number) => {
+    hovering.current = true; measure(); setActive(i); fire(i);
+    if (!photosReady && window.matchMedia("(hover: hover)").matches) setPhotosReady(true);
+  };
   const leave = () => { hovering.current = false; setActive(null); };
 
   const photos = () =>
     photosReady && PHOTOS.map((id, n) => (
-      <img key={id} src={`/photos/pages/${id}.jpg`} className={active === n ? "on" : undefined} alt="" width={600} height={400} decoding="async" />
+      <img key={id} src={small(id, 384)} className={active === n ? "on" : undefined} alt="" width={600} height={400} decoding="async" />
     ));
   const knoop = active !== null ? anchors[active] : null;
 
@@ -451,6 +489,7 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
       ref={(el) => { rows.current[i] = el; }}
       className={`rt${active === i ? " on" : ""}${text ? " has-text" : ""}`}
       href={hrefOf(locale, path)}
+      prefetch={false}
       onMouseEnter={() => enter(i)}
       onMouseLeave={leave}
       onFocus={() => enter(i)}
@@ -460,13 +499,13 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
       <span className="rt-idx">{idx ? String(idx) : "◆"}</span>
       <span className="rt-label">{label}</span>
       {text && <span className="rt-text">{text}</span>}
-      <img className="rt-thumb" src={`/photos/pages/${PHOTOS[i]}.jpg`} alt="" width={600} height={400} loading="lazy" decoding="async" />
+      <img className="rt-thumb" src={small(PHOTOS[i], 128)} alt="" width={600} height={400} loading="lazy" decoding="async" />
       <span className="rt-go" aria-hidden="true">→</span>
     </Link>
   );
 
   return (
-    <section className="h3" id="routes" ref={root} aria-labelledby="h3-q" data-tab={tab}>
+    <section className="h3" id="routes" ref={root} aria-labelledby="h3-q" data-tab={tab} suppressHydrationWarning /* FIT_NOW has set --fit before hydration */>
       <h1 className="sr-only">{title}</h1>
 
       <svg className="h3-threads" width={box.w} height={box.h} viewBox={`0 0 ${box.w || 1} ${box.h || 1}`} aria-hidden="true">
@@ -544,11 +583,17 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
         </nav>
       </div>
 
-      <Link ref={key} className="h3-key" href={`/${locale}/contact?subject=nominated#contact-form`}>
-        <img src="/logo/dukaat-beeldmerk.svg" alt="" width={859} height={998} />
-        <span>{extra.nominated}</span>
-        <span className="arrow" aria-hidden="true">→</span>
-      </Link>
+      <div className="h3-keys" ref={key}>
+        <Link className="h3-key" href={`/${locale}/contact?subject=nominated#contact-form`} prefetch={false}>
+          <img src="/logo/dukaat-beeldmerk.svg" alt="" width={859} height={998} />
+          <span>{extra.nominated}</span>
+          <Arrow />
+        </Link>
+        <Link className="h3-key is-contact" href={`/${locale}/contact`} prefetch={false}>
+          <span>{contact}</span>
+          <Arrow />
+        </Link>
+      </div>
 
       <div className="h3-band" ref={band}>
         <p className="band-t band-start"><bdi>{pillars.slice(0, half).join(" – ")}</bdi></p>
@@ -558,10 +603,14 @@ export function HeroStage({ locale, title, descriptor, hero, extra }: Props) {
           <span className="bar-aa" aria-hidden="true" />
         </div>
         <p className="band-t band-end"><bdi>{pillars.slice(half).join(" – ")}</bdi></p>
-        <span className="band-b band-start" title={extra.annoTitle}>{extra.anno}</span>
-        <span className="band-b band-end" title={extra.byNominationTitle}>{extra.byNomination}</span>
+        <span className="band-b band-start">{extra.anno}</span>
+        <span className="band-b band-end">{extra.byNomination}</span>
         <span className="bar" ref={bar} aria-hidden="true" />
       </div>
+      {/* owner, 4 Oct 2026: what the club is, in Bordeaux under the name, always on the first screen (fit() counts it) */}
+      <p className="h3-desc"><bdi>{descriptor}</bdi></p>
+      {/* UX-26: the hero takes its size before the first paint (fitHero), so nothing on the first screen moves */}
+      {pageLoad && <script dangerouslySetInnerHTML={{ __html: FIT_NOW }} suppressHydrationWarning />}
 
       {mounted && createPortal(
         <div className="dock" ref={dock} aria-hidden="true">

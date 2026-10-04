@@ -39,6 +39,7 @@ export async function sendForm(_prev: FormState, fd: FormData): Promise<FormStat
   let fields: LocalField[];
   let title: string;
   let consent = true;
+  let confirmation = d.forms.success;
   if (id === "newsletter") {
     fields = [{ name: "email", label: d.footer.newsletter.field, type: "email", required: true }];
     title = d.footer.newsletter.title;
@@ -48,9 +49,15 @@ export async function sendForm(_prev: FormState, fd: FormData): Promise<FormStat
     if (!form) return { status: "invalid" };
     fields = fieldsOf(form, locale, d);
     title = (form.title ?? form.choice)?.[locale] ?? form.id;
+    if (form.success) confirmation = form.success[locale];
   }
 
-  const lines: string[] = [`Form: ${id} — ${title}`, `Site language: ${locale}`, ""];
+  const lines: string[] = [`Form: ${id} — ${title}`, `Site language: ${locale}`];
+  // UX-09: the button the visitor pressed before the form, and the page it was on (components/Arrival.tsx)
+  const ref = String(fd.get("ref") ?? "").trim().slice(0, 300);
+  if (ref) lines.push(`Source: ${ref}`);
+  lines.push("");
+  const head = lines.length; // what follows is the visitor's own request (UX-10: their copy starts here)
   const attachments: { filename: string; content: string }[] = [];
   let size = 0;
   let replyTo = "";
@@ -100,8 +107,28 @@ export async function sendForm(_prev: FormState, fd: FormData): Promise<FormStat
         ...(attachments.length ? { attachments } : {}),
       }),
     });
-    return res.ok ? { status: "ok" } : { status: "error" };
+    if (!res.ok) return { status: "error" };
   } catch {
     return { status: "error" };
   }
+
+  /* UX-10 (owner, 4 Oct 2026): the visitor receives a copy of the request in the page's language — the form's own
+     confirmation (the source's words), then what they sent. Replies go to DUKAAT. Attachments are named, not resent.
+     It never decides the outcome: the request has already reached DUKAAT. INTAKE_COPY=off switches it off. */
+  if (replyTo && id !== "newsletter" && process.env.INTAKE_COPY !== "off") {
+    try {
+      await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          from,
+          to: [replyTo],
+          reply_to: to,
+          subject: `DUKAAT · ${title}`,
+          text: [confirmation, "", `— ${d.ux.copyHeading} —`, "", ...lines.slice(head)].join("\n"),
+        }),
+      });
+    } catch {}
+  }
+  return { status: "ok" };
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { Arrow } from "./Arrow";
 import { usePathname } from "next/navigation";
 import type { Dict, GroupKey, Locale } from "@/content/types";
 import { groups, groupOfPathname, hrefOf, type SiteGroup } from "@/lib/site";
@@ -13,7 +14,7 @@ const LOCALES: { code: Locale; short: string; name: string }[] = [
   { code: "nl", short: "NL", name: "Nederlands" },
 ];
 
-type Props = { locale: Locale; nav: Dict["nav"]; site: Dict["site"]; extra: Dict["extra"] };
+type Props = { locale: Locale; nav: Dict["nav"]; site: Dict["site"]; extra: Dict["extra"]; ux: Dict["ux"] };
 
 /**
  * The menu of the source (1.1): Home | Over ons | Academie | Zakelijke diensten | Lidmaatschap | Evenementen | Contact,
@@ -21,12 +22,24 @@ type Props = { locale: Locale; nav: Dict["nav"]; site: Dict["site"]; extra: Dict
  * title line of each; on phones the same buttons fold open inside the full-screen menu.
  * Above it a thin line with the club's descriptor and the language choice, which folds away once you scroll.
  */
-export function TopBar({ locale, nav, site, extra }: Props) {
+export function TopBar({ locale, nav, site, extra, ux }: Props) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false); // phones: the full-screen menu
   const [panel, setPanel] = useState<GroupKey | null>(null); // desktop: the open group
+  // the compact panel (owner, 4 Oct 2026): the line of the page the pointer or focus is on shows on the left
+  const [peek, setPeek] = useState<string | null>(null);
   const timer = useRef(0);
+  const burger = useRef<HTMLButtonElement>(null);
+  /* === Muntregister: the group panel switches at once (a5-1) ===
+     Moving from one open group to the next swaps the panels without a crossfade (two site maps never shine through
+     each other); only opening from closed and closing move. React's "state from the previous render" pattern. */
+  const [prevPanel, setPrevPanel] = useState<GroupKey | null>(null);
+  const [swap, setSwap] = useState(false);
+  if (panel !== prevPanel) {
+    setPrevPanel(panel);
+    setSwap(panel !== null && prevPanel !== null);
+  }
   const home = `/${locale}`;
   const isHome = pathname === home || pathname === `${home}/`;
   const current = groupOfPathname(pathname);
@@ -45,6 +58,7 @@ export function TopBar({ locale, nav, site, extra }: Props) {
     document.body.style.overflow = open ? "hidden" : "";
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
+      if (open) burger.current?.focus(); // Muntregister a5-2: focus goes back to the burger
       setOpen(false);
       setPanel((p) => {
         if (p) (document.querySelector(`[aria-controls="mp-${p}"]`) as HTMLElement | null)?.focus();
@@ -56,6 +70,16 @@ export function TopBar({ locale, nav, site, extra }: Props) {
   }, [open]);
 
   useEffect(() => { setOpen(false); setPanel(null); }, [pathname]);
+
+  /* === Muntregister: the phone menu holds the focus (a5-2) ===
+     While the sheet is open the page under it (main, footer) is inert, so Tab and a screen reader stay in the header
+     and the menu; Escape closes it and returns the focus to the burger (above). */
+  useEffect(() => {
+    if (!open) return;
+    const under = Array.from(document.querySelectorAll<HTMLElement>("body > main, body > footer"));
+    under.forEach((el) => { el.inert = true; });
+    return () => under.forEach((el) => { el.inert = false; });
+  }, [open]);
 
   // hover intent: opening waits a moment (no flicker when the pointer only passes), switching is instant
   const hoverOpen = (k: GroupKey) => {
@@ -115,6 +139,20 @@ export function TopBar({ locale, nav, site, extra }: Props) {
   );
 
   const withPanel = groups.filter((g) => g.children.length > 0);
+  /* UX-14: the pages a menu shows (not those kept out of it), and — for the services — their three parts */
+  const inMenu = (g: SiteGroup) => g.children.filter((c) => c.menu !== false);
+  const parts = (g: SiteGroup) =>
+    inMenu(g).some((c) => c.part !== undefined)
+      ? ([0, 1, 2] as const).map((k) => inMenu(g).filter((c) => c.part === k)).filter((l) => l.length > 0)
+      : null;
+  const entry = (c: SiteGroup["children"][number]) => (
+    <li key={c.path} onPointerEnter={() => setPeek(c.path)} onFocus={() => setPeek(c.path)}>
+      <Link href={hrefOf(locale, c)} className={c.href ? "is-key" : undefined} aria-current={pathname === hrefOf(locale, c) ? "page" : undefined}>
+        <span className="mp-t">{site.pages[c.path].title}<Arrow /></span>
+        <span className="mp-b">{site.pages[c.path].blurb}</span>
+      </Link>
+    </li>
+  );
 
   return (
     <>
@@ -126,8 +164,8 @@ export function TopBar({ locale, nav, site, extra }: Props) {
         <div className="tb-util">
           <p className="util-l">
             <span>DUKAAT</span><i aria-hidden="true">◆</i><span>{nav.descriptor}</span>
-            <i aria-hidden="true">◆</i><span title={extra.annoTitle}>{extra.anno}</span>
-            <i aria-hidden="true">◆</i><span title={extra.byNominationTitle}>{extra.byNomination}</span>
+            <i aria-hidden="true">◆</i><span>{extra.anno}</span>
+            <i aria-hidden="true">◆</i><span>{extra.byNomination}</span>
           </p>
           <nav className="util-r" aria-label={nav.langLabel}>
             <Link className="util-key" href={`/${locale}/contact?subject=nominated#contact-form`}>
@@ -159,6 +197,7 @@ export function TopBar({ locale, nav, site, extra }: Props) {
           {/* phones: the other two languages stay in the header, beside the menu */}
           {langs("lang-m", false)}
           <button
+            ref={burger}
             className="burger"
             type="button"
             aria-expanded={open}
@@ -170,29 +209,40 @@ export function TopBar({ locale, nav, site, extra }: Props) {
           </button>
         </div>
 
-        <div className={`mega${panel ? " on" : ""}`} onClick={closeOnLink}>
+        <div className={`mega${panel ? " on" : ""}${swap ? " swap" : ""}`} onClick={closeOnLink}>
           {withPanel.map((g) => {
             const on = panel === g.key;
             return (
               <div key={g.key} id={`mp-${g.key}`} className={`mp${on ? " on" : ""}`} role="region" aria-label={site.groups[g.key].label} inert={!on}>
                 <div className="mp-grid">
-                  <div className="mp-intro">
+                  <div className={`mp-intro${on && peek && g.children.some((c) => c.path === peek) ? " is-peek" : ""}`}>
                     <p className="mp-title">{site.groups[g.key].label}</p>
                     <p className="mp-lede">{site.groups[g.key].lede}</p>
+                    {/* the page under the pointer: its title and line, in place of the group's text (decorative copy of
+                        what the link itself carries for screen readers) */}
+                    {on && peek && g.children.some((c) => c.path === peek) && (
+                      <div className="mp-peek" aria-hidden="true">
+                        <p className="mp-peek-t">{site.pages[peek].title}</p>
+                        <p className="mp-peek-b">{site.pages[peek].blurb}</p>
+                      </div>
+                    )}
                     <Link className="more" href={hrefOf(locale, g)} aria-current={pathname === hrefOf(locale, g) ? "page" : undefined}>
-                      {site.groups[g.key].label} <span className="arrow" aria-hidden="true">→</span>
+                      {site.groups[g.key].label} <Arrow />
                     </Link>
                   </div>
-                  <ul className="mp-list">
-                    {g.children.map((c) => (
-                      <li key={c.path}>
-                        <Link href={hrefOf(locale, c)} className={c.href ? "is-key" : undefined} aria-current={pathname === hrefOf(locale, c) ? "page" : undefined}>
-                          <span className="mp-t">{site.pages[c.path].title}<span className="arrow" aria-hidden="true">→</span></span>
-                          <span className="mp-b">{site.pages[c.path].blurb}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                  {parts(g) ? (
+                    /* UX-14 (owner, 4 Oct 2026): three parts with their own heading, no numbers */
+                    <div className="mp-parts" onPointerLeave={() => setPeek(null)}>
+                      {parts(g)!.map((list, k) => (
+                        <div className="mp-part" key={k}>
+                          <p className="mp-part-t">{ux.serviceGroups[k]}</p>
+                          <ul className="mp-list is-part">{list.map(entry)}</ul>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <ul className="mp-list" onPointerLeave={() => setPeek(null)}>{inMenu(g).map(entry)}</ul>
+                  )}
                 </div>
               </div>
             );
@@ -200,7 +250,10 @@ export function TopBar({ locale, nav, site, extra }: Props) {
         </div>
       </header>
 
-      <div className={`veil${open ? " open" : ""}`} id="veil" onClick={closeOnLink} inert={!open}>
+      {/* Muntregister a5-1: the page behind an open group panel dims a little; a click on it closes the panel */}
+      <div className={`mega-scrim${panel ? " on" : ""}`} aria-hidden="true" onClick={() => setPanel(null)} />
+
+      <div className={`veil${open ? " open" : ""}`} id="veil" onClick={closeOnLink} inert={!open} data-lenis-prevent>
         <nav className="veil-in" aria-label={site.ui.mainNav}>
           <Link className="vg-solo" href={home}>{nav.home}</Link>
           {groups.map((g) =>
@@ -213,10 +266,15 @@ export function TopBar({ locale, nav, site, extra }: Props) {
                   <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" /></svg>
                 </summary>
                 <div className="vg-list">
-                  <Link className="vg-all" href={hrefOf(locale, g)}>{site.groups[g.key].label} <span className="arrow" aria-hidden="true">→</span></Link>
-                  {g.children.map((c) => (
-                    <Link key={c.path} href={hrefOf(locale, c)}>{site.pages[c.path].title}</Link>
-                  ))}
+                  <Link className="vg-all" href={hrefOf(locale, g)}>{site.groups[g.key].label} <Arrow /></Link>
+                  {parts(g)
+                    ? parts(g)!.map((list, k) => (
+                        <div className="vg-part" key={k}>
+                          <p className="vg-part-t">{ux.serviceGroups[k]}</p>
+                          {list.map((c) => <Link key={c.path} href={hrefOf(locale, c)}>{site.pages[c.path].title}</Link>)}
+                        </div>
+                      ))
+                    : inMenu(g).map((c) => <Link key={c.path} href={hrefOf(locale, c)}>{site.pages[c.path].title}</Link>)}
                 </div>
               </details>
             ),

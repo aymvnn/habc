@@ -91,5 +91,22 @@ export type Dict = {
     legalLine: string;
     foundation: string;
   };
+  /**
+   * interface words added with the UX assessment (owner's choices of 4 Oct 2026, report 2yXZnyx32TzQFtL3NbA7qe,
+   * db collection "ux"): not in the source. Each key names the approved item it belongs to.
+   */
+  ux: {
+    moreDetails: string; // UX-04: the one button behind which a request form keeps its optional fields
+    moreInfo: string; // R1: the same on the contact form
+    respondingTo: string; // UX-09: "{ref}" = the words of the button the visitor came from
+    checkFields: string; // UX-07: the summary of the fields still to correct
+    direct: string; // R1: the heading of the direct channels beside the contact form
+    after: string; // R1: the heading of what happens after sending
+    afterSteps: [string, string, string]; // R1
+    copyHeading: string; // UX-10: the copy of the request in the visitor's confirmation e-mail
+    onThisPage: string; // UX-24: the section index of a long page
+    backToTop: string; // UX-24
+    serviceGroups: [string, string, string]; // UX-14: the three groups of the services menu
+  };
   site: SiteCopy;
 };

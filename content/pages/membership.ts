@@ -348,7 +348,7 @@ export const membership: PageSet = {
 
   /* ── extra page the owner kept (30 Sep 2026): old "how-we-work/verification", verbatim from commit 2336702 ── */
   "membership/admission": {
-    masthead: { variant: "portrait", photo: "ver-hero" },
+    masthead: { variant: "portrait", photo: "ver-hero-band" },
     blocks: [
       {
         kind: "lead",

@@ -35,6 +35,28 @@
   --radius:2px;
   --ease-out:cubic-bezier(0.16,1,0.3,1); --ease-quart:cubic-bezier(0.25,1,0.5,1); --ease-io:cubic-bezier(0.65,0,0.35,1);
   --d-fast:180ms; --d-mid:420ms; --d-slow:900ms;
+
+  /* === Muntregister: tokens (g4, a4-1, a1-2, a7-1, a3-1) ===
+     New beside the old: the hero and the dock keep --ease-out, --ease-io, --ease-quart and --d-*. New specs never use
+     --ease-out. Lines draw on --ease-draw, arrivals use --ease-arrive, colours change on plain ease. */
+  --ease-arrive:cubic-bezier(0.23,1,0.32,1); --ease-draw:cubic-bezier(0.77,0,0.175,1);
+  --d-press:140ms; --d-hover:200ms; --d-ui:240ms; --d-reveal:700ms; --d-draw:1100ms;
+  /* one metal: the hero bar's five-stop foil (values copied from hero.css, not imported). Every gold edge of 3px or more
+     uses it; short marks stay flat --bar. Gold budget: at rest at most three gold elements or series per screen, the
+     nav edge not counted; index numbers, folios, link underlines, selection, chevrons and the burger are never gold.
+     --gold-gradient stays as it is (the hero's family of tokens) and is no longer used by the inner pages. */
+  --foil:linear-gradient(90deg,#9E7946 0%,#B39455 18%,#D2AE72 50%,#B39455 82%,#9E7946 100%);
+  --foil-v:linear-gradient(180deg,#9E7946 0%,#B39455 18%,#D2AE72 50%,#B39455 82%,#9E7946 100%); /* the same foil, upright */
+  /* the struck coin (the admission steps, the current page's 9px coin, the 404): the hero ducat's radial gold */
+  --coin:radial-gradient(circle at 34% 28%,#F7E6BE 0%,#DDBA7A 34%,#B08850 70%,#8A6634 100%);
+  /* the soft and quiet paper tones on bordeaux (9:1 on --wine-deep), and the rule under a form field (3.28:1 on paper) */
+  --paper-soft:#E9DED3; --paper-mute:#CDB9AE; --rule-field:#8A7F6A;
+  /* one interface-caps style (buttons, "read more", field labels, the menu's "all" link, the footer's send word) */
+  --caps-w:700; --caps-size:.78125rem; --caps-track:.14em;
+  /* one reading size for running text; --read-s for secondary lines (never under 16px) */
+  --read:clamp(1rem,.96rem + .1vw,1.0625rem); --read-lh:1.62; --read-s:.9375rem; /* owner, 4 Oct: a step smaller (17px on his screen) */ --read-s-lh:1.55;
+  /* three steps of white between blocks (used from slice 3 on) */
+  --pace-tight:clamp(32px,3vw,48px); --pace:clamp(72px,8vw,128px); --pace-breath:clamp(112px,12vw,192px);
 }
 
 *,*::before,*::after{ box-sizing:border-box }
@@ -42,10 +64,13 @@ html{ scroll-behavior:smooth; -webkit-text-size-adjust:100% }
 @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto } }
 body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--text); font-size:var(--t0); line-height:1.6; font-kerning:normal; -webkit-font-smoothing:antialiased; overflow-x:clip }
 [dir="rtl"] body{ font-family:var(--arabic); font-size:1.125rem; line-height:1.9 }
-[dir="rtl"] :is(h1,h2,h3,h4,.label,.chip,.router-label,.router-idx,.step-n,.more,.lang a,.btn,.field label,.field input,.field select,.field textarea){ font-family:var(--arabic); letter-spacing:0 }
+/* Muntregister a8-2: generated numbers left this Almarai list, so every number keeps one font */
+[dir="rtl"] :is(h1,h2,h3,h4,.label,.more,.lang a,.btn,.field label,.field input,.field select,.field textarea){ font-family:var(--arabic); letter-spacing:0 }
 ::selection{ background:rgba(179,148,85,.28) }
 a{ color:inherit; text-decoration:none }
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{ outline:2px solid var(--wine); outline-offset:4px; border-radius:var(--radius) }
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{ outline:2px solid var(--wine); outline-offset:4px }
+/* the hero and the docked name keep their focus ring exactly as it was; elsewhere see app/muntregister.css (a4-1) */
+.h3 :is(a,button,input,select,textarea):focus-visible,.topbar .brand:focus-visible{ border-radius:var(--radius) }
 img,video,svg{ display:block; max-width:100% }
 p{ margin:0; text-wrap:pretty }
 h1,h2,h3,h4{ margin:0; font-family:var(--display); font-weight:700; letter-spacing:-.025em; line-height:1.04; text-wrap:balance }
@@ -63,16 +88,12 @@ h2 em,h3 em{ font-style:normal; color:var(--wine) }
 [dir="rtl"] .label{ letter-spacing:0; font-size:.95rem }
 .lede{ font-size:var(--t1); line-height:1.45; color:var(--ink-soft); max-width:56ch }
 [dir="rtl"] .lede{ line-height:1.7 }
-.chip{ display:inline-flex; align-items:center; gap:10px; font-family:var(--display); font-weight:600; font-size:var(--t-1); letter-spacing:.14em; text-transform:uppercase; color:var(--ink); border:1px solid var(--line-strong); padding:9px 16px; border-radius:999px }
-.chip.solid{ background:var(--wine); color:var(--paper); border-color:var(--wine) }
-.chip i{ font-style:normal; color:var(--bar) }
-[dir="rtl"] .chip{ letter-spacing:0; font-size:.95rem }
 
 .more{ display:inline-flex; align-items:center; gap:14px; margin-top:var(--s-lg); font-family:var(--display); font-weight:700; font-size:var(--t-1); letter-spacing:.12em; text-transform:uppercase; color:var(--wine); position:relative; padding-block:6px }
-.more::after{ content:""; position:absolute; inset-inline-start:0; bottom:0; height:2px; width:100%; background:var(--bar); transform:scaleX(.28); transform-origin:var(--ox,left); transition:transform var(--d-mid) var(--ease-out) }
+.more::after{ content:""; position:absolute; inset-inline-start:0; bottom:0; height:2px; width:100%; background:var(--bar); transform:scaleX(.28); transform-origin:var(--ox,left); transition:transform var(--d-ui) var(--ease-arrive) }
 [dir="rtl"] .more::after{ --ox:right }
 .more:hover::after{ transform:scaleX(1) }
-.arrow{ display:inline-block; transition:transform var(--d-mid) var(--ease-out) }
+.arrow{ display:inline-block; transition:transform var(--d-ui) var(--ease-arrive) }
 [dir="rtl"] .arrow{ transform:scaleX(-1) }
 
 /* ---------- top bar: see nav.css ---------- */
@@ -99,8 +120,8 @@ h2 em,h3 em{ font-style:normal; color:var(--wine) }
 .hero .chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:var(--s-xl) }
 .hero-media .frame{ position:relative; aspect-ratio:16/9; overflow:hidden; background:var(--paper) }
 .hero-media video,.hero-media img{ width:100%; height:100%; object-fit:cover; background:var(--paper) }
-.film-blend{ -webkit-mask-image:radial-gradient(ellipse 78% 78% at 50% 50%, #000 52%, transparent 100%); mask-image:radial-gradient(ellipse 78% 78% at 50% 50%, #000 52%, transparent 100%) }
-.media-toggle{ position:absolute; inset-inline-end:10px; bottom:10px; z-index:2; font-family:var(--display); font-weight:600; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); background:color-mix(in srgb, var(--paper) 80%, transparent); border:1px solid var(--line); padding:6px 10px; border-radius:999px; cursor:pointer; opacity:0; transition:opacity var(--d-mid) }
+/* Muntregister a6-5: the Name film no longer fades out at its edges (.film-blend); it sits in its band in full tone (muntregister.css, slice 7) */
+.media-toggle{ position:absolute; inset-inline-end:10px; bottom:10px; z-index:2; font-family:var(--display); font-weight:600; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); background:color-mix(in srgb, var(--paper) 80%, transparent); border:1px solid var(--line); padding:6px 10px; border-radius:999px; cursor:pointer; opacity:0; transition:opacity var(--d-ui) }
 .hero-media:hover .media-toggle,.media-toggle:focus-visible,.media-toggle.show{ opacity:1 }
 .scrollcue{ position:absolute; inset-inline-start:var(--gutter); bottom:clamp(20px,4vh,40px); display:inline-flex; align-items:center; gap:14px; font-family:var(--display); font-weight:600; font-size:var(--t-1); letter-spacing:.14em; text-transform:uppercase; color:var(--muted) }
 [dir="rtl"] .scrollcue{ font-family:var(--arabic); letter-spacing:0 }
@@ -108,8 +129,6 @@ h2 em,h3 em{ font-style:normal; color:var(--wine) }
 @keyframes cue{ 0%{transform:scaleY(0)} 45%{transform:scaleY(1)} 100%{transform:scaleY(1) translateY(46px); opacity:0} }
 .audit .hero{ min-height:auto; padding-top:140px }
 .audit .scrollcue{ display:none }
-.rise{ opacity:0; transform:translateY(22px); transition:opacity var(--d-slow) var(--ease-out), transform var(--d-slow) var(--ease-out) }
-.rise.in{ opacity:1; transform:none }
 
 /* ---------- sections ---------- */
 section.block{ padding-block:var(--section); position:relative }
@@ -118,94 +137,17 @@ section.block{ padding-block:var(--section); position:relative }
 .head h2{ grid-column:1 / span 8; font-size:var(--t4) }
 [dir="rtl"] .head h2{ line-height:1.2 }
 .head .lede{ grid-column:9 / span 4; margin-bottom:.35em }
-.kruising{ display:flex; justify-content:center; padding-block:var(--s-md) }
-.kruising svg{ width:140px; height:auto; overflow:visible }
-.kruising path{ fill:none; stroke:var(--bar); stroke-width:1.5; stroke-dasharray:240; stroke-dashoffset:0; transition:stroke-dashoffset 1.6s var(--ease-out) }
-@media (scripting: enabled){ .kruising:not(.in) path{ stroke-dashoffset:240 } }
-.kruising.in path{ stroke-dashoffset:0 }
-.kruising.in path:nth-child(2){ transition-delay:.2s }
-@media (scripting: enabled){ .rv{ opacity:0; transform:translateY(28px); transition:opacity .9s var(--ease-out), transform .9s var(--ease-out) } }
-@media (scripting: enabled){ .rv.in{ opacity:1; transform:none } }
-.rv.lag1{ transition-delay:.1s } .rv.lag2{ transition-delay:.2s } .rv.lag3{ transition-delay:.3s } .rv.lag4{ transition-delay:.4s }
-/* scroll-linked where the browser can: the reveal follows the scroll position itself (half-way scrolled is
-   half-way shown, scrolling back plays it back) instead of firing once. Elsewhere the class toggle above. */
-@supports (animation-timeline: view()){
-  @media (scripting: enabled) and (prefers-reduced-motion: no-preference){
-    .rv{ transition:none; animation:rv-rise linear both; animation-timeline:view(); animation-range:entry 0% entry 100% }
-    .rv.lag1{ animation-range:entry 12% entry 100% } .rv.lag2{ animation-range:entry 22% entry 100% }
-    .rv.lag3{ animation-range:entry 32% entry 100% } .rv.lag4{ animation-range:entry 42% entry 100% }
-  }
-}
-@keyframes rv-rise{ from{ opacity:0; transform:translateY(34px) } to{ opacity:1; transform:none } }
+/* .rv reveals: see app/muntregister.css (g4 repair — once, via IntersectionObserver, never tied to the scroll) */
 /* Lenis glides the page itself; the browser must not smooth its steps a second time */
 html.lenis{ scroll-behavior:auto }
 
-/* ---------- a held chapter: the five steps pin and play in place (see Steps.tsx) ---------- */
-@media (scripting: enabled) and (prefers-reduced-motion: no-preference) and (min-height:560px){
-  #how.chapter{ padding-block:0; height:calc(100svh + var(--n) * 46svh) }
-  #how.chapter .pin{ position:sticky; top:0; height:100svh; display:flex; flex-direction:column; justify-content:center; padding-top:64px; padding-bottom:clamp(16px, 3svh, 40px); overflow:hidden }
-  #how.chapter .head{ margin-bottom:clamp(24px, 5svh, 64px) }
-  #how.chapter .head h2{ font-size:min(var(--t4), 8svh) }
-  #how.chapter .step-n{ font-size:min(var(--t5), 11svh) }
-  /* the gold line fills as you move through the chapter */
-  #how.chapter .ledger::after{
-    content:""; position:absolute; top:0; inset-inline:0; height:2px; margin-top:-.5px; background:var(--bar);
-    transform:scaleX(var(--p, 0)); transform-origin:var(--ox, left); will-change:transform;
-  }
-  [dir="rtl"] #how.chapter .ledger::after{ --ox:right }
-  #how.chapter .step{ opacity:.22; transition:opacity .7s var(--ease-out), transform .7s var(--ease-out) }
-  #how.chapter .step.past{ opacity:.5 }
-  #how.chapter .step.now{ opacity:1 }
-  #how.chapter .step::before{ transform:scaleY(.4); transform-origin:top; transition:transform .7s var(--ease-out) }
-  #how.chapter .step:is(.past,.now)::before{ transform:none }
-}
-/* tablets and phones: one register; only the current step opens its text, so the chapter fits one screen */
-@media (scripting: enabled) and (prefers-reduced-motion: no-preference) and (min-height:560px) and (max-width:1100px){
-  #how.chapter .ledger{ grid-template-columns:1fr; row-gap:0 }
-  #how.chapter .step{ display:grid; grid-template-columns:auto 1fr; column-gap:var(--s-lg); align-items:baseline; padding-block:clamp(10px, 1.8svh, 18px) 0 }
-  #how.chapter .step::before{ display:none }
-  #how.chapter .step-n{ font-size:min(var(--t4), 6svh); min-width:1.2em }
-  #how.chapter .step h3{ margin-top:0; max-width:none; font-size:min(var(--t2), 3.4svh) }
-  #how.chapter .step p{ grid-column:2; margin-top:0; max-height:0; opacity:0; overflow:hidden; transition:max-height .7s var(--ease-out), opacity .5s var(--ease-out), margin-top .7s var(--ease-out) }
-  #how.chapter .step.now p{ max-height:14em; opacity:1; margin-top:var(--s-sm) }
-  #how.chapter .head h2{ font-size:min(var(--t4), 6.4svh) }
-  #how.chapter .head .lede{ display:none }
-  /* start under the nav instead of centring, so no half-empty screen opens up after the hero */
-  #how.chapter .pin{ justify-content:flex-start; padding-top:clamp(72px, 9svh, 96px) }
-}
+/* Muntregister a9-8: the dead homepage chapter (#how.chapter, .ledger, .step), the old routers (.router*), the
+   kruising, .rise, .chip and the old dark #membership block are removed (no markup since the redesign). */
 
 /* ---------- routers ---------- */
 #routes .register{ display:grid; grid-template-columns:1fr 1fr; column-gap:var(--s-2xl); border-top:1px solid var(--line-strong) }
-.router{ display:grid; grid-template-columns:auto 1fr auto; column-gap:var(--s-lg); align-items:start; padding:clamp(22px,2.6vw,34px) 0; border-bottom:1px solid var(--line); position:relative; color:var(--ink) }
-.router::after{ content:""; position:absolute; inset-inline-start:0; bottom:-1px; height:3px; width:100%; background:var(--bar); transform:scaleX(0); transform-origin:var(--ox,left); transition:transform var(--d-slow) var(--ease-out) }
-[dir="rtl"] .router::after{ --ox:right }
-.router:hover::after,.router:focus-visible::after{ transform:scaleX(1) }
-.router-idx{ font-family:var(--display); font-weight:600; font-size:var(--t-1); letter-spacing:.1em; color:var(--gold-deep); padding-top:.55em; min-width:2.2em; font-variant-numeric:tabular-nums }
-.router-label{ font-family:var(--display); font-weight:800; font-size:var(--t2); letter-spacing:-.025em; line-height:1.05; transition:color var(--d-mid) var(--ease-out) }
-[dir="rtl"] .router-label{ line-height:1.4 }
-.router:hover .router-label{ color:var(--wine) }
-.router-hint{ margin-top:8px; color:var(--muted); font-size:.95rem; line-height:1.5; max-width:38ch; opacity:.72; transition:opacity var(--d-mid) var(--ease-out), color var(--d-mid) var(--ease-out) }
-.router:hover .router-hint,.router:focus-visible .router-hint{ opacity:1; color:var(--ink-soft) }
-.router-arrow{ width:44px; height:44px; border:1px solid var(--line-strong); border-radius:999px; display:grid; place-items:center; font-family:var(--display); font-size:1.1rem; color:var(--ink-soft); margin-top:.1em; transition:background var(--d-mid) var(--ease-out), color var(--d-mid) var(--ease-out), border-color var(--d-mid), transform var(--d-mid) var(--ease-out) }
-.router:hover .router-arrow{ background:var(--wine); border-color:var(--wine); color:var(--paper); transform:translateX(4px) }
-[dir="rtl"] .router-arrow{ transform:scaleX(-1) }
-[dir="rtl"] .router:hover .router-arrow{ transform:scaleX(-1) translateX(4px) }
-.router.nominated{ grid-column:1 / -1; background:var(--paper-lift); padding-inline:clamp(18px,2.4vw,34px); margin-top:var(--s-lg); border:1px solid var(--line-strong) }
-.router.nominated .router-hint{ opacity:1; transform:none; color:var(--ink-soft) }
-.router.nominated .seal{ width:30px; height:auto; margin-inline-end:6px }
 #routes .routes-foot{ margin-top:var(--s-xl); color:var(--muted); font-size:.95rem }
 #routes .routes-foot a{ color:var(--wine); border-bottom:1px solid var(--bar) }
-
-/* ---------- how (ledger) ---------- */
-#how .ledger{ display:grid; grid-template-columns:repeat(5,1fr); column-gap:var(--s-lg); position:relative; padding:var(--s-lg) 0 0; margin:0; list-style:none }
-#how .ledger::before{ content:""; position:absolute; top:0; inset-inline:0; height:1px; background:var(--line-strong) }
-.step{ position:relative; padding-top:var(--s-lg) }
-.step::before{ content:""; position:absolute; top:calc(-1 * var(--s-lg)); inset-inline-start:0; width:2px; height:18px; background:var(--bar) }
-.step-n{ font-family:var(--display); font-weight:800; font-size:var(--t5); letter-spacing:-.05em; line-height:.85; color:var(--wine); font-variant-numeric:tabular-nums }
-.step h3{ font-size:var(--t2); margin-top:var(--s-lg); letter-spacing:-.02em; max-width:12ch }
-[dir="rtl"] .step h3{ line-height:1.4 }
-.step p{ margin-top:var(--s-md); color:var(--ink-soft); font-size:.98rem; line-height:1.55 }
-[dir="rtl"] .step p{ line-height:1.85 }
 
 /* ---------- why ---------- */
 #why .split{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--s-lg) }
@@ -241,24 +183,6 @@ html.lenis{ scroll-behavior:auto }
 #name .keystone{ margin-top:var(--s-lg); font-family:var(--display); font-weight:800; font-size:var(--t2); letter-spacing:-.02em; line-height:1.1; color:var(--wine); border-top:2px solid var(--bar); padding-top:var(--s-md) }
 [dir="rtl"] #name .keystone{ font-family:var(--arabic); letter-spacing:0; line-height:1.5 }
 
-/* ---------- membership (the one dark block) ---------- */
-#membership{ background:var(--wine-deep); color:var(--paper); overflow:hidden }
-#membership::before{ content:""; position:absolute; top:0; inset-inline:0; height:3px; background:var(--gold-gradient) }
-#membership .grid{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--s-lg); row-gap:var(--s-xl) }
-#membership .label{ grid-column:1 / span 12; color:var(--gold-light) }
-#membership .label::before{ background:var(--gold-light) }
-#membership h2{ grid-column:1 / span 7; font-size:var(--t4); color:var(--paper) }
-#membership h2 em{ color:var(--gold-light) }
-[dir="rtl"] #membership h2{ line-height:1.2 }
-#membership .text{ grid-column:1 / span 6; font-size:var(--t1); line-height:1.5; color:#E9DED3 }
-[dir="rtl"] #membership .text{ line-height:1.8 }
-#membership .charge{ grid-column:8 / span 5; align-self:end; border:1px solid rgba(220,177,122,.45); padding:clamp(22px,2.6vw,36px) }
-#membership .charge p{ color:var(--gold-light); font-family:var(--display); font-weight:600; font-size:1.02rem; line-height:1.5 }
-[dir="rtl"] #membership .charge p{ font-family:var(--arabic); line-height:1.8 }
-#membership .note{ grid-column:1 / span 6; color:#CDB9AE; font-style:italic }
-[dir="rtl"] #membership .note{ font-style:normal }
-#membership .watermark{ position:absolute; inset-inline-end:-6%; bottom:-14%; width:min(46vw,560px); opacity:.08; pointer-events:none }
-
 /* ---------- behind ---------- */
 #behind .founders{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--s-lg); row-gap:var(--s-2xl) }
 .founder{ display:grid; grid-template-columns:minmax(150px,220px) 1fr; column-gap:var(--s-lg); align-items:start }
@@ -289,12 +213,13 @@ html.lenis{ scroll-behavior:auto }
 #correspondence .signoff .tag{ font-family:var(--display); font-weight:700; letter-spacing:-.01em; font-size:var(--t1) }
 #correspondence .signoff .tag .echo{ display:inline-block; unicode-bidi:isolate; color:var(--gold-deep); font-weight:700; margin-inline-start:16px; font-size:.95em }
 .seal-wrap{ width:132px; height:132px; position:relative; display:grid; place-items:center }
-.seal-wrap .ring{ position:absolute; inset:0; animation:spin 40s linear infinite }
+.seal-wrap .ring{ position:absolute; inset:0 } /* Muntregister a6-4: the seal lies still (it used to spin); @keyframes spin stays */
 .seal-wrap .ring text{ font-family:var(--display); font-weight:600; font-size:9.6px; letter-spacing:.26em; fill:var(--gold-deep) }
 .seal-wrap .tulip{ width:46px; height:auto }
 @keyframes spin{ to{ transform:rotate(360deg) } }
 
 /* ---------- footer ---------- */
+/* Muntregister a5-4: the dead footer map (.f-map, .col, .f-langs, .f-legal) is removed; the footer's new face is in app/muntregister.css (slice 5) */
 footer{ border-top:1px solid var(--line-strong); padding:var(--s-2xl) 0 var(--s-xl) }
 footer .grid{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--s-lg); row-gap:var(--s-xl) }
 footer .colophon{ grid-column:1 / span 5 }
@@ -303,22 +228,6 @@ footer .colophon p{ color:var(--ink-soft); font-size:.95rem; max-width:44ch }
 footer .colophon p + p{ margin-top:var(--s-md) }
 footer .colophon .legal{ color:var(--muted); font-style:italic }
 [dir="rtl"] footer .colophon .legal{ font-style:normal }
-footer .f-map{ grid-column:6 / span 7; display:grid; grid-template-columns:repeat(4,1fr); column-gap:var(--s-lg); row-gap:var(--s-xl) }
-footer .col h4{ font-family:var(--display); font-weight:600; font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:var(--s-sm) }
-footer .col h4 a{ transition:color var(--d-fast) }
-footer .col h4 a:hover{ color:var(--wine) }
-[dir="rtl"] footer .col h4{ letter-spacing:0; font-size:.85rem }
-footer .col > a{ display:block; font-family:var(--display); font-size:.88rem; font-weight:500; color:var(--ink-soft); padding-block:4px; transition:color var(--d-fast); line-height:1.4 }
-[dir="rtl"] footer :is(.col > a,.f-legal a,.f-langs a){ font-family:var(--arabic) }
-footer .col > a:hover{ color:var(--wine) }
-footer .f-langs{ display:flex; gap:18px; margin-top:var(--s-lg) }
-footer .f-langs a{ font-family:var(--display); font-weight:700; font-size:.9rem; color:var(--ink-soft); border-bottom:1px solid transparent }
-footer .f-langs a[aria-current]{ color:var(--wine); border-color:var(--bar) }
-footer .f-legal{ display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 22px; margin-top:var(--s-2xl); padding-top:var(--s-lg); border-top:1px solid var(--line) }
-footer .f-legal h4{ font-family:var(--display); font-weight:600; font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-deep); margin-inline-end:6px }
-[dir="rtl"] footer .f-legal h4{ letter-spacing:0; font-size:.85rem }
-footer .f-legal a{ font-family:var(--display); font-size:.85rem; color:var(--ink-soft) }
-footer .f-legal a:hover{ color:var(--wine) }
 footer .bottom{ display:flex; justify-content:space-between; gap:var(--s-lg); flex-wrap:wrap; margin-top:var(--s-2xl); padding-top:var(--s-lg); border-top:1px solid var(--line); color:var(--muted); font-size:.82rem; font-family:var(--display) }
 [dir="rtl"] footer .bottom{ font-family:var(--arabic); font-size:.9rem }
 footer .bottom .values i{ font-style:normal; color:var(--bar) }
@@ -334,7 +243,7 @@ footer .bottom .values i{ font-style:normal; color:var(--bar) }
 .field{ display:grid; gap:8px }
 .field label{ font-family:var(--display); font-weight:600; font-size:var(--t-1); letter-spacing:.12em; text-transform:uppercase; color:var(--gold-deep) }
 [dir="rtl"] .field label{ letter-spacing:0; font-size:.95rem }
-.field input,.field select,.field textarea{ font:inherit; font-size:1rem; color:var(--ink); background:var(--paper-lift); border:1px solid var(--line-strong); border-radius:var(--radius); padding:14px 16px; width:100%; transition:border-color var(--d-fast) }
+.field input,.field select,.field textarea{ font:inherit; font-size:1rem; color:var(--ink); background:var(--paper-lift); border:1px solid var(--line-strong); border-radius:var(--radius); padding:14px 16px; width:100%; transition:border-color var(--d-hover) }
 .field input:hover,.field select:hover,.field textarea:hover{ border-color:var(--gold) }
 .field textarea{ min-height:150px; resize:vertical }
 .field .hint{ color:var(--muted); font-size:.9rem }
@@ -342,7 +251,7 @@ footer .bottom .values i{ font-style:normal; color:var(--bar) }
 .field.two > div{ display:grid; gap:8px }
 /* the honeypot: clipped in place, never pushed off-screen (an offset widens the page in RTL) */
 .hp{ position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; opacity:0; pointer-events:none }
-.btn{ font-family:var(--display); font-weight:700; font-size:var(--t-1); letter-spacing:.12em; text-transform:uppercase; color:var(--paper); background:var(--wine); border:1px solid var(--wine); padding:16px 26px; border-radius:999px; cursor:pointer; justify-self:start; display:inline-flex; align-items:center; gap:12px; transition:background var(--d-mid) var(--ease-out), transform var(--d-fast) }
+.btn{ font-family:var(--display); font-weight:700; font-size:var(--t-1); letter-spacing:.12em; text-transform:uppercase; color:var(--paper); background:var(--wine); border:1px solid var(--wine); padding:16px 26px; border-radius:999px; cursor:pointer; justify-self:start; display:inline-flex; align-items:center; gap:12px; transition:background var(--d-ui) var(--ease-arrive), transform var(--d-hover) }
 .btn:hover{ background:var(--wine-deep) }
 .btn:active{ transform:scale(.98) }
 .btn:disabled{ opacity:.6; cursor:progress }
@@ -357,7 +266,7 @@ footer .bottom .values i{ font-style:normal; color:var(--bar) }
 .faq summary{ cursor:pointer; list-style:none; display:grid; grid-template-columns:1fr auto; align-items:center; gap:var(--s-lg); padding:22px 0; font-family:var(--display); font-weight:700; font-size:var(--t1); letter-spacing:-.01em; color:var(--ink) }
 [dir="rtl"] .faq summary{ font-family:var(--arabic) }
 .faq summary::-webkit-details-marker{ display:none }
-.faq summary::after{ content:"+"; font-weight:500; color:var(--gold-deep); font-size:1.4em; transition:transform var(--d-mid) var(--ease-out) }
+.faq summary::after{ content:"+"; font-weight:500; color:var(--gold-deep); font-size:1.4em; transition:transform var(--d-ui) var(--ease-arrive) }
 .faq details[open] summary::after{ transform:rotate(45deg) }
 .faq details p{ padding:0 0 26px; color:var(--ink-soft); max-width:64ch }
 
@@ -367,13 +276,11 @@ footer .bottom .values i{ font-style:normal; color:var(--bar) }
   .hero-media{ grid-column:2 / span 10; order:-1 }
   .hero{ padding-top:clamp(84px,12vh,120px) }
   .head h2{ grid-column:1 / span 12 } .head .lede{ grid-column:1 / span 8 }
-  #how .ledger{ grid-template-columns:repeat(2,1fr); row-gap:var(--s-2xl) }
   #why .sticky{ grid-column:1 / span 12; position:static } #why .claims{ grid-column:1 / span 12; margin-top:var(--s-xl) }
   #name .film{ grid-column:1 / span 12 } #name .story{ grid-column:1 / span 10; margin-top:var(--s-xl) }
-  #membership h2,#membership .text,#membership .charge,#membership .note{ grid-column:1 / span 12 }
   .founder:nth-child(1),.founder:nth-child(2){ grid-column:1 / span 12 }
   #correspondence h2,#correspondence .contact{ grid-column:1 / span 12 }
-  footer .colophon,footer .f-map{ grid-column:1 / span 12 }
+  footer .colophon{ grid-column:1 / span 12 }
   .intake .intro,.intake form{ grid-column:1 / span 12 }
 }
 @media (max-width:900px){
@@ -383,24 +290,17 @@ footer .bottom .values i{ font-style:normal; color:var(--bar) }
   .hero h1{ font-size:clamp(3rem,15vw,4.4rem) }
   .scrollcue{ display:none }
   #routes .register{ grid-template-columns:1fr }
-  .router{ grid-template-columns:auto 1fr }
-  .router-arrow{ display:none }
-  #how .ledger{ grid-template-columns:1fr; row-gap:var(--s-xl) }
-  .step{ display:grid; grid-template-columns:auto 1fr; column-gap:var(--s-lg); padding-top:var(--s-md) }
-  .step-n{ font-size:var(--t4); min-width:1.4em }
-  .step h3{ margin-top:0 }
-  .step p{ grid-column:2 }
   .claim{ grid-template-columns:1fr } .claim .roman{ padding-top:0; margin-bottom:8px }
   .founder{ grid-template-columns:1fr; row-gap:var(--s-lg) } .portrait{ max-width:220px }
   #correspondence .mail{ font-size:var(--t1) }
-  footer .f-map{ grid-template-columns:1fr 1fr }
   .field.two{ grid-template-columns:1fr }
 }
 
 @media (prefers-reduced-motion:reduce){
-  .rise,.rv,.hero h1 .line > span,.hero h1 .crossed::after,.kruising path{ opacity:1; transform:none; transition:none; stroke-dashoffset:0 }
-  .scrollcue::after,.seal-wrap .ring{ animation:none }
-  .router::after,.more::after{ transition:none }
+  .hero h1 .line > span,.hero h1 .crossed::after{ opacity:1; transform:none; transition:none; stroke-dashoffset:0 }
+  .scrollcue::after{ animation:none }
+  /* the new motion classes have their one reduced-motion block in app/muntregister.css (a6-6) */
+  .more::after{ transition:none }
 }
 
 /* ---------- homepage bottom (source 1.6), footer newsletter and links (21), 404 ---------- */
@@ -408,9 +308,8 @@ footer .bottom .values i{ font-style:normal; color:var(--bar) }
 .more-sx .label{ margin-bottom:var(--s-lg) }
 .mx-row{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--line-strong) }
 .mx-row + .mx-row{ border-top:0 }
-.mx-row a{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:20px 18px 20px 0; border-bottom:1px solid var(--line); font-family:var(--display); font-weight:700; font-size:var(--t1); letter-spacing:-.015em; color:var(--ink); transition:color var(--d-fast) }
+.mx-row a{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:20px 18px 20px 0; border-bottom:1px solid var(--line); font-family:var(--display); font-weight:700; font-size:var(--t1); letter-spacing:-.015em; color:var(--ink); transition:color var(--d-hover) }
 [dir="rtl"] .mx-row a{ font-family:var(--arabic); letter-spacing:0; padding:20px 0 20px 18px }
-.mx-row a .arrow{ color:var(--gold-deep) }
 .mx-row a:hover{ color:var(--wine) }
 footer .colophon .values{ font-family:var(--display); font-weight:600; font-size:var(--t-1); letter-spacing:.14em; text-transform:uppercase; color:var(--gold-deep) }
 footer .colophon .slogan{ font-family:var(--display); font-weight:700; color:var(--ink) }

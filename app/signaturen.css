@@ -1,0 +1,235 @@
+/* ============================================================
+   DUKAAT — the signatures (round 3, approved by the owner on 4 Oct 2026: 1, 4, 5, 6, 9, 10)
+   Proposal: https://claude.ai/artifact/RmfLzc4cnNBn5As7aFJa7H (db collection "signaturen").
+   Loaded last. Never reaches the hero (.h3) or the dock. No text changes, except signature 4, which shows each
+   heading's own source text in the other script beside it (owner-approved, the same strings as in content/).
+   Every effect has a still end state under prefers-reduced-motion and without script.
+   ============================================================ */
+
+/* === Signature 5: one light — the window and the mashrabiya ===
+   components/Licht.tsx. A fixed layer under the header: a soft diagonal shaft of warm window light from the top left
+   over the paper, a little brighter near the window, and a faint shade in the far corner. A few percent, no blend
+   mode (cheap to scroll). Off over the hero (the script turns it on). The window follows the hand a little. */
+.licht{
+  position:fixed; inset:0; z-index:30; pointer-events:none; opacity:0;
+  transition:opacity 1200ms var(--ease-arrive);
+  background:
+    linear-gradient(116deg,
+      rgba(255,247,226,0) calc(2% + var(--lpx,0) * 7%),
+      rgba(255,247,226,.1) calc(15% + var(--lpx,0) * 7%),
+      rgba(255,247,226,.08) calc(33% + var(--lpx,0) * 7%),
+      rgba(255,247,226,0) calc(52% + var(--lpx,0) * 7%)),
+    radial-gradient(55% 50% at calc(3% + var(--lpx,0) * 6%) calc(-2% + var(--lpy,0) * 6%), rgba(255,249,232,.12), rgba(255,249,232,0) 72%),
+    radial-gradient(80% 70% at 104% 106%, rgba(61,5,18,.045), rgba(61,5,18,0) 72%);
+}
+.licht[data-on="1"]{ opacity:1 }
+[dir="rtl"] .licht{ transform:scaleX(-1) } /* the window sits where the reading starts */
+
+/* the same light through a mashrabiya, on the dark surfaces: a patch of lattice light falling diagonally over the
+   wall, drifting a hand's width a minute. Warm light on the dark; on the light variant of the slot it is shade. */
+.pe,footer{ isolation:isolate }
+.mash{
+  position:absolute; inset:0; z-index:-1; overflow:hidden; pointer-events:none;
+  -webkit-mask-image:linear-gradient(112deg, transparent 12%, #000 28%, #000 42%, transparent 58%), linear-gradient(180deg, #000 0%, rgba(0,0,0,.7) 45%, transparent 92%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(112deg, transparent 12%, #000 28%, #000 42%, transparent 58%), linear-gradient(180deg, #000 0%, rgba(0,0,0,.7) 45%, transparent 92%);
+  mask-composite:intersect;
+}
+.mash > span{
+  position:absolute; inset:-200px; opacity:.09; transform:skewX(-18deg);
+  background-size:88px 88px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cdefs%3E%3Cfilter id='b' x='-30%25' y='-30%25' width='160%25' height='160%25'%3E%3CfeGaussianBlur stdDeviation='2.4'/%3E%3C/filter%3E%3C/defs%3E%3Cg fill='%23F4DDB0' filter='url(%23b)'%3E%3Crect x='22' y='22' width='16' height='16'/%3E%3Crect x='22' y='22' width='16' height='16' transform='rotate(45 30 30)'/%3E%3Ccircle cx='0' cy='0' r='6.5'/%3E%3Ccircle cx='60' cy='0' r='6.5'/%3E%3Ccircle cx='0' cy='60' r='6.5'/%3E%3Ccircle cx='60' cy='60' r='6.5'/%3E%3Crect x='28' y='0' width='4' height='10'/%3E%3Crect x='28' y='50' width='4' height='10'/%3E%3Crect x='0' y='28' width='10' height='4'/%3E%3Crect x='50' y='28' width='10' height='4'/%3E%3C/g%3E%3C/svg%3E");
+}
+html[data-slot="licht"] .mash > span{
+  opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cdefs%3E%3Cfilter id='b' x='-30%25' y='-30%25' width='160%25' height='160%25'%3E%3CfeGaussianBlur stdDeviation='2.4'/%3E%3C/filter%3E%3C/defs%3E%3Cg fill='%23241418' filter='url(%23b)'%3E%3Crect x='22' y='22' width='16' height='16'/%3E%3Crect x='22' y='22' width='16' height='16' transform='rotate(45 30 30)'/%3E%3Ccircle cx='0' cy='0' r='6.5'/%3E%3Ccircle cx='60' cy='0' r='6.5'/%3E%3Ccircle cx='0' cy='60' r='6.5'/%3E%3Ccircle cx='60' cy='60' r='6.5'/%3E%3Crect x='28' y='0' width='4' height='10'/%3E%3Crect x='28' y='50' width='4' height='10'/%3E%3Crect x='0' y='28' width='10' height='4'/%3E%3Crect x='50' y='28' width='10' height='4'/%3E%3C/g%3E%3C/svg%3E");
+}
+[dir="rtl"] .mash{ transform:scaleX(-1) }
+@media (prefers-reduced-motion:no-preference){
+  .mash > span{ animation:mash-drift 60s linear infinite }
+}
+@keyframes mash-drift{ from{ transform:skewX(-18deg) } to{ transform:skewX(-18deg) translate3d(88px,88px,0) } }
+@media print{ .licht,.mash{ display:none !important } }
+
+/* === Signature 1: the gold thread ===
+   components/GoldThread.tsx. One SVG behind the content of <main>: main becomes a stacking context (z-index 0), the
+   thread sits at -1 inside it, so paper shows it and every photograph, band and dark surface covers it — it passes
+   behind them, as the bar passes behind the letters in the hero. 2px in the bar's gold; the turns carry a struck
+   coin (it strikes as the thread reaches it, with the extra motion). Hidden on narrow screens and in print. */
+main{ position:relative; z-index:0 }
+.draad{ position:absolute; left:0; top:0; z-index:-1; display:block; overflow:visible; pointer-events:none }
+.draad .dr-line{ fill:none; stroke:var(--bar); stroke-width:2; stroke-linejoin:miter; opacity:.92 }
+.draad .dr-glint{ fill:none; stroke:#FFF7E2; stroke-width:2.4; stroke-linecap:round; opacity:0 }
+.draad .dr-coin{ fill:url(#dr-coin-g); stroke:rgba(122,90,42,.6); stroke-width:.7; transform-box:fill-box; transform-origin:center }
+@media (prefers-reduced-motion:no-preference){
+  html[data-beweging="extra"] .draad .dr-coin{ opacity:0; scale:1.6; transition:opacity var(--d-ui) var(--ease-arrive), scale var(--d-ui) var(--ease-arrive) }
+  html[data-beweging="extra"] .draad .dr-coin.on{ opacity:1; scale:1 }
+}
+@media (max-width:900px){ .draad{ display:none } }
+@media print{ .draad{ display:none !important } }
+/* where the thread runs, it is the line that opens the lead: the lead's own short gold bar would double it */
+@media (min-width:901px){ .b-lead .b-lead-t::before{ display:none } }
+
+/* === Signature 10: the reverse turns ===
+   The page's end no longer simply begins as a dark block: the last piece of paper lies over it and, as you scroll
+   towards it, turns a quarter away from you along the gold line (a hinge at the foil edge), like a coin set on its
+   edge — and the bordeaux reverse appears underneath. Tied to the scroll: scroll back and it turns back. The gold
+   edge stays on top of it all the time (it is the hinge) and so does the seal.
+   Only with the extra motion, without reduced motion, and where the browser can tie an animation to the scroll
+   (otherwise the end simply is there, as before). Light variant of the slot: the same paper over --paper-deep. */
+.pe-flap{ display:none }
+.pe::before{ z-index:3 }
+.pe-seal{ z-index:4 }
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion:no-preference){
+    html[data-beweging="extra"] .pe-flap{
+      display:block; position:absolute; top:0; inset-inline:0; height:min(100%, 74svh); z-index:2; pointer-events:none;
+      background:var(--paper); transform-origin:50% 0; backface-visibility:hidden;
+      box-shadow:0 34px 60px -34px rgba(24,4,10,.6);
+      animation:pe-turn linear both; animation-timeline:view(); animation-range:entry 0% entry 80%;
+    }
+    /* the light of the window lies on the sheet as on the rest of the paper, and the turned edge catches it */
+    html[data-beweging="extra"] .pe-flap::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(255,248,230,.0) 0%, rgba(255,248,230,.0) 55%, rgba(255,248,230,.35) 100%);
+      animation:pe-turn-light linear both; animation-timeline:view(); animation-range:entry 0% entry 80%;
+    }
+  }
+}
+@keyframes pe-turn{
+  from{ transform:perspective(1500px) rotateX(0deg) }
+  to{ transform:perspective(1500px) rotateX(-90deg) }
+}
+@keyframes pe-turn-light{ from{ opacity:0 } 60%{ opacity:1 } to{ opacity:1 } }
+@media print{ .pe-flap{ display:none !important } }
+
+/* === Signature 4: two scripts on one line ===
+   components/Twin.tsx. The heading on the start side, its own text in the other script on the far side, both on the
+   same last baseline, standing on one gold line (2px, the bar's gold). The twin takes the room the line has: as large
+   as the heading where the column is wide, smaller where it is narrow (sized by the container), and it wraps under the
+   heading on a narrow column or a phone. Extra motion: the line draws in from both ends to the middle (900ms), the twin
+   arrives from its side (700ms), one glint where the halves meet. Reduced motion, keyboard, no script: all there. */
+.twinline{
+  position:relative; display:flex; flex-wrap:wrap; align-items:last baseline; justify-content:space-between;
+  column-gap:clamp(18px,2.6vw,44px); row-gap:6px; padding-bottom:clamp(12px,1.1vw,18px);
+  --twin-from:28px;
+}
+[dir="rtl"] .twinline{ --twin-from:-28px }
+.twinline > h2{ flex:0 1 auto; min-width:0; margin-bottom:0 }
+/* the twin line takes the place its heading had in the grids that place headings themselves */
+.head > .twinline{ grid-column:1 / span 8 }
+.b.b-chapter .ch-head .b-head > .twinline{ grid-column:1 / span 6; grid-row:2 }
+@media (max-width:1100px){ .head > .twinline{ grid-column:1 / span 12 } }
+.twin-h{
+  flex:0 1 auto; max-width:100%; margin-inline-start:auto; text-align:end;
+  font-weight:700; line-height:1.25; color:var(--gold-deep); font-size:clamp(1.15rem, .55rem + 1.55vw, 2.35rem);
+  text-wrap:balance; unicode-bidi:isolate;
+}
+.twin-h:lang(ar){ font-family:var(--arabic); letter-spacing:0 }
+.twin-h:is(:lang(nl),:lang(en)){ font-family:var(--display); letter-spacing:-.02em; line-height:1.1 }
+.twin-h em{ font-style:normal; color:inherit }
+.twin-rule{ position:absolute; inset-inline:0; bottom:0; height:2px; display:flex; pointer-events:none }
+.twin-rule i{ flex:1; background:var(--bar) }
+.twin-rule::after{
+  content:""; position:absolute; left:50%; top:50%; width:160px; height:16px; translate:-50% -50%; opacity:0;
+  background:radial-gradient(closest-side, rgba(255,247,226,.95), rgba(255,247,226,0));
+}
+/* on the dark surfaces the twin and the line keep to the paper's tones */
+:is(.pe,.b-dark) .twin-h{ color:var(--paper-mute) }
+@media (scripting:enabled) and (prefers-reduced-motion:no-preference){
+  html[data-beweging="extra"] .twinline .twin-rule i{ transition:transform var(--d-reveal) var(--ease-draw) }
+  html[data-beweging="extra"] .twinline .twin-rule i:first-child{ transform-origin:left center }
+  html[data-beweging="extra"] .twinline .twin-rule i:last-child{ transform-origin:right center }
+  html[data-beweging="extra"] .twinline:not(.in) .twin-rule i{ transform:scaleX(0) }
+  html[data-beweging="extra"] .twinline .twin-h{ transition:opacity var(--d-reveal) var(--ease-arrive) 220ms, translate var(--d-reveal) var(--ease-arrive) 220ms }
+  html[data-beweging="extra"] .twinline:not(.in) .twin-h{ opacity:0; translate:var(--twin-from) 0 }
+  html[data-beweging="extra"] .twinline.in .twin-rule::after{ animation:twin-glint var(--d-reveal) var(--ease-arrive) 780ms both }
+}
+@keyframes twin-glint{ 0%{ opacity:0 } 25%{ opacity:1 } 100%{ opacity:0 } }
+html[data-kbd] .twinline *{ transition:none !important; animation:none !important }
+@media (max-width:640px){
+  .twinline{ flex-direction:column; align-items:flex-start }
+  .twin-h{ margin-inline-start:0; font-size:1.15rem; text-align:start }
+}
+
+/* === Signature 6: the letter ===
+   components/Form.tsx. Every form except the footer's newsletter is a sheet of the club's letter paper: lifted a
+   little from the page (the window light falls on it like on the rest of the paper), the mark as letterhead with a
+   short foil bar, the tulip as a faint watermark; the fields are already ruled lines (slice 4).
+   Sent: the sheet folds in three (bottom third up, top third down, 2 x 300ms), settles, and the wax seal of DUKAAT is
+   pressed on the fold (420ms); then the existing confirmation. The resting state (reduced motion, keyboard, a second
+   look) is the sealed letter. On the dark footer nothing changes. */
+.fm.is-letter{
+  position:relative; isolation:isolate;
+  padding:clamp(28px,3vw,48px) clamp(22px,3vw,48px) clamp(26px,2.8vw,40px);
+  background:var(--paper-lift); border:1px solid var(--line);
+  box-shadow:0 1px 0 rgba(36,20,24,.04), 0 22px 44px -30px rgba(36,20,24,.38);
+}
+.fm.is-letter::after{
+  content:""; position:absolute; z-index:-1; pointer-events:none; opacity:.045;
+  inset-block:12% 10%; inset-inline:auto 6%; width:min(42%, 300px);
+  background:url("/logo/dukaat-beeldmerk.svg") center / contain no-repeat;
+}
+.lt-head{ display:flex; align-items:center; gap:14px; margin-bottom:clamp(6px,.8vw,12px) }
+.lt-head img{ width:22px; height:auto }
+.lt-head i{ width:40px; height:2px; background:var(--foil) }
+@media (max-width:600px){ .fm.is-letter{ padding:22px 18px 24px; margin-inline:calc(var(--gutter) * -.4) } }
+
+/* the sealed letter */
+.fm-ok.is-letter{
+  grid-template-columns:auto minmax(0,1fr); column-gap:clamp(24px,3vw,48px); padding:var(--s-lg) 0;
+  background:transparent;
+}
+.fm-ok.is-letter::before{ display:none }
+.lt{ position:relative; width:200px; height:270px; display:grid; place-items:center; perspective:1100px }
+.lt-fold{ position:relative; width:200px; height:90px; transform-style:preserve-3d; filter:drop-shadow(0 10px 14px rgba(36,20,24,.22)) }
+.lt-p{ position:absolute; inset-inline:0; height:90px; transform-style:preserve-3d; backface-visibility:visible }
+/* the written face: the ruled lines of the letter; the folded panels show their plain back */
+.lt-p::before,.lt-p::after{ content:""; position:absolute; inset:0; backface-visibility:hidden }
+.lt-p::before{
+  background:
+    repeating-linear-gradient(180deg, transparent 0 13px, rgba(122,90,42,.16) 13px 14px) 18px 12px / calc(100% - 36px) calc(100% - 20px) no-repeat,
+    var(--paper-lift);
+  box-shadow:inset 0 0 0 1px var(--line);
+}
+.lt-p::after{ background:#EFEBE1; box-shadow:inset 0 0 0 1px var(--line); transform:rotateX(180deg) }
+.lt-p1{ top:0; transform-origin:50% 100%; transform:translateY(-100%) rotateX(-180deg) }
+.lt-p2{ top:0 }
+.lt-p3{ top:0; transform-origin:50% 0; transform:translateY(100%) rotateX(180deg) }
+/* the fold lines on the sealed letter */
+.lt-p2::before{ box-shadow:inset 0 0 0 1px var(--line), inset 0 1px 0 rgba(255,255,255,.7) }
+/* the wax: Bordeaux, a little irregular, the tulip pressed into it (an emboss of the mark) */
+.lt-wax{
+  position:absolute; left:50%; top:50%; width:58px; height:58px; translate:-50% -48%;
+  border-radius:52% 48% 50% 46% / 48% 52% 47% 53%;
+  background:radial-gradient(circle at 36% 30%, #A11B3D 0%, #7A0C29 46%, #540618 100%);
+  box-shadow:0 2px 3px rgba(36,20,24,.35), inset 0 -3px 5px rgba(0,0,0,.28), inset 0 2px 3px rgba(255,190,200,.22);
+}
+.lt-wax::before{ content:""; position:absolute; inset:7px; border-radius:50%; box-shadow:inset 0 0 0 1px rgba(255,205,210,.22), 0 0 0 1px rgba(40,0,10,.25) }
+.lt-wax::after{
+  content:""; position:absolute; inset:13px 15px;
+  -webkit-mask:url("/logo/dukaat-beeldmerk.svg") center / contain no-repeat; mask:url("/logo/dukaat-beeldmerk.svg") center / contain no-repeat;
+  background:linear-gradient(150deg, rgba(255,214,190,.55) 0%, rgba(255,214,190,.12) 45%, rgba(30,0,8,.35) 100%);
+}
+/* the letter does not fade in as a block: the sheet itself arrives (140ms), then folds */
+.fm-ok.is-letter{ transition:none }
+@starting-style{ .fm-ok.is-letter{ opacity:1; transform:none } }
+@media (prefers-reduced-motion:no-preference){
+  html[data-beweging="extra"] .lt-fold{ animation:lt-in var(--d-press) var(--ease-arrive) both, lt-settle var(--d-ui) var(--ease-arrive) 740ms both }
+  html[data-beweging="extra"] .lt-p3{ animation:lt-up var(--d-ui) var(--ease-draw) 160ms both }
+  html[data-beweging="extra"] .lt-p1{ animation:lt-down var(--d-ui) var(--ease-draw) 440ms both }
+  html[data-beweging="extra"] .lt-wax{ animation:lt-press var(--d-ui) var(--ease-arrive) 820ms both }
+  html[data-beweging="extra"] .fm-ok.is-letter .fm-ok-t{ animation:lt-text var(--d-ui) var(--ease-arrive) 960ms both }
+}
+@keyframes lt-in{ from{ opacity:0; translate:0 8px } }
+@keyframes lt-up{ from{ transform:translateY(100%) rotateX(0deg) } }
+@keyframes lt-down{ from{ transform:translateY(-100%) rotateX(0deg) } }
+@keyframes lt-settle{ from{ transform:translateY(-6px) } }
+@keyframes lt-press{ from{ opacity:0; scale:1.5; rotate:-12deg } 70%{ opacity:1 } }
+@keyframes lt-text{ from{ opacity:0; transform:translateY(8px) } }
+html[data-kbd] .fm-ok.is-letter *{ animation:none !important }
+@media (max-width:600px){
+  .fm-ok.is-letter{ grid-template-columns:minmax(0,1fr); row-gap:var(--s-md) }
+  .lt{ justify-self:start; height:220px }
+}
+@media print{ .lt-head,.fm.is-letter::after{ display:none } .fm.is-letter{ box-shadow:none } }

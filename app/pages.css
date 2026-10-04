@@ -3,84 +3,25 @@
    "in this section" and "elsewhere on the site"
    ============================================================ */
 
-/* home: the whole club in one register, straight under the hero */
-.site-index{ padding-block:calc(var(--section) * .8) }
-.site-index .head{ margin-bottom:var(--s-xl) }
-.gx-grid{ display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line-strong) }
-.gx-grid > div{ border-bottom:1px solid var(--line); border-inline-end:1px solid var(--line) }
-.gx-grid > div:nth-child(4n){ border-inline-end:0 }
-.gx{ height:100%; padding:clamp(22px,2.4vw,34px) clamp(18px,2vw,30px) clamp(24px,2.6vw,36px); position:relative; transition:background var(--d-mid) var(--ease-out) }
-.gx::before{ content:""; position:absolute; top:-1px; inset-inline:0; height:3px; background:var(--bar); transform:scaleX(0); transform-origin:var(--ox,left); transition:transform var(--d-slow) var(--ease-out) }
-[dir="rtl"] .gx::before{ --ox:right }
-.gx:hover{ background:var(--paper-lift) }
-.gx:hover::before{ transform:scaleX(1) }
-.gx-n{ font-family:var(--display); font-weight:600; font-size:11px; letter-spacing:.18em; color:var(--gold-deep); font-variant-numeric:tabular-nums }
-.gx h3{ margin-top:10px; font-size:var(--t2); letter-spacing:-.025em; line-height:1.05 }
-[dir="rtl"] .gx h3{ line-height:1.4 }
-.gx h3 a{ transition:color var(--d-fast) }
-.gx h3 a:hover{ color:var(--wine) }
-.gx h3 .arrow{ font-size:.7em; color:var(--gold-deep); margin-inline-start:.35em }
-.gx-lede{ margin-top:10px; color:var(--ink-soft); font-size:.95rem; line-height:1.5 }
-[dir="rtl"] .gx-lede{ line-height:1.8 }
-.gx ul{ list-style:none; margin:var(--s-md) 0 0; padding:0 }
-.gx li a{ display:block; padding:6px 0; font-family:var(--display); font-weight:600; font-size:.9rem; color:var(--ink-soft); border-top:1px solid var(--line); transition:color var(--d-fast), padding var(--d-mid) var(--ease-out) }
-[dir="rtl"] .gx li a{ font-family:var(--arabic) }
-.gx li a:hover{ color:var(--wine); padding-inline-start:6px }
-.gx li a.is-key{ color:var(--wine) }
-.gx-contact{ background:var(--wine-deep); color:var(--paper) }
-.gx-contact:hover{ background:var(--wine-night) }
-.gx-contact .gx-n,.gx-contact h3 .arrow{ color:var(--gold-light) }
-.gx-contact h3 a:hover{ color:var(--gold-light) }
-.gx-contact .gx-lede{ color:#E9DED3 }
-.gx-contact li a{ color:#E9DED3; border-color:rgba(220,177,122,.3) }
-.gx-contact li a:hover{ color:var(--gold-light) }
+/* Muntregister a9-8: the old home register (.site-index, .gx*), the pinned chapter's step photos, the old dark
+   #membership room and the paper footer background (now app/muntregister.css, slice 5) are removed. */
 
-/* home: "read more" in the dark block */
-#membership .more{ grid-column:1 / span 6; color:var(--gold-light); margin-top:0; justify-self:start }
-#membership .more::after{ background:var(--gold-light) }
-#how .more,#behind .more{ margin-top:var(--s-xl) }
+#behind .more{ margin-top:var(--s-xl) }
 
 /* inner pages (masthead and blocks: blocks.css) */
 .sp{ padding-bottom:0 }
 .crumbs{ display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; font-family:var(--display); font-weight:600; font-size:.8rem; color:var(--muted) }
 [dir="rtl"] .crumbs{ font-family:var(--arabic); font-size:.9rem }
-.crumbs a{ color:var(--ink-soft); border-bottom:1px solid transparent; transition:color var(--d-fast), border-color var(--d-fast) }
+.crumbs a{ color:var(--ink-soft); border-bottom:1px solid transparent; transition:color var(--d-hover), border-color var(--d-hover) }
 .crumbs a:hover{ color:var(--wine); border-color:var(--bar) }
 .crumbs i{ font-style:normal; color:var(--bar) }
 .crumbs [aria-current]{ color:var(--ink) }
 
 
 
-.sp-sib{ margin-top:var(--s-2xl); padding-top:var(--s-lg); border-top:1px solid var(--line-strong) }
-.sp-sib .label a{ color:var(--wine); border-bottom:1px solid var(--bar) }
-.sp-sib ul{ list-style:none; margin:var(--s-md) 0 0; padding:0; display:flex; flex-wrap:wrap; gap:10px }
-.sp-sib ul a{ display:inline-block; padding:9px 16px; border:1px solid var(--line-strong); border-radius:999px; font-family:var(--display); font-weight:600; font-size:.88rem; color:var(--ink-soft); transition:border-color var(--d-fast), color var(--d-fast), background var(--d-fast) }
-[dir="rtl"] .sp-sib ul a{ font-family:var(--arabic) }
-.sp-sib ul a:hover{ border-color:var(--bar); color:var(--wine) }
-.sp-sib ul a[aria-current]{ background:var(--wine); border-color:var(--wine); color:var(--paper) }
-.sp-sib ul a.is-key{ color:var(--wine); border-color:var(--bar) }
+/* Muntregister g2: the sibling pills (.sp-sib) and the band of other groups (.og) gave way to the page's end
+   (components/PageEnd.tsx, app/muntregister.css slice 5) */
 
-/* under every inner page: the other groups */
-.og{ margin-top:var(--section); padding-block:var(--s-2xl) var(--section); background:var(--paper-deep); border-top:1px solid var(--line-strong) }
-.og ul{ list-style:none; margin:var(--s-lg) 0 0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); column-gap:var(--s-xl); row-gap:0 }
-.og a{ display:block; padding:18px 0 20px; border-top:1px solid var(--line-strong) }
-.og-t{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; font-family:var(--display); font-weight:800; font-size:var(--t1); letter-spacing:-.02em; color:var(--ink); transition:color var(--d-fast) }
-[dir="rtl"] .og-t{ font-family:var(--arabic); letter-spacing:0 }
-.og-t .arrow{ font-size:.8em; color:var(--gold-deep) }
-.og-b{ display:block; margin-top:6px; font-size:.9rem; line-height:1.45; color:var(--muted) }
-.og a:hover .og-t{ color:var(--wine) }
-footer{ background:var(--paper) }
-
-@media (max-width:1100px){
-  .gx-grid{ grid-template-columns:1fr 1fr }
-  .gx-grid > div:nth-child(4n){ border-inline-end:1px solid var(--line) }
-  .gx-grid > div:nth-child(2n){ border-inline-end:0 }
-  .og ul{ grid-template-columns:1fr 1fr }
-}
-@media (max-width:640px){
-  .gx-grid,.og ul{ grid-template-columns:1fr }
-  .gx-grid > div{ border-inline-end:0 !important }
-}
 
 /* ============================================================
    PHOTOGRAPHS on the home page (and the pages that reuse its sections)
@@ -89,43 +30,9 @@ footer{ background:var(--paper) }
    ============================================================ */
 :root{ --photo-line:0 0 0 1px rgba(179,148,85,.75) }
 
-/* five steps: one still life per step, only while the chapter is pinned on wide screens */
-.step-photo{ display:none }
-@media (scripting: enabled) and (prefers-reduced-motion: no-preference) and (min-height:560px) and (min-width:1101px){
-  #how.chapter .head .label,#how.chapter .head h2{ grid-column:1 / span 8 }
-  #how.chapter .head .lede{ grid-column:1 / span 8; grid-row:3; margin:0 }
-  #how.chapter .step-photo{
-    display:block; position:relative; grid-column:9 / span 4; grid-row:1 / span 3; align-self:end; justify-self:end;
-    width:100%; aspect-ratio:16/9; max-height:26svh; margin:0; overflow:hidden; box-shadow:var(--photo-line); background:var(--paper-deep);
-  }
-  #how.chapter .step-photo img{
-    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-    opacity:0; transform:scale(1.04); transition:opacity .6s var(--ease-out), transform 1.4s var(--ease-out);
-  }
-  #how.chapter .step-photo img.on{ opacity:1; transform:none }
-}
 
-/* why: a plate beside each claim */
-.claim{ grid-template-columns:auto 1fr clamp(120px, 12vw, 190px) }
-.claim-photo{ margin:0; align-self:start; aspect-ratio:4/5; overflow:hidden; box-shadow:var(--photo-line); background:var(--paper-deep) }
-.claim-photo img{ display:block; width:100%; height:100%; object-fit:cover }
-@media (max-width:640px){
-  .claim{ grid-template-columns:1fr }
-  .claim-photo{ order:-1; aspect-ratio:1/1; margin-bottom:var(--s-md) }
-  .claim-photo img{ object-position:50% 45% }
-}
+/* why: the plate beside each claim is gone (Muntregister g1, slice 7: no photos in lists) */
 
-/* membership: the room, full width at the top of the dark block, fading into the bordeaux under the heading */
-#membership::before{ z-index:2 }
-#membership .m-room{ position:relative; width:100%; margin:calc(-1 * var(--section)) 0 0; aspect-ratio:21/9; max-height:72svh; overflow:hidden }
-#membership .m-room img{ display:block; width:100%; height:100%; object-fit:cover; object-position:50% 45% }
-#membership .m-room::after{ content:""; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(61,5,18,0) 40%, rgba(61,5,18,.55) 72%, var(--wine-deep) 100%) }
-#membership .grid{ position:relative; z-index:1; margin-top:calc(-1 * clamp(48px, 7vw, 132px)) }
-@media (max-width:900px){
-  #membership .m-room{ aspect-ratio:4/5; max-height:72svh }
-  #membership .m-room img{ object-position:66% 50% }
-  #membership .grid{ margin-top:-48px }
-}
 
 /* founders: the AI stand-ins fill the frame; the "portrait to follow" label sits on a paper pill */
 .portrait--standin img{ width:100%; height:100%; object-fit:cover; opacity:1 }

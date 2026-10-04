@@ -410,3 +410,31 @@ body::after{
 .h3[data-tight] .rt-text,.h3[data-tight] .caption{ display:none }
 [dir="rtl"] .rt-text{ font-family:var(--arabic); line-height:1.75 }
 .caption > p.on{ font-style:normal }
+
+/* === owner, 4 Oct 2026: the descriptor under the name, and a wider introduction ===
+   "Dutch–Arab Business Club" (the existing descriptor) in Bordeaux under DUKAAT, spaced to the wordmark's width, so a
+   visitor sees at once what kind of site this is; HeroStage.fit() keeps it inside the first screen. The introduction
+   under the tulip runs wider (two or three lines instead of five), so it no longer pushes the name down. The eyebrow
+   that carried the descriptor on smaller screens is no longer needed. */
+.h3-desc{
+  align-self:center; margin-top:calc(clamp(8px, 1.5svh, 16px) * var(--fit)); white-space:nowrap; text-align:center;
+  font-family:var(--display); font-weight:800; font-size:calc(var(--wm) * .032); line-height:1.2;
+  letter-spacing:.6em; margin-inline-end:-.6em; text-transform:uppercase; color:var(--wine);
+}
+[dir="rtl"] .h3-desc{ font-family:var(--arabic); font-weight:800; letter-spacing:0; margin-inline-end:0; font-size:calc(var(--wm) * .056) }
+/* the Dutch descriptor is longer: less spacing, so it also spans the name */
+.h3-desc:lang(nl){ letter-spacing:.27em; margin-inline-end:-.27em }
+@media (scripting: enabled){ .h3:not(.in) .h3-desc{ opacity:0 } }
+.h3 .h3-desc{ transition:opacity .9s var(--ease-out) 1.3s }
+.h3-eyebrow{ display:none !important }
+.h3 .caption{ max-width:none; width:min(46ch, 33vw) }
+[dir="rtl"] .h3 .caption{ max-width:none; width:min(44ch, 33vw) }
+@media (max-width:900px){ .h3-desc{ order:3; font-size:calc(var(--wm) * .034) } }
+
+/* owner, 4 Oct 2026: the hero's controls follow the site's rectangular buttons (b2) — "I have been nominated" and the
+   two tabs on phones; round stays only for the arrow coins */
+.h3-key{ border-radius:var(--radius); padding:11px 20px 11px 14px }
+[dir="rtl"] .h3-key{ padding:11px 14px 11px 20px }
+@media (max-width:900px){
+  .h3-tabs,.h3-tabs button{ border-radius:var(--radius) !important }
+}

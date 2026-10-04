@@ -4,9 +4,14 @@
    ============================================================ */
 :root{ --util-h:34px }
 @media (max-width:1200px){ :root{ --util-h:0px } }
+/* === Muntregister: --nav-h (a2-9) === the main row (.tb-main) at rest, measured in the browser, not guessed:
+   ≥1201px 70.5px (16px padding ×2 + the 38.5px Contact pill) · ≤1200px 72px (14px ×2 + the 44px burger).
+   The utility line above it is --util-h. Nothing here changes the bar itself. */
+:root{ --nav-h:70.5px }
+@media (max-width:1200px){ :root{ --nav-h:72px } }
 
-.topbar{ position:fixed; top:0; inset-inline:0; z-index:40; transition:background var(--d-mid) var(--ease-out), box-shadow var(--d-mid) var(--ease-out) }
-.topbar.scrolled,.topbar.menu-open{ background:color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); box-shadow:0 1px 0 var(--line) }
+.topbar{ position:fixed; top:0; inset-inline:0; z-index:40; transition:background var(--d-ui) var(--ease-arrive), box-shadow var(--d-ui) var(--ease-arrive) }
+.topbar.scrolled,.topbar.menu-open{ background:color-mix(in srgb, var(--paper) 90%, transparent); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); /* UI-04: prefixed first, the build keeps only the last of the two */ box-shadow:0 1px 0 var(--line) }
 .topbar.menu-open{ background:var(--paper) }
 [dir="rtl"] :is(.topbar,.veil){ --display:var(--arabic) }
 
@@ -14,20 +19,20 @@
 .tb-util{
   display:flex; align-items:center; justify-content:space-between; gap:var(--s-lg); height:var(--util-h); padding-inline:var(--gutter);
   border-bottom:1px solid var(--line); overflow:hidden;
-  transition:height var(--d-mid) var(--ease-out), opacity var(--d-mid) var(--ease-out), border-color var(--d-mid);
+  transition:height var(--d-ui) var(--ease-arrive), opacity var(--d-ui) var(--ease-arrive), border-color var(--d-ui);
 }
 .topbar.scrolled .tb-util{ height:0; opacity:0; border-color:transparent }
 .util-l{ display:flex; align-items:center; gap:10px; font-family:var(--display); font-weight:600; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep); white-space:nowrap }
 .util-l i{ font-style:normal; color:var(--bar); font-size:8px }
 .util-r{ display:flex; align-items:center; gap:clamp(14px,1.6vw,24px) }
-.util-r > a{ font-family:var(--display); font-weight:600; font-size:12px; letter-spacing:.06em; color:var(--ink-soft); transition:color var(--d-fast) }
+.util-r > a{ font-family:var(--display); font-weight:600; font-size:12px; letter-spacing:.06em; color:var(--ink-soft); transition:color var(--d-hover) }
 .util-r > a:hover{ color:var(--wine) }
 .util-key{ display:inline-flex; align-items:center; gap:8px; color:var(--wine) !important }
 .util-key img{ width:12px; height:auto }
 [dir="rtl"] :is(.util-l,.util-r > a){ letter-spacing:0; font-size:.85rem }
 
 .lang{ display:flex; align-items:center; gap:2px; padding-inline-start:clamp(10px,1.2vw,18px); border-inline-start:1px solid var(--line-strong) }
-.lang a{ font-family:var(--display); font-weight:700; font-size:11.5px; letter-spacing:.08em; color:var(--muted); padding:4px 7px; border-radius:999px; transition:color var(--d-fast) }
+.lang a{ font-family:var(--display); font-weight:700; font-size:11.5px; letter-spacing:.08em; color:var(--muted); padding:4px 7px; border-radius:999px; transition:color var(--d-hover) }
 .lang a:hover{ color:var(--ink) }
 .lang a[aria-current="page"]{ color:var(--wine) }
 .lang a.ar-glyph{ font-family:var(--arabic); font-size:.95rem; line-height:1; letter-spacing:0 }
@@ -36,7 +41,7 @@
 /* 2 · the main row: four groups · the name · three groups and Contact */
 .tb-main{
   display:grid; grid-template-columns:1fr auto 1fr; grid-template-areas:"l b r"; align-items:center; gap:var(--s-lg);
-  padding:16px var(--gutter); transition:padding var(--d-mid) var(--ease-out);
+  padding:16px var(--gutter); transition:padding var(--d-ui) var(--ease-arrive);
 }
 .topbar.scrolled .tb-main{ padding-block:10px }
 /* the complete logo: tulip beside the name (always in this order, also in Arabic) */
@@ -50,19 +55,20 @@
 .ni{ position:relative; display:flex; align-items:center }
 .ni > a{
   position:relative; padding-block:8px; white-space:nowrap;
-  font-family:var(--display); font-weight:600; font-size:.8rem; letter-spacing:.03em; color:var(--ink-soft); transition:color var(--d-fast) var(--ease-out);
+  font-family:var(--display); font-weight:600; font-size:.8rem; letter-spacing:.03em; color:var(--ink-soft); transition:color var(--d-hover) var(--ease-arrive);
 }
 [dir="rtl"] .ni > a{ font-size:.95rem; letter-spacing:0 }
-.ni > a::after{ content:""; position:absolute; inset-inline-start:0; bottom:0; height:2px; width:100%; background:var(--bar); transform:scaleX(0); transform-origin:var(--ox,left); transition:transform var(--d-mid) var(--ease-out) }
+.ni > a::after{ content:""; position:absolute; inset-inline-start:0; bottom:0; height:2px; width:100%; background:var(--bar); transform:scaleX(0); transform-origin:var(--ox,left); transition:transform var(--d-ui) var(--ease-arrive) }
 [dir="rtl"] .ni > a::after{ --ox:right }
 .ni > a:hover,.ni.on > a,.ni > a[aria-current]{ color:var(--ink) }
-.ni > a:hover::after,.ni.on > a::after{ transform:scaleX(1) }
+.ni.on > a::after{ transform:scaleX(1) }
+@media (hover:hover) and (pointer:fine){ .ni > a:hover::after{ transform:scaleX(1) } } /* Muntregister a4-1: hover transforms only for a mouse */
 .ni > a[aria-current]::after{ transform:scaleX(1); background:var(--wine) }
 .ni-t{ width:18px; height:28px; padding:0; border:0; background:none; color:var(--muted); cursor:pointer; display:grid; place-items:center; border-radius:var(--radius) }
-.ni-t svg{ width:9px; height:6px; fill:none; stroke:currentColor; stroke-width:1.5; transition:transform var(--d-mid) var(--ease-out) }
+.ni-t svg{ width:9px; height:6px; fill:none; stroke:currentColor; stroke-width:1.5; transition:transform var(--d-ui) var(--ease-arrive) }
 .ni.on .ni-t{ color:var(--wine) }
 .ni.on .ni-t svg{ transform:rotate(180deg) }
-.ni-contact > a{ padding:8px 18px; border:1px solid var(--wine); border-radius:999px; color:var(--wine); transition:background var(--d-mid) var(--ease-out), color var(--d-mid) var(--ease-out) }
+.ni-contact > a{ padding:8px 18px; border:1px solid var(--wine); border-radius:999px; color:var(--wine); transition:background var(--d-ui) var(--ease-arrive), color var(--d-ui) var(--ease-arrive) }
 .ni-contact > a::after{ display:none }
 .ni-contact > a:hover,.ni-contact > a[aria-current]{ background:var(--wine); color:var(--paper) }
 
@@ -72,35 +78,23 @@
   position:absolute; top:0; inset-inline:0; background:var(--paper); pointer-events:auto;
   box-shadow:0 1px 0 var(--line-strong), 0 40px 60px -40px rgba(36,20,24,.35);
   opacity:0; visibility:hidden; transform:translateY(-6px);
-  transition:opacity .28s var(--ease-out), transform .4s var(--ease-out), visibility 0s .28s;
+  /* Muntregister a5-1: the panel's timing lives in app/muntregister.css (.mega .mp …) */
 }
-.mp::before{ content:""; position:absolute; top:0; inset-inline:0; height:3px; background:linear-gradient(90deg, #9E7946 0%, #B39455 18%, #D2AE72 50%, #B39455 82%, #9E7946 100%) }
-.mp.on{ opacity:1; visibility:visible; transform:none; transition:opacity .28s var(--ease-out), transform .4s var(--ease-out) }
-.mega.on .mp{ transition-duration:.18s, .3s, 0s }
+.mp::before{ content:""; position:absolute; top:0; inset-inline:0; height:3px; background:var(--foil) } /* Muntregister a7-1: the same five stops, now the token */
+.mp.on{ opacity:1; visibility:visible; transform:none }
 .mp-grid{ width:min(100% - 2*var(--gutter), var(--max)); margin-inline:auto; display:grid; grid-template-columns:minmax(220px,3fr) 8fr; column-gap:clamp(32px,4vw,72px); padding:clamp(28px,4vh,44px) 0 clamp(32px,4.6vh,52px) }
-.mp-grid:has(.mp-aside){ grid-template-columns:minmax(220px,3fr) 6fr minmax(200px,3fr) }
-.mp-n{ font-family:var(--display); font-weight:600; font-size:11px; letter-spacing:.2em; color:var(--gold-deep); font-variant-numeric:tabular-nums }
+/* Muntregister a9-8: the hover photo column (.mp-aside), the old numbers (.mp-n) and the glyph arrow (.arrow) are gone from the panel */
 .mp-title{ margin-top:10px; font-family:var(--display); font-weight:800; font-size:var(--t2); letter-spacing:-.025em; line-height:1.05; color:var(--ink) }
 .mp-lede{ margin-top:12px; color:var(--ink-soft); font-size:.98rem; line-height:1.5; max-width:34ch }
 [dir="rtl"] .mp-lede{ font-family:var(--arabic); line-height:1.8 }
 .mp-intro .more{ margin-top:var(--s-md) }
 .mp-list{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; column-gap:clamp(24px,2.6vw,44px); align-content:start }
 .mp-list a{ display:block; padding:14px 0 16px; border-top:1px solid var(--line) }
-.mp-t{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; font-family:var(--display); font-weight:700; font-size:1.02rem; letter-spacing:-.01em; color:var(--ink); transition:color var(--d-fast) }
-.mp-t .arrow{ color:var(--gold-deep); opacity:0; transition:opacity var(--d-mid) var(--ease-out), transform var(--d-mid) var(--ease-out) }
+.mp-t{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; font-family:var(--display); font-weight:700; font-size:1.02rem; letter-spacing:-.01em; color:var(--ink); transition:color var(--d-hover) }
 .mp-b{ display:block; margin-top:4px; color:var(--muted); font-size:.9rem; line-height:1.45 }
 [dir="rtl"] .mp-b{ font-family:var(--arabic); line-height:1.75 }
 .mp-list a:hover .mp-t,.mp-list a:focus-visible .mp-t,.mp-list a[aria-current] .mp-t{ color:var(--wine) }
-.mp-list a:hover .arrow,.mp-list a:focus-visible .arrow{ opacity:1; transform:translateX(3px) }
-[dir="rtl"] .mp-list a:hover .arrow{ transform:scaleX(-1) translateX(3px) }
 .mp-list a.is-key .mp-t{ color:var(--wine) }
-.mp-list a.is-key .arrow{ opacity:1 }
-.mp-aside{ border-inline-start:1px solid var(--line); padding-inline-start:clamp(20px,2.4vw,36px); display:flex; flex-direction:column }
-.mp-aside-h{ font-family:var(--display); font-weight:600; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:8px }
-[dir="rtl"] .mp-aside-h{ letter-spacing:0; font-size:.85rem }
-.mp-aside a{ display:flex; gap:12px; align-items:baseline; padding:7px 0; font-family:var(--display); font-weight:600; font-size:.92rem; color:var(--ink-soft); transition:color var(--d-fast) }
-.mp-aside a:hover{ color:var(--wine) }
-.mp-aside i{ font-style:normal; font-size:10.5px; letter-spacing:.1em; color:var(--gold-deep); font-variant-numeric:tabular-nums }
 
 /* narrower desktops: tighten before the menu folds into the burger */
 @media (max-width:1360px){
@@ -111,17 +105,17 @@
 
 /* 4 · tablets and phones: burger, full-screen menu with folding groups */
 .burger{ display:none; width:44px; height:44px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; cursor:pointer; position:relative }
-.burger span{ position:absolute; left:13px; right:13px; height:2px; background:var(--ink); transition:transform var(--d-mid) var(--ease-out), top var(--d-mid) var(--ease-out) }
+.burger span{ position:absolute; left:13px; right:13px; height:2px; background:var(--ink); transition:transform var(--d-ui) var(--ease-arrive), top var(--d-ui) var(--ease-arrive) }
 .burger span:nth-child(1){ top:17px } .burger span:nth-child(2){ top:25px }
 .burger[aria-expanded="true"] span:nth-child(1){ top:21px; transform:rotate(45deg) }
 .burger[aria-expanded="true"] span:nth-child(2){ top:21px; transform:rotate(-45deg) }
 
 .veil{
   position:fixed; inset:0; z-index:35; overflow-y:auto; overscroll-behavior:contain;
-  background:color-mix(in srgb, var(--paper) 99%, transparent); backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
-  opacity:0; visibility:hidden; transition:opacity var(--d-mid) var(--ease-out), visibility 0s var(--d-mid);
+  background:color-mix(in srgb, var(--paper) 99%, transparent); -webkit-backdrop-filter:blur(22px); backdrop-filter:blur(22px);
+  opacity:0; visibility:hidden; transition:opacity var(--d-ui) var(--ease-arrive), visibility 0s var(--d-ui);
 }
-.veil.open{ opacity:1; visibility:visible; transition:opacity var(--d-mid) var(--ease-out) }
+.veil.open{ opacity:1; visibility:visible; transition:opacity var(--d-ui) var(--ease-arrive) }
 .veil-in{ padding:92px var(--gutter) 40px; max-width:720px; margin-inline:auto }
 .vg{ border-bottom:1px solid var(--line) }
 .vg summary,.vg-solo{
@@ -130,7 +124,7 @@
 }
 [dir="rtl"] :is(.vg summary,.vg-solo){ letter-spacing:0; line-height:1.5 }
 .vg summary::-webkit-details-marker{ display:none }
-.vg summary svg{ width:14px; height:9px; flex:none; fill:none; stroke:var(--gold-deep); stroke-width:1.5; transition:transform var(--d-mid) var(--ease-out) }
+.vg summary svg{ width:14px; height:9px; flex:none; fill:none; stroke:var(--gold-deep); stroke-width:1.5; transition:transform var(--d-ui) var(--ease-arrive) }
 .vg[open] summary svg{ transform:rotate(180deg) }
 .vg[open] summary{ color:var(--wine) }
 .vg-list{ display:grid; padding:0 0 16px; border-inline-start:2px solid var(--bar); padding-inline-start:16px; margin-bottom:12px }
@@ -150,7 +144,7 @@
   .brand{ grid-area:auto; justify-self:start }
   .burger{ display:block }
   .lang-m{ display:flex; align-items:center; gap:2px }
-  .lang-m a{ font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.1em; color:var(--ink-soft); min-width:40px; height:40px; display:grid; place-items:center; border-radius:999px; transition:color var(--d-fast), background var(--d-fast) }
+  .lang-m a{ font-family:var(--display); font-weight:700; font-size:12px; letter-spacing:.1em; color:var(--ink-soft); min-width:40px; height:40px; display:grid; place-items:center; border-radius:999px; transition:color var(--d-hover), background var(--d-hover) }
   .lang-m a:active{ background:var(--paper-deep) }
   .lang-m a.ar-glyph{ font-family:var(--arabic); font-size:1rem; line-height:1; letter-spacing:0; padding-bottom:5px }
 }

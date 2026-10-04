@@ -1,0 +1,224 @@
+/* ============================================================
+   DUKAAT — round 2 of the Muntregister: density and the masthead (1 Oct 2026, evening)
+   The owner, looking at localhost: far too much white space, layouts still boring, text set too small for the width
+   it owns ("echt overdreven"), the masthead still reads "standard template"; a bit more modern, tighter, the gold line
+   under the title must always shine like the header's. Loaded after app/muntregister.css, so these rules win.
+   Never reaches the hero (.h3) or the dock. No text changes: only how the existing text is set.
+   ============================================================ */
+
+/* === 1. Pace: less paper between blocks (the three steps stay, all smaller) === */
+:root{
+  --pace-tight:clamp(20px,2vw,32px);
+  --pace:clamp(48px,5.4vw,88px);
+  --pace-breath:clamp(72px,7.6vw,124px);
+}
+
+/* === 2. The masthead as one composition ===
+   legend line: crumbs ·· twin name (NL and AR on one line, like the two ends of the bar in the hero)
+   name row:   eyebrow + page name (7 columns) | standfirst (5 columns), sharing the bottom line
+   the living gold line, edge to edge, with the photograph hanging straight from it and filling the first screen */
+.sp .mh-top{ padding-top:clamp(8px,1vw,16px) }
+.mh-meta{
+  display:flex; align-items:baseline; justify-content:space-between; gap:var(--s-lg);
+  padding-bottom:clamp(10px,.9vw,14px); border-bottom:1px solid var(--line);
+}
+.mh-meta .crumbs{ margin:0; min-width:0 }
+.mh .mh-twin{
+  flex:none; margin:0; padding:0; font-weight:400; font-size:clamp(1.05rem,.92rem + .45vw,1.35rem); line-height:1.2;
+  color:var(--gold-deep); white-space:nowrap;
+}
+.mh .mh-twin:lang(en){ font-family:var(--text); font-weight:500; font-variant-caps:all-small-caps; letter-spacing:.06em; font-size:1.0625rem }
+.mh .mh-row{
+  display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--s-lg); align-items:end;
+  margin:0; padding-block:clamp(22px,2.4vw,38px) clamp(20px,2vw,30px);
+}
+.mh-name{ grid-column:1 / span 7; min-width:0 }
+.mh .mh-label{ display:flex; margin:0 0 clamp(10px,1vw,16px) }
+.mh .mh-title{
+  font-size:clamp(2.75rem,1.55rem + 3.7vw,5.25rem); line-height:.94; letter-spacing:-.045em; max-width:none;
+  text-wrap:balance;
+}
+.mh .mh-sub{ grid-column:8 / -1; display:block; padding:0; margin:0; min-width:0; padding-bottom:.35em }
+.mh .mh-stand{
+  font-size:clamp(1.15rem,.98rem + .5vw,1.5rem); line-height:1.38; max-width:32ch; margin:0; color:var(--ink);
+  text-wrap:pretty;
+}
+.mh .mh-lede{ grid-column:auto; margin-top:var(--s-md); padding:0; max-width:46ch; color:var(--ink-soft) }
+.mh:not(.has-sub) .mh-name{ grid-column:1 / -1 }
+
+/* the hero's own gesture, on every page: the name stands ON the gold line, the way DUKAAT stands on the bar in the
+   hero — the baseline sits on the line and descenders (j, g, p) cross in front of it. The standfirst shares that line. */
+.mh .mh-top{ position:relative; z-index:2 }
+.mh .mh-row{ padding-bottom:0 }
+.mh .mh-title{ margin-bottom:-.121em; padding-bottom:0 } /* measured: the baseline lands on the top of the line */
+.mh .mh-sub{ padding-bottom:clamp(14px,1.3vw,20px) }
+[dir="rtl"] .mh .mh-title{ margin-bottom:-.303em }
+
+/* the line: full width, edge to edge, under the name */
+.mh .mh-bar{ height:3px; position:relative; z-index:1 }
+/* the photograph hangs from the line and takes the rest of the first screen (1442×796: ≈ 380px; full HD: 600px) */
+.mh .ph.mh-band{
+  margin-top:0; aspect-ratio:auto; height:clamp(280px, calc(100svh - 420px), 640px); max-height:none;
+}
+.mh .ph.mh-band img{ object-position:var(--fx, 50% 62%) }
+
+/* a modern touch, only with the extra motion and only where the browser can tie it to the scroll: as the page
+   leaves the first screen the photograph drifts and settles a little deeper (parallax), like looking past the line */
+@supports (animation-timeline: scroll()){
+  @media (prefers-reduced-motion:no-preference){
+    html[data-beweging="extra"] .mh .ph.mh-band img{
+      animation:mh-settle var(--d-draw) var(--mh-out) .45s both, mh-drift linear both;
+      animation-timeline:auto, scroll(root);
+      animation-range:normal, 0 80svh;
+    }
+    html[data-beweging="extra"][data-mh="seen"] .mh .ph.mh-band img{
+      animation:mh-settle var(--d-draw) var(--mh-out) .1s both, mh-drift linear both;
+      animation-timeline:auto, scroll(root);
+      animation-range:normal, 0 80svh;
+    }
+  }
+}
+@keyframes mh-drift{ from{ translate:0 0; scale:1 } to{ translate:0 9%; scale:1.1 } }
+
+[dir="rtl"] .mh .mh-title{ line-height:1.25; letter-spacing:0 }
+[dir="rtl"] .mh .mh-stand{ line-height:1.75 }
+
+@media (max-width:1100px){
+  .mh-name{ grid-column:1 / span 6 }
+  .mh .mh-sub{ grid-column:7 / -1 }
+}
+@media (max-width:900px){
+  .mh .mh-row{ grid-template-columns:minmax(0,1fr); row-gap:var(--s-md) }
+  .mh-name,.mh .mh-sub{ grid-column:1 / -1 }
+  .mh .mh-title{ font-size:clamp(2.5rem,1.6rem + 4.4vw,3.4rem) }
+  .mh .ph.mh-band{ height:auto; aspect-ratio:3/2 }
+  .mh .mh-twin{ font-size:1rem }
+}
+@media (max-width:600px){
+  .mh-meta{ flex-wrap:wrap; row-gap:6px }
+}
+
+/* === 3. The opening paragraph owns its width ===
+   No longer 46 characters in the left half with an empty right half: set larger, across ten columns, with the gold
+   bar hanging in the margin at the first line instead of sitting above it. */
+.b-lead .b-lead-t{
+  grid-column:1 / span 11; max-width:none; position:relative;
+  font-size:clamp(1.3rem,1.02rem + .78vw,1.7rem); line-height:1.36; letter-spacing:-.012em; color:var(--ink);
+  text-wrap:pretty;
+}
+.b-lead .b-lead-t::before{ position:absolute; inset-inline-start:0; top:-.9em; margin:0; width:56px }
+.b-lead.has-photo .b-lead-t{ grid-column:1 / span 8; font-size:clamp(1.25rem,.98rem + .7vw,1.6rem) }
+.b-lead-ph{ margin-top:0 }
+[dir="rtl"] .b-lead .b-lead-t{ line-height:1.7; letter-spacing:0 }
+@media (max-width:900px){
+  .b-lead .b-lead-t,.b-lead.has-photo .b-lead-t{ grid-column:1 / -1; font-size:clamp(1.2rem,1rem + 1vw,1.4rem) }
+}
+
+/* === 5. Text and photograph as one composition (prose with a tall or plate photo) ===
+   Before: a 4:5 photo in four columns, the text far away in the other half, paper all around. Now the photograph is
+   large and runs to the screen's edge, and the text sits on a sheet of paper that slides one column over it — the
+   page reads as composed, not placed. Same text, same photo. */
+@media (min-width:901px){
+  .b-prose:is(.ph-tall,.ph-plate) .b-grid{ align-items:center; row-gap:0 }
+  .b.b-prose:is(.ph-tall,.ph-plate) .b-grid > .b-prose-ph{ grid-row:1 / span 2; margin-top:0; aspect-ratio:4/5; max-height:min(86svh,760px); width:100% }
+  .b.b-prose:is(.ph-tall,.ph-plate).side-start .b-grid > .b-prose-ph{
+    grid-column:1 / span 6; margin-inline-start:calc(-1 * max(var(--gutter), (100vw - var(--max)) / 2));
+    width:calc(100% + max(var(--gutter), (100vw - var(--max)) / 2));
+  }
+  .b.b-prose:is(.ph-tall,.ph-plate).side-end .b-grid > .b-prose-ph{
+    grid-column:7 / -1; margin-inline-end:calc(-1 * max(var(--gutter), (100vw - var(--max)) / 2));
+    width:calc(100% + max(var(--gutter), (100vw - var(--max)) / 2));
+  }
+  .b-prose:is(.ph-tall,.ph-plate) :is(.b-prose-head,.b-prose-body){ position:relative; z-index:1; background:var(--paper); max-width:none }
+  .b.b-prose:is(.ph-tall,.ph-plate).side-start .b-grid > :is(.b-prose-head,.b-prose-body){ grid-column:6 / span 6; padding-inline:clamp(32px,3.4vw,64px) 0 }
+  .b.b-prose:is(.ph-tall,.ph-plate).side-end .b-grid > :is(.b-prose-head,.b-prose-body){ grid-column:2 / span 6; padding-inline:0 clamp(32px,3.4vw,64px) }
+  .b.b-prose:is(.ph-tall,.ph-plate) .b-grid > .b-prose-head{ grid-row:1; align-self:end; padding-top:clamp(28px,3vw,52px) }
+  .b.b-prose:is(.ph-tall,.ph-plate) .b-grid > .b-prose-body{ grid-row:2; align-self:start; padding-top:clamp(18px,1.8vw,28px); padding-bottom:clamp(28px,3vw,52px) }
+  .b-prose:is(.ph-tall,.ph-plate) .b-prose-head h2{ font-size:clamp(1.85rem,1.2rem + 1.6vw,2.75rem); max-width:16ch }
+  .b-prose:is(.ph-tall,.ph-plate) .b-prose-body p{ font-size:var(--read, 1.125rem); max-width:52ch; color:var(--ink) }
+}
+
+/* === 6. Twin labels: the hairline and the space sit between the two languages, whatever the twin's own direction
+   (the Arabic twin is rtl inside an ltr label, so its "start" was on the far side: "EXECUTIVEExecutive مستوى |") === */
+:root:not([dir="rtl"]) .label-twin{ margin:0 0 0 14px; padding:0 0 0 14px; border:0; border-left:1px solid var(--line-strong) }
+[dir="rtl"] .label-twin{ margin:0 14px 0 0; padding:0 14px 0 0; border:0; border-right:1px solid var(--line-strong) }
+:is(.b-dark,.pe) .label-twin{ border-color:rgba(237,234,225,.25) }
+
+/* === 7. Long chapters become a catalogue ===
+   Academy tracks, event formats, missions: before, a sticky heading in four columns and a long single list beside it
+   (half the screen empty for the whole length). Now the heading spans the top and the items sit in three columns,
+   each opened by a struck serif numeral like the admission steps — denser, and one family with the rest. */
+@media (min-width:1101px){
+  .b.b-chapter .b-grid{ row-gap:clamp(28px,2.8vw,44px) }
+  .b.b-chapter .b-grid > .ch-head{ grid-column:1 / -1; position:static }
+  .b.b-chapter .ch-head .b-head{ display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--s-lg); align-items:end }
+  .b.b-chapter .ch-head .b-head > .label{ grid-column:1 / -1; grid-row:1 }
+  .b.b-chapter .ch-head .b-head > h2{ grid-column:1 / span 6; grid-row:2; max-width:20ch }
+  .b.b-chapter .ch-head .b-head > .lede{ grid-column:8 / -1; grid-row:2; margin:0; max-width:46ch }
+  .b.b-chapter .b-grid > .ch-items{
+    grid-column:1 / -1; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:clamp(28px,3vw,56px);
+    border-top:1px solid var(--line-strong);
+  }
+  .b.b-chapter .ch-items:has(> :nth-child(5)){ grid-template-columns:repeat(3,minmax(0,1fr)) }
+  .b.b-chapter .ch-items:has(> :nth-child(5)):not(:has(> :nth-child(7))):has(> :nth-child(4):last-child){ grid-template-columns:repeat(2,minmax(0,1fr)) }
+  .b.b-chapter .ch-i{ grid-template-columns:minmax(0,1fr); align-content:start; border-top:0; border-bottom:1px solid var(--line); padding:clamp(22px,2.2vw,32px) 0 clamp(26px,2.6vw,38px) }
+  .b.b-chapter .ch-i:last-child{ border-bottom:1px solid var(--line) }
+  :root:not([dir="rtl"]) .b.b-chapter .ch-i > .ch-n{
+    font-family:var(--text); font-style:italic; font-weight:400; font-size:clamp(2.1rem,1.5rem + 1.5vw,3rem); line-height:.9;
+    letter-spacing:0; color:var(--wine); padding:0; margin-bottom:clamp(12px,1.2vw,18px);
+  }
+  [dir="rtl"] .b.b-chapter .ch-i > .ch-n{ font-size:2.4rem; line-height:1; color:var(--wine); padding:0; margin-bottom:12px }
+  .b.b-chapter .ch-i :is(h2,h3){ font-size:clamp(1.2rem,1.05rem + .45vw,1.45rem); line-height:1.2 }
+  .b.b-chapter .ch-i p{ max-width:none }
+}
+
+/* === 8. Short text beside a large photograph sits in its middle, at reading size, in ink === */
+@media (min-width:901px){
+  .b.b-prose.ph-half:not(:has(.b-prose-head)) .b-grid > .b-prose-body{ align-self:center }
+  .b.b-prose.ph-half .b-prose-body p,.b.b-prose.single .b-prose-body p{ font-size:var(--read, 1.125rem); color:var(--ink) }
+}
+
+/* === 9. Two photographs and a text: one composition, nothing beside empty paper ===
+   The large photograph holds the left seven columns at the full height of the block (to the screen's edge); the small
+   one and the text stack in the right four. */
+@media (min-width:901px){
+  .b.b-duo:has(.duo-t) .b-grid{ align-items:stretch; row-gap:clamp(24px,2.4vw,36px) }
+  .b.b-duo:has(.duo-t) .b-grid > .duo-a{
+    grid-column:1 / span 7; grid-row:1 / span 2; aspect-ratio:auto; height:auto; min-height:min(72svh,620px); margin-top:0;
+    margin-inline-start:calc(-1 * max(var(--gutter), (100vw - var(--max)) / 2));
+  }
+  .b.b-duo:has(.duo-t) .b-grid > .duo-b{ grid-column:9 / -1; grid-row:1; aspect-ratio:3/2; height:auto; margin-top:0; align-self:start }
+  .b.b-duo:has(.duo-t) .b-grid > .duo-t{ grid-column:9 / -1; grid-row:2; padding:0; margin:0; align-self:start }
+  .b.b-duo:has(.duo-t) .duo-t .b-head h2{ font-size:clamp(1.7rem,1.2rem + 1.4vw,2.4rem) }
+}
+
+/* === 10. Homepage below the hero: denser, same order and text === */
+/* the three claims: their bodies at reading size, in ink */
+#why .claim p{ font-size:var(--read, 1.125rem); line-height:1.6; color:var(--ink-soft) }
+/* the founders: the picture and who they are side by side, both founders on one line, the voice underneath */
+@media (min-width:901px){
+  #behind .founders{ align-items:start }
+  #behind .founder{
+    grid-template-columns:clamp(140px,12.5vw,190px) minmax(0,1fr); column-gap:clamp(20px,2vw,30px); row-gap:0; align-items:end;
+    margin-top:0;
+  }
+  #behind .founder > .portrait{ grid-column:1; grid-row:1; max-width:none; width:100% }
+  #behind .founder > .founder-id{ grid-column:2; grid-row:1; align-self:end; padding-bottom:2px }
+  #behind .founder > blockquote{ grid-column:1 / -1; grid-row:2; margin-top:clamp(20px,2vw,30px) }
+}
+@media (max-width:900px){
+  #behind .founder > .founder-id{ margin-top:var(--s-md) }
+}
+/* the closing slogan: the space sits between Dutch and Arabic (the Arabic echo is rtl, so its own "start" was on the
+   far side and the two languages touched: "oversteektحيث") */
+:root:not([dir="rtl"]) #correspondence .signoff .tag .echo{ margin:0 0 0 .9em }
+[dir="rtl"] #correspondence .signoff .tag .echo{ margin:0 .9em 0 0 }
+
+/* === 4. A statement is a moment, not a screen === */
+.b-statement{ min-height:0 }
+
+/* === owner, 4 Oct 2026: the text a step smaller ===
+   Running text is 17px on his screen (--read in globals.css); the long founders' quotes and the Name story follow it
+   (they were 23px), the story's first paragraph stays a step larger as the opening. */
+#behind .founder blockquote{ font-size:calc(var(--read) * 1.06); line-height:1.6; max-width:58ch }
+#name .story p.big{ font-size:clamp(1.12rem,1rem + .35vw,1.3rem); line-height:1.55 }

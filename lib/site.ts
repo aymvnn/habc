@@ -10,8 +10,13 @@ import type { Dict, GroupKey, Locale } from "@/content/types";
  * contact = 19); "services" is an overview of its sections. After the source's sections each group lists the extras
  * the owner kept on 30 Sep 2026 (report 9pZxu4Jeprq9yqE3KkNu5V): pages that are not in the source.
  */
-/** href: a menu line that leads somewhere else than its own page (the nomination line goes to the contact form) */
-export type SiteNode = { path: string; href?: string };
+/**
+ * href: a menu line that leads somewhere else than its own page (the nomination line goes to the contact form).
+ * part (UX-14, owner 4 Oct 2026): the services menu in three parts — 0 guidance, 1 market and network, 2 good to know
+ * (the parts' names: content "ux.serviceGroups"). menu: false — the page stays on the site and in its group's overview,
+ * but not in the menu ("What we do not do": the questions and the services overview link to it).
+ */
+export type SiteNode = { path: string; href?: string; part?: 0 | 1 | 2; menu?: false };
 export type SiteGroup = { key: GroupKey; path: string; children: SiteNode[] };
 
 export const groups: SiteGroup[] = [
@@ -32,18 +37,18 @@ export const groups: SiteGroup[] = [
     key: "services",
     path: "services",
     children: [
-      { path: "services/connect" }, // 3
-      { path: "services/matchmaking" }, // 12
-      { path: "services/advisory" }, // 6
-      { path: "services/market" }, // 7
-      { path: "services/purchase-requests" }, // 13
-      { path: "services/stocklots-machinery" }, // 14
-      { path: "services/invest" }, // 8.1
-      { path: "services/directory" }, // 11
-      { path: "services/intelligence" }, // 15
-      { path: "services/representation" }, // extra
-      { path: "services/documents" }, // extra
-      { path: "services/boundaries" }, // extra
+      { path: "services/connect", part: 0 }, // 3
+      { path: "services/matchmaking", part: 0 }, // 12
+      { path: "services/advisory", part: 0 }, // 6
+      { path: "services/market", part: 1 }, // 7
+      { path: "services/purchase-requests", part: 1 }, // 13
+      { path: "services/stocklots-machinery", part: 1 }, // 14
+      { path: "services/invest", part: 1 }, // 8.1
+      { path: "services/directory", part: 1 }, // 11
+      { path: "services/intelligence", part: 1 }, // 15
+      { path: "services/representation", part: 2 }, // extra
+      { path: "services/documents", part: 2 }, // extra
+      { path: "services/boundaries", part: 2, menu: false }, // extra — UX-14: not in the menu
     ],
   },
   {
