@@ -16,7 +16,13 @@ import { usePathname } from "next/navigation";
      in full and still. Hidden on narrow screens (≤900px), where the margin is too small for it. RTL: mirrored.
    - One SVG behind the content of <main> (z-index:-1 inside main's stacking context): paper shows it, every
      photograph, band and dark surface covers it. Recomputed when the page's height or the window changes.
-   Styles: app/signaturen.css ("Signature 1"). */
+   Styles: app/signaturen.css ("Signature 1").
+
+   === Werkplaatsen w7 (owner approved 8 Oct 2026): the thread feels your pace ===
+   The thread has a head where it is being drawn: a small point of light, barely there while you read calmly. Rush
+   down the page and it flares and the last stretch behind it runs fuller, as a pen pressed harder; stop, and it
+   springs back and fades. The pace is the scroll's own (Lenis already smooths it); the loop sleeps when it is still.
+   Same conditions as the drawing (live()). Styles: app/werkplaatsen.css. */
 
 type Piece = { len: number; y0: number; y1: number; at: number };
 type Coin = { x: number; y: number; at: number };
@@ -35,6 +41,10 @@ export function GoldThread() {
     const path = svg.querySelector<SVGPathElement>(".dr-line")!;
     const glint = svg.querySelector<SVGPathElement>(".dr-glint")!;
     const coinsG = svg.querySelector<SVGGElement>(".dr-coins")!;
+    const press = svg.querySelector<SVGPathElement>(".dr-press")!;
+    const head = svg.querySelector<SVGGElement>(".dr-head")!;
+    const halo = head.querySelector<SVGCircleElement>(".dr-halo")!;
+    const core = head.querySelector<SVGCircleElement>(".dr-core")!;
     const html = document.documentElement;
     const wide = window.matchMedia("(min-width: 901px)");
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -45,6 +55,10 @@ export function GoldThread() {
     let layoutRaf = 0;
     let idleTimer = 0;
     let glintAnim: Animation | null = null;
+    // w7: the head — the polyline's corners with their distance along the thread, where it is, how fast you go
+    let verts: { x: number; y: number; at: number }[] = [];
+    let sNow = 0, lastY = scrollY, vel = 0, tempoRaf = 0;
+    const PRESS = 46; // the stretch behind the head that runs fuller
     const home = HOME.test(pathname);
     const live = () => html.dataset.beweging === "extra" && !reduce.matches && wide.matches;
 
@@ -106,6 +120,12 @@ export function GoldThread() {
       const d = pts.map(([px, py], i) => `${i ? "L" : "M"}${px.toFixed(1)} ${py.toFixed(1)}`).join(" ");
       path.setAttribute("d", d);
       glint.setAttribute("d", d);
+      press.setAttribute("d", d);
+      let run = 0;
+      verts = pts.map(([px, py], i) => {
+        if (i) run += Math.hypot(px - pts[i - 1][0], py - pts[i - 1][1]);
+        return { x: px, y: py, at: run };
+      });
       svg.setAttribute("viewBox", `0 0 ${W} ${main.offsetHeight}`);
       svg.setAttribute("width", String(W));
       svg.setAttribute("height", String(main.offsetHeight));
@@ -153,18 +173,58 @@ export function GoldThread() {
       return s;
     };
 
+    // w7: where along the polyline a distance falls
+    const pointAt = (s: number): [number, number] => {
+      for (let i = 1; i < verts.length; i++) {
+        const a = verts[i - 1], b = verts[i];
+        if (s <= b.at) { const f = (s - a.at) / Math.max(0.001, b.at - a.at); return [a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f]; }
+      }
+      const l = verts[verts.length - 1];
+      return l ? [l.x, l.y] : [0, 0];
+    };
+    // w7: the head and the fuller stretch behind it, from the drawn length and the pace (0 calm … 1 rushing)
+    const paintHead = () => {
+      if (!live() || sNow <= 1 || sNow >= total - 1) { head.style.opacity = "0"; press.style.opacity = "0"; return; }
+      const [hx, hy] = pointAt(sNow);
+      const g = Math.min(1, vel / 22);
+      head.setAttribute("transform", `translate(${hx.toFixed(1)} ${hy.toFixed(1)})`);
+      halo.setAttribute("r", (8 + 12 * g).toFixed(2));
+      halo.style.opacity = (0.18 + 0.8 * g).toFixed(3);
+      core.setAttribute("r", (1.8 + 1.6 * g).toFixed(2));
+      core.style.opacity = (0.45 + 0.55 * g).toFixed(3);
+      head.style.opacity = "1";
+      const L = Math.min(PRESS, sNow);
+      press.style.strokeDasharray = `${L} ${total + L}`;
+      press.style.strokeDashoffset = String(L - sNow);
+      press.style.strokeWidth = (2 + 1.2 * g).toFixed(2);
+      press.style.opacity = (0.9 * g).toFixed(3);
+    };
+    const tempo = () => {
+      tempoRaf = 0;
+      const y = scrollY, raw = Math.abs(y - lastY);
+      lastY = y;
+      vel += (raw - vel) * (raw > vel ? 0.35 : 0.08);
+      if (vel < 0.05) vel = 0;
+      paintHead();
+      if (vel > 0) tempoRaf = requestAnimationFrame(tempo);
+    };
+
     function draw() {
       raf = 0;
       if (!pieces.length) return;
       if (!live()) {
         path.style.strokeDashoffset = "0";
         coins.forEach((c) => { if (!c.on) { c.on = true; c.el.classList.add("on"); } });
+        sNow = 0;
+        paintHead();
         return;
       }
       const mainTop = main!.getBoundingClientRect().top + scrollY;
       const yHead = scrollY + innerHeight * 0.75 - mainTop;
       const s = drawnAt(yHead);
       path.style.strokeDashoffset = String(Math.max(0, total - s));
+      sNow = s;
+      paintHead();
       for (const c of coins) {
         const on = s >= c.at - 0.5;
         if (on !== c.on) { c.on = on; c.el.classList.toggle("on", on); }
@@ -196,6 +256,7 @@ export function GoldThread() {
 
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(draw);
+      if (!tempoRaf && live()) tempoRaf = requestAnimationFrame(tempo);
       restartIdle();
     };
     const relayout = () => { if (!layoutRaf) layoutRaf = requestAnimationFrame(layout); };
@@ -220,6 +281,7 @@ export function GoldThread() {
       wide.removeEventListener("change", relayout);
       reduce.removeEventListener("change", relayout);
       if (raf) cancelAnimationFrame(raf);
+      if (tempoRaf) cancelAnimationFrame(tempoRaf);
       if (layoutRaf) cancelAnimationFrame(layoutRaf);
       if (idleTimer) clearTimeout(idleTimer);
       clearTimeout(late);
@@ -236,10 +298,20 @@ export function GoldThread() {
           <stop offset=".7" stopColor="#B08850" />
           <stop offset="1" stopColor="#8A6634" />
         </radialGradient>
+        <radialGradient id="dr-head-g">
+          <stop offset="0" stopColor="#FFF7E4" />
+          <stop offset=".35" stopColor="#F2DDB0" stopOpacity=".9" />
+          <stop offset="1" stopColor="#DCB17A" stopOpacity="0" />
+        </radialGradient>
       </defs>
       <path className="dr-line" d="" />
+      <path className="dr-press" d="" />
       <path className="dr-glint" d="" />
       <g className="dr-coins" />
+      <g className="dr-head">
+        <circle className="dr-halo" r="8" />
+        <circle className="dr-core" r="1.8" />
+      </g>
     </svg>
   );
 }

@@ -1,0 +1,128 @@
+/* === Werkplaatsen (owner approved 8 Oct 2026; report "DUKAAT Werkplaatsen", artifact Loa5mSA6TbkzZfWwj3xD64) ===
+   w1 the strike with weight, w2 the wax that becomes the seal (components/WaxSeal.tsx), w3 the rose engine
+   (components/RoseEngine.tsx), w4 the foil that catches the light per petal (components/FoilRose.tsx + TierLight.tsx),
+   w7 the thread that feels your pace (components/GoldThread.tsx). Loaded last (app/site-styles.ts).
+   Never touches the hero (.h3), the dock, Lenis or a word of the copy. */
+
+/* ---------- w1: the strike with weight ----------
+   One curve for everything on the site that is struck: the die goes a fraction too deep (to 104.5% of the way), springs
+   back and settles in three dying returns, with a tremor of at most 0.7px and 0.25deg from the moment of impact (22%).
+   Generated from s(t) = 1 + .045·e^(-9t)·cos(2π·5.5t) after a cubic arrival; the same curve as the report's demo.
+   Only where linear() exists: elsewhere the earlier curves stay (a var() with an unknown function would switch the
+   animation off). */
+:root{
+  --d-strike:780ms;
+  --ease-strike:linear(0, 0.2529, 0.4613, 0.6296, 0.7619, 0.8626, 0.9361, 0.9866, 1.0184, 1.0359, 1.0433, 1.045, 1.0387, 1.0233, 1.0059, 0.9911, 0.982, 0.9795, 0.9826, 0.9892, 0.997, 1.0036, 1.0078, 1.0091, 1.0078, 1.0049, 1.0015, 0.9986, 0.9966, 0.996, 0.9965, 0.9977, 0.9992, 1.0006, 1.0014, 1.0018, 1.0016, 1.001, 1.0004, 0.9998, 0.9994, 0.9992, 0.9993, 0.9995, 0.9998, 1.0001, 1.0003, 1.0003, 1.0003, 1.0002, 1.0001, 1, 1);
+}
+@keyframes strike-tremor{
+  0%,21.8%{ translate:0 0; rotate:0deg } 24.8%{ translate:.72px 0; rotate:.25deg } 27.8%{ translate:.29px 0; rotate:.21deg }
+  30.8%{ translate:-.38px 0; rotate:.01deg } 33.8%{ translate:-.35px 0; rotate:-.14deg } 36.8%{ translate:.12px 0; rotate:-.12deg }
+  39.8%{ translate:.29px 0; rotate:-.01deg } 42.9%{ translate:.03px 0; rotate:.08deg } 45.9%{ translate:-.19px 0; rotate:.07deg }
+  48.9%{ translate:-.1px 0; rotate:.01deg } 51.9%{ translate:.09px 0; rotate:-.04deg } 54.9%{ translate:.1px 0; rotate:-.04deg }
+  57.9%{ translate:-.02px 0; rotate:-.01deg } 60.9%{ translate:-.08px 0; rotate:.02deg } 63.9%{ translate:-.02px 0; rotate:.02deg }
+  66.9%{ translate:.05px 0; rotate:0deg } 69.9%{ translate:.03px 0; rotate:-.01deg } 72.9%{ translate:-.02px 0; rotate:-.01deg }
+  75.9%{ translate:-.03px 0; rotate:0deg } 100%{ translate:0 0; rotate:0deg }
+}
+/* the hairline that runs away from the impact (replaces the wide ring of the steps) */
+@keyframes strike-ring{ 0%{ opacity:.9; transform:scale(1) } 100%{ opacity:0; transform:scale(1.55) } }
+
+@supports (animation-timing-function:linear(0, 1)){
+  @media (scripting:enabled) and (prefers-reduced-motion:no-preference){
+    /* the admission steps: each coin struck with weight, the ring a hairline from the moment of impact */
+    @media (min-width:1101px){
+      html[data-beweging="extra"] .bsteps.is-struck .bstep::before{
+        animation:coin-strike var(--d-strike) var(--ease-strike) calc(var(--i) * var(--step) + 150ms) both,
+                  strike-tremor var(--d-strike) linear calc(var(--i) * var(--step) + 150ms) both;
+      }
+      html[data-beweging="extra"] .bsteps.is-struck .bstep::after{
+        box-shadow:0 0 0 .75px var(--bar);
+        animation:strike-ring 560ms var(--ease-arrive) calc(var(--i) * var(--step) + 320ms) both;
+      }
+      html[data-beweging="extra"] .bsteps.is-struck:not(.in) .bstep::before,
+      html[data-beweging="extra"] .bsteps.is-struck:not(.in) .bstep::after{ animation-play-state:paused }
+    }
+    /* the coins at the turns of the gold thread */
+    html[data-beweging="extra"] .draad .dr-coin{ transition:opacity var(--d-ui) var(--ease-arrive), scale var(--d-strike) var(--ease-strike) }
+    html[data-beweging="extra"] .draad .dr-coin.on{ animation:strike-tremor var(--d-strike) linear both }
+    /* the seal at the page's end: the tulip settles with the press, the seal trembles once */
+    html[data-beweging="extra"]:not([data-seal="seen"]) .pe-seal .tulip{ transition:scale var(--d-strike) var(--ease-strike), filter 450ms var(--ease-arrive) }
+    html[data-beweging="extra"]:not([data-seal="seen"]) .pe-seal .seal-wrap.in{ animation:strike-tremor var(--d-strike) linear 120ms both }
+    /* the mark beside an inline confirmation (the newsletter) */
+    html[data-beweging="extra"] .fm-mark{ transition:opacity var(--d-ui) var(--ease-arrive) 120ms, transform var(--d-strike) var(--ease-strike) 120ms }
+  }
+  /* the 404 coin lands after its turn with the same tremor (the turn itself is not gated by the extra motion) */
+  @media (prefers-reduced-motion:no-preference){
+    .nf-coin{ animation:strike-tremor var(--d-strike) linear calc(300ms + var(--d-draw) - 170ms) both }
+  }
+}
+
+/* ---------- w2: from a drop to the seal ----------
+   The wax on the sealed letter is no longer a ready-made disc: components/WaxSeal.tsx draws it as a shape (SVG) that
+   GSAP's MorphSVG pours, spreads and presses. The ring and the pressed tulip are real elements now (they were the
+   disc's ::before/::after), so the press can strike them. At rest (reduced motion, keyboard, the standard motion,
+   or before GSAP has arrived) the seal simply lies there, exactly as before. */
+.lt-wax{ background:none; border-radius:0; box-shadow:none }
+.lt-wax::before,.lt-wax::after{ content:none }
+.lt-wax-in{ position:absolute; inset:0 }
+.lt-wax-b{ position:absolute; inset:-11px; width:80px; height:80px; max-width:none; overflow:visible; filter:drop-shadow(0 2px 2px rgba(36,20,24,.35)) }
+.lt-wax-ring{ position:absolute; inset:7px; border-radius:50%; box-shadow:inset 0 0 0 1px rgba(255,205,210,.22), 0 0 0 1px rgba(40,0,10,.25) }
+.lt-wax-mk{
+  position:absolute; inset:13px 15px;
+  -webkit-mask:url("/logo/dukaat-beeldmerk.svg") center / contain no-repeat; mask:url("/logo/dukaat-beeldmerk.svg") center / contain no-repeat;
+  background:linear-gradient(150deg, rgba(255,214,190,.55) 0%, rgba(255,214,190,.12) 45%, rgba(30,0,8,.35) 100%);
+}
+/* GSAP plays it: the old press keyframe steps aside; until the timeline starts, nothing of the wax shows */
+html[data-beweging="extra"] .lt-wax[data-wax]{ animation:none }
+.lt-wax[data-wax="wait"] .lt-wax-in{ opacity:0 }
+@supports (animation-timing-function:linear(0, 1)){
+  .lt-wax-in.is-struck{ animation:wax-strike var(--d-strike) var(--ease-strike) both, strike-tremor var(--d-strike) linear both }
+}
+@keyframes wax-strike{ from{ scale:1.035 } to{ scale:1 } }
+
+/* ---------- w3: the rose engine ----------
+   The coin certificate (register variant "spec", About) gets its rosette under the heading: a guilloche of two
+   woven bands, cut loop by loop by a bright point that leaves the engraved line behind; when the inner band closes,
+   one light runs over it and the tulip is struck in the middle. Lines in the darker gold, hairline. */
+.rose{ position:relative; width:min(240px, 100%); aspect-ratio:1; margin-top:var(--s-xl) }
+.rose svg{ position:absolute; inset:0; width:100%; height:100%; overflow:visible }
+.rose .ro-rim{ fill:none; stroke:var(--line-strong); stroke-width:.8 }
+.rose .ro-rim2{ fill:none; stroke:var(--bar); stroke-width:.6 }
+.rose .ro-draw{ fill:none; stroke:#9E7946; stroke-width:.55 }
+.rose .ro-cut{ fill:none; stroke:#FFF6DC; stroke-width:1.7; stroke-linecap:round }
+.rose .ro-cut path{ opacity:0 }
+.rose .ro-gl{ fill:none; stroke-width:1 }
+.rose .ro-mark{
+  position:absolute; inset:0; margin:auto; width:17%; height:auto; aspect-ratio:859/998;
+  -webkit-mask:url("/logo/dukaat-beeldmerk.svg") center / contain no-repeat; mask:url("/logo/dukaat-beeldmerk.svg") center / contain no-repeat;
+  background:#9E7946;
+}
+@supports (animation-timing-function:linear(0, 1)){
+  .rose .ro-mark.is-struck{ animation:mark-strike var(--d-strike) var(--ease-strike) both, strike-tremor var(--d-strike) linear both }
+}
+@keyframes mark-strike{ from{ opacity:0; scale:1.4 } 18%{ opacity:1 } to{ opacity:1; scale:1 } }
+@media (max-width:1100px){ .rose{ width:min(200px, 60%); margin-top:var(--s-lg) } }
+
+/* ---------- w4: foil that catches the light per petal ----------
+   Only the third card (Executive): a rosette of 32 foil petals around its tulip. Every petal has its own angle, so
+   when the light moves, two opposite petals flare and the flare turns round the tulip, like the security foil on a
+   banknote or a passport. Gold only. The light: the pointer (TierLight), on touch the card's place on the screen;
+   at rest the window's light from the top left. The card becomes a size container so the rosette sits on the mark. */
+.tier-card[data-tier="3"]{ container-type:inline-size }
+.tc-rose{
+  position:absolute; z-index:1; pointer-events:none; width:64cqw; height:64cqw;
+  top:calc(clamp(14px,1.4vw,20px) + 13.94cqw - 32cqw);
+  inset-inline-end:calc(clamp(16px,1.6vw,22px) + 12cqw - 32cqw);
+}
+.tc-rose .fr-b path{ fill:#7A5A2A; opacity:.42 }
+.tc-rose .fr-h path{ transition:none }
+
+/* ---------- w7: the thread feels your pace ----------
+   The gold thread gets a head where it is being drawn: barely there when you read calmly; when you rush down the
+   page it flares and the last stretch of line behind it runs fuller, as a pen pressed harder; when you stop it
+   springs back and fades. Only with the extra motion, a fine screen width and no reduced motion (GoldThread). */
+.draad .dr-press{ fill:none; stroke:var(--bar); stroke-linecap:round; opacity:0 }
+.draad .dr-head{ opacity:0 }
+.draad .dr-halo{ fill:url(#dr-head-g) }
+.draad .dr-core{ fill:#FFF7E4 }
+@media (prefers-reduced-motion:reduce){ .draad .dr-head,.draad .dr-press{ display:none } }
+@media print{ .rose .ro-cut,.rose .ro-gl,.draad .dr-head{ display:none } }

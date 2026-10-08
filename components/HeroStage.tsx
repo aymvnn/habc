@@ -579,7 +579,9 @@ export function HeroStage({ locale, title, descriptor, hero, extra, contact }: P
 
         <nav className="wing wing-b" aria-label={hero.networkHeading}>
           <span className="wing-h">{hero.networkHeading}</span>
-          {homeNetwork.map((path, n) => row(n + homeKnow.length, path, hero.network[n].title, hero.network[n].text, n + 1))}
+          {/* owner, 9 Oct 2026: no line under the first route either — every route of this side is its title alone
+              (the source's line for route 1 stays in content/*.ts, it is only not shown here) */}
+          {homeNetwork.map((path, n) => row(n + homeKnow.length, path, hero.network[n].title, undefined, n + 1))}
         </nav>
       </div>
 

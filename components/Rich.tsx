@@ -5,8 +5,15 @@ import { Fragment, type CSSProperties, type ReactNode } from "react";
  * rises inside it (.wi) — numbered in reading order (--w), so a heading can come up from behind an edge line by line
  * (app/premium.css; components/Reveal.tsx numbers the lines). The words and the spaces between them are unchanged.
  */
+/* Waardepapier v7 (owner, 9 Oct 2026: "alleen het woordje dukaat"): the club's name in running text is set in its
+   own span so it can carry the red ink of a rubric (app/waardepapier.css). The whole word, never a letter of it, so
+   the Arabic stays joined; headings and dark surfaces keep it unstyled. */
+const NAME = /(DUKAAT|دوكات)/;
 function plain(text: string, words: boolean, next: () => number): ReactNode {
-  if (!words) return text;
+  if (!words) {
+    if (!NAME.test(text)) return text;
+    return text.split(NAME).map((part, i) => (i % 2 ? <span className="rub" key={i}>{part}</span> : part));
+  }
   return text.split(/(\s+)/).map((part, i) => {
     if (!part || /^\s+$/.test(part)) return part;
     const n = next();

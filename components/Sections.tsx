@@ -10,6 +10,7 @@ import { TwinLine } from "./Twin";
 import { NameFilm } from "./NameFilm";
 import { Mash } from "./Licht";
 import { FooterTulip } from "./FooterTulip";
+import { SealFoil } from "./SealFoil";
 
 /* eslint-disable @next/next/no-img-element -- the brand SVGs are served as-is; next/image adds nothing to vector art */
 
@@ -76,9 +77,10 @@ export function Why({ why, more, twin, twinLang }: { why: Dict["extra"]["why"]; 
           <MoreLink more={more} />
         </div>
         <div className="claims">
-          {why.claims.map((c) => (
+          {why.claims.map((c, i) => (
             <article className="claim" key={c.roman}>
-              <span className="roman">{c.roman}</span>
+              {/* Waardepapier v9: the Arabic-Indic numeral follows the roman one, small in gold */}
+              <span className="roman">{c.roman}<span className="n2" aria-hidden="true">{"١٢٣٤٥٦٧٨٩"[i]}</span></span>
               <div>
                 <h3><Rich text={c.title} /></h3>
                 <ClaimBody text={c.body} />
@@ -169,6 +171,8 @@ export function Seal({ text }: { text: string }) {
         </defs>
         <text><textPath href="#ringPath">{text}</textPath></text>
       </svg>
+      {/* Waardepapier v6: the foil of the Executive card, in every seal */}
+      <SealFoil />
       <img className="tulip" src="/logo/dukaat-beeldmerk.svg" alt="" width={859} height={998} />
     </div>
   );

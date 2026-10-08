@@ -6,6 +6,7 @@ import { LANGUAGE_OF, MAX_ATTACHMENT, type LocalField } from "@/lib/forms";
 import type { Locale } from "@/content/types";
 import { Arrow } from "./Arrow";
 import { takeArrival } from "./Arrival";
+import { WaxSeal, warmWax } from "./WaxSeal";
 
 /* eslint-disable @next/next/no-img-element -- the brand mark is served as-is */
 
@@ -218,7 +219,8 @@ export function Form({ id, locale, fields, submit, success, successNote, option,
               <i className="lt-p lt-p2" />
               <i className="lt-p lt-p3" />
             </div>
-            <span className="lt-wax" />
+            {/* Werkplaatsen w2: the wax is poured and pressed (GSAP MorphSVG), or simply lies there */}
+            <WaxSeal />
           </div>
           {confirmation}
         </div>
@@ -369,11 +371,21 @@ export function Form({ id, locale, fields, submit, success, successNote, option,
     }
   };
 
+  /* Waardepapier v16 (owner approved 9 Oct 2026): a field to correct is marked as an editor marks a proof — a ring drawn
+     round its label in one stroke, and a caret in the margin (.field.is-wrong .ctl::before, app/waardepapier.css). The
+     message under the field, its focus and the list above the form stay as they are; the marks are decorative. */
   const fieldEl = (f: LocalField) => (
-    <div className={`field${f.wide || f.type === "textarea" ? " wide" : ""}${f.type === "file" ? " is-file" : ""}`} key={f.name}>
+    <div className={`field${f.wide || f.type === "textarea" ? " wide" : ""}${f.type === "file" ? " is-file" : ""}${errs[f.name] && f.type !== "file" ? " is-wrong" : ""}`} key={f.name}>
       <label htmlFor={fid(f.name)}>
-        {f.label}
-        {f.required && <span className="req" aria-hidden="true">*</span>}
+        <span className="lbl">
+          {f.label}
+          {f.required && <span className="req" aria-hidden="true">*</span>}
+          {errs[f.name] && f.type !== "file" && (
+            <svg className="pm-ring" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path pathLength={1} d="M92.8 8.7L95.4 10.4L97.1 12.2L97.8 14.0L97.5 15.9L96.3 17.7L94.1 19.4L90.9 21.1L87.0 22.6L82.2 24.0L76.8 25.2L70.8 26.1L64.4 26.9L57.7 27.3L50.9 27.6L44.1 27.5L37.4 27.2L31.1 26.7L25.1 25.8L19.7 24.8L14.9 23.6L10.8 22.1L7.6 20.6L5.2 18.9L3.7 17.1L3.1 15.3L3.4 13.4L4.7 11.6L6.9 9.9L10.0 8.2L13.9 6.7L18.5 5.4L23.8 4.2L29.6 3.3L35.9 2.6L42.5 2.2L49.3 2.0L56.1 2.2L62.8 2.6L69.3 3.2L75.4 4.1L81.0 5.3L85.9 6.6L90.1 8.2L93.4 9.9L95.8 11.7L97.3 13.6L97.8 15.6L97.3 17.6" />
+            </svg>
+          )}
+        </span>
       </label>
       {input(f)}
       {errs[f.name] && <span className="err" id={eid(f.name)}>{errs[f.name]}</span>}
@@ -386,7 +398,7 @@ export function Form({ id, locale, fields, submit, success, successNote, option,
   const real = (channels ?? []).filter((c) => c.value.trim());
 
   return (
-    <form ref={ref} onSubmit={onSubmit} onInput={keepDraft} onChange={keepDraft} className={`fm${inline ? " is-inline" : " is-letter"}`} id={`${id}-form`}>
+    <form ref={ref} onSubmit={onSubmit} onInput={keepDraft} onChange={keepDraft} onFocus={inline ? undefined : warmWax} className={`fm${inline ? " is-inline" : " is-letter"}`} id={`${id}-form`}>
       {/* Signature 6: the letterhead of the club's paper (the mark only, decorative) */}
       {!inline && (
         <div className="lt-head" aria-hidden="true">

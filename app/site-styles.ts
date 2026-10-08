@@ -14,4 +14,6 @@ import "./signaturen.css"; // round 3: the signatures the owner approved on 4 Oc
 import "./kaarten.css"; // round 3, signature 9: the three membership cards
 import "./footers.css"; // 4 Oct: short endings — the page end and the footer compact
 import "./ux.css"; // 4 Oct: the UX assessment, the owner's choices (report 2yXZnyx32TzQFtL3NbA7qe)
-import "./premium.css"; // 4 Oct: the UI assessment, the owner's choices (report WZkgDuxzHx5fska3qjnKmy) — loaded last
+import "./premium.css"; // 4 Oct: the UI assessment, the owner's choices (report WZkgDuxzHx5fska3qjnKmy)
+import "./werkplaatsen.css"; // 8 Oct: GSAP / Motion / React Bits ideas the owner approved (report Loa5mSA6TbkzZfWwj3xD64)
+import "./waardepapier.css"; // 9 Oct: round 2, the security-paper ideas the owner approved (report TBSdY2Y854BfBFWENf8UnA) — loaded last

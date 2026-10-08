@@ -14,7 +14,9 @@ const LOCALES: { code: Locale; short: string; name: string }[] = [
   { code: "nl", short: "NL", name: "Nederlands" },
 ];
 
-type Props = { locale: Locale; nav: Dict["nav"]; site: Dict["site"]; extra: Dict["extra"]; ux: Dict["ux"] };
+/* Waardepapier v11 (owner approved 9 Oct 2026): twins = each group's name in the other script (the existing
+   translations; Arabic on /nl and /en, Dutch on /ar), shown under the gold line when a group is pointed at. */
+type Props = { locale: Locale; nav: Dict["nav"]; site: Dict["site"]; extra: Dict["extra"]; ux: Dict["ux"]; twins?: Record<GroupKey, string>; twinLang?: Locale };
 
 /**
  * The menu of the source (1.1): Home | Over ons | Academie | Zakelijke diensten | Lidmaatschap | Evenementen | Contact,
@@ -22,7 +24,9 @@ type Props = { locale: Locale; nav: Dict["nav"]; site: Dict["site"]; extra: Dict
  * title line of each; on phones the same buttons fold open inside the full-screen menu.
  * Above it a thin line with the club's descriptor and the language choice, which folds away once you scroll.
  */
-export function TopBar({ locale, nav, site, extra, ux }: Props) {
+export function TopBar({ locale, nav, site, extra, ux, twins, twinLang }: Props) {
+  const twin = (k: GroupKey, cls: string) =>
+    twins?.[k] ? <span className={cls} lang={twinLang} dir={twinLang === "ar" ? "rtl" : "ltr"} aria-hidden="true">{twins[k]}</span> : null;
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false); // phones: the full-screen menu
@@ -103,7 +107,7 @@ export function TopBar({ locale, nav, site, extra, ux }: Props) {
         className={`ni${panel === g.key ? " on" : ""}${g.key === "contact" ? " ni-contact" : ""}`}
         onMouseEnter={() => (has ? hoverOpen(g.key) : hoverClose())}
       >
-        <Link href={hrefOf(locale, g)} aria-current={current === g.key ? "true" : undefined}>{label}</Link>
+        <Link href={hrefOf(locale, g)} aria-current={current === g.key ? "true" : undefined}>{label}{twin(g.key, "ni-tw")}</Link>
         {has && (
           <button
             type="button"
@@ -258,11 +262,11 @@ export function TopBar({ locale, nav, site, extra, ux }: Props) {
           <Link className="vg-solo" href={home}>{nav.home}</Link>
           {groups.map((g) =>
             g.children.length === 0 ? (
-              <Link key={g.key} className="vg-solo" href={hrefOf(locale, g)}>{site.groups[g.key].label}</Link>
+              <Link key={g.key} className="vg-solo" href={hrefOf(locale, g)}>{site.groups[g.key].label}{twin(g.key, "vg-tw")}</Link>
             ) : (
               <details key={g.key} className="vg" open={current === g.key || undefined}>
                 <summary>
-                  <span>{site.groups[g.key].label}</span>
+                  <span>{site.groups[g.key].label}</span>{twin(g.key, "vg-tw")}
                   <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" /></svg>
                 </summary>
                 <div className="vg-list">

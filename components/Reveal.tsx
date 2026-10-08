@@ -13,7 +13,8 @@ import { usePathname } from "next/navigation";
    - Keyboard: while the visitor works with the keyboard, <html data-kbd> makes every transition outside the hero
      instant (app/muntregister.css); the first pointer move or press clears it. Typing in a field does not set it. */
 
-const REVEAL = ".rv:not(.in), .rv-ph:not(.in), .rv-rule:not(.in), .stmt-mark:not(.in), .bsteps:not(.in), .seal-wrap:not(.in)";
+// Waardepapier v7: the rubricated name (.rub) dries once, when its line first comes into view
+const REVEAL = ".rv:not(.in), .rv-ph:not(.in), .rv-rule:not(.in), .stmt-mark:not(.in), .bsteps:not(.in), .seal-wrap:not(.in), main .rub:not(.in)";
 const MH_KEY = "dukaat-mh";
 
 const mhSeen = () => {

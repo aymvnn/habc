@@ -3,6 +3,7 @@ import { Arrow } from "./Arrow";
 import { Rich } from "./Rich";
 import type { Dict, Locale } from "@/content/types";
 import { groups, hrefOf } from "@/lib/site";
+import { SealFoil } from "./SealFoil";
 
 /**
  * UI-03 (owner, 4 Oct 2026): the 404 as an ordinary page of the house, in the language of the address. The same
@@ -42,7 +43,7 @@ export function NotFoundPage({ locale, d }: { locale: Locale; d: Dict }) {
         <div className="nf-coin">
           <div className="nf-turn">
             <span className="nf-face nf-obv"><span className="nf-mark" /></span>
-            <p className="nf-code nf-face nf-rev">404</p>
+            <p className="nf-code nf-face nf-rev"><SealFoil />404</p>
           </div>
         </div>
       </div>

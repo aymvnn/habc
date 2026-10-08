@@ -8,6 +8,8 @@ import { groups, hrefOf, type SiteGroup } from "@/lib/site";
 import { Rich } from "./Rich";
 import { TwinLine, twinOf } from "./Twin";
 import { TierLight } from "./TierLight";
+import { FoilRose } from "./FoilRose";
+import { RoseEngine } from "./RoseEngine";
 import { Photo } from "./Photo";
 import { Form, FormSet, type Channel } from "./Form";
 import { ListingSearch } from "./Listing";
@@ -37,6 +39,13 @@ const UI = {
 } satisfies Record<string, T>;
 
 const pad = (i: number) => String(i + 1).padStart(2, "0");
+/* === Waardepapier v9 (owner approved 9 Oct 2026): two numerals ===
+   Where the site numbers, both numerals stand: the page's own leads, the other follows small in gold (.n2,
+   app/waardepapier.css). On /ar the Arabic-Indic numeral leads. Every numeral here is already aria-hidden. */
+const AR_DIGITS = "٠١٢٣٤٥٦٧٨٩";
+const arDigits = (s: string) => s.replace(/\d/g, (d) => AR_DIGITS[+d]);
+const twinNum = (s: string, l: Locale) =>
+  l === "ar" ? (<><span className="n1">{arDigits(s)}</span><span className="n2">{s}</span></>) : (<>{s}<span className="n2">{arDigits(s)}</span></>);
 /* Muntregister g4: a stagger of at most three steps (60 / 120 / 180 ms), only on photographs in a row */
 const lag = (i: number) => (i % 4 ? ` lag${Math.min(i % 4, 3)}` : "");
 
@@ -221,7 +230,7 @@ function Register({ b, c, closing }: { b: Extract<Block, { kind: "register" }>; 
       <ol className={`reg cols-${b.cols ?? 1}${b.numbered ? " numbered" : ""}`}>
         {b.items.map((it, i) => (
           <li className="reg-i" key={i}>
-            {b.numbered && <span className="reg-n" aria-hidden="true">{pad(i)}</span>}
+            {b.numbered && <span className="reg-n" aria-hidden="true">{twinNum(pad(i), c.l)}</span>}
             <div>
               <ItemH><Rich text={it.title[c.l]} /></ItemH>
               {it.body && (() => {
@@ -244,6 +253,8 @@ function Register({ b, c, closing }: { b: Extract<Block, { kind: "register" }>; 
         {head && (
           <div className="reg-head">
             <Head label={b.label} heading={b.heading} intro={b.intro} l={c.l} path={c.path} />
+            {/* Werkplaatsen w3: the coin certificate's rosette, engraved in front of you */}
+            {b.variant === "spec" && <RoseEngine />}
           </div>
         )}
         <div className="reg-body">{list}</div>
@@ -291,7 +302,7 @@ function Steps({ b, c }: { b: Extract<Block, { kind: "steps" }>; c: Ctx }) {
         <ol className={`bsteps${b.items.length <= 6 ? " is-struck" : ""}`} data-n={b.items.length} style={{ ["--n" as string]: b.items.length }}>
           {b.items.map((s, i) => (
             <li className="bstep" key={i} style={{ ["--i" as string]: i }}>
-              <span className="bstep-n" aria-hidden="true">{i + 1}</span>
+              <span className="bstep-n" aria-hidden="true">{twinNum(String(i + 1), c.l)}</span>
               <h3><Rich text={s.title[c.l]} /></h3>
               {s.body && <p><Rich text={s.body[c.l]} /></p>}
             </li>
@@ -328,7 +339,7 @@ function Chapter({ b, c }: { b: Extract<Block, { kind: "chapter" }>; c: Ctx }) {
           {b.items.map((it, i) => (
             /* Muntregister g1: no photographs in lists — the items' photos are no longer shown (content keeps them) */
             <article className="ch-i" key={i}>
-              <span className="ch-n" aria-hidden="true">{pad(i)}</span>
+              <span className="ch-n" aria-hidden="true">{twinNum(pad(i), c.l)}</span>
               <div>
                 <ItemH><Rich text={it.title[c.l]} /></ItemH>
                 <p><Rich text={it.body[c.l]} /></p>
@@ -462,7 +473,9 @@ function Tiers({ b, c }: { b: Extract<Block, { kind: "tiers" }>; c: Ctx }) {
               {/* Signature 9: the membership card itself — paper, Bordeaux leather, dark with gold foil — carrying only
                   what was already there: the roman numeral and the level's name (ID-1 card proportion, 1.586:1) */}
               <div className="tier-card" data-tier={i + 1}>
-                <span className="tier-n" aria-hidden="true">{["I", "II", "III", "IV"][i]}</span>
+                <span className="tier-n" aria-hidden="true">{["I", "II", "III", "IV"][i]}<span className="n2">{arDigits(String(i + 1))}</span></span>
+                {/* Werkplaatsen w4: the Executive card's security foil, a petal per angle round its tulip */}
+                {i === 2 && <FoilRose />}
                 <span className="tc-mark" aria-hidden="true" />
                 <NameH className="tier-name">{tr.name}</NameH>
               </div>
