@@ -42,7 +42,7 @@ export const market: PageSet = {
         kind: "register",
         heading: { en: "What will you find here?", nl: "Wat vindt u hier?", ar: "ماذا ستجد هنا؟" },
         cols: 2,
-        photo: "prod-showroom",
+        photo: "p-showroom",
         items: [
           {
             title: {
@@ -211,7 +211,7 @@ export const market: PageSet = {
   },
 
   "services/purchase-requests": {
-    masthead: { variant: "portrait", photo: "br-hero" },
+    masthead: { variant: "portrait", photo: "p-purchase-requests" },
     headline: {
       en: "Let the market know what you need",
       nl: "Laat de markt weten wat u nodig hebt",
@@ -299,7 +299,7 @@ export const market: PageSet = {
   },
 
   "services/stocklots-machinery": {
-    masthead: { variant: "band", photo: "stk-hero-band" },
+    masthead: { variant: "band", photo: "p-stocklots" },
     headline: {
       en: "Trade opportunities that call for clear information and considered speed",
       nl: "Commerciële kansen die om duidelijke informatie en weloverwogen snelheid vragen",
@@ -325,7 +325,7 @@ export const market: PageSet = {
             ar: "يمكن أن تشمل القطاعات الورق والطباعة والتغليف، والمواد الصناعية، والبناء، والأثاث، والمنسوجات وغيرها، بحسب العروض المتاحة.",
           },
         ],
-        photo: "stk-lots",
+        photo: "p-stk-lots",
         size: "half",
         side: "end",
       },
@@ -343,7 +343,7 @@ export const market: PageSet = {
             ar: "مساحة للتعرف إلى ماكينات الطباعة والتغليف وتصنيع الأغذية، ومعدات الإنتاج والمستودعات، والخطوط الكاملة، والمعدات المجددة أو المستخدمة للعرض، بحسب ما يقدمه العارضون.",
           },
         ],
-        photo: "mach-cnc",
+        photo: "p-mach",
         size: "tall",
         side: "start",
       },

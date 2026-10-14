@@ -41,8 +41,8 @@ TARGETS.update({
 # the inner pages: every entry of brand/fotostijl/paginas-fotos.md goes to public/photos/pages/<id>.jpg,
 # sized by its web format (the 21:9 bands are full-width, so they get the most pixels)
 PAGE_SIZES = {"21:9": (2560, 1097), "3:2": (1800, 1200), "4:5": (1200, 1500)}
-# paginas-fotos.md: the Known Weight still lifes (Sep 2026); mensen-fotos-definitief.md: the people photos in the DUKAAT house (Oct 2026)
-PAGE_SHEETS = [os.path.join(ROOT, "brand", "fotostijl", f) for f in ("paginas-fotos.md", "mensen-fotos-definitief.md")]
+# paginas-fotos.md: the Known Weight still lifes (Sep 2026); mensen-fotos-definitief.md and mensen-fotos-rest.md: the DUKAAT house (Oct 2026)
+PAGE_SHEETS = [os.path.join(ROOT, "brand", "fotostijl", f) for f in ("paginas-fotos.md", "mensen-fotos-definitief.md", "mensen-fotos-rest.md")]
 import re
 for PAGE_SHEET in [f for f in PAGE_SHEETS if os.path.exists(f)]:
     for block in re.split(r"^### ", open(PAGE_SHEET, encoding="utf8").read(), flags=re.M)[1:]:

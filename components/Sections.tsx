@@ -196,7 +196,7 @@ export function Correspondence({ c, tagline, locale, contact }: { c: Dict["extra
           <h2 id="corr-h" className="rv"><Rich text={c.heading} words /></h2>
           <div className="contact">
             <figure className="close-photo" aria-hidden="true">
-              <Image src="/photos/home/closing-letter.jpg" alt="" width={1200} height={800} sizes="(max-width: 1100px) 90vw, 30vw" />
+              <Image src="/photos/pages/p-closing.jpg" alt="" width={1800} height={1200} sizes="(max-width: 1100px) 90vw, 30vw" />
             </figure>
             <span className="mail pending">{c.mailPending}</span>
             <p className="where">{c.where}</p>

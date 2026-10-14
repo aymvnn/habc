@@ -261,7 +261,7 @@ export const membership: PageSet = {
       /* ── extras the owner kept (30 Sep 2026), verbatim from commit 2336702: "membership/levels" and "membership" ── */
       {
         kind: "duo",
-        photos: ["lvl-breakfast", "lvl-tea"],
+        photos: ["p-lvl-breakfast", "p-lvl-tea"],
         label: { en: "Executive level", nl: "Niveau Executive", ar: "مستوى Executive" },
         heading: { en: "Closer to *the table.*", nl: "Dichter bij *de tafel.*", ar: "أقرب إلى *الطاولة.*" },
         body: [
@@ -564,7 +564,7 @@ export const membership: PageSet = {
 
   /* ── extra page the owner kept (30 Sep 2026): old "how-we-work/fees", verbatim from commit 2336702 ── */
   "membership/fees": {
-    masthead: { variant: "plate", photo: "fees-hero" },
+    masthead: { variant: "plate", photo: "p-fees" },
     blocks: [
       {
         kind: "lead",
@@ -665,7 +665,7 @@ export const membership: PageSet = {
 
   /* ── extra page the owner kept (30 Sep 2026): old "network/ambassadors", verbatim from commit 2336702 ── */
   "membership/ambassadors": {
-    masthead: { variant: "band", photo: "amb-hero" },
+    masthead: { variant: "band", photo: "p-ambassadors" },
     blocks: [
       {
         kind: "lead",
@@ -718,7 +718,7 @@ export const membership: PageSet = {
       },
       {
         kind: "prose",
-        photo: "amb-facade",
+        photo: "p-amb-facade",
         size: "tall",
         side: "end",
         label: { en: "The choice", nl: "De keuze", ar: "الاختيار" },

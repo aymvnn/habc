@@ -275,7 +275,7 @@ export const about: PageSet = {
       },
       {
         kind: "prose",
-        photo: "why-hero",
+        photo: "p-vision-2",
         size: "half",
         side: "end",
         body: [
