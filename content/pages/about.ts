@@ -7,7 +7,7 @@ import type { PageSet } from "./types";
  */
 export const about: PageSet = {
   about: {
-    masthead: { variant: "band", photo: "about-hero" },
+    masthead: { variant: "band", photo: "f-about" },
     headline: {
       en: "A space where relationships meet knowledge and opportunities",
       nl: "Een ruimte waar relaties samenkomen met kennis en kansen",
@@ -24,7 +24,7 @@ export const about: PageSet = {
       },
       {
         kind: "prose",
-        photo: "about-room",
+        photo: "f-detail-folder",
         size: "half",
         side: "end",
         body: [
@@ -42,7 +42,7 @@ export const about: PageSet = {
       },
       {
         kind: "prose",
-        photo: "about-coffee",
+        photo: "x-about-window",
         size: "tall",
         side: "start",
         heading: { en: "Why DUKAAT?", nl: "Waarom DUKAAT?", ar: "لماذا دوكات؟" },
@@ -258,7 +258,7 @@ export const about: PageSet = {
   },
 
   "about/vision": {
-    masthead: { variant: "band", photo: "values-court" },
+    masthead: { variant: "band", photo: "f-vision" },
     headline: {
       en: "A business community that opens horizons for cooperation across borders",
       nl: "Een zakelijke community die perspectieven opent voor samenwerking over grenzen heen",
@@ -290,7 +290,7 @@ export const about: PageSet = {
   },
 
   "about/mission": {
-    masthead: { variant: "portrait", photo: "how-hero" },
+    masthead: { variant: "portrait", photo: "f-mission" },
     headline: {
       en: "Turning relationships into value and business opportunities",
       nl: "Relaties omzetten in waarde en zakelijke kansen",
@@ -320,11 +320,11 @@ export const about: PageSet = {
 
   /* 2.5 has no title line: the masthead shows the page title and blurb from content/site.*.ts */
   "about/goals": {
-    masthead: { variant: "plate", photo: "values-value-band" },
+    masthead: { variant: "plate", photo: "f-goals" },
     blocks: [
       {
         kind: "register",
-        photo: "values-trust",
+        photo: "x-membership-dallah",
         items: [
           {
             title: { en: "Connecting the business community", nl: "De zakelijke community verbinden", ar: "ربط مجتمع الأعمال" },
@@ -414,7 +414,7 @@ export const about: PageSet = {
 
   /* Extra page kept by the owner: "about/why" from commit 2336702. */
   "about/why": {
-    masthead: { variant: "plate", photo: "why-hero-band" },
+    masthead: { variant: "plate", photo: "f-why" },
     blocks: [
       {
         kind: "lead",

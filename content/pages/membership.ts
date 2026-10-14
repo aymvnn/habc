@@ -7,7 +7,7 @@ import type { PageSet } from "./types";
  */
 export const membership: PageSet = {
   membership: {
-    masthead: { variant: "band", photo: "membership-hero" },
+    masthead: { variant: "band", photo: "f-membership" },
     headline: {
       en: "Belonging that connects you with knowledge, relationships and opportunities",
       nl: "Erbij horen verbindt u met kennis, relaties en kansen",
@@ -31,7 +31,7 @@ export const membership: PageSet = {
             ar: "تتدرج العضويات بحسب طبيعة المشاركة والدعم المطلوب. تُوضّح الخدمات المشمولة وحدودها ومدتها ورسومها في عرض العضوية قبل الاشتراك.",
           },
         ],
-        photo: "lvl-hero",
+        photo: "f-roundtable",
         size: "half",
       },
       {
@@ -348,7 +348,7 @@ export const membership: PageSet = {
 
   /* ── extra page the owner kept (30 Sep 2026): old "how-we-work/verification", verbatim from commit 2336702 ── */
   "membership/admission": {
-    masthead: { variant: "portrait", photo: "ver-hero-band" },
+    masthead: { variant: "portrait", photo: "f-arrival" },
     blocks: [
       {
         kind: "lead",
