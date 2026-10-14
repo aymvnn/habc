@@ -105,7 +105,7 @@ export const invest: PageSet = {
   },
 
   "events/missions": {
-    masthead: { variant: "band", photo: "mis-hero" },
+    masthead: { variant: "band", photo: "p-missions" },
     eyebrow: { en: "DUKAAT Missions", nl: "DUKAAT Missions", ar: "DUKAAT Missions" },
     headline: {
       en: "Get to know the market through its people and its companies",
@@ -187,7 +187,7 @@ export const invest: PageSet = {
               nl: "Voor ondernemers uit de Arabische wereld: Nederlandse bedrijven en fabrieken, de haven van Rotterdam en haar logistiek, innovatie, investeren, bedrijfsoprichting en de Nederlandse manier van zakendoen.",
               ar: "برنامجٌ لأصحاب الأعمال القادمين من العالم العربي، للتعرّف إلى الشركات والمصانع الهولندية، وميناء روتردام ومنظومته اللوجستية، والابتكار، والاستثمار، وتأسيس الشركات، وثقافة الأعمال في هولندا.",
             },
-            photo: "mis-nl",
+            photo: "p-mis-nl",
           },
           {
             title: { en: "Discover Dubai", nl: "Discover Dubai", ar: "Discover Dubai" },
@@ -196,7 +196,7 @@ export const invest: PageSet = {
               nl: "Een bedrijf opzetten, investeren, vastgoed en B2B-gesprekken met lokale bedrijven in één programma — met tijd om de stad te ervaren en te zien hoe er zaken worden gedaan.",
               ar: "برنامجٌ واحد يجمع تأسيس الشركات، والاستثمار، والعقار، ولقاءات B2B مع الشركات المحلية — مع متّسعٍ من الوقت لاكتشاف المدينة ومعرفة كيف تُدار فيها الأعمال.",
             },
-            photo: "mis-dubai",
+            photo: "p-mis-dubai",
           },
           {
             title: { en: "Discover Saudi Arabia", nl: "Discover Saudi Arabia", ar: "Discover Saudi Arabia" },
@@ -205,7 +205,7 @@ export const invest: PageSet = {
               nl: "Een programma over de Saoedische markt: investeerders, leveranciers, agenten en distributeurs, de grote projecten, en de vakbeurzen waar de markt samenkomt.",
               ar: "برنامجٌ يركّز على السوق السعودية: المستثمرون، والمورّدون، والوكلاء والموزّعون، والمشاريع الكبرى، والمعارض التي يلتقي فيها أطراف السوق.",
             },
-            photo: "mis-saudi",
+            photo: "p-mis-saudi",
           },
           {
             title: { en: "Reverse Buyer Missions", nl: "Reverse Buyer Missions", ar: "Reverse Buyer Missions" },
@@ -214,7 +214,7 @@ export const invest: PageSet = {
               nl: "Soms brengen wij de kopers naar Europa. Kopers uit de Golf en de bredere Arabische wereld komen naar Nederland om Europese fabrikanten en leveranciers te ontmoeten, in hun eigen fabrieken.",
               ar: "أحياناً نأتي بالمشترين إلى أوروبا: مشترون من الخليج وسائر العالم العربي يَقدَمون إلى هولندا للقاء مصنّعين ومورّدين أوروبيين في مصانعهم.",
             },
-            photo: "mis-reverse",
+            photo: "p-mis-reverse",
           },
         ],
       },

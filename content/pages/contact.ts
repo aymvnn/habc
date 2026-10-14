@@ -9,7 +9,7 @@ import type { PageSet } from "./types";
  */
 export const contact: PageSet = {
   contact: {
-    masthead: { variant: "plate", photo: "contact-hero", compact: true }, // UX-03: a task page, the form in the first screen
+    masthead: { variant: "plate", photo: "p-contact", compact: true }, // UX-03: a task page, the form in the first screen
     headline: {
       en: "What do you want to achieve?",
       nl: "Wat wilt u bereiken?",
@@ -165,7 +165,7 @@ export const contact: PageSet = {
   },
 
   "looking-for": {
-    masthead: { variant: "portrait", photo: "docs-desk-band", compact: true }, // UX-03
+    masthead: { variant: "portrait", photo: "p-looking-for", compact: true }, // UX-03
     headline: {
       en: "What are you looking for?",
       nl: "Wat zoekt u?",
@@ -593,7 +593,7 @@ export const contact: PageSet = {
   },
 
   faq: {
-    masthead: { variant: "plate", photo: "faq-hero" },
+    masthead: { variant: "plate", photo: "p-faq" },
     blocks: [
       {
         kind: "faq",

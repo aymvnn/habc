@@ -19,7 +19,7 @@ import type { PageSet } from "./types";
 export const network: PageSet = {
   /* ------------------------------------------------------------------ 11. Company directory */
   "services/directory": {
-    masthead: { variant: "plate", photo: "dir-hero" },
+    masthead: { variant: "plate", photo: "p-directory" },
     eyebrow: {
       en: "DUKAAT Directory",
       nl: "DUKAAT Directory",
@@ -132,7 +132,7 @@ export const network: PageSet = {
             ar: "نميّز بين المعلومات التي تقدّمها الشركة وأي بيانات تمت مراجعتها فعليًا. عند عرض مراجعة لمعلومة، نوضح موضوعها وتاريخها ونطاقها؛ ولا تعني العضوية أو إدراج الملف ضمان الشركة أو جودة تعاملاتها.",
           },
         ],
-        photo: "dir-profile",
+        photo: "p-dir-profile",
         size: "tall",
         side: "end",
       },
@@ -343,7 +343,7 @@ export const network: PageSet = {
 
   /* ------------------------------------------------------------------ 15. Studies and reports */
   "services/intelligence": {
-    masthead: { variant: "band", photo: "int-hero" },
+    masthead: { variant: "band", photo: "p-intelligence" },
     eyebrow: {
       en: "DUKAAT Intelligence",
       nl: "DUKAAT Intelligence",
@@ -434,7 +434,7 @@ export const network: PageSet = {
           },
         ],
       },
-      { kind: "band", photo: "int-band" },
+      { kind: "band", photo: "p-int-band" },
       {
         kind: "listing",
         id: "publications",
@@ -482,7 +482,7 @@ export const network: PageSet = {
 
   /* ------------------------------------------------------------------ 16. Sector communities */
   "membership/sector-networks": {
-    masthead: { variant: "portrait", photo: "sec-hero" },
+    masthead: { variant: "portrait", photo: "p-sector-networks" },
     eyebrow: {
       en: "DUKAAT Circles",
       nl: "DUKAAT Circles",
@@ -520,7 +520,7 @@ export const network: PageSet = {
           { en: "Professional services", nl: "Professionele diensten", ar: "الخدمات المهنية" },
         ],
       },
-      { kind: "mosaic", photos: ["sec-dates", "sec-pack", "sec-energy", "sec-seeds"] },
+      { kind: "mosaic", photos: ["p-sec-dates", "p-sec-pack", "p-sec-energy", "p-sec-seeds"] },
       {
         kind: "prose",
         body: [
@@ -634,7 +634,7 @@ export const network: PageSet = {
 
   /* ------------------------------------------------------------------ 17. Success stories */
   "membership/stories": {
-    masthead: { variant: "plate", photo: "sto-hero-band" },
+    masthead: { variant: "plate", photo: "p-stories" },
     eyebrow: {
       en: "DUKAAT Stories",
       nl: "DUKAAT Stories",
@@ -778,7 +778,7 @@ export const network: PageSet = {
 
   /* ------------------------------------------------------------------ 18. Partnerships and sponsorship */
   partnerships: {
-    masthead: { variant: "portrait", photo: "par-hero", compact: true }, // UX-03
+    masthead: { variant: "portrait", photo: "p-partnerships", compact: true }, // UX-03
     headline: {
       en: "Let us build broader value together",
       nl: "Laten we samen bredere waarde opbouwen",

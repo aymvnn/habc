@@ -187,7 +187,7 @@ export const events: PageSet = {
       },
       {
         kind: "duo",
-        photos: ["cal-fair", "cal-pavilion"],
+        photos: ["p-fair", "p-pavilion"],
         label: {
           en: "DUKAAT Pavilions",
           nl: "DUKAAT Pavilions",

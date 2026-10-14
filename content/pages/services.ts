@@ -10,7 +10,7 @@ import type { PageSet } from "./types";
 export const services: PageSet = {
   /* ------------------------------------------------------------------ overview */
   services: {
-    masthead: { variant: "band", photo: "services-hero" },
+    masthead: { variant: "band", photo: "p-services" },
     blocks: [{ kind: "index" }],
   },
 
@@ -166,7 +166,7 @@ export const services: PageSet = {
 
   /* ------------------------------------------------------------------ 12 */
   "services/matchmaking": {
-    masthead: { variant: "plate", photo: "how-tea-band" },
+    masthead: { variant: "plate", photo: "p-matchmaking" },
     eyebrow: { en: "DUKAAT Connect", nl: "DUKAAT Connect", ar: "DUKAAT Connect" },
     headline: {
       en: "What do you offer? And what do you need?",
@@ -335,7 +335,7 @@ export const services: PageSet = {
 
   /* ------------------------------------------------------------------ extra: representation (commit 2336702, services.ts) */
   "services/representation": {
-    masthead: { variant: "plate", photo: "rep-hero" },
+    masthead: { variant: "plate", photo: "p-representation" },
     blocks: [
       {
         kind: "lead",
@@ -409,7 +409,7 @@ export const services: PageSet = {
       },
       {
         kind: "prose",
-        photo: "rep-window",
+        photo: "p-rep-window",
         size: "tall",
         side: "start",
         label: { en: "Per region", nl: "Per regio", ar: "بحسب المنطقة" },
@@ -457,7 +457,7 @@ export const services: PageSet = {
 
   /* ------------------------------------------------------------------ extra: documents, customs & logistics (commit 2336702, services.ts) */
   "services/documents": {
-    masthead: { variant: "portrait", photo: "docs-desk-band" },
+    masthead: { variant: "portrait", photo: "p-documents" },
     blocks: [
       {
         kind: "lead",
@@ -546,7 +546,7 @@ export const services: PageSet = {
       },
       {
         kind: "band",
-        photo: "docs-dock",
+        photo: "p-docs-dock",
         caption: {
           en: "We sit next to Rotterdam, Europe’s largest port. Here the paperwork and the quay are never far apart.",
           nl: "Wij zitten naast Rotterdam, de grootste haven van Europa. Hier liggen het papierwerk en de kade nooit ver uit elkaar.",
@@ -591,7 +591,7 @@ export const services: PageSet = {
 
   /* ------------------------------------------------------------------ extra: what we do not do (commit 2336702, how.ts "how-we-work/boundaries") */
   "services/boundaries": {
-    masthead: { variant: "plate", photo: "bnd-hero" },
+    masthead: { variant: "plate", photo: "p-boundaries" },
     blocks: [
       {
         kind: "lead",
