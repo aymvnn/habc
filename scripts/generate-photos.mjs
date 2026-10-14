@@ -11,6 +11,9 @@
 //   npm run photos -- --check          after each image, let a second Gemini model inspect it (faces, text, hands, borders…)
 //   npm run photos -- --check-only     inspect the images that already exist (with --only to limit)
 //   npm run photos -- --workers 3       generations in parallel (default 2)
+//   npm run photos -- --pro             every image on Nano Banana Pro (default: only 21:9 bands and the members' room)
+//   npm run photos -- --preview         cheap low-quality preview first (Nano Banana 2 at 1K, files <id>-p<n>.jpg);
+//                                       the owner approves the preview before the final run (owner, 13 Oct 2026)
 //
 // Needs GEMINI_API_KEY in .env.local. Output: brand/fotostijl/flow-export/<id>/<id>-<n>.jpg
 // plus brand/fotostijl/flow-export/overzicht.html to compare the variants side by side.
@@ -23,10 +26,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "brand/fotostijl/flow-export");
 const API = "https://generativelanguage.googleapis.com/v1beta";
 const MODELS = { flash: "gemini-3.1-flash-image", pro: "gemini-3-pro-image" };
-// the large photos get the Pro model at 4K: the members' room on the home page and every full-width 21:9 band;
-// everything else Flash at 2K
+// the large photos get the Pro model: the members' room on the home page and every full-width 21:9 band; everything else Flash.
+// Never above 2K (owner, 13 Oct 2026: "maximaal 2K"); previews are Flash at 1K.
 const PRO = new Set(["membership-room"]);
-const isPro = (item) => PRO.has(item.id) || item.ratio === "21:9";
+const isPro = (item) => process.argv.includes("--pro") || PRO.has(item.id) || item.ratio === "21:9"; // --pro: every image on the Pro model
 const RATIOS = new Set(["1:1", "3:2", "2:3", "3:4", "4:3", "4:5", "5:4", "9:16", "16:9", "21:9"]);
 // the inspector: a cheap vision model that reads every image before a person does
 const CHECK_MODEL = process.env.GEMINI_CHECK_MODEL || "gemini-flash-latest";
@@ -39,6 +42,8 @@ const opt = (name, fallback) => {
   return i >= 0 && args[i + 1] ? args[i + 1] : fallback;
 };
 const N = Math.max(1, Math.min(6, Number(opt("n", 3))));
+const PREVIEW = flag("preview");
+const tag = (v) => (PREVIEW ? `p${v}` : `${v}`); // preview files sit beside the finals as <id>-p1.jpg
 const ONLY = opt("only", "").split(",").map((s) => s.trim()).filter(Boolean);
 const SHEET = join(ROOT, opt("sheet", "brand/fotostijl/homepage-fotos.md"));
 const WORKERS = Math.max(1, Math.min(4, Number(opt("workers", 2))));
@@ -72,7 +77,9 @@ function readSheet(path) {
     let prompt = code[1].replace(/\s+/g, " ").trim();
     // the API sets the ratio itself, so the Flow line at the end goes (and 3:2, 4:5, 21:9 need no cropping)
     prompt = prompt.replace(/\s*Aspect ratio \d+:\d+\.?\s*$/i, "").trim();
-    items.push({ id, ratio: ratio[1], prompt });
+    // optional reference images ("**Referentie:** `brand/fotostijl/x.png`"), e.g. the real logo for embossed books
+    const refs = [...b.matchAll(/\*\*Referentie:\*\*\s*`([^`]+)`/g)].map((m) => join(ROOT, m[1].trim()));
+    items.push({ id, ratio: ratio[1], prompt, refs });
   }
   return items;
 }
@@ -114,18 +121,22 @@ async function post(url, body) {
 }
 
 async function generate(item, variant) {
-  const model = isPro(item) ? MODELS.pro : MODELS.flash;
-  const size = isPro(item) ? "4K" : "2K";
-  // 1 · the Interactions API (current docs)
-  let r = await post(`${API}/interactions`, {
+  const model = !PREVIEW && isPro(item) ? MODELS.pro : MODELS.flash;
+  const size = PREVIEW ? "1K" : "2K";
+  // with reference images: generateContent, the images first and the prompt last
+  const refParts = item.refs.map((f) => ({
+    inlineData: { mimeType: f.endsWith(".png") ? "image/png" : "image/jpeg", data: readFileSync(f).toString("base64") },
+  }));
+  // 1 · the Interactions API (current docs), text-only prompts
+  let r = refParts.length ? { status: 404, json: null, text: "" } : await post(`${API}/interactions`, {
     model,
     input: [{ type: "text", text: item.prompt }],
     response_format: { type: "image", mime_type: "image/jpeg", aspect_ratio: item.ratio, image_size: size },
   });
-  // 2 · fallback: generateContent (older surface, same model)
+  // 2 · generateContent (older surface, same model; also the route for reference images)
   if (r.status === 404 || (r.status === 400 && !findImage(r.json))) {
     r = await post(`${API}/models/${model}:generateContent`, {
-      contents: [{ parts: [{ text: item.prompt }] }],
+      contents: [{ parts: [...refParts, { text: item.prompt }] }],
       generationConfig: { responseModalities: ["IMAGE"], imageConfig: { aspectRatio: item.ratio, imageSize: size } },
     });
   }
@@ -150,14 +161,14 @@ async function generate(item, variant) {
   const ext = img.mime.includes("png") ? "png" : img.mime.includes("webp") ? "webp" : "jpg";
   const dir = join(OUT, item.id);
   mkdirSync(dir, { recursive: true });
-  const file = join(dir, `${item.id}-${variant}.${ext}`);
+  const file = join(dir, `${item.id}-${tag(variant)}.${ext}`);
   writeFileSync(file, Buffer.from(img.data, "base64"));
   return file;
 }
 
 /* ---------- inspection: a second model looks for the defects we keep finding by eye ---------- */
 const CHECK_PROMPT = `You are the strict photo editor of a discreet, high-end business club. Inspect this AI-generated photograph for defects that would make it unusable on a professional website. Look slowly at every part of the image, including small details at the edges and in the background. Reply with JSON only:
-{"readable_text": [every word, name, number, logo or sign you can actually read anywhere in the image, however small: ship names, labels, badges, signs, document headings],
+{"readable_text": [every word, name, number, logo or sign you can actually read anywhere in the image, however small: ship names, labels, badges, signs, document headings, and brand logos on laptop lids, phones or cups],
  "hands_visible": number of human hands visible,
  "hands_explained": "which person each visible hand belongs to, and whether each hand and arm is anatomically plausible",
  "face_in_focus": boolean (a clearly recognisable, sharp human face; small soft faces in the background do not count),
@@ -166,7 +177,7 @@ const CHECK_PROMPT = `You are the strict photo editor of a discreet, high-end bu
  "body_error": boolean (a headless torso, cut-off or impossible bodies, duplicated people),
  "drawn_border": boolean (a frame, border or band drawn into the image itself),
  "alcohol": boolean (wine glasses, bottles or drinks that read as alcohol),
- "weapon_or_conflict": boolean, "religious_symbol": boolean, "flag_or_map": boolean, "revealing_clothing": boolean,
+ "weapon_or_conflict": boolean, "religious_symbol": boolean (a headscarf worn as clothing is NOT a religious symbol), "flag_or_map": boolean, "revealing_clothing": boolean (short sleeves count),
  "verdict": "ok" | "check" | "reject" (reject for any clear defect; readable text is always at least check; ok only when clean),
  "notes": "at most 20 words in Dutch explaining the verdict"}`;
 
@@ -180,6 +191,8 @@ async function inspect(file) {
   const text = r.json?.candidates?.[0]?.content?.parts?.map((p) => p.text ?? "").join("") ?? "";
   try {
     const res = JSON.parse(text.replace(/^```(json)?|```$/g, "").trim());
+    // the real DUKAAT emblem on books, folders and banners is wanted (it comes from a reference image), not a defect
+    if (Array.isArray(res.readable_text)) res.readable_text = res.readable_text.filter((t) => !/^\s*dukaat\s*$/i.test(String(t)));
     if (res.verdict === "ok" && Array.isArray(res.readable_text) && res.readable_text.length) {
       res.verdict = "check";
       res.notes = `leesbare tekst: ${res.readable_text.slice(0, 4).join(", ")}`;
@@ -210,7 +223,7 @@ async function withRetry(fn, label) {
   }
 }
 
-const exists = (id, v) => existsSync(join(OUT, id)) && readdirSync(join(OUT, id)).some((f) => f.startsWith(`${id}-${v}.`));
+const exists = (id, v) => existsSync(join(OUT, id)) && readdirSync(join(OUT, id)).some((f) => f.startsWith(`${id}-${tag(v)}.`));
 
 /* ---------- contact sheet to compare variants ---------- */
 function writeOverview(items) {
@@ -271,7 +284,7 @@ for (const it of items) for (let v = 1; v <= N; v++) if (flag("force") || !exist
 
 console.log(`${items.length} beelden × ${N} varianten · ${jobs.length} te maken · ${relative(ROOT, SHEET)}`);
 if (flag("dry")) {
-  for (const j of jobs) console.log(`  ${j.it.id}-${j.v}  ${j.it.ratio}  ${isPro(j.it) ? "Pro 4K" : "Flash 2K"}`);
+  for (const j of jobs) console.log(`  ${j.it.id}-${tag(j.v)}  ${j.it.ratio}  ${PREVIEW ? "Flash 1K (voorbeeld)" : isPro(j.it) ? "Pro 2K" : "Flash 2K"}`);
   process.exit(0);
 }
 if (!KEY) {
@@ -285,7 +298,7 @@ const queue = [...jobs];
 const worker = async () => {
   while (queue.length) {
     const { it, v } = queue.shift();
-    const label = `${it.id}-${v}`;
+    const label = `${it.id}-${tag(v)}`;
     try {
       const file = await withRetry(() => generate(it, v), label);
       done++;

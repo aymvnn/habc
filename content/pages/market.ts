@@ -9,7 +9,7 @@ import type { PageSet } from "./types";
  */
 export const market: PageSet = {
   "services/market": {
-    masthead: { variant: "band", photo: "market-hero" },
+    masthead: { variant: "band", photo: "f-market" },
     eyebrow: { en: "DUKAAT Market", nl: "DUKAAT Market", ar: "DUKAAT Market" },
     headline: {
       en: "Present what you offer, and discover what your market needs",
@@ -34,7 +34,7 @@ export const market: PageSet = {
             ar: "يمكن أن تعرض الشركة منتجًا هولنديًا يبحث عن مستورد عربي، أو منتجًا عربيًا يستهدف السوق الأوروبية، أو خدمة تدعم نشاط الشركات عبر الحدود. يقدّم العرض الجيد معلومات واضحة تجعل المحادثة التجارية أكثر فائدة منذ البداية.",
           },
         ],
-        photo: "prod-hero",
+        photo: "x-market-taste",
         size: "tall",
         side: "end",
       },

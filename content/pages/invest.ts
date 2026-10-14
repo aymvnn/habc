@@ -10,7 +10,7 @@ import type { PageSet } from "./types";
  */
 export const invest: PageSet = {
   "services/invest": {
-    masthead: { variant: "portrait", photo: "inv-hero" },
+    masthead: { variant: "portrait", photo: "f-invest" },
     eyebrow: { en: "DUKAAT Invest", nl: "DUKAAT Invest", ar: "DUKAAT Invest" },
     headline: {
       en: "A meeting that brings together project owners and those interested in investment",
@@ -35,7 +35,7 @@ export const invest: PageSet = {
             ar: "قد تتناول الفرص الصناعة، والأغذية، والتكنولوجيا، والخدمات اللوجستية، والعقارات، والسياحة، أو تطوير شركات قائمة ومشاريع جديدة.",
           },
         ],
-        photo: "inv-meeting",
+        photo: "x-invest-dossier",
         size: "half",
         side: "end",
       },

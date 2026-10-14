@@ -9,7 +9,7 @@ import type { PageSet } from "./types";
  */
 export const events: PageSet = {
   events: {
-    masthead: { variant: "band", photo: "events-hero" },
+    masthead: { variant: "band", photo: "f-events" },
     eyebrow: {
       en: "DUKAAT Events",
       nl: "DUKAAT Events",
@@ -96,8 +96,8 @@ export const events: PageSet = {
             ar: "راجع الموضوع، والفئات المشاركة، والبرنامج، واللغة والمكان. ثم حدّد هدفك من الحضور وما ترغب في تقديمه أو مناقشته، ليكون اللقاء أكثر فائدة لك وللآخرين.",
           },
         ],
-        photo: "cal-hero",
-        size: "tall",
+        photo: "x-events-table",
+        size: "half",
         side: "start",
       },
       {

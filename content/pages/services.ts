@@ -16,7 +16,7 @@ export const services: PageSet = {
 
   /* ------------------------------------------------------------------ 3 */
   "services/connect": {
-    masthead: { variant: "band", photo: "me-hero" },
+    masthead: { variant: "band", photo: "f-connect" },
     eyebrow: { en: "DUKAAT Connect", nl: "DUKAAT Connect", ar: "DUKAAT Connect" },
     headline: {
       en: "Finding the right party starts with understanding your needs",
@@ -40,7 +40,7 @@ export const services: PageSet = {
       {
         kind: "register",
         heading: { en: "Who is this service for?", nl: "Voor wie is deze dienst?", ar: "لمن هذه الخدمة؟" },
-        photo: "trade-distributor",
+        photo: "x-connect-window",
         items: [
           {
             title: {
@@ -135,7 +135,7 @@ export const services: PageSet = {
             ar: "قدّم وصفًا واضحًا لما تحتاجه، والكمية أو حجم العمل، والدولة المستهدفة، والموعد المتوقع، وما يميز عرضك. كلما كانت المعلومات أدق، أصبح تقييم الملاءمة أسهل.",
           },
         ],
-        photo: "trade-samples",
+        photo: "f-detail-stone",
         size: "tall",
       },
       {
@@ -237,7 +237,7 @@ export const services: PageSet = {
 
   /* ------------------------------------------------------------------ 6 */
   "services/advisory": {
-    masthead: { variant: "band", photo: "adv-hero-band" },
+    masthead: { variant: "band", photo: "f-advisory" },
     eyebrow: { en: "DUKAAT Advisory", nl: "DUKAAT Advisory", ar: "DUKAAT Advisory" },
     headline: {
       en: "Greater clarity for the next step in your business",
@@ -255,7 +255,7 @@ export const services: PageSet = {
       },
       {
         kind: "register",
-        photo: "adv-specialist",
+        photo: "x-advisory-notes",
         items: [
           {
             title: { en: "Market entry", nl: "Markttoetreding", ar: "دخول الأسواق" },

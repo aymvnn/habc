@@ -9,7 +9,7 @@ import type { PageSet } from "./types";
  */
 export const academy: PageSet = {
   academy: {
-    masthead: { variant: "band", photo: "aca-hero" },
+    masthead: { variant: "band", photo: "f-academy" },
     eyebrow: { en: "DUKAAT Academy", nl: "DUKAAT Academy", ar: "DUKAAT Academy" },
     headline: {
       en: "Knowledge that turns into skill, and skill that opens an opportunity for you",
@@ -50,8 +50,8 @@ export const academy: PageSet = {
             ar: "قد تخرج من ورشة بخطة عرض مشروع، أو نموذج طلب شراء، أو طريقة أوضح للتفاوض، أو خطوات لتحسين حضورك المهني. نوضح في صفحة كل برنامج المهارات المستهدفة وما سيعمل عليه المشارك.",
           },
         ],
-        photo: "aca-notes",
-        size: "tall",
+        photo: "x-academy-group",
+        size: "half",
       },
       {
         kind: "chapter",
