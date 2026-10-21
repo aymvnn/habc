@@ -1,7 +1,7 @@
 # DUKAAT — Dutch–Arab Business Club
 
 Website of DUKAAT, the private business club connecting companies between the Netherlands and the Arab world
-(Stichting Nederlands–Arabische Handelskamer, Anno 2018). Tagline: **Where Value Crosses Borders** · حيث تعبر القيمة الحدود.
+(Stichting Nederlands-Arabische Handelskamer, Anno 2018). Tagline: **Where Value Crosses Borders** · حيث تعبر القيمة الحدود.
 
 ## Stack
 

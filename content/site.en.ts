@@ -107,7 +107,7 @@ export const siteEn: SiteCopy = {
     "legal/terms": { title: "Terms of use", blurb: "The terms that apply to membership and project work." },
     "legal/cookies": { title: "Cookie settings", blurb: "What this site stores in your browser — no tracking, no advertising cookies." },
     "legal/disclaimer": { title: "Disclaimer", blurb: "The limits of what this site and its information promise." },
-    "legal/company": { title: "Company details", blurb: "Legal name, Chamber of Commerce and VAT numbers, registered address." },
+    "legal/company": { title: "Company details", blurb: "Legal name, Chamber of Commerce (KvK) number, registered address." },
     "legal/member-data": { title: "Publication of member data", blurb: "What we publish about members, only with consent, and how to withdraw it." },
     "legal/data-transfers": { title: "Transfers outside the EU", blurb: "How data travels safely to partners in the Gulf and the wider region." },
   },

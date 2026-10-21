@@ -10,8 +10,8 @@ import type { PageSet } from "./types";
  * scripts; fonts self-hosted through next/font; one session-storage item "dukaat-intro" = "1", written by the home
  * page's opening animation; the intake sends route, language, company, name, e-mail, country and message through
  * Resend to the mailbox and stores nothing on the site; hosting on Vercel.
- * Bracketed values are pending founders' decisions. The seat is given as the Rotterdam region (owner, 29 Sep 2026);
- * the KvK extract names the exact municipality.
+ * Bracketed values are pending founders' decisions. The seat is given as the Rotterdam region (owner, 29 Sep 2026, kept
+ * 21 Oct 2026); name, address and KvK number as in the Handelsregister (KvK 73318205). No VAT number on the site.
  */
 
 const version = { en: "Version: September 2026", nl: "Versie: september 2026", ar: "الإصدار: سبتمبر 2026" };
@@ -46,9 +46,9 @@ export const legal: PageSet = {
         updated: version,
         intro: [
           {
-            en: "This statement explains how Stichting Nederlands–Arabische Handelskamer, trading as DUKAAT, handles personal data: of visitors to this site, of people who write to us or use the intake, of members and of those nominated for or applying for membership, and of the contact persons of the companies we deal with.",
-            nl: "Deze verklaring beschrijft hoe Stichting Nederlands–Arabische Handelskamer, handelend onder de naam DUKAAT, omgaat met persoonsgegevens: van bezoekers van deze site, van wie ons schrijft of de intake gebruikt, van leden en van wie voor het lidmaatschap is voorgedragen of zich heeft aangemeld, en van de contactpersonen van de bedrijven waarmee wij zakendoen.",
-            ar: "يوضّح هذا البيان كيف تتعامل Stichting Nederlands–Arabische Handelskamer، التي تمارس نشاطها تحت الاسم التجاري DUKAAT، مع البيانات الشخصية: بيانات زوّار هذا الموقع، ومَن يراسلنا أو يستخدم استمارة التعارف، والأعضاء ومَن رُشّحوا للعضوية أو تقدّموا بطلبها، ومسؤولي الاتصال في الشركات التي نتعامل معها.",
+            en: "This statement explains how Stichting Nederlands-Arabische Handelskamer, trading as DUKAAT, handles personal data: of visitors to this site, of people who write to us or use the intake, of members and of those nominated for or applying for membership, and of the contact persons of the companies we deal with.",
+            nl: "Deze verklaring beschrijft hoe Stichting Nederlands-Arabische Handelskamer, handelend onder de naam DUKAAT, omgaat met persoonsgegevens: van bezoekers van deze site, van wie ons schrijft of de intake gebruikt, van leden en van wie voor het lidmaatschap is voorgedragen of zich heeft aangemeld, en van de contactpersonen van de bedrijven waarmee wij zakendoen.",
+            ar: "يوضّح هذا البيان كيف تتعامل Stichting Nederlands-Arabische Handelskamer، التي تمارس نشاطها تحت الاسم التجاري DUKAAT، مع البيانات الشخصية: بيانات زوّار هذا الموقع، ومَن يراسلنا أو يستخدم استمارة التعارف، والأعضاء ومَن رُشّحوا للعضوية أو تقدّموا بطلبها، ومسؤولي الاتصال في الشركات التي نتعامل معها.",
           },
           {
             en: "Much of what passes through DUKAAT is company information. The General Data Protection Regulation (GDPR) applies wherever that information concerns an identifiable person — a contact person, a director, a sole trader — and this statement covers exactly that part.",
@@ -62,9 +62,9 @@ export const legal: PageSet = {
             title: { en: "Who we are", nl: "Wie wij zijn", ar: "من نحن" },
             body: [
               {
-                en: "The controller for the processing described here is Stichting Nederlands–Arabische Handelskamer, a foundation under Dutch law trading as DUKAAT — Dutch–Arab Business Club, based in the Rotterdam region, the Netherlands. Visiting address: [Address]. Chamber of Commerce (KvK) number: [number].",
-                nl: "Verwerkingsverantwoordelijke voor de verwerkingen in deze verklaring is Stichting Nederlands–Arabische Handelskamer, een stichting naar Nederlands recht die handelt onder de naam DUKAAT — Dutch–Arab Business Club, gevestigd in de regio Rotterdam. Bezoekadres: [adres]. KvK-nummer: [nummer].",
-                ar: "المتحكّم في البيانات فيما يخص عمليات المعالجة الموصوفة في هذا البيان هو Stichting Nederlands–Arabische Handelskamer، وهي مؤسسة (Stichting) خاضعة للقانون الهولندي، تمارس نشاطها تحت الاسم التجاري DUKAAT — نادي الأعمال الهولندي العربي، ومقرّها في منطقة روتردام بهولندا. عنوان الزيارة: [العنوان]. رقم السجل لدى غرفة التجارة الهولندية (KvK): [الرقم].",
+                en: "The controller for the processing described here is Stichting Nederlands-Arabische Handelskamer, a foundation under Dutch law trading as DUKAAT — Dutch–Arab Business Club, based in the Rotterdam region, the Netherlands. Visiting address: Kelvinring 11, 2952 BG Alblasserdam. Chamber of Commerce (KvK) number: 73318205.",
+                nl: "Verwerkingsverantwoordelijke voor de verwerkingen in deze verklaring is Stichting Nederlands-Arabische Handelskamer, een stichting naar Nederlands recht die handelt onder de naam DUKAAT — Dutch–Arab Business Club, gevestigd in de regio Rotterdam. Bezoekadres: Kelvinring 11, 2952 BG Alblasserdam. KvK-nummer: 73318205.",
+                ar: "المتحكّم في البيانات فيما يخص عمليات المعالجة الموصوفة في هذا البيان هو Stichting Nederlands-Arabische Handelskamer، وهي مؤسسة (Stichting) خاضعة للقانون الهولندي، تمارس نشاطها تحت الاسم التجاري DUKAAT — نادي الأعمال الهولندي العربي، ومقرّها في منطقة روتردام بهولندا. عنوان الزيارة: Kelvinring 11, 2952 BG Alblasserdam. رقم السجل لدى غرفة التجارة الهولندية (KvK): 73318205.",
               },
               {
                 en: "For any question about this statement or about your data, write to [enquiries@ — domain pending].",
@@ -251,9 +251,9 @@ export const legal: PageSet = {
             title: { en: "Contact and complaints", nl: "Contact en klachten", ar: "التواصل والشكاوى" },
             body: [
               {
-                en: "Questions about this statement go to [enquiries@ — domain pending], or by post to Stichting Nederlands–Arabische Handelskamer, [Address].",
-                nl: "Vragen over deze verklaring kunt u sturen aan [e-mailadres — domein in afwachting], of per post aan Stichting Nederlands–Arabische Handelskamer, [adres].",
-                ar: "تُوجَّه الأسئلة المتعلقة بهذا البيان إلى [البريد الإلكتروني — بانتظار قرار النطاق]، أو بالبريد العادي إلى Stichting Nederlands–Arabische Handelskamer، [العنوان].",
+                en: "Questions about this statement go to [enquiries@ — domain pending], or by post to Stichting Nederlands-Arabische Handelskamer, Kelvinring 11, 2952 BG Alblasserdam, the Netherlands.",
+                nl: "Vragen over deze verklaring kunt u sturen aan [e-mailadres — domein in afwachting], of per post aan Stichting Nederlands-Arabische Handelskamer, Kelvinring 11, 2952 BG Alblasserdam.",
+                ar: "تُوجَّه الأسئلة المتعلقة بهذا البيان إلى [البريد الإلكتروني — بانتظار قرار النطاق]، أو بالبريد العادي إلى Stichting Nederlands-Arabische Handelskamer، Kelvinring 11, 2952 BG Alblasserdam، هولندا.",
               },
               {
                 en: "If you believe we handle your data incorrectly, please tell us first, so that we can put it right. You also have the right to lodge a complaint with the Dutch Data Protection Authority, the Autoriteit Persoonsgegevens (autoriteitpersoonsgegevens.nl), or with the supervisory authority of the EU country where you live or work.",
@@ -396,9 +396,9 @@ export const legal: PageSet = {
           {
             title: { en: "Legal name", nl: "Statutaire naam", ar: "الاسم القانوني" },
             body: {
-              en: "Stichting Nederlands–Arabische Handelskamer",
-              nl: "Stichting Nederlands–Arabische Handelskamer",
-              ar: "Stichting Nederlands–Arabische Handelskamer",
+              en: "Stichting Nederlands-Arabische Handelskamer",
+              nl: "Stichting Nederlands-Arabische Handelskamer",
+              ar: "Stichting Nederlands-Arabische Handelskamer",
             },
           },
           {
@@ -420,18 +420,14 @@ export const legal: PageSet = {
           {
             title: { en: "Visiting address", nl: "Bezoekadres", ar: "عنوان الزيارة" },
             body: {
-              en: "[Address] — meetings by appointment",
-              nl: "[Adres] — uitsluitend op afspraak",
-              ar: "[العنوان] — اللقاءات بموعد مسبق",
+              en: "Kelvinring 11, 2952 BG Alblasserdam — meetings by appointment",
+              nl: "Kelvinring 11, 2952 BG Alblasserdam — uitsluitend op afspraak",
+              ar: "Kelvinring 11, 2952 BG Alblasserdam — اللقاءات بموعد مسبق",
             },
           },
           {
             title: { en: "Chamber of Commerce (KvK)", nl: "KvK-nummer", ar: "رقم السجل لدى غرفة التجارة الهولندية (KvK)" },
-            body: { en: "[number]", nl: "[nummer]", ar: "[الرقم]" },
-          },
-          {
-            title: { en: "VAT number", nl: "Btw-nummer", ar: "رقم ضريبة القيمة المضافة" },
-            body: { en: "[number]", nl: "[nummer]", ar: "[الرقم]" },
+            body: { en: "73318205", nl: "73318205", ar: "73318205" },
           },
           {
             title: { en: "E-mail", nl: "E-mail", ar: "البريد الإلكتروني" },
@@ -531,9 +527,9 @@ export const legal: PageSet = {
             title: { en: "Contact", nl: "Contact", ar: "التواصل" },
             body: [
               {
-                en: "Requests and questions go to [enquiries@ — domain pending], or by post to Stichting Nederlands–Arabische Handelskamer, [Address]. We answer within one month.",
-                nl: "Verzoeken en vragen kunt u sturen aan [e-mailadres — domein in afwachting], of per post aan Stichting Nederlands–Arabische Handelskamer, [adres]. Wij antwoorden binnen een maand.",
-                ar: "تُوجَّه الطلبات والأسئلة إلى [البريد الإلكتروني — بانتظار قرار النطاق]، أو بالبريد العادي إلى Stichting Nederlands–Arabische Handelskamer، [العنوان]. ونرد خلال شهر واحد.",
+                en: "Requests and questions go to [enquiries@ — domain pending], or by post to Stichting Nederlands-Arabische Handelskamer, Kelvinring 11, 2952 BG Alblasserdam, the Netherlands. We answer within one month.",
+                nl: "Verzoeken en vragen kunt u sturen aan [e-mailadres — domein in afwachting], of per post aan Stichting Nederlands-Arabische Handelskamer, Kelvinring 11, 2952 BG Alblasserdam. Wij antwoorden binnen een maand.",
+                ar: "تُوجَّه الطلبات والأسئلة إلى [البريد الإلكتروني — بانتظار قرار النطاق]، أو بالبريد العادي إلى Stichting Nederlands-Arabische Handelskamer، Kelvinring 11, 2952 BG Alblasserdam، هولندا. ونرد خلال شهر واحد.",
               },
             ],
           },

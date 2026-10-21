@@ -103,7 +103,7 @@ export const nl: Dict = {
   /** extras the owner kept on 30 Sep 2026 (report 9pZxu4Jeprq9yqE3KkNu5V) — not in the source; texts from commit 2336702 */
   extra: {
     "anno": "Anno 2018",
-    "annoTitle": "Stichting Nederlands–Arabische Handelskamer, opgericht in 2018",
+    "annoTitle": "Stichting Nederlands-Arabische Handelskamer, opgericht in 2018",
     "byNomination": "Op voordracht",
     "byNominationTitle": "Lidmaatschap op voordracht of uitnodiging, na beoordeling",
     "nominated": "Ik ben voorgedragen",
@@ -142,14 +142,14 @@ export const nl: Dict = {
       "lede": "De een is ondernemer in onderwijs, handel en diensten. De ander adviseert over structuur, contracten en controles.",
       "founders": [
         {
-          "name": "[Oprichter 1 — ondernemer]",
+          "name": "Ghassan Salma",
           "role": "Oprichter en ondernemer",
           "credentials": "MBA, specialisatie Financiën en Investeringen | Ondernemer in onderwijs, handel en diensten",
           "voice": "“Het idee voor DUKAAT ontstond vanuit mijn visie als ondernemer die academische kennis en praktijkervaring combineert. Door mijn studie bedrijfskunde, met specialisatie in financiën en investeringen, en mijn ervaring in onderwijs, handel en diensten, raakte ik ervan overtuigd dat bedrijfsgroei begint met heldere kennis, betrouwbare relaties en het vermogen om kansen om te zetten in praktische stappen.\n\nVanuit die overtuiging ontstond mijn visie om DUKAAT op te richten: een zakelijke gemeenschap die bedrijven en ondernemers tussen Nederland en de Arabische wereld verbindt, en training, uitwisseling van ervaring, het bouwen van partnerschappen en de ontwikkeling van commerciële en investeringskansen samenbrengt in één ecosysteem.\n\nMijn ambitie is dat iedereen die zich bij DUKAAT aansluit kennis vindt die de eigen vaardigheden ontwikkelt, een verbinding die de horizon verbreedt, en een ruimte om ervaring te delen en waarde te creëren voor anderen.”",
           "portraitAlt": "Het vak van de oprichter-ondernemer: een graanprikker in een zak kikkererwten"
         },
         {
-          "name": "[Oprichter 2 — fiscaal recht]",
+          "name": "Ayman Ebdul",
           "role": "Oprichter · Fiscaal recht",
           "voice": "“Een goede introductie strandt vaker op het papierwerk dan op de mensen. Mijn achtergrond is het fiscale recht, en mijn rol bij DUKAAT is adviserend: zorgen dat de juiste vragen op tijd worden gesteld — welke entiteit tekent, wat er in het contract staat, waar de fiscale en douanevragen liggen, en of de tegenpartij is wie zij zegt te zijn. Die ervaring maakt een deal helderder. Het is geen garantie; de beslissing blijft bij het lid. Het is wat een handdruk waarde geeft.”",
           "portraitAlt": "Het vak van de oprichter-fiscalist: een pen boven een contract"
@@ -164,9 +164,9 @@ export const nl: Dict = {
       "taglineEcho": "حيث تعبر القيمة الحدود",
       "sealText": "DUKAAT · DUTCH–ARAB BUSINESS CLUB · ANNO 2018 · "
     },
-    "colophon": "Een initiatief van Stichting Nederlands–Arabische Handelskamer, Anno 2018, gevestigd in Nederland.",
+    "colophon": "Een initiatief van Stichting Nederlands-Arabische Handelskamer, Anno 2018, gevestigd in Nederland, KvK 73318205.",
     "legalLine": "Wij nemen geen gelden van leden in bewaring, wij treden niet op als bank of betaaldienstverlener, en wij garanderen geen enkele transactie tussen leden.",
-    "foundation": "Stichting Nederlands–Arabische Handelskamer"
+    "foundation": "Stichting Nederlands-Arabische Handelskamer"
   },
   /** interface words approved on 4 Oct 2026 (UX assessment, see content/types.ts) — not in the source */
   ux: {
