@@ -156,8 +156,6 @@ export const ar: Dict = {
     },
     "correspondence": {
       "heading": "العضوية بالترشيح أو الدعوة.\nوإن أردت أن تكتب، *فاكتب.*",
-      "mailPending": "[البريد الإلكتروني — بانتظار قرار النطاق]",
-      "mailPendingTitle": "عنوان على نطاقنا الخاص بعد قرار النطاق",
       "where": "منطقة روتردام، اللقاءات بموعد مسبق.",
       "taglineEcho": "Where Value Crosses Borders",
       "sealText": "DUKAAT · DUTCH–ARAB BUSINESS CLUB · ANNO 2018 · "

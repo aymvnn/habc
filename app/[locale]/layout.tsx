@@ -13,6 +13,7 @@ import { PageTransition } from "@/components/PageTransition";
 import { ArrivalTracker } from "@/components/Arrival";
 import { Calm } from "@/components/Calm";
 import { PageBar } from "@/components/PageBar";
+import { SITE_URL } from "@/lib/site-url";
 import { DEFAULT_BEWEGING, DEFAULT_OVERGANG } from "@/components/motion";
 import { alternatesFor, dirOf, getDict, isLocale, locales } from "@/lib/i18n";
 import "../site-styles"; // every stylesheet, in cascade order (one list, shared with the global 404)
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!isLocale(locale)) return {};
   const d = getDict(locale);
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+    metadataBase: new URL(SITE_URL),
     title: { default: d.meta.title, template: "%s — DUKAAT" },
     description: d.meta.description,
     alternates: { canonical: `/${locale}`, ...alternatesFor("") },

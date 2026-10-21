@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Arrow } from "./Arrow";
 import Image from "next/image";
 import type { Dict, Locale } from "@/content/types";
+import { EMAIL } from "@/content/contact-details";
 import { homeMore, hrefOf, legal } from "@/lib/site";
 import { Form } from "./Form";
 import { Rich } from "./Rich";
@@ -194,7 +195,7 @@ export function Correspondence({ c, tagline, locale, contact }: { c: Dict["extra
             <figure className="close-photo" aria-hidden="true">
               <Image src="/photos/pages/p-closing.jpg" alt="" width={1800} height={1200} sizes="(max-width: 1100px) 90vw, 30vw" />
             </figure>
-            <span className="mail pending">{c.mailPending}</span>
+            <a className="mail" href={`mailto:${EMAIL}`}>{EMAIL}</a>
             <p className="where">{c.where}</p>
             {/* UX-21 (owner, 4 Oct 2026): "write to us" now leads somewhere — the contact form, in the menu's own words */}
             <Link className="act-a corr-go" href={`/${locale}/contact#contact-form`} prefetch={false}>{contact} <Arrow /></Link>

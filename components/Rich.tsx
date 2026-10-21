@@ -1,12 +1,28 @@
 import { Fragment, type CSSProperties, type ReactNode } from "react";
+import { PHONE, PHONE_TEL } from "@/content/contact-details";
 
 /**
  * UI-07 (owner, 4 Oct 2026): with `words`, every word is set in its own two spans — a mask (.w) and the word that
  * rises inside it (.wi) — numbered in reading order (--w), so a heading can come up from behind an edge line by line
  * (app/premium.css; components/Reveal.tsx numbers the lines). The words and the spaces between them are unchanged.
  */
+/* The club's e-mail address and telephone number (content/contact-details.ts) are links wherever they stand in running
+   text — the legal texts, the business card, the failure notice of a form. Set as an isolate (dir="ltr") so the Arabic
+   lines keep them in one piece. Headings that rise word by word (words) are never linked. */
+const LINK = new RegExp(`([\\w.+-]+@[\\w-]+(?:\\.[\\w-]+)+|${PHONE.replace(/[+]/g, "\\+")})`);
 function plain(text: string, words: boolean, next: () => number): ReactNode {
-  if (!words) return text;
+  if (!words) {
+    if (!LINK.test(text)) return text;
+    return text.split(LINK).map((part, i) =>
+      i % 2 ? (
+        <a className="autolink" key={i} dir="ltr" href={part === PHONE ? `tel:${PHONE_TEL}` : `mailto:${part}`}>
+          {part.includes("@") ? <>{part.slice(0, part.indexOf("@") + 1)}<wbr />{part.slice(part.indexOf("@") + 1)}</> : part}
+        </a>
+      ) : (
+        part
+      ),
+    );
+  }
   return text.split(/(\s+)/).map((part, i) => {
     if (!part || /^\s+$/.test(part)) return part;
     const n = next();

@@ -157,8 +157,6 @@ export const en: Dict = {
     },
     "correspondence": {
       "heading": "Membership is by nomination or invitation.\nShould you wish to write, *write.*",
-      "mailPending": "[enquiries@ — domain pending]",
-      "mailPendingTitle": "Own-domain address follows the domain decision",
       "where": "Rotterdam area, meetings by appointment.",
       "taglineEcho": "حيث تعبر القيمة الحدود",
       "sealText": "DUKAAT · DUTCH–ARAB BUSINESS CLUB · ANNO 2018 · "

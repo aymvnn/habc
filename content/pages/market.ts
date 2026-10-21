@@ -351,20 +351,22 @@ export const market: PageSet = {
         kind: "listing",
         id: "deals",
         heading: { en: "Browse clearances", nl: "Bekijk de restpartijen", ar: "استعرض التصفيات" },
+        // not in the source: written 22 Oct 2026 in the voice of the "offers" listing; not shown while the listing is hidden
         empty: {
-          en: "[text missing in the source: text when no clearances are published]",
-          nl: "[tekst ontbreekt in de bron: tekst als er geen restpartijen zijn gepubliceerd]",
-          ar: "[نص غير موجود في المصدر: نص عند عدم وجود تصفيات منشورة]",
+          en: "There are currently no clearances published in this section. Tell us what you are looking for, or submit your offer for review.",
+          nl: "Er zijn momenteel geen restpartijen gepubliceerd in dit onderdeel. Vertel ons wat u zoekt of dien uw aanbod ter beoordeling in.",
+          ar: "لا توجد تصفيات منشورة في هذا القسم حاليًا. أخبرنا بما تبحث عنه أو قدّم عرضك للمراجعة.",
         },
       },
       {
         kind: "listing",
         id: "machinery",
         heading: { en: "Browse equipment", nl: "Bekijk de apparatuur", ar: "استعرض المعدات" },
+        // not in the source: written 22 Oct 2026 in the voice of the "offers" listing; not shown while the listing is hidden
         empty: {
-          en: "[text missing in the source: text when no equipment is published]",
-          nl: "[tekst ontbreekt in de bron: tekst als er geen apparatuur is gepubliceerd]",
-          ar: "[نص غير موجود في المصدر: نص عند عدم وجود معدات منشورة]",
+          en: "There is currently no equipment published in this section. Tell us what you are looking for, or submit your offer for review.",
+          nl: "Er is momenteel geen apparatuur gepubliceerd in dit onderdeel. Vertel ons wat u zoekt of dien uw aanbod ter beoordeling in.",
+          ar: "لا توجد معدات منشورة في هذا القسم حاليًا. أخبرنا بما تبحث عنه أو قدّم عرضك للمراجعة.",
         },
       },
       {

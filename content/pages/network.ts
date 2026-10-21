@@ -443,10 +443,11 @@ export const network: PageSet = {
           nl: "Bekijk de content",
           ar: "استعرض المحتوى",
         },
+        // not in the source: written 22 Oct 2026 to lead into the two buttons below; not shown while the listing is hidden
         empty: {
-          en: "[text missing in the source: text for when no content is published]",
-          nl: "[tekst ontbreekt in de bron: tekst voor wanneer er geen content is gepubliceerd]",
-          ar: "[نص غير موجود في المصدر: نص عند عدم نشر أي محتوى]",
+          en: "There is currently no content published in this section. Request a study tailored to your question, or register your interest in a sector.",
+          nl: "Er is momenteel geen content gepubliceerd in dit onderdeel. Vraag een studie op maat aan of registreer uw interesse in een sector.",
+          ar: "لا يوجد محتوى منشور في هذا القسم حاليًا. اطلب دراسة مخصصة أو سجّل اهتمامك بقطاع.",
         },
         links: [
           {

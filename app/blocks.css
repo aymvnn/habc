@@ -22,6 +22,10 @@
 .ph-empty{ position:absolute; inset:0; background:var(--paper-deep) url(/logo/dukaat-beeldmerk.svg) center / 16% auto no-repeat; opacity:.55 }
 .pending{ color:var(--muted); border-bottom:1px dashed var(--bar); white-space:nowrap }
 em .pending{ color:inherit }
+/* the club's e-mail address and telephone number in running text (components/Rich.tsx) */
+.autolink{ color:inherit; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.2em; text-decoration-color:var(--bar); overflow-wrap:break-word; transition:text-decoration-color .2s }
+.autolink:hover{ text-decoration-color:currentColor }
+.autolink:focus-visible{ outline:2px solid currentColor; outline-offset:3px }
 
 /* ---------- masthead: "the crossing" — one header for every inner page ----------
    The page's name and its twin in the other script rest on the logo's gold A-bar, which runs from edge to edge
