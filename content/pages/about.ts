@@ -547,9 +547,9 @@ export const about: PageSet = {
             ar: "طموحي أن يجد كل من ينضم إلى دوكات معرفةً تطوّر قدراته، وعلاقةً توسّع آفاقه، ومساحةً يشارك فيها خبرته ويصنع من خلالها قيمةً للآخرين.»",
           },
           {
-            en: "— [Founder 1 — entrepreneur], Founder and Entrepreneur",
-            nl: "— [Oprichter 1 — ondernemer], Oprichter en ondernemer",
-            ar: "— [المؤسس الأول — رائد الأعمال]، المؤسس ورائد الأعمال",
+            en: "— Ghassan Salma, Founder and Entrepreneur",
+            nl: "— Ghassan Salma, Oprichter en ondernemer",
+            ar: "— غسان سلمى، المؤسس ورائد الأعمال",
           },
           {
             en: "MBA, specialising in Finance and Investment | Entrepreneur in education, trade and services",
@@ -578,9 +578,9 @@ export const about: PageSet = {
             ar: "تساعد هذه الخبرة الأعضاء على رؤية الصفقة بوضوح أكبر. إنها مشورة لا ضمان، ولا تغني العضو عن مستشاريه — فالقرار يبقى بيده، والمسؤولية على عاتقه. أما ما تفعله فهو أن تجعل للمصافحة قيمة.",
           },
           {
-            en: "— [Founder 2 — fiscal law], Founder · Fiscal law",
-            nl: "— [Oprichter 2 — fiscaal recht], Oprichter · Fiscaal recht",
-            ar: "— [المؤسس الثاني — القانون الضريبي]، مؤسس · القانون الضريبي",
+            en: "— Ayman Ebdul, Founder · Fiscal law",
+            nl: "— Ayman Ebdul, Oprichter · Fiscaal recht",
+            ar: "— أيمن عبدول، مؤسس · القانون الضريبي",
           },
         ],
       },
@@ -605,7 +605,7 @@ export const about: PageSet = {
           },
           {
             title: { en: "Address", nl: "Adres", ar: "العنوان" },
-            body: { en: "[Address], the Netherlands", nl: "[Adres], Nederland", ar: "[العنوان]، هولندا" },
+            body: { en: "Kelvinring 11, 2952 BG Alblasserdam, the Netherlands", nl: "Kelvinring 11, 2952 BG Alblasserdam, Nederland", ar: "Kelvinring 11, 2952 BG Alblasserdam، هولندا" },
           },
           {
             title: { en: "Meetings", nl: "Gesprekken", ar: "اللقاءات" },
@@ -618,9 +618,9 @@ export const about: PageSet = {
           {
             title: { en: "Anno", nl: "Anno", ar: "منذ" },
             body: {
-              en: "2018 — Stichting Nederlands–Arabische Handelskamer",
-              nl: "2018 — Stichting Nederlands–Arabische Handelskamer",
-              ar: "2018 — Stichting Nederlands–Arabische Handelskamer",
+              en: "2018 — Stichting Nederlands-Arabische Handelskamer",
+              nl: "2018 — Stichting Nederlands-Arabische Handelskamer",
+              ar: "2018 — Stichting Nederlands-Arabische Handelskamer",
             },
           },
         ],

@@ -110,7 +110,7 @@ export const siteNl: SiteCopy = {
     "legal/terms": { title: "Gebruiksvoorwaarden", blurb: "De voorwaarden voor lidmaatschap en projectwerk." },
     "legal/cookies": { title: "Cookie-instellingen", blurb: "Wat deze site in uw browser bewaart — geen tracking, geen advertentiecookies." },
     "legal/disclaimer": { title: "Disclaimer", blurb: "De grenzen van wat deze site en haar informatie beloven." },
-    "legal/company": { title: "Bedrijfsgegevens", blurb: "Statutaire naam, KvK- en btw-nummer, vestigingsadres." },
+    "legal/company": { title: "Bedrijfsgegevens", blurb: "Statutaire naam, KvK-nummer, vestigingsadres." },
     "legal/member-data": { title: "Publicatie van ledengegevens", blurb: "Wat wij over leden publiceren, alleen met toestemming, en hoe u die intrekt." },
     "legal/data-transfers": { title: "Doorgifte buiten de EU", blurb: "Hoe gegevens veilig reizen naar partners in de Golf en de bredere regio." },
   },

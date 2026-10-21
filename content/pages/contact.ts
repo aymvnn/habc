@@ -139,7 +139,7 @@ export const contact: PageSet = {
           },
           {
             title: { en: "Address", nl: "Adres", ar: "العنوان" },
-            body: { en: "[Address approved for publication]", nl: "[adres dat gepubliceerd mag worden]", ar: "[العنوان المصرح بنشره]" },
+            body: { en: "Kelvinring 11, 2952 BG Alblasserdam, the Netherlands", nl: "Kelvinring 11, 2952 BG Alblasserdam, Nederland", ar: "Kelvinring 11, 2952 BG Alblasserdam، هولندا" },
           },
           {
             title: { en: "Contact hours", nl: "Contacttijden", ar: "أوقات التواصل" },

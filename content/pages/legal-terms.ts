@@ -7,8 +7,8 @@ import type { PageSet } from "./types";
  * (membership.charge) and the verification disclaimer (EN verbatim, NL/AR faithful).
  * Owner's decisions of 29 Sep 2026: seat given as the Rotterdam region; admission by nomination or invitation, applications
  * possible; no statutory interest; no remedy "if we fall short"; fees stated clearly, arrangements kept open.
- * Brackets are values the founders fill in, written in each language as in content/pages/legal.ts
- * ([number] / [nummer] / [الرقم], [Address] / [adres] / [العنوان]); the e-mail placeholder is the one from content/{nl,ar}.ts.
+ * Name, address and KvK number as in the Handelsregister (KvK 73318205, 21 Oct 2026); no VAT number on the site.
+ * Brackets are values the founders still fill in; the e-mail placeholder is the one from content/{nl,ar}.ts.
  * Articles are numbered by the legal block in order (1, 2, 3 …); cross-references below rely on that order.
  */
 export const legalTerms: PageSet = {
@@ -35,9 +35,9 @@ export const legalTerms: PageSet = {
                 ar: "يكون للكلمات والعبارات الآتية، حيثما وردت في هذه الشروط، المعاني المبيّنة إزاء كلٍّ منها.",
               },
               {
-                en: "DUKAAT, we, us: Stichting Nederlands–Arabische Handelskamer, trading as DUKAAT, as described in article 2.",
-                nl: "DUKAAT, wij, ons: Stichting Nederlands–Arabische Handelskamer, handelend onder de naam DUKAAT, zoals omschreven in artikel 2.",
-                ar: "DUKAAT أو «نحن»: Stichting Nederlands–Arabische Handelskamer، التي تمارس نشاطها تحت الاسم التجاري DUKAAT، على النحو المبيّن في المادة 2.",
+                en: "DUKAAT, we, us: Stichting Nederlands-Arabische Handelskamer, trading as DUKAAT, as described in article 2.",
+                nl: "DUKAAT, wij, ons: Stichting Nederlands-Arabische Handelskamer, handelend onder de naam DUKAAT, zoals omschreven in artikel 2.",
+                ar: "DUKAAT أو «نحن»: Stichting Nederlands-Arabische Handelskamer، التي تمارس نشاطها تحت الاسم التجاري DUKAAT، على النحو المبيّن في المادة 2.",
               },
               {
                 en: "Member, you: the company, or the person acting in the course of a business or profession, with whom we have concluded a membership agreement. Where these terms refer to members, they also cover a client to whom we provide project services without membership.",
@@ -85,9 +85,9 @@ export const legalTerms: PageSet = {
             title: { en: "DUKAAT and these terms", nl: "DUKAAT en deze voorwaarden", ar: "DUKAAT وهذه الشروط" },
             body: [
               {
-                en: "DUKAAT is the trading name of Stichting Nederlands–Arabische Handelskamer, a foundation under Dutch law established in 2018 and based in the Rotterdam region, the Netherlands. Chamber of Commerce (KvK) number [number], VAT number [number], address [Address].",
-                nl: "DUKAAT is de handelsnaam van Stichting Nederlands–Arabische Handelskamer, een stichting naar Nederlands recht, opgericht in 2018 en gevestigd in de regio Rotterdam. KvK-nummer [nummer], btw-nummer [nummer], adres [adres].",
-                ar: "DUKAAT هو الاسم التجاري لـ Stichting Nederlands–Arabische Handelskamer، وهي مؤسسة (Stichting) خاضعة للقانون الهولندي، تأسست عام 2018، ومقرّها في منطقة روتردام بهولندا. رقم السجل لدى غرفة التجارة الهولندية (KvK): [الرقم]؛ رقم ضريبة القيمة المضافة: [الرقم]؛ العنوان: [العنوان].",
+                en: "DUKAAT is the trading name of Stichting Nederlands-Arabische Handelskamer, a foundation under Dutch law established in 2018 and based in the Rotterdam region, the Netherlands. Chamber of Commerce (KvK) number 73318205, address Kelvinring 11, 2952 BG Alblasserdam.",
+                nl: "DUKAAT is de handelsnaam van Stichting Nederlands-Arabische Handelskamer, een stichting naar Nederlands recht, opgericht in 2018 en gevestigd in de regio Rotterdam. KvK-nummer 73318205, adres Kelvinring 11, 2952 BG Alblasserdam.",
+                ar: "DUKAAT هو الاسم التجاري لـ Stichting Nederlands-Arabische Handelskamer، وهي مؤسسة (Stichting) خاضعة للقانون الهولندي، تأسست عام 2018، ومقرّها في منطقة روتردام بهولندا. رقم السجل لدى غرفة التجارة الهولندية (KvK): 73318205؛ العنوان: Kelvinring 11, 2952 BG Alblasserdam.",
               },
               {
                 en: "DUKAAT is a private business club. It is not a public body, does not represent any government and does not issue official documents. The name of the foundation reflects the purpose for which it was established; it confers no public-law status.",
@@ -464,9 +464,9 @@ export const legalTerms: PageSet = {
         updated: { en: "Version: September 2026", nl: "Versie: september 2026", ar: "الإصدار: سبتمبر 2026" },
         intro: [
           {
-            en: "This disclaimer covers the use of this website and of all information on it. DUKAAT is the trading name of Stichting Nederlands–Arabische Handelskamer; its details are on the Company details page.",
-            nl: "Deze disclaimer is van toepassing op het gebruik van deze website en van alle informatie daarop. DUKAAT is de handelsnaam van Stichting Nederlands–Arabische Handelskamer; haar gegevens staan op de pagina Bedrijfsgegevens.",
-            ar: "يسري إخلاء المسؤولية هذا على استخدام الموقع وعلى جميع المعلومات الواردة فيه. وDUKAAT هو الاسم التجاري لـ Stichting Nederlands–Arabische Handelskamer، وترد بياناتها في صفحة «بيانات الشركة».",
+            en: "This disclaimer covers the use of this website and of all information on it. DUKAAT is the trading name of Stichting Nederlands-Arabische Handelskamer; its details are on the Company details page.",
+            nl: "Deze disclaimer is van toepassing op het gebruik van deze website en van alle informatie daarop. DUKAAT is de handelsnaam van Stichting Nederlands-Arabische Handelskamer; haar gegevens staan op de pagina Bedrijfsgegevens.",
+            ar: "يسري إخلاء المسؤولية هذا على استخدام الموقع وعلى جميع المعلومات الواردة فيه. وDUKAAT هو الاسم التجاري لـ Stichting Nederlands-Arabische Handelskamer، وترد بياناتها في صفحة «بيانات الشركة».",
           },
         ],
         articles: [
@@ -569,9 +569,9 @@ export const legalTerms: PageSet = {
             title: { en: "Intellectual property", nl: "Intellectuele eigendom", ar: "الملكية الفكرية" },
             body: [
               {
-                en: "All rights in this website — texts, photographs, design, the name DUKAAT and the tulip mark — belong to Stichting Nederlands–Arabische Handelskamer or its licensors. You may view the website and quote short passages with a clear reference to the source. Any other reproduction, publication or commercial use requires our prior written consent.",
-                nl: "Alle rechten op deze website — teksten, foto’s, vormgeving, de naam DUKAAT en het beeldmerk met de tulp — berusten bij Stichting Nederlands–Arabische Handelskamer of haar licentiegevers. U mag de website bekijken en korte passages citeren met een duidelijke bronvermelding. Elke andere verveelvoudiging, openbaarmaking of commercieel gebruik vereist onze voorafgaande schriftelijke toestemming.",
-                ar: "جميع الحقوق في هذا الموقع — النصوص والصور والتصميم واسم DUKAAT وشعار التوليب — مملوكة لـ Stichting Nederlands–Arabische Handelskamer أو للجهات المرخِّصة لها. ويجوز لك تصفّح الموقع واقتباس مقاطع قصيرة منه مع الإشارة الواضحة إلى المصدر. ويتطلب أي نسخ أو نشر أو استخدام تجاري آخر موافقتَنا الكتابية المسبقة.",
+                en: "All rights in this website — texts, photographs, design, the name DUKAAT and the tulip mark — belong to Stichting Nederlands-Arabische Handelskamer or its licensors. You may view the website and quote short passages with a clear reference to the source. Any other reproduction, publication or commercial use requires our prior written consent.",
+                nl: "Alle rechten op deze website — teksten, foto’s, vormgeving, de naam DUKAAT en het beeldmerk met de tulp — berusten bij Stichting Nederlands-Arabische Handelskamer of haar licentiegevers. U mag de website bekijken en korte passages citeren met een duidelijke bronvermelding. Elke andere verveelvoudiging, openbaarmaking of commercieel gebruik vereist onze voorafgaande schriftelijke toestemming.",
+                ar: "جميع الحقوق في هذا الموقع — النصوص والصور والتصميم واسم DUKAAT وشعار التوليب — مملوكة لـ Stichting Nederlands-Arabische Handelskamer أو للجهات المرخِّصة لها. ويجوز لك تصفّح الموقع واقتباس مقاطع قصيرة منه مع الإشارة الواضحة إلى المصدر. ويتطلب أي نسخ أو نشر أو استخدام تجاري آخر موافقتَنا الكتابية المسبقة.",
               },
             ],
           },
@@ -733,9 +733,9 @@ export const legalTerms: PageSet = {
                 ar: "تُعالَج البيانات الشخصية لمسؤولي الاتصال وفقاً للائحة العامة لحماية البيانات (GDPR)، على النحو المبيّن في بيان الخصوصية. ويحقّ لمسؤولي الاتصال كذلك ممارسة حقوقهم لدينا مباشرةً.",
               },
               {
-                en: "For corrections, withdrawals and questions about these terms, write to [enquiries@ — domain pending], to your contact at DUKAAT, or by post to Stichting Nederlands–Arabische Handelskamer, trading as DUKAAT, [Address], the Netherlands.",
-                nl: "Voor correcties, intrekkingen en vragen over deze voorwaarden schrijft u naar [e-mailadres — domein in afwachting], naar uw contactpersoon bij DUKAAT, of per post naar Stichting Nederlands–Arabische Handelskamer, handelend onder de naam DUKAAT, [adres], Nederland.",
-                ar: "للتصحيح أو السحب أو الاستفسار عن هذه الشروط، راسلنا على [البريد الإلكتروني — بانتظار قرار النطاق]، أو راسل الشخص الذي تتواصل معه لدى DUKAAT، أو اكتب إلينا بالبريد العادي على العنوان: Stichting Nederlands–Arabische Handelskamer، التي تمارس نشاطها تحت الاسم التجاري DUKAAT، [العنوان]، هولندا.",
+                en: "For corrections, withdrawals and questions about these terms, write to [enquiries@ — domain pending], to your contact at DUKAAT, or by post to Stichting Nederlands-Arabische Handelskamer, trading as DUKAAT, Kelvinring 11, 2952 BG Alblasserdam, the Netherlands.",
+                nl: "Voor correcties, intrekkingen en vragen over deze voorwaarden schrijft u naar [e-mailadres — domein in afwachting], naar uw contactpersoon bij DUKAAT, of per post naar Stichting Nederlands-Arabische Handelskamer, handelend onder de naam DUKAAT, Kelvinring 11, 2952 BG Alblasserdam, Nederland.",
+                ar: "للتصحيح أو السحب أو الاستفسار عن هذه الشروط، راسلنا على [البريد الإلكتروني — بانتظار قرار النطاق]، أو راسل الشخص الذي تتواصل معه لدى DUKAAT، أو اكتب إلينا بالبريد العادي على العنوان: Stichting Nederlands-Arabische Handelskamer، التي تمارس نشاطها تحت الاسم التجاري DUKAAT، Kelvinring 11, 2952 BG Alblasserdam، هولندا.",
               },
               {
                 en: "These terms are published in Dutch, English and Arabic. Where the versions differ, the Dutch text prevails.",

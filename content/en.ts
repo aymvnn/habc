@@ -102,7 +102,7 @@ export const en: Dict = {
   /** extras the owner kept on 30 Sep 2026 (report 9pZxu4Jeprq9yqE3KkNu5V) — not in the source; texts from commit 2336702 */
   extra: {
     "anno": "Anno 2018",
-    "annoTitle": "Stichting Nederlands–Arabische Handelskamer, founded 2018",
+    "annoTitle": "Stichting Nederlands-Arabische Handelskamer, founded 2018",
     "byNomination": "By nomination",
     "byNominationTitle": "Membership by nomination or invitation, after review",
     "nominated": "I have been nominated",
@@ -141,14 +141,14 @@ export const en: Dict = {
       "lede": "One is an entrepreneur in education, trade and services. The other advises on structure, contracts and checks.",
       "founders": [
         {
-          "name": "[Founder 1 — entrepreneur]",
+          "name": "Ghassan Salma",
           "role": "Founder and Entrepreneur",
           "credentials": "MBA, specialising in Finance and Investment | Entrepreneur in education, trade and services",
           "voice": "“The idea for DUKAAT grew out of my vision as an entrepreneur who combines academic knowledge with practical experience. Through my studies in business administration, specialising in finance and investment, and my experience in education, trade and services, I became convinced that business growth begins with clear knowledge, trusted relationships, and the ability to turn opportunities into practical steps.\n\nFrom that conviction came my vision of founding DUKAAT: a business community that connects companies and entrepreneurs between the Netherlands and the Arab world, and brings training, the exchange of experience, partnership-building and the development of commercial and investment opportunities together in one ecosystem.\n\nMy ambition is that everyone who joins DUKAAT finds knowledge that develops their abilities, a connection that widens their horizons, and a space in which to share their experience and create value for others.”",
           "portraitAlt": "The founding entrepreneur’s craft: a sampling probe in a sack of chickpeas"
         },
         {
-          "name": "[Founder 2 — fiscal law]",
+          "name": "Ayman Ebdul",
           "role": "Founder · Fiscal law",
           "voice": "“A good introduction fails on the paperwork more often than on the people. My background is fiscal law, and my role at DUKAAT is an advisory one: making sure the right questions are asked early — which entity signs, what the contract says, where the tax and customs questions lie, and whether the other party is who they say they are. That experience makes a deal clearer. It is not a guarantee; the decision stays with the member. It is what makes the handshake worth something.”",
           "portraitAlt": "The fiscal-law founder’s craft: a pen over a contract"
@@ -163,9 +163,9 @@ export const en: Dict = {
       "taglineEcho": "حيث تعبر القيمة الحدود",
       "sealText": "DUKAAT · DUTCH–ARAB BUSINESS CLUB · ANNO 2018 · "
     },
-    "colophon": "An initiative of Stichting Nederlands–Arabische Handelskamer, Anno 2018, registered in the Netherlands.",
+    "colophon": "An initiative of Stichting Nederlands-Arabische Handelskamer, Anno 2018, registered in the Netherlands, KvK 73318205.",
     "legalLine": "We do not take custody of members’ funds, we do not act as a bank or payment provider, and we do not guarantee any transaction between members.",
-    "foundation": "Stichting Nederlands–Arabische Handelskamer"
+    "foundation": "Stichting Nederlands-Arabische Handelskamer"
   },
   /** interface words approved on 4 Oct 2026 (UX assessment, see content/types.ts) — not in the source */
   ux: {
