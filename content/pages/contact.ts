@@ -1,4 +1,5 @@
 import type { PageSet } from "./types";
+import { EMAIL, PHONE } from "../contact-details";
 
 /**
  * Contact (source 19), "What are you looking for?" (source 10) and the frequently asked questions (source 20).
@@ -131,23 +132,15 @@ export const contact: PageSet = {
         items: [
           {
             title: { en: "Email", nl: "E-mail", ar: "البريد الإلكتروني" },
-            body: { en: "[Approved official email address]", nl: "[officieel goedgekeurd e-mailadres]", ar: "[البريد الرسمي المعتمد]" },
+            body: { en: EMAIL, nl: EMAIL, ar: EMAIL },
           },
           {
             title: { en: "Phone or business WhatsApp", nl: "Telefoon of WhatsApp Business", ar: "الهاتف أو واتساب الأعمال" },
-            body: { en: "[Approved number]", nl: "[goedgekeurd nummer]", ar: "[الرقم المعتمد]" },
+            body: { en: PHONE, nl: PHONE, ar: PHONE },
           },
           {
             title: { en: "Address", nl: "Adres", ar: "العنوان" },
             body: { en: "Kelvinring 11, 2952 BG Alblasserdam, the Netherlands", nl: "Kelvinring 11, 2952 BG Alblasserdam, Nederland", ar: "Kelvinring 11, 2952 BG Alblasserdam، هولندا" },
-          },
-          {
-            title: { en: "Contact hours", nl: "Contacttijden", ar: "أوقات التواصل" },
-            body: { en: "[Days, hours and time zone]", nl: "[dagen, uren en tijdzone]", ar: "[الأيام والساعات والمنطقة الزمنية]" },
-          },
-          {
-            title: { en: "Official accounts", nl: "Officiële accounts", ar: "الحسابات الرسمية" },
-            body: { en: "[Approved links]", nl: "[goedgekeurde links]", ar: "[الروابط المعتمدة]" },
           },
         ],
       },

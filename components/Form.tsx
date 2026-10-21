@@ -6,6 +6,7 @@ import { LANGUAGE_OF, MAX_ATTACHMENT, type LocalField } from "@/lib/forms";
 import type { Locale } from "@/content/types";
 import { Arrow } from "./Arrow";
 import { takeArrival } from "./Arrival";
+import { Rich } from "./Rich";
 import { WaxSeal, warmWax } from "./WaxSeal";
 
 /* eslint-disable @next/next/no-img-element -- the brand mark is served as-is */
@@ -490,7 +491,7 @@ export function Form({ id, locale, fields, submit, success, successNote, option,
                 {real.map((c) => (
                   <div key={c.label}>
                     <dt>{c.label}</dt>
-                    <dd>{c.value}</dd>
+                    <dd><Rich text={c.value} /></dd>
                   </div>
                 ))}
               </dl>

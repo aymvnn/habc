@@ -8,7 +8,7 @@ Website of DUKAAT, the private business club connecting companies between the Ne
 - **Next.js 16** (App Router, Turbopack), React 19, TypeScript. No CSS framework: one hand-written design system in `app/globals.css`.
 - Three language versions with their own URLs: `/en` (default; `/` redirects there), `/nl`, `/ar` (`dir="rtl"`). Full `hreflang` alternates.
 - Fonts via `next/font`: Schibsted Grotesk (display), Source Serif 4 (text), Almarai (Arabic).
-- Intake behind the eight routers: `app/actions/intake.ts` (Server Action → Resend REST API). See `.env.example`.
+- Intake behind the eight routers: `app/actions/forms.ts` (Server Action → Resend REST API, needs `RESEND_API_KEY`). See `.env.example`.
 - Hosted on Vercel (auto-detected Next.js build).
 
 ## Structure
@@ -17,7 +17,8 @@ Website of DUKAAT, the private business club connecting companies between the Ne
 app/[locale]/layout.tsx     html lang/dir, fonts, top bar, footer, metadata
 app/[locale]/page.tsx       homepage (hero · routers · how we work · why · the name · membership · behind · correspondence)
 app/[locale]/contact/       intake + FAQ (?intent=distributor|supplier|sell|buy|market-entry|opportunity|invest|nominated)
-app/actions/intake.ts       Server Action for the intake
+app/actions/forms.ts        Server Action behind every form (Resend)
+app/robots.ts, sitemap.ts   robots.txt and sitemap.xml (origin: lib/site-url.ts)
 app/globals.css             design tokens + all component styles (bordeaux #6F0A25 · gold #DCB17A→#9E7946 · bar #B39455 · paper #EDEAE1)
 components/                 TopBar, Hero, Sections (Routers, Steps, Why, Name, Membership, Behind, Correspondence, Footer), IntakeForm, Reveal
 content/{en,nl,ar}.ts       home page, menu and contact copy, keyed; edit copy here, never in components
@@ -58,4 +59,4 @@ Admission by nomination or invitation; companies may also apply through the inta
 (router 8 is "I have been nominated"); no counts of members per sector or market; no prices (only the charging model),
 no fabricated numbers or members, no Syria on the public site, "people verify" instead of "AI finds", Anno 2018 present,
 ducat facts as verified (4 Aug 1586 · 3.494 g at 983/1000 · sultani 1477–78 · bunduqi = Venice), and the legal line about members' funds.
-Bracketed values such as `[48] newsletters` are pending founders' decisions; reply times are Member 5, Professional 3, Executive 1 working day(s).
+The club's e-mail address and telephone number live in `content/contact-details.ts`; a value between square brackets in the copy is still a pending founders' decision (none are left since 22 Oct 2026); reply times are Member 5, Professional 3, Executive 1 working day(s).

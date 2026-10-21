@@ -207,7 +207,6 @@ html.lenis{ scroll-behavior:auto }
 [dir="rtl"] #correspondence h2{ line-height:1.25; letter-spacing:0 }
 #correspondence .contact{ grid-column:9 / span 4; display:grid; gap:var(--s-md) }
 #correspondence .mail{ font-family:var(--display); font-weight:700; font-size:var(--t2); letter-spacing:-.02em; color:var(--wine); border-bottom:2px solid var(--bar); padding-bottom:4px; width:max-content; max-width:100% }
-#correspondence .mail.pending{ color:var(--muted); border-bottom-style:dashed; font-size:var(--t1) }
 #correspondence .where{ color:var(--muted); font-size:.98rem }
 #correspondence .signoff{ margin-top:var(--s-3xl); display:flex; justify-content:space-between; align-items:center; gap:var(--s-lg); flex-wrap:wrap; border-top:1px solid var(--line-strong); padding-top:var(--s-lg) }
 #correspondence .signoff .tag{ font-family:var(--display); font-weight:700; letter-spacing:-.01em; font-size:var(--t1) }

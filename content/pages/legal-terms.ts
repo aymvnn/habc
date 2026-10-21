@@ -8,7 +8,10 @@ import type { PageSet } from "./types";
  * Owner's decisions of 29 Sep 2026: seat given as the Rotterdam region; admission by nomination or invitation, applications
  * possible; no statutory interest; no remedy "if we fall short"; fees stated clearly, arrangements kept open.
  * Name, address and KvK number as in the Handelsregister (KvK 73318205, 21 Oct 2026); no VAT number on the site.
- * Brackets are values the founders still fill in; the e-mail placeholder is the one from content/{nl,ar}.ts.
+ * Filled in by the owner on 22 Oct 2026: notice periods (termination one month, rate change two months, force majeure two
+ * months, change of terms one month), correction or removal of member data within one month, e-mail contact@dukaatbusinessclub.com
+ * (content/contact-details.ts). Liability: no liability is accepted and there is no damage cap or claims period ("never
+ * acknowledge liability, remove everything about damage claims"); the exclusion applies as far as mandatory law permits.
  * Articles are numbered by the legal block in order (1, 2, 3 …); cross-references below rely on that order.
  */
 export const legalTerms: PageSet = {
@@ -160,9 +163,9 @@ export const legalTerms: PageSet = {
             title: { en: "Term, renewal and notice", nl: "Duur, verlenging en opzegging", ar: "المدة والتجديد والإنهاء" },
             body: [
               {
-                en: "Membership is concluded for one membership year and renews each time for a further membership year, unless the member or we give written notice of termination no later than [one month] before the end of the current membership year. Notice given later takes effect at the end of the following membership year.",
-                nl: "Het lidmaatschap wordt aangegaan voor één lidmaatschapsjaar en wordt telkens stilzwijgend verlengd met een volgend lidmaatschapsjaar, tenzij het lid of wij uiterlijk [één maand] vóór het einde van het lopende lidmaatschapsjaar schriftelijk opzeggen. Een latere opzegging werkt tegen het einde van het daaropvolgende lidmaatschapsjaar.",
-                ar: "تُبرم العضوية لسنة عضوية واحدة، وتتجدّد تلقائياً في كل مرة لسنة عضوية أخرى، ما لم يُخطر أحد الطرفين الآخرَ كتابةً بالإنهاء قبل [شهر واحد] على الأقل من نهاية سنة العضوية الجارية. أما الإخطار الذي يرد بعد هذا الموعد فيسري في نهاية سنة العضوية التالية.",
+                en: "Membership is concluded for one membership year and renews each time for a further membership year, unless the member or we give written notice of termination no later than one month before the end of the current membership year. Notice given later takes effect at the end of the following membership year.",
+                nl: "Het lidmaatschap wordt aangegaan voor één lidmaatschapsjaar en wordt telkens stilzwijgend verlengd met een volgend lidmaatschapsjaar, tenzij het lid of wij uiterlijk één maand vóór het einde van het lopende lidmaatschapsjaar schriftelijk opzeggen. Een latere opzegging werkt tegen het einde van het daaropvolgende lidmaatschapsjaar.",
+                ar: "تُبرم العضوية لسنة عضوية واحدة، وتتجدّد تلقائياً في كل مرة لسنة عضوية أخرى، ما لم يُخطر أحد الطرفين الآخرَ كتابةً بالإنهاء قبل شهر واحد على الأقل من نهاية سنة العضوية الجارية. أما الإخطار الذي يرد بعد هذا الموعد فيسري في نهاية سنة العضوية التالية.",
               },
               {
                 en: "During a membership year, membership can be ended early only as provided in articles 12, 15 and 16 or by law.",
@@ -200,9 +203,9 @@ export const legalTerms: PageSet = {
                 ar: "تُسدَّد الفواتير خلال المهلة المبيّنة فيها. وفي حال التأخر في السداد، يجوز لنا بعد توجيه تذكير كتابي تعليق خدماتنا إلى حين سداد الفاتورة، ويتحمّل العضو حينئذٍ تكاليف التحصيل المعقولة.",
               },
               {
-                en: "We may change the subscription rate for a following membership year. We announce such a change in writing no later than [two months] before the end of the current membership year, so that the member can give notice in time.",
-                nl: "Wij kunnen het abonnementstarief voor een volgend lidmaatschapsjaar wijzigen. Een dergelijke wijziging maken wij uiterlijk [twee maanden] vóór het einde van het lopende lidmaatschapsjaar schriftelijk bekend, zodat het lid tijdig kan opzeggen.",
-                ar: "يجوز لنا تعديل قيمة الاشتراك لسنة عضوية تالية، على أن نُعلن هذا التعديل كتابةً قبل [شهرين] على الأقل من نهاية سنة العضوية الجارية، ليتمكّن العضو من الإخطار بالإنهاء في الوقت المناسب.",
+                en: "We may change the subscription rate for a following membership year. We announce such a change in writing no later than two months before the end of the current membership year, so that the member can give notice in time.",
+                nl: "Wij kunnen het abonnementstarief voor een volgend lidmaatschapsjaar wijzigen. Een dergelijke wijziging maken wij uiterlijk twee maanden vóór het einde van het lopende lidmaatschapsjaar schriftelijk bekend, zodat het lid tijdig kan opzeggen.",
+                ar: "يجوز لنا تعديل قيمة الاشتراك لسنة عضوية تالية، على أن نُعلن هذا التعديل كتابةً قبل شهرين على الأقل من نهاية سنة العضوية الجارية، ليتمكّن العضو من الإخطار بالإنهاء في الوقت المناسب.",
               },
             ],
           },
@@ -310,9 +313,9 @@ export const legalTerms: PageSet = {
             title: { en: "Liability", nl: "Aansprakelijkheid", ar: "المسؤولية" },
             body: [
               {
-                en: "Our total liability, on whatever ground, is limited to direct damage, up to at most [the fees paid by the member in the twelve months before the event that caused the damage].",
-                nl: "Onze totale aansprakelijkheid, op welke grond ook, is beperkt tot directe schade en tot ten hoogste [de vergoedingen die het lid in de twaalf maanden vóór de schadeveroorzakende gebeurtenis heeft betaald].",
-                ar: "تقتصر مسؤوليتنا الإجمالية، أيّاً كان أساسها، على الضرر المباشر، ولا تتجاوز [الرسوم التي دفعها العضو خلال الاثني عشر شهراً السابقة للواقعة المسبِّبة للضرر].",
+                en: "We accept no liability for damage arising from membership, from any introduction we make or from our services, on whatever ground.",
+                nl: "Wij aanvaarden geen aansprakelijkheid voor schade die voortvloeit uit het lidmaatschap, uit een introductie die wij doen of uit onze dienstverlening, op welke grond ook.",
+                ar: "لا نتحمّل أي مسؤولية عن الأضرار الناشئة عن العضوية أو عن أي تعريف نُجريه أو عن خدماتنا، أيّاً كان أساسها.",
               },
               {
                 en: "We are not liable for indirect damage, including loss of profit or turnover, lost savings, loss of reputation, business interruption, and damage arising from a transaction that is delayed, not concluded or not performed.",
@@ -325,14 +328,14 @@ export const legalTerms: PageSet = {
                 ar: "ولا نُسأل عمّا يصدر عن الأعضاء أو الأطراف المقابلة أو المختصين أو السفراء أو الشركاء أو الناقلين أو المصارف أو السلطات أو غيرهم من الأطراف الثالثة، من أفعال أو امتناع أو معلومات.",
               },
               {
-                en: "These limitations do not cover damage caused by intent or gross negligence on the part of DUKAAT or its management, nor cases in which mandatory law does not permit them.",
-                nl: "Deze beperkingen gelden niet voor schade die is veroorzaakt door opzet of grove schuld van DUKAAT of haar leidinggevenden, en evenmin voor zover dwingend recht zich ertegen verzet.",
-                ar: "ولا تسري هذه القيود على الضرر الناجم عن العمد أو الخطأ الجسيم من جانب DUKAAT أو القائمين على إدارته، ولا في الحالات التي لا يجيز فيها القانون الآمر هذه القيود.",
+                en: "These exclusions apply to the fullest extent mandatory law permits.",
+                nl: "Deze uitsluitingen gelden voor zover het dwingend recht dit toestaat.",
+                ar: "ويسري هذا الإخلاء من المسؤولية بالقدر الذي يجيزه القانون الآمر.",
               },
               {
-                en: "A claim for damages lapses if it has not been reported to us in writing within [one year] after the member became aware, or could reasonably have become aware, of the damage. These limitations also protect our board members, staff and the persons we engage in providing our services, who may invoke them directly.",
-                nl: "Een vordering tot schadevergoeding vervalt als zij niet binnen [één jaar] nadat het lid de schade heeft ontdekt of redelijkerwijs had kunnen ontdekken, schriftelijk bij ons is gemeld. Deze beperkingen gelden ook ten gunste van onze bestuurders, medewerkers en de personen die wij bij onze dienstverlening inschakelen; zij kunnen zich er rechtstreeks op beroepen.",
-                ar: "ويسقط الحق في المطالبة بالتعويض ما لم يُخطرنا العضو بها كتابةً خلال [سنة واحدة] من تاريخ علمه بالضرر، أو من التاريخ الذي كان بوسعه فيه أن يعلم به على نحو معقول. وتسري هذه القيود كذلك لمصلحة أعضاء مجلس إدارتنا والعاملين لدينا والأشخاص الذين نستعين بهم في تقديم خدماتنا، ويحقّ لهم التمسّك بها مباشرةً.",
+                en: "These exclusions also protect our board members, staff and the persons we engage in providing our services, who may invoke them directly.",
+                nl: "Deze uitsluitingen gelden ook ten gunste van onze bestuurders, medewerkers en de personen die wij bij onze dienstverlening inschakelen; zij kunnen zich er rechtstreeks op beroepen.",
+                ar: "ويسري هذا الإخلاء من المسؤولية كذلك لمصلحة أعضاء مجلس إدارتنا والعاملين لدينا والأشخاص الذين نستعين بهم في تقديم خدماتنا، ويحقّ لهم التمسّك به مباشرةً.",
               },
             ],
           },
@@ -345,9 +348,9 @@ export const legalTerms: PageSet = {
                 ar: "لا نُسأل عن أي إخلال ناجم عن ظروف خارجة عن سيطرتنا، كالحرب والاضطرابات والإرهاب والأوبئة والكوارث الطبيعية والإجراءات الحكومية والعقوبات وتحذيرات السفر والإضرابات وتعطّل النقل أو إمدادات الطاقة أو الإنترنت، وتقصير مزوّدي أماكن الفعاليات أو الناقلين أو غيرهم من المورّدين.",
               },
               {
-                en: "During force majeure our obligations are suspended. If it lasts longer than [two months], either party may terminate the affected part of the agreement in writing, without any obligation to pay damages.",
-                nl: "Tijdens overmacht worden onze verplichtingen opgeschort. Duurt de overmacht langer dan [twee maanden], dan kan elk van de partijen het getroffen deel van de overeenkomst schriftelijk ontbinden, zonder tot schadevergoeding gehouden te zijn.",
-                ar: "وتُعلَّق التزاماتنا طوال مدة القوة القاهرة. فإن استمرت أكثر من [شهرين]، جاز لكلٍّ من الطرفين فسخ الجزء المتأثر من الاتفاق كتابةً، دون أن يلتزم بأي تعويض.",
+                en: "During force majeure our obligations are suspended. If it lasts longer than two months, either party may terminate the affected part of the agreement in writing, without any obligation to pay damages.",
+                nl: "Tijdens overmacht worden onze verplichtingen opgeschort. Duurt de overmacht langer dan twee maanden, dan kan elk van de partijen het getroffen deel van de overeenkomst schriftelijk ontbinden, zonder tot schadevergoeding gehouden te zijn.",
+                ar: "وتُعلَّق التزاماتنا طوال مدة القوة القاهرة. فإن استمرت أكثر من شهرين، جاز لكلٍّ من الطرفين فسخ الجزء المتأثر من الاتفاق كتابةً، دون أن يلتزم بأي تعويض.",
               },
               {
                 en: "We may change the programme, date or place of an event or trade mission, or cancel it, where travel advice, security, legal or insurance conditions, government measures or circumstances at the destination require it. We inform participants as early as we can. What happens to amounts already paid for that event or mission is set out in its invitation or confirmation.",
@@ -420,9 +423,9 @@ export const legalTerms: PageSet = {
             title: { en: "Changes to these terms", nl: "Wijziging van deze voorwaarden", ar: "تعديل هذه الشروط" },
             body: [
               {
-                en: "We may change these terms. We announce a change in writing at least [one month] before it takes effect, and publish the new version on this website with its date.",
-                nl: "Wij kunnen deze voorwaarden wijzigen. Een wijziging maken wij ten minste [één maand] voordat zij ingaat schriftelijk bekend, en wij publiceren de nieuwe versie met haar datum op deze website.",
-                ar: "يجوز لنا تعديل هذه الشروط، على أن نُعلن التعديل كتابةً قبل [شهر واحد] على الأقل من سريانه، وننشر الصيغة الجديدة بتاريخها على هذا الموقع.",
+                en: "We may change these terms. We announce a change in writing at least one month before it takes effect, and publish the new version on this website with its date.",
+                nl: "Wij kunnen deze voorwaarden wijzigen. Een wijziging maken wij ten minste één maand voordat zij ingaat schriftelijk bekend, en wij publiceren de nieuwe versie met haar datum op deze website.",
+                ar: "يجوز لنا تعديل هذه الشروط، على أن نُعلن التعديل كتابةً قبل شهر واحد على الأقل من سريانه، وننشر الصيغة الجديدة بتاريخها على هذا الموقع.",
               },
               {
                 en: "If a change materially limits your rights, you may terminate your membership in writing with effect from the date on which the change takes effect. A change required by law takes effect when the law requires it.",
@@ -673,9 +676,9 @@ export const legalTerms: PageSet = {
             title: { en: "Correction and withdrawal", nl: "Correctie en intrekking", ar: "التصحيح والسحب" },
             body: [
               {
-                en: "A member may correct or withdraw any published information at any time, without giving reasons, by writing to us. We carry out the correction or removal without undue delay, and at the latest within [10] working days.",
-                nl: "Een lid kan gepubliceerde informatie op elk moment en zonder opgave van redenen corrigeren of intrekken door ons te schrijven. Wij voeren de correctie of verwijdering zonder onnodige vertraging uit, en uiterlijk binnen [10] werkdagen.",
-                ar: "يجوز للعضو، في أي وقت ودون إبداء أسباب، تصحيح أي معلومات منشورة أو سحبها بمراسلتنا كتابةً. وننفّذ التصحيح أو الحذف دون تأخير لا مبرر له، وفي موعد أقصاه [10] أيام عمل.",
+                en: "A member may correct or withdraw any published information at any time, without giving reasons, by writing to us. We carry out the correction or removal without undue delay, and at the latest within one month.",
+                nl: "Een lid kan gepubliceerde informatie op elk moment en zonder opgave van redenen corrigeren of intrekken door ons te schrijven. Wij voeren de correctie of verwijdering zonder onnodige vertraging uit, en uiterlijk binnen één maand.",
+                ar: "يجوز للعضو، في أي وقت ودون إبداء أسباب، تصحيح أي معلومات منشورة أو سحبها بمراسلتنا كتابةً. وننفّذ التصحيح أو الحذف دون تأخير لا مبرر له، وفي موعد أقصاه شهر واحد.",
               },
               {
                 en: "Withdrawing a publication does not end the membership. We remove the information from every place under our control. Information already sent to members, for instance in DUKAAT Deal Alert, cannot be recalled, and copies held by third parties, such as search engines, are outside our control.",
@@ -733,9 +736,9 @@ export const legalTerms: PageSet = {
                 ar: "تُعالَج البيانات الشخصية لمسؤولي الاتصال وفقاً للائحة العامة لحماية البيانات (GDPR)، على النحو المبيّن في بيان الخصوصية. ويحقّ لمسؤولي الاتصال كذلك ممارسة حقوقهم لدينا مباشرةً.",
               },
               {
-                en: "For corrections, withdrawals and questions about these terms, write to [enquiries@ — domain pending], to your contact at DUKAAT, or by post to Stichting Nederlands-Arabische Handelskamer, trading as DUKAAT, Kelvinring 11, 2952 BG Alblasserdam, the Netherlands.",
-                nl: "Voor correcties, intrekkingen en vragen over deze voorwaarden schrijft u naar [e-mailadres — domein in afwachting], naar uw contactpersoon bij DUKAAT, of per post naar Stichting Nederlands-Arabische Handelskamer, handelend onder de naam DUKAAT, Kelvinring 11, 2952 BG Alblasserdam, Nederland.",
-                ar: "للتصحيح أو السحب أو الاستفسار عن هذه الشروط، راسلنا على [البريد الإلكتروني — بانتظار قرار النطاق]، أو راسل الشخص الذي تتواصل معه لدى DUKAAT، أو اكتب إلينا بالبريد العادي على العنوان: Stichting Nederlands-Arabische Handelskamer، التي تمارس نشاطها تحت الاسم التجاري DUKAAT، Kelvinring 11, 2952 BG Alblasserdam، هولندا.",
+                en: "For corrections, withdrawals and questions about these terms, write to contact@dukaatbusinessclub.com, to your contact at DUKAAT, or by post to Stichting Nederlands-Arabische Handelskamer, trading as DUKAAT, Kelvinring 11, 2952 BG Alblasserdam, the Netherlands.",
+                nl: "Voor correcties, intrekkingen en vragen over deze voorwaarden schrijft u naar contact@dukaatbusinessclub.com, naar uw contactpersoon bij DUKAAT, of per post naar Stichting Nederlands-Arabische Handelskamer, handelend onder de naam DUKAAT, Kelvinring 11, 2952 BG Alblasserdam, Nederland.",
+                ar: "للتصحيح أو السحب أو الاستفسار عن هذه الشروط، راسلنا على contact@dukaatbusinessclub.com، أو راسل الشخص الذي تتواصل معه لدى DUKAAT، أو اكتب إلينا بالبريد العادي على العنوان: Stichting Nederlands-Arabische Handelskamer، التي تمارس نشاطها تحت الاسم التجاري DUKAAT، Kelvinring 11, 2952 BG Alblasserdam، هولندا.",
               },
               {
                 en: "These terms are published in Dutch, English and Arabic. Where the versions differ, the Dutch text prevails.",

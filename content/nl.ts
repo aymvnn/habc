@@ -158,8 +158,6 @@ export const nl: Dict = {
     },
     "correspondence": {
       "heading": "Lidmaatschap is op voordracht of uitnodiging.\nWilt u ons schrijven, *schrijf.*",
-      "mailPending": "[e-mailadres — domein in afwachting]",
-      "mailPendingTitle": "Adres op eigen domein volgt na het domeinbesluit",
       "where": "Regio Rotterdam, uitsluitend op afspraak.",
       "taglineEcho": "حيث تعبر القيمة الحدود",
       "sealText": "DUKAAT · DUTCH–ARAB BUSINESS CLUB · ANNO 2018 · "

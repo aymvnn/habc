@@ -20,6 +20,7 @@ import { SealedTab } from "@/components/SealedTab";
 import { PrintSheet } from "@/components/PrintSheet";
 import { twinOf } from "@/components/Twin";
 import type { GroupKey } from "@/content/types";
+import { SITE_URL } from "@/lib/site-url";
 import { DEFAULT_BEWEGING, DEFAULT_OVERGANG } from "@/components/motion";
 import { alternatesFor, dirOf, getDict, isLocale, locales } from "@/lib/i18n";
 import type { Dict } from "@/content/types";
@@ -49,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!isLocale(locale)) return {};
   const d = getDict(locale);
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+    metadataBase: new URL(SITE_URL),
     title: { default: d.meta.title, template: "%s — DUKAAT" },
     description: d.meta.description,
     alternates: { canonical: `/${locale}`, ...alternatesFor("") },

@@ -67,9 +67,9 @@ export const legal: PageSet = {
                 ar: "المتحكّم في البيانات فيما يخص عمليات المعالجة الموصوفة في هذا البيان هو Stichting Nederlands-Arabische Handelskamer، وهي مؤسسة (Stichting) خاضعة للقانون الهولندي، تمارس نشاطها تحت الاسم التجاري DUKAAT — نادي الأعمال الهولندي العربي، ومقرّها في منطقة روتردام بهولندا. عنوان الزيارة: Kelvinring 11, 2952 BG Alblasserdam. رقم السجل لدى غرفة التجارة الهولندية (KvK): 73318205.",
               },
               {
-                en: "For any question about this statement or about your data, write to [enquiries@ — domain pending].",
-                nl: "Voor elke vraag over deze verklaring of over uw gegevens kunt u schrijven aan [e-mailadres — domein in afwachting].",
-                ar: "لأي سؤال عن هذا البيان أو عن بياناتك، راسلنا على [البريد الإلكتروني — بانتظار قرار النطاق].",
+                en: "For any question about this statement or about your data, write to contact@dukaatbusinessclub.com.",
+                nl: "Voor elke vraag over deze verklaring of over uw gegevens kunt u schrijven aan contact@dukaatbusinessclub.com.",
+                ar: "لأي سؤال عن هذا البيان أو عن بياناتك، راسلنا على contact@dukaatbusinessclub.com.",
               },
             ],
           },
@@ -186,14 +186,14 @@ export const legal: PageSet = {
                 ar: "لا نحتفظ بالبيانات الشخصية مدةً أطول مما يقتضيه الغرض منها.",
               },
               {
-                en: "Intakes, nominations and applications that lead to neither a membership nor a project engagement: [12] months after our last contact.",
-                nl: "Intakes, voordrachten en aanmeldingen die niet tot een lidmaatschap of een projectopdracht leiden: [12] maanden na ons laatste contact.",
-                ar: "رسائل الاستمارة والترشيحات وطلبات الانضمام التي لا تُفضي إلى عضوية ولا إلى تكليف بمشروع: [12] شهراً بعد آخر تواصل بيننا.",
+                en: "Intakes, nominations and applications that lead to neither a membership nor a project engagement: 36 months after our last contact.",
+                nl: "Intakes, voordrachten en aanmeldingen die niet tot een lidmaatschap of een projectopdracht leiden: 36 maanden na ons laatste contact.",
+                ar: "رسائل الاستمارة والترشيحات وطلبات الانضمام التي لا تُفضي إلى عضوية ولا إلى تكليف بمشروع: 36 شهراً بعد آخر تواصل بيننا.",
               },
               {
-                en: "Membership and project data — profile, verification data, correspondence and project files: for the duration of the membership or the engagement, and then no longer than [24] months, unless a statutory period requires longer. A published profile is taken down without undue delay when the membership ends or you withdraw your consent.",
-                nl: "Leden- en projectgegevens — profiel, verificatiegegevens, correspondentie en projectdossiers: zolang het lidmaatschap of de opdracht duurt, en daarna niet langer dan [24] maanden, tenzij een wettelijke termijn langer bewaren vereist. Een gepubliceerd profiel wordt zonder onnodige vertraging van de site verwijderd wanneer het lidmaatschap eindigt of u uw toestemming intrekt.",
-                ar: "بيانات العضوية والمشاريع — الملف التعريفي وبيانات التحقق والمراسلات وملفات المشاريع: طوال مدة العضوية أو التكليف، ثم مدةً لا تتجاوز [24] شهراً، ما لم تقتضِ مدةٌ قانونية الاحتفاظَ بها أطول من ذلك. ويُزال الملف المنشور دون تأخير لا مبرر له عند انتهاء العضوية أو سحب موافقتك.",
+                en: "Membership and project data — profile, verification data, correspondence and project files: for the duration of the membership or the engagement, and then no longer than 36 months, unless a statutory period requires longer. A published profile is taken down without undue delay when the membership ends or you withdraw your consent.",
+                nl: "Leden- en projectgegevens — profiel, verificatiegegevens, correspondentie en projectdossiers: zolang het lidmaatschap of de opdracht duurt, en daarna niet langer dan 36 maanden, tenzij een wettelijke termijn langer bewaren vereist. Een gepubliceerd profiel wordt zonder onnodige vertraging van de site verwijderd wanneer het lidmaatschap eindigt of u uw toestemming intrekt.",
+                ar: "بيانات العضوية والمشاريع — الملف التعريفي وبيانات التحقق والمراسلات وملفات المشاريع: طوال مدة العضوية أو التكليف، ثم مدةً لا تتجاوز 36 شهراً، ما لم تقتضِ مدةٌ قانونية الاحتفاظَ بها أطول من ذلك. ويُزال الملف المنشور دون تأخير لا مبرر له عند انتهاء العضوية أو سحب موافقتك.",
               },
               {
                 en: "Invoices, payment records and other financial records: seven years, as Dutch tax and civil law require.",
@@ -241,9 +241,9 @@ export const legal: PageSet = {
                 ar: "لك الحق في الاطلاع على البيانات الشخصية التي نحتفظ بها عنك؛ وفي تصحيحها أو محوها؛ وفي تقييد معالجتها؛ وفي الحصول على البيانات التي قدّمتها إلينا بصيغة منظّمة وشائعة الاستخدام، ونقلها إلى جهة أخرى؛ وفي الاعتراض على المعالجة القائمة على المصالح المشروعة. وإذا كانت المعالجة تستند إلى موافقتك، فلك أن تسحب هذه الموافقة في أي وقت.",
               },
               {
-                en: "Send your request to [enquiries@ — domain pending]. We may ask you to confirm your identity. We answer within one month; for complex requests this may be extended by up to two further months, in which case we tell you why within the first month. Exercising your rights is free of charge, unless a request is manifestly unfounded or excessive.",
-                nl: "Stuur uw verzoek aan [e-mailadres — domein in afwachting]. Wij kunnen u vragen uw identiteit te bevestigen. Wij antwoorden binnen een maand; bij complexe verzoeken kan die termijn met ten hoogste twee maanden worden verlengd, en dan laten wij u binnen de eerste maand weten waarom. Het uitoefenen van uw rechten is kosteloos, tenzij een verzoek kennelijk ongegrond of buitensporig is.",
-                ar: "أرسل طلبك إلى [البريد الإلكتروني — بانتظار قرار النطاق]. وقد نطلب منك تأكيد هويتك. ونرد خلال شهر واحد؛ ويجوز في الطلبات المعقّدة تمديد هذه المدة بما لا يزيد على شهرين إضافيين، وعندئذٍ نُعلمك بسبب التمديد خلال الشهر الأول. وممارستك لحقوقك مجانية، ما لم يكن الطلب بلا أساس على نحو واضح، أو مفرطاً.",
+                en: "Send your request to contact@dukaatbusinessclub.com. We may ask you to confirm your identity. We answer within one month; for complex requests this may be extended by up to two further months, in which case we tell you why within the first month. Exercising your rights is free of charge, unless a request is manifestly unfounded or excessive.",
+                nl: "Stuur uw verzoek aan contact@dukaatbusinessclub.com. Wij kunnen u vragen uw identiteit te bevestigen. Wij antwoorden binnen een maand; bij complexe verzoeken kan die termijn met ten hoogste twee maanden worden verlengd, en dan laten wij u binnen de eerste maand weten waarom. Het uitoefenen van uw rechten is kosteloos, tenzij een verzoek kennelijk ongegrond of buitensporig is.",
+                ar: "أرسل طلبك إلى contact@dukaatbusinessclub.com. وقد نطلب منك تأكيد هويتك. ونرد خلال شهر واحد؛ ويجوز في الطلبات المعقّدة تمديد هذه المدة بما لا يزيد على شهرين إضافيين، وعندئذٍ نُعلمك بسبب التمديد خلال الشهر الأول. وممارستك لحقوقك مجانية، ما لم يكن الطلب بلا أساس على نحو واضح، أو مفرطاً.",
               },
             ],
           },
@@ -251,9 +251,9 @@ export const legal: PageSet = {
             title: { en: "Contact and complaints", nl: "Contact en klachten", ar: "التواصل والشكاوى" },
             body: [
               {
-                en: "Questions about this statement go to [enquiries@ — domain pending], or by post to Stichting Nederlands-Arabische Handelskamer, Kelvinring 11, 2952 BG Alblasserdam, the Netherlands.",
-                nl: "Vragen over deze verklaring kunt u sturen aan [e-mailadres — domein in afwachting], of per post aan Stichting Nederlands-Arabische Handelskamer, Kelvinring 11, 2952 BG Alblasserdam.",
-                ar: "تُوجَّه الأسئلة المتعلقة بهذا البيان إلى [البريد الإلكتروني — بانتظار قرار النطاق]، أو بالبريد العادي إلى Stichting Nederlands-Arabische Handelskamer، Kelvinring 11, 2952 BG Alblasserdam، هولندا.",
+                en: "Questions about this statement go to contact@dukaatbusinessclub.com, or by post to Stichting Nederlands-Arabische Handelskamer, Kelvinring 11, 2952 BG Alblasserdam, the Netherlands.",
+                nl: "Vragen over deze verklaring kunt u sturen aan contact@dukaatbusinessclub.com, of per post aan Stichting Nederlands-Arabische Handelskamer, Kelvinring 11, 2952 BG Alblasserdam.",
+                ar: "تُوجَّه الأسئلة المتعلقة بهذا البيان إلى contact@dukaatbusinessclub.com، أو بالبريد العادي إلى Stichting Nederlands-Arabische Handelskamer، Kelvinring 11, 2952 BG Alblasserdam، هولندا.",
               },
               {
                 en: "If you believe we handle your data incorrectly, please tell us first, so that we can put it right. You also have the right to lodge a complaint with the Dutch Data Protection Authority, the Autoriteit Persoonsgegevens (autoriteitpersoonsgegevens.nl), or with the supervisory authority of the EU country where you live or work.",
@@ -367,9 +367,9 @@ export const legal: PageSet = {
             title: { en: "Contact", nl: "Contact", ar: "التواصل" },
             body: [
               {
-                en: "Questions about this policy go to [enquiries@ — domain pending]. We update it whenever the site changes what it stores; the version date at the top shows which text applies.",
-                nl: "Vragen over dit beleid kunt u sturen aan [e-mailadres — domein in afwachting]. Wij werken het bij zodra de site iets anders opslaat; de versiedatum bovenaan toont welke tekst geldt.",
-                ar: "تُوجَّه الأسئلة المتعلقة بهذه السياسة إلى [البريد الإلكتروني — بانتظار قرار النطاق]. ونحدّثها كلما تغيّر ما يخزّنه الموقع؛ ويدلّ تاريخ الإصدار المثبت في أعلى الصفحة على النص الساري.",
+                en: "Questions about this policy go to contact@dukaatbusinessclub.com. We update it whenever the site changes what it stores; the version date at the top shows which text applies.",
+                nl: "Vragen over dit beleid kunt u sturen aan contact@dukaatbusinessclub.com. Wij werken het bij zodra de site iets anders opslaat; de versiedatum bovenaan toont welke tekst geldt.",
+                ar: "تُوجَّه الأسئلة المتعلقة بهذه السياسة إلى contact@dukaatbusinessclub.com. ونحدّثها كلما تغيّر ما يخزّنه الموقع؛ ويدلّ تاريخ الإصدار المثبت في أعلى الصفحة على النص الساري.",
               },
             ],
           },
@@ -432,9 +432,9 @@ export const legal: PageSet = {
           {
             title: { en: "E-mail", nl: "E-mail", ar: "البريد الإلكتروني" },
             body: {
-              en: "[enquiries@ — domain pending]",
-              nl: "[e-mailadres — domein in afwachting]",
-              ar: "[البريد الإلكتروني — بانتظار قرار النطاق]",
+              en: "contact@dukaatbusinessclub.com",
+              nl: "contact@dukaatbusinessclub.com",
+              ar: "contact@dukaatbusinessclub.com",
             },
           },
         ],
@@ -527,9 +527,9 @@ export const legal: PageSet = {
             title: { en: "Contact", nl: "Contact", ar: "التواصل" },
             body: [
               {
-                en: "Requests and questions go to [enquiries@ — domain pending], or by post to Stichting Nederlands-Arabische Handelskamer, Kelvinring 11, 2952 BG Alblasserdam, the Netherlands. We answer within one month.",
-                nl: "Verzoeken en vragen kunt u sturen aan [e-mailadres — domein in afwachting], of per post aan Stichting Nederlands-Arabische Handelskamer, Kelvinring 11, 2952 BG Alblasserdam. Wij antwoorden binnen een maand.",
-                ar: "تُوجَّه الطلبات والأسئلة إلى [البريد الإلكتروني — بانتظار قرار النطاق]، أو بالبريد العادي إلى Stichting Nederlands-Arabische Handelskamer، Kelvinring 11, 2952 BG Alblasserdam، هولندا. ونرد خلال شهر واحد.",
+                en: "Requests and questions go to contact@dukaatbusinessclub.com, or by post to Stichting Nederlands-Arabische Handelskamer, Kelvinring 11, 2952 BG Alblasserdam, the Netherlands. We answer within one month.",
+                nl: "Verzoeken en vragen kunt u sturen aan contact@dukaatbusinessclub.com, of per post aan Stichting Nederlands-Arabische Handelskamer, Kelvinring 11, 2952 BG Alblasserdam. Wij antwoorden binnen een maand.",
+                ar: "تُوجَّه الطلبات والأسئلة إلى contact@dukaatbusinessclub.com، أو بالبريد العادي إلى Stichting Nederlands-Arabische Handelskamer، Kelvinring 11, 2952 BG Alblasserdam، هولندا. ونرد خلال شهر واحد.",
               },
             ],
           },

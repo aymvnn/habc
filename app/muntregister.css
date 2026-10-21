@@ -1342,7 +1342,9 @@ html[data-kbd] .burger span{ transition:none } /* opened from the keyboard, the 
 #correspondence h2 em{ color:var(--pe-first) }
 #correspondence .contact{ grid-column:9 / -1 }
 #correspondence .close-photo{ max-width:none; margin:0 0 var(--s-sm); box-shadow:0 0 0 1px var(--pe-rule); background:var(--pe-bg) }
-#correspondence .mail.pending{ color:var(--pe-mute); border-bottom-color:var(--pe-rule); font-size:var(--t1) }
+#correspondence .mail{ color:var(--pe-ink); border-bottom-color:var(--pe-first); font-size:var(--t1); overflow-wrap:break-word; transition:border-color .2s }
+#correspondence .mail:hover{ border-bottom-color:var(--pe-ink) }
+#correspondence .mail:focus-visible{ outline:2px solid var(--pe-focus); outline-offset:4px }
 #correspondence .where{ color:var(--pe-soft) }
 #correspondence .signoff{ border-top-color:var(--pe-rule); justify-content:flex-start }
 #correspondence .signoff .tag{ color:var(--pe-ink) }

@@ -1,4 +1,5 @@
 import { Fragment, type CSSProperties, type ReactNode } from "react";
+import { PHONE, PHONE_TEL } from "@/content/contact-details";
 
 /**
  * UI-07 (owner, 4 Oct 2026): with `words`, every word is set in its own two spans — a mask (.w) and the word that
@@ -9,10 +10,26 @@ import { Fragment, type CSSProperties, type ReactNode } from "react";
    own span so it can carry the red ink of a rubric (app/waardepapier.css). The whole word, never a letter of it, so
    the Arabic stays joined; headings and dark surfaces keep it unstyled. */
 const NAME = /(DUKAAT|دوكات)/;
+function brand(text: string): ReactNode {
+  if (!NAME.test(text)) return text;
+  return text.split(NAME).map((part, i) => (i % 2 ? <span className="rub" key={i}>{part}</span> : part));
+}
+/* The club's e-mail address and telephone number (content/contact-details.ts) are links wherever they stand in running
+   text — the legal texts, the business card, the failure notice of a form. Set as an isolate (dir="ltr") so the Arabic
+   lines keep them in one piece. Headings that rise word by word (words) are never linked. */
+const LINK = new RegExp(`([\\w.+-]+@[\\w-]+(?:\\.[\\w-]+)+|${PHONE.replace(/[+]/g, "\\+")})`);
 function plain(text: string, words: boolean, next: () => number): ReactNode {
   if (!words) {
-    if (!NAME.test(text)) return text;
-    return text.split(NAME).map((part, i) => (i % 2 ? <span className="rub" key={i}>{part}</span> : part));
+    if (!LINK.test(text)) return brand(text);
+    return text.split(LINK).map((part, i) =>
+      i % 2 ? (
+        <a className="autolink" key={i} dir="ltr" href={part === PHONE ? `tel:${PHONE_TEL}` : `mailto:${part}`}>
+          {part.includes("@") ? <>{part.slice(0, part.indexOf("@") + 1)}<wbr />{part.slice(part.indexOf("@") + 1)}</> : part}
+        </a>
+      ) : (
+        <Fragment key={i}>{brand(part)}</Fragment>
+      ),
+    );
   }
   return text.split(/(\s+)/).map((part, i) => {
     if (!part || /^\s+$/.test(part)) return part;
