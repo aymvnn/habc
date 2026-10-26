@@ -26,11 +26,14 @@ const PHOTOS = ["about-room", "values-court", "why-hero", "values-value", "trade
 
 type Anchor = { x: number; y: number; side: 1 | -1 };
 
-/* ---------- fit: the whole hero, the name on the gold line included, always sits inside the first screen ----------
+/* ---------- fit: the whole hero, the name on the gold line included, sits inside the first screen — down to a floor ----------
    The two wings set the height of the stage (seven routes on one side wrap to two lines on a laptop). When the
    hero is taller than the screen, --fit scales every gap, the title and the name down together and the type a
    little more slowly (see hero.css) — as much as is needed, never more. The tulip then fills what is left of
    its column: as tall as the wings beside it, and as wide as the column.
+   Owner, 26 Oct 2026: on a low window (a laptop with a bookmarks bar, ~550px of page) the name had shrunk to a third
+   and the short texts were gone. --fit now stops at FIT_MIN: below that the hero runs on past the first screen, the
+   name sits just under the fold, and the texts stay. (The name also scales more gently than the rest, see hero.css.)
    UX-26 (owner, 4 Oct 2026): the words stand at once now (UX-20), so the hero must not change size after the first
    paint. This function therefore also runs as a small script right after the hero's markup (FIT_NOW), before the
    browser paints. It is self-contained for that reason: no outside names. */
@@ -38,10 +41,9 @@ function fitHero(r: HTMLElement) {
   const c = r.querySelector<HTMLElement>(".crest");
   if (!c) return;
   const ASPECT = 859 / 998; // the tulip's viewBox: width / height
-  const FIT_MIN = 0.5, FIT_TIGHT = 0.35;
+  const FIT_MIN = 0.56;
   r.style.setProperty("--fit", "1");
   r.style.removeProperty("--th-fill");
-  delete r.dataset.tight;
   if (window.matchMedia("(max-width: 900px)").matches) return; // phones: the hero is two screens by design
   // while the size is being found the tulip stays small, so that only the wings and the fixed parts decide the height
   r.style.setProperty("--th-fill", "130px");
@@ -61,12 +63,7 @@ function fitHero(r: HTMLElement) {
     return lo;
   };
   let f = largest(FIT_MIN);
-  if (f === null) {
-    // a very low window: the short descriptions under the routes give way (hero.css), the pages have them in full
-    r.dataset.tight = "";
-    f = largest(FIT_TIGHT);
-    if (f === null) f = FIT_TIGHT; // not even then: it does what it can
-  }
+  if (f === null) f = FIT_MIN; // a low window: the hero is taller than the screen, the visitor scrolls to the name
   r.style.setProperty("--fit", f.toFixed(3));
   const col = c.parentElement;
   const wings = Array.from(r.querySelectorAll<HTMLElement>(".wing"), (w) => w.getBoundingClientRect().height);
