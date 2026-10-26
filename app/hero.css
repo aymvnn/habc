@@ -8,13 +8,14 @@
 .h3{
   /* --fit is set by HeroStage on screens too low for the whole composition: 1 = as drawn, less = every gap, the name
      on the gold line and the title scaled down together (the type follows more slowly, --fs) until the whole hero,
-     name included, fits the first screen */
-  --fit:1; --fs:calc(.6 + .4 * var(--fit));
-  --wm:calc(min(56vw, 820px, 88svh) * var(--fit));
+     name included, fits the first screen — or, on a really low window, until the floor (.56): then the hero runs on
+     past the fold. The name follows --fit only down to --fw's floor: it is wide and low, so it costs little height */
+  --fit:1; --fs:calc(.6 + .4 * var(--fit)); --fw:max(var(--fit), .7);
+  --wm:calc(min(56vw, 820px, 88svh) * var(--fw));
   --wmh:calc(var(--wm) * 0.16044);
   --toward:1;
   position:relative; min-height:100svh; display:flex; flex-direction:column; align-items:stretch;
-  padding-top:calc(clamp(86px, 11svh, 116px) + var(--util-h, 0px)); padding-bottom:calc(clamp(22px, 3.6svh, 44px) * var(--fit));
+  padding-top:calc(clamp(74px, 11svh, 116px) + var(--util-h, 0px)); padding-bottom:calc(clamp(22px, 3.6svh, 44px) * var(--fit));
   overflow:hidden;
 }
 .h3-threads{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:visible }
@@ -406,8 +407,6 @@ body::after{
 .rt.has-text{ align-items:start }
 .rt-text{ grid-column:1 / -1; margin-top:4px; font-family:var(--text); font-size:calc(.92rem * var(--fs)); line-height:1.45; color:var(--ink-soft); max-width:36ch }
 .wing-a .rt-text{ grid-row:2 }
-/* set by HeroStage on very low windows, so that the name still fits the first screen: the short texts give way, the tulip takes the room */
-.h3[data-tight] .rt-text,.h3[data-tight] .caption{ display:none }
 [dir="rtl"] .rt-text{ font-family:var(--arabic); line-height:1.75 }
 .caption > p.on{ font-style:normal }
 
